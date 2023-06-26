@@ -62,10 +62,6 @@ const Login: React.FC = () => {
         getUsers();
     }, []);
 
-    users.map((user)=> {
-        console.log(user)
-    })
-
     //LOGIN INPUTS
     const [userName, setUserName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
