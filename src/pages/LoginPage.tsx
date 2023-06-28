@@ -3,12 +3,15 @@ import { Box, Stack } from "@mui/material"
 //COMPONENTS
 import Navbar from "../components/Navbar"
 import Login from "../components/Login"
+import { UserType, loginProps } from '../types/UserType'
 
-function LoginPage() {
+function LoginPage ({userType}:loginProps) {
+    
+    const users:UserType[] = userType
     return (
         <Box>
             <Navbar />
-            <Login />
+            <Login userType={users}/>
         </Box>
     )
 }

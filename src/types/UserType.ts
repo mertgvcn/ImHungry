@@ -6,3 +6,9 @@ export type UserType = {
     email: string,
     password: string
 }
+
+export type loginProps = {
+    userType: UserType[],
+    usersCollectionRef?: any
+}
+

@@ -1,66 +1,16 @@
 import React from 'react'
-import { useEffect, useState } from "react"
-import {UserType} from "../types/UserType"
+import { useState } from "react"
+import { UserType, loginProps } from "../types/UserType"
 //MUI ELEMENTS
-import { Box, Typography, Stack, Divider, TextField, Button } from "@mui/material"
-import styled from '@emotion/styled'
+import { Stack, Divider } from "@mui/material"
+import { MyBox, MyTypography, MyTextField, MyButton } from './styles/LoginStyle';
 import { ShoppingBasket } from '@mui/icons-material';
-//DB
-import { db } from "../firebase-config"
-import { getDocs, collection } from "firebase/firestore"
 
-//STYLE
-const MyBox = styled(Box)({
-    display: "flex",
-    justifyContent: "center",
-    margin: "auto",
-    marginTop: 60,
-    width: 500,
-    height: 470,
-    backgroundColor: "#282e49",
-    color: "white",
-    borderRadius: 10
-})
 
-const MyTypography = styled(Typography)({
-    fontSize: 30,
-    fontWeight: "bold"
-})
 
-const MyTextField = styled(TextField)({
-    backgroundColor: "white",
-    borderRadius: "5px",
-    width: 300,
-})
+const Login = ({userType}:loginProps) => {
 
-const MyButton = styled(Button)({
-    width: 300,
-    fontSize: 16,
-    fontWeight: "bold"
-})
-
-const Login: React.FC = () => {
-
-    //GETTING USER LIST FROM DATA BASE
-    const [users, setUsers] = useState<UserType[]>([]);
-    const usersCollectionRef = collection(db, "users");
-
-    useEffect(() => {
-        const getUsers = async () => {
-            const data = await getDocs(usersCollectionRef)
-            //setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))) //without typescript
-            setUsers(data.docs.map((doc) => ({
-                id: doc.id,
-                firstName: doc.data().firstName,
-                lastName: doc.data().lastName,
-                userName: doc.data().userName,
-                email: doc.data().email,
-                password: doc.data().password
-              })));
-        };
-
-        getUsers();
-    }, []);
+    const users:UserType[] = userType
 
     //LOGIN INPUTS
     const [userName, setUserName] = useState<string>("");
@@ -112,14 +62,14 @@ const Login: React.FC = () => {
     }
 
     return (
-        <MyBox>
+        <MyBox className="myBox">
             {/* FRAME */}
             <Stack direction={"column"}>
 
                 {/* HEADER */}
-                <Stack direction={'column'} marginTop={3} alignItems={"center"}>
+                <Stack direction={"column"} marginTop={3} alignItems={"center"}>
                     <ShoppingBasket sx={{ width: "70px", height: "70px" }} />
-                    <MyTypography>LOGIN</MyTypography>
+                    <MyTypography className="myTypography">LOGIN</MyTypography>
                     <Divider sx={{ width: 400, marginTop: 1, backgroundColor: 'white' }} />
                 </Stack>
 
@@ -134,7 +84,7 @@ const Login: React.FC = () => {
                     {/* login-register-forgot password buttons */}
                     <MyButton variant="contained" size="large" sx={{ backgroundColor: "#26a3af" }} onClick={checkLogin}>Login</MyButton>
                     <MyButton variant="outlined" size="large" sx={{ color: "#26a3af" }} onClick={goRegister}>Register</MyButton>
-                    <Button color="secondary" size="small" sx={{ color: "#26a3af", fontWeight: "normal", width: 300 }} onClick={forgotPassword}>Forgot my password</Button>
+                    <MyButton color="secondary" size="small" sx={{ color: "#26a3af", fontWeight: "normal", width: 300 }} onClick={forgotPassword}>Forgot my password</MyButton>
                 </Stack>
 
             </Stack> {/* END FRAME */}

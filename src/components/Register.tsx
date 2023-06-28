@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react"
-import { UserType } from '../types/UserType'
+import { UserType, loginProps } from '../types/UserType'
 //MUI ELEMENTS
 import { Box, Typography, Stack, Divider, TextField, Button } from "@mui/material"
 import styled from '@emotion/styled'
@@ -46,28 +46,7 @@ const MyButton = styled(Button)({
     fontWeight: "bold"
 })
 
-const Register: React.FC = () => {
-
-    //GETTING USER LIST FROM DATA BASE
-    const [users, setUsers] = useState<UserType[]>([]);
-    const usersCollectionRef = collection(db, "users");
-
-    useEffect(() => {
-        const getUsers = async () => {
-            const data = await getDocs(usersCollectionRef)
-            //setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))) //without typescript
-            setUsers(data.docs.map((doc) => ({
-                id: doc.id,
-                firstName: doc.data().firstName,
-                lastName: doc.data().lastName,
-                userName: doc.data().userName,
-                email: doc.data().email,
-                password: doc.data().password
-              })));
-        };
-
-        getUsers();
-    }, []);
+const Register = ({userType, usersCollectionRef}:loginProps) => {
 
     //REGISTRATION INPUTS
     const [firstName, setFirstName] = useState<string>("");
@@ -84,7 +63,7 @@ const Register: React.FC = () => {
     const createUser = async () => {
         let key = true
 
-        users.map((user) => {
+        userType.map((user) => {
             if(userName == user.userName) {
                 alert("This username already selected from another user")
                 setUserName("")
