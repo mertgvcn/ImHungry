@@ -8,9 +8,9 @@ import { ShoppingBasket } from '@mui/icons-material';
 
 
 
-const Login = ({userType}:loginProps) => {
+const Login = ({ userType }: loginProps) => {
 
-    const users:UserType[] = userType
+    const users: UserType[] = userType
 
     //LOGIN INPUTS
     const [userName, setUserName] = useState<string>("");
@@ -22,25 +22,18 @@ const Login = ({userType}:loginProps) => {
     }
 
     const checkLogin = () => {
-        let key = false;
 
-        users.map((user) => {
-            if (user.userName === userName && user.password === password) {
-                key = true;
-                return;
-            }
-        })
-
-        if (key) {
-            window.location.href = "/home"
-            setUserName("")
-            setPassword("")
-        } else {
-            setUserName("")
-            setPassword("")
-            alert("Kullanıcı adı veya Şifre yanlış")
+        if (userName == "" || password == "") {
+            alert("Username or password cannot be left blank!")
+            return;
         }
 
+        if (users.some(user => user.userName === userName && user.password === password)) {
+            window.location.href = "/home";
+            return;
+        }
+
+        alert("User name or password is wrong!")
     }
 
     const forgotPassword = () => {
