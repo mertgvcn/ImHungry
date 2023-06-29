@@ -65,14 +65,14 @@ const Register = ({ userType, usersCollectionRef }: loginProps) => {
 
 
     return (
-        <MyBox>
+        <MyBox sx={{width: {xs: "100%", sm: "500px"}}}>
             {/* FRAME */}
             <Stack direction={"column"}>
 
                 {/* HEADER */}
                 <Stack direction={'column'} marginTop={3} spacing={1} alignItems={"center"}>
                     <MyTypography>Join Us</MyTypography>
-                    <Divider sx={{ width: 400, marginTop: 1, backgroundColor: 'white' }} />
+                    <Divider sx={{ width: "100%", marginTop: 1, backgroundColor: 'white' }} />
                 </Stack>
 
                 {/* INPUTS */}

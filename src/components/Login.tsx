@@ -55,15 +55,15 @@ const Login = ({ userType }: loginProps) => {
     }
 
     return (
-        <MyBox className="myBox">
+        <MyBox sx={{width: {xs: "100%", sm: "500px"}}}>
             {/* FRAME */}
             <Stack direction={"column"}>
 
                 {/* HEADER */}
                 <Stack direction={"column"} marginTop={3} alignItems={"center"}>
                     <ShoppingBasket sx={{ width: "70px", height: "70px" }} />
-                    <MyTypography className="myTypography">LOGIN</MyTypography>
-                    <Divider sx={{ width: 400, marginTop: 1, backgroundColor: 'white' }} />
+                    <MyTypography>LOGIN</MyTypography>
+                    <Divider sx={{ width: "100%", marginTop: 1, backgroundColor: 'white' }} />
                 </Stack>
 
                 {/* INPUTS - BUTTONS */}
