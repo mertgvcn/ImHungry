@@ -1,22 +1,8 @@
 import React from 'react'
-import { Box, AppBar, Typography, Container, Stack } from "@mui/material"
-import styled from '@emotion/styled'
+import { Container, Stack } from "@mui/material"
 import { ShoppingBasket, Person } from '@mui/icons-material';
+import { MyAppBar, MyTypography } from './styles/NavbarStyle';
 
-const MyAppBar = styled(AppBar)({
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    height: 55,
-    backgroundColor: "#06060f",
-    fontSize: 20
-})
-
-const MyTypography = styled(Typography)({
-    marginLeft: 5,
-    fontSize: 20,
-    fontWeight: "bold"
-})
 
 const Navbar: React.FC= () => {
 
