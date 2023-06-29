@@ -3,8 +3,8 @@ import { useState } from "react"
 import { UserType, loginProps } from "../types/UserType"
 //MUI ELEMENTS
 import { Stack, Divider } from "@mui/material"
-import { MyBox, MyTypography, MyTextField, MyButton } from './styles/LoginStyle';
 import { ShoppingBasket } from '@mui/icons-material';
+import { MyBox, MyTypography, MyTextField, MyButton } from './styles/LoginStyle';
 
 
 

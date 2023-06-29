@@ -1,52 +1,15 @@
 import React from 'react'
-import { useState, useEffect } from "react"
-import { UserType, loginProps } from '../types/UserType'
+import { useState } from "react"
+import { loginProps } from '../types/UserType'
 //MUI ELEMENTS
-import { Box, Typography, Stack, Divider, TextField, Button } from "@mui/material"
-import styled from '@emotion/styled'
+import { Stack, Divider, Button } from "@mui/material"
+import { MyBox, MyTypography, MyTextField, MyButton, MyTextField2 } from './styles/RegisterStyle';
 //DB
-import { db } from "../firebase-config"
-import { addDoc, collection, getDocs } from "firebase/firestore"
+import { addDoc } from "firebase/firestore"
 
 
-//STYLE
-const MyBox = styled(Box)({
-    display: "flex",
-    justifyContent: "center",
-    margin: "auto",
-    marginTop: 60,
-    width: 500,
-    height: 470,
-    backgroundColor: "#282e49",
-    color: "white",
-    borderRadius: 10
-})
 
-const MyTypography = styled(Typography)({
-    fontSize: 30,
-    fontWeight: "bold"
-})
-
-const MyTextField = styled(TextField)({
-    backgroundColor: "white",
-    borderRadius: "5px",
-    width: 300,
-})
-
-//for FirstName LastName  
-const MyTextField2 = styled(TextField)({
-    backgroundColor: "white",
-    borderRadius: "5px",
-    width: 142,
-})
-
-const MyButton = styled(Button)({
-    width: 300,
-    fontSize: 16,
-    fontWeight: "bold"
-})
-
-const Register = ({userType, usersCollectionRef}:loginProps) => {
+const Register = ({ userType, usersCollectionRef }: loginProps) => {
 
     //REGISTRATION INPUTS
     const [firstName, setFirstName] = useState<string>("");
@@ -61,34 +24,42 @@ const Register = ({userType, usersCollectionRef}:loginProps) => {
     }
 
     const createUser = async () => {
-        let key = true
 
-        userType.map((user) => {
-            if(userName == user.userName) {
-                alert("This username already selected from another user")
-                setUserName("")
-                key = false
-            }
-        })
-
-        if(key) {
-            await addDoc(usersCollectionRef, {
-                firstName: firstName,
-                lastName: lastName,
-                userName: userName,
-                email: email,
-                password: password
-            })
-    
-            setFirstName("")
-            setLastName("")
-            setUserName("")
-            setEmail("")
-            setPassword("")
-            alert("Registration Successful!")
-            window.location.href = "/"
+        if (firstName == "" || lastName == "" || email == "" || userName == "") {
+            alert("Please dont leave blank spaces")
+            return;
         }
 
+        if (userType.some(user => user.userName === userName)) {
+            alert("This username already selected from another user")
+            setUserName("")
+            return;
+        }
+
+        if (!(email.includes("@") && email.includes(".com"))) {
+            alert("Please enter a valid mail")
+            return;
+        }
+
+        if (password.length < 8) {
+            alert("Password must be at least 8 characters")
+            return;
+        } else if (!stringHasNumber(password)) {
+            alert("Password must contain at least one numeric value")
+            return;
+        }
+
+        //Registration Successful
+        await addDoc(usersCollectionRef, {
+            firstName: firstName,
+            lastName: lastName,
+            userName: userName,
+            email: email,
+            password: password
+        })
+
+        alert("Registration Successful!")
+        window.location.href = "/"
     }
 
 
@@ -132,6 +103,18 @@ const Register = ({userType, usersCollectionRef}:loginProps) => {
             </Stack> {/* END FRAME */}
         </MyBox>
     )
+}
+
+// function stringHasNumber(text: String) {
+//     if (!(text.includes("1") && text.includes("2") && text.includes("3") && text.includes("4") && text.includes("5") &&
+//         text.includes("6") && text.includes("7") && text.includes("8") && text.includes("9") && text.includes("0"))) {
+//         return false;
+//     }
+//     return true;
+// }
+
+function stringHasNumber(text: string): boolean { //yukarıdaki fonksiyonla aynı işlevi görüyor.
+    return /\d/.test(text);
 }
 
 export default Register
