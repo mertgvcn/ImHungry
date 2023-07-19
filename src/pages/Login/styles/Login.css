@@ -1,0 +1,269 @@
+#login-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 500px;
+    background-color: transparent;
+    margin: auto;
+    margin-top: 50px;
+    color: white;
+}
+
+/**---------------------------------------------------Title--------------------------------------------------*/
+#login-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+    font-size: 50px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+#login-hr-line {
+    width: 420px;
+    margin-top: 10px;
+}
+
+/**---------------------------------------------------Inputs--------------------------------------------------*/
+#login-inputs-wrapper {
+    margin-top: 30px;
+}
+
+/*General input structure*/
+#login-inputs-wrapper .input-template {
+    display: flex;
+    flex-direction: column;
+}
+
+#login-inputs-wrapper .input-label {
+    margin-left: 2px;
+    margin-bottom: 3px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#login-inputs-wrapper .input-text {
+    margin-bottom: 8px;
+    width: 310px;
+    height: 40px;
+    border: none;
+    box-shadow: rgba(39, 174, 96, .15) 0 8px 9px;
+    border-radius: 4px;
+    padding-left: 10px;
+    font-size: 20px;
+}
+
+#login-inputs-wrapper .input-text:hover {
+    background-color: rgb(237, 231, 231);
+}
+
+#login-inputs-wrapper .input-text:focus {
+    outline-color: #24121e;
+}
+
+/**-----------------------------------------------------Buttons----------------------------------------------------*/
+#login-buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+#login-buttons-wrapper .input-button {
+    width: 320px;
+    height: 45px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 15px;
+    border: 1px solid white;
+    box-shadow: rgba(255, 255, 255, .15) 0 4px 7px;
+    border-radius: 5px;
+    background-color: transparent;
+    color: white;
+}
+
+#login-buttons-wrapper #login:hover {
+    background-color: #aba9aa;
+}
+
+#login-buttons-wrapper #register:hover {
+    background-color: #ffbfdf36;
+}
+
+#login-buttons-wrapper #forgotpassword {
+    box-shadow: none;
+    margin-top: -8px;
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+}
+
+#login-buttons-wrapper #forgotpassword:hover {
+    color: #ffbddd42;
+}
+
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 1024px (large)*/
+@media (max-width: 1024px) {
+    #login-wrapper {
+        width: 480px;
+        height: 480px;
+    }
+
+    #login-title {
+        font-size: 46px;
+    }
+
+    #login-hr-line {
+        width: 400px;
+    }
+
+    #login-inputs-wrapper .input-label {
+        font-size: 16px;
+    }
+    
+    #login-inputs-wrapper .input-text {
+        width: 300px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    #login-buttons-wrapper .input-button {
+        width: 310px;
+        height: 40px;
+        font-size: 22px;
+    }
+
+    #login-buttons-wrapper #forgotpassword {
+        font-size: 16px;
+        font-weight: 700;
+    }
+}
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    #login-wrapper {
+        width: 450px;
+        height: 450px;
+    }
+
+    #login-title {
+        font-size: 42px;
+    }
+
+    #login-hr-line {
+        width: 380px;
+    }
+
+    #login-inputs-wrapper .input-label {
+        font-size: 15px;
+    }
+    
+    #login-inputs-wrapper .input-text {
+        width: 270px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    #login-buttons-wrapper .input-button {
+        width: 280px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    #login-buttons-wrapper #forgotpassword {
+        font-size: 15px;
+        font-weight: 700;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    #login-wrapper {
+        width: 400px;
+        height: 400px;
+    }
+
+    #login-title {
+        font-size: 34px;
+    }
+
+    #login-hr-line {
+        width: 300px;
+    }
+
+    #login-inputs-wrapper .input-label {
+        font-size: 14px;
+    }
+    
+    #login-inputs-wrapper .input-text {
+        width: 240px;
+        height: 32px;
+        font-size: 16px;
+    }
+
+    #login-buttons-wrapper .input-button {
+        width: 250px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    #login-buttons-wrapper #forgotpassword {
+        font-size: 15px;
+        font-weight: 700;
+    }
+}
+
+/*above 475px (xsmall)*/
+@media (max-width: 475px) {
+    #login-wrapper {
+        width: 100%;
+        height: 400px;
+    }
+
+    #login-title {
+        width: 100%;
+        font-size: 34px;
+    }
+
+    #login-hr-line {
+        display: none;
+    }
+
+    #login-inputs-wrapper {
+        width: 80%;   
+    }
+
+    #login-inputs-wrapper .input-label {
+        font-size: 14px;
+    }
+    
+    #login-inputs-wrapper .input-text {
+        padding-left: 0px;
+        width: 100%;
+        height: 30px;
+        font-size: 15px;
+    }
+
+    #login-buttons-wrapper {
+        width: 80%;
+    }
+
+    #login-buttons-wrapper .input-button {
+        width: 100%;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    #login-buttons-wrapper #forgotpassword {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}

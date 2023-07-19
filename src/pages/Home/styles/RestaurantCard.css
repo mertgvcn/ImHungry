@@ -1,0 +1,73 @@
+/**------------------------------------------------------------------STRUCTURE---------------------------------------------------------*/
+.restaurant-card-wrapper {
+    width: 30%;
+    height: 250px;
+    border: 3px solid rgba(55, 15, 23, 0.612);
+    border-radius: 10px;
+    background-color: rgb(227, 227, 227);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-shadow: rgba(0, 0, 0, .4) 0 5px 8px;
+    cursor: pointer;
+}
+
+.restaurant-card-wrapper:hover {
+    background-color: #e4e2e2;
+    transition: transform 0.2s;
+    transform: scale(1.08);
+    border: 4px solid rgb(126, 29, 55)
+}
+
+/**------------------------------------------------------------------IMAGE---------------------------------------------------------*/
+.restaurant-image {
+    width: 100%;
+    height: 180px;
+}
+
+.restaurant-image img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/**----------------------------------------------------------------INFORMATION---------------------------------------------------------*/
+.restaurant-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 50px;
+}
+
+/*title-description (LEFT SIDE)*/
+.restaurant-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+}
+
+.restaurant-title #restaurant-name {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.restaurant-title #restaurant-description {
+    font-size: 16px;
+}
+
+/*rating (RIGHT SIDE)*/
+.restaurant-rating {
+    width: 12%;
+}
+
+.restaurant-rating #restaurant-rate {
+    margin: auto;
+    font-size: 18px;
+}

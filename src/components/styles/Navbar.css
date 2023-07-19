@@ -1,0 +1,48 @@
+#navbar-wrapper {
+    position: sticky;
+    top: 0px;
+    width: 99.9%;
+    height: 60px;
+    padding-top: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navbar-title {
+    margin-left: 5%;
+    color: #F0F0F0;
+    font-size: 36px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+#navbar-title:hover {
+    color: #f7d5d3
+}
+
+#title {
+    font-family: 'Pacifico', cursive;
+}
+
+/*above 1024px (large)*/
+@media (max-width: 1024px) {
+    #navbar-title {
+        font-size: 32px; 
+    }
+}
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    #navbar-title {
+        font-size: 28px; 
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    #navbar-title {
+        font-size: 20px; 
+    }
+}

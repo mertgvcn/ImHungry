@@ -1,0 +1,158 @@
+.container {
+    width: 90%;
+    height: 300px;
+    margin: 0 auto;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#text-welcome {
+    font-size: 90px;
+    font-weight: 400;
+    font-style: italic;
+    color: #F0F0F0;
+    font-family: 'Overpass', sans-serif;
+    text-shadow:2px 2px #9f9f9f;
+}
+
+#text-info {
+    font-size: 30px;
+    font-weight: 300;
+    font-style: italic;
+    color: #F0F0F0;
+    font-family: 'Overpass', sans-serif;
+}
+
+#button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+}
+
+#button-wrapper .input-button {
+    width: 280px;
+    height: 60px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 40px;
+    box-shadow: rgba(255, 255, 255, .15) 0 4px 7px;
+    border-radius: 20px;
+}
+
+#button-wrapper #login {
+    border: 1px solid #FDF0D5;
+    background-color: transparent;
+    color: #F0F0F0;
+}
+
+#button-wrapper #login:hover {
+    background-color: #908d8f;
+    transition: 0.3s;
+}
+
+#button-wrapper #register {
+    border: 1px solid #FDF0D5;
+    background-color: transparent;
+    color: #F0F0F0;
+}
+
+#button-wrapper #register:hover {
+    background-color: #24121e;
+    transition: 0.3s;
+}
+
+/*above 1024px (large)*/
+@media (max-width: 1024px) {
+    #text-welcome {
+        font-size: 70px;
+    }
+    
+    #text-info {
+        font-size: 22px;
+    }
+    
+    #button-wrapper {
+        width: 460px;
+    }
+
+    #button-wrapper .input-button {
+        width: 220px;
+        height: 50px;
+        font-size: 25px;
+    }
+}
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    #text-welcome {
+        font-size: 50px;
+    }
+    
+    #text-info {
+        font-size: 18px;
+    }
+    
+    #button-wrapper {
+        width: 360px;
+    }
+
+    #button-wrapper .input-button {
+        width: 170px;
+        height: 35px;
+        font-size: 18px;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    #text-welcome {
+        font-size: 40px;
+    }
+    
+    #text-info {
+        font-size: 15px;
+    }
+    
+    #button-wrapper {
+        width: 300px;
+    }
+
+    #button-wrapper .input-button {
+        width: 140px;
+        height: 35px;
+        font-size: 16px;
+    }
+}
+
+/*above 475px (xsmall)*/
+@media (max-width: 475px) {
+    #text-welcome {
+        font-size: 40px;
+        text-align: center;
+    }
+    
+    #text-info {
+        margin-top: 15px;
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    #button-wrapper {
+        flex-direction: column;
+        justify-content: center;
+        width: 220px;
+        height: 140px;
+        margin-top: 15px;
+    }
+
+    #button-wrapper .input-button {
+        width: 220px;
+        height: 40px;
+        font-size: 12px;
+        margin-top: 0px;
+    }
+}

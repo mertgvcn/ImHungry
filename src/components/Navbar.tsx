@@ -1,26 +1,25 @@
 import React from 'react'
-import { Container, Stack } from "@mui/material"
-import { ShoppingBasket, Person } from '@mui/icons-material';
-import { MyAppBar, MyTypography } from './styles/NavbarStyle';
+import "./styles/Navbar.css";
 
+type propsType = {
+    currentUser?: string
+}
 
-const Navbar: React.FC= () => {
+const Navbar = (props:propsType) => {
 
     const goLogin = () => {
         window.location.href = "/"
     }
 
     return (
-        <MyAppBar position='sticky'>
-            <Container sx={{display: "flex", justifyContent:"space-between"}}>
-                <Stack direction="row" spacing={2}>
-                    <ShoppingBasket/>
-                    <MyTypography onClick={goLogin} sx={{cursor: "pointer"}}>IM HUNGRY</MyTypography>
-                </Stack>
-
-                <Person sx={{width: 30, height: 30}}/>
-            </Container>
-        </MyAppBar>
+        <nav id="navbar-wrapper">
+            <div id="navbar-title" onClick={goLogin} style={{ cursor: 'pointer' }}>
+                <p id="title"><i className="fa-solid fa-drumstick-bite" style={{paddingRight:"8px"}}></i>Im Hungry</p>
+            </div>
+            <div>
+                {props.currentUser}
+            </div>
+        </nav>
     )
 }
 
