@@ -3,3 +3,11 @@
     height: 100vh;
     background-image: linear-gradient(#87314e, #512645, #311e3e);
 }
+
+.restaurant-body-layout {
+    display: flex;
+    width: 90%;
+    height: 550px;
+    justify-content: center;
+    margin: auto;
+}

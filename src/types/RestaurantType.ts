@@ -18,11 +18,29 @@ export type RestaurantDetail = {
     imageSource: string
 }
 
+export type MenuTitlesType = {
+    categoryID: string,
+    categoryName: string
+}
+
 export type MenuType = {
     restaurantID: string,
     itemName: string,
     itemDescription: string,
     imageSource: string,
     categoryID: string,
-    price: string
+    price: string,
+    categoryName: string
+}
+
+export type MenuItemType = {
+    data: {
+        restaurantID: string,
+        itemName: string,
+        itemDescription: string,
+        imageSource: string,
+        categoryID: string,
+        price: string,
+        categoryName: string
+    }
 }

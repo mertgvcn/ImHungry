@@ -15,10 +15,12 @@ const RestaurantDetailsPage = () => {
 
     return (
         <div className='restaurant-detail-background'>
-            <Navbar/> 
-            <RestaurantDetails restaurantID={currentRestaurantID}/>
-            <Menu restaurantID={currentRestaurantID}/>
-         </div>
+            <Navbar />
+            <div className="restaurant-body-layout">
+                <RestaurantDetails restaurantID={currentRestaurantID} />
+                <Menu restaurantID={currentRestaurantID} />
+            </div>
+        </div>
     )
 }
 
