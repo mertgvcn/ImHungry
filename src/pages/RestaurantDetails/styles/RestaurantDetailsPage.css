@@ -2,12 +2,15 @@
     width: 100%;
     height: 100vh;
     background-image: linear-gradient(#87314e, #512645, #311e3e);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow-y: scroll;
 }
 
 .restaurant-body-layout {
     display: flex;
+    flex-direction: column;
     width: 90%;
-    height: 550px;
-    justify-content: center;
-    margin: auto;
+    align-items: center;
 }

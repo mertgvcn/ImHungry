@@ -7,21 +7,24 @@
     background-color: white;
     box-shadow: rgba(0, 0, 0, .3) 2px 5px 8px;
     border-radius: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .menu-item-wrapper:hover {
     transform: scale(1.1);
     transition: 0.2s;
-    .add-to-cart {
+    #add-to-cart {
         display: block;
     }
 }
 
 /*IMAGE*/
 .menu-item-wrapper .item-image {
-    height: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
+    padding: 5px 5px;
 }
 
 .menu-item-wrapper .item-image img{
@@ -63,8 +66,74 @@
 }
 
 /*Add to Card*/
-.menu-item-wrapper .add-to-cart {
+.menu-item-wrapper #add-to-cart {
     display: none;
+    color: #87314e;
+    font-size: 25px;
     margin-right: 5px;
     cursor: pointer;
+}
+
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 1024px (large)*/
+@media (max-width: 1024px) {
+    .menu-item-wrapper {
+        width: 260px;
+    }
+    .menu-item-wrapper .item-name {
+        font-size: 20px;
+    }
+    
+    .menu-item-wrapper .item-description {
+        font-size: 13px;
+    }
+    .menu-item-wrapper .item-price {
+        font-size: 20px;
+    }
+    .menu-item-wrapper #add-to-cart {
+        font-size: 24px;
+    }
+    
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .menu-item-wrapper {
+        width: 80%;
+    }
+    .menu-item-wrapper .item-name {
+        font-size: 22px;
+    }
+    
+    .menu-item-wrapper .item-description {
+        font-size: 11px;
+    }
+    .menu-item-wrapper .item-price {
+        font-size: 18px;
+    }
+    .menu-item-wrapper #add-to-cart {
+        font-size: 20px;
+    }
+}
+
+/*above 475px (xsmall)*/
+@media (max-width: 475px) {
+    .menu-item-wrapper {
+        width: 80%;
+    }
+    .menu-item-wrapper .item-name {
+        font-size: 15px;
+    }
+    
+    .menu-item-wrapper .item-description {
+        font-size: 8px;
+    }
+    .menu-item-wrapper .item-price {
+        font-size: 14px;
+    }
+    .menu-item-wrapper #add-to-cart {
+        font-size: 16px;
+    }
 }

@@ -24,7 +24,7 @@ const MenuItem = ({ data: { itemName, itemDescription, imageSource,  price} }: M
         <div className="item-price">{price}TL</div>
       </div>
 
-      <div className="add-to-cart" onClick={handleAddToCard}><i className="fa-solid fa-cart-plus" style={{ color: "#87314e", fontSize: 25 }}></i></div>
+      <div id="add-to-cart" onClick={handleAddToCard}><i className="fa-solid fa-cart-plus"></i></div>
 
     </div>
   )

@@ -1,21 +1,20 @@
 .menu-wrapper {
     display: flex;
     flex-direction: column;
-    width: 60%;
-    height: 550px;
+    width: 90%;
     border-radius: 15px;
     box-shadow: rgba(255, 255, 255, .4) 0 5px 8px;
-    background-color: rgb(246, 246, 246);
-    margin-left: 20px;
-    margin-top: 30px;
+    background-color: rgb(255, 255, 255, 0.88);
+    margin-top: 25px;
 }
 
 /**-------------------------------------------------MAIN TITLE------------------------------------------------------*/
 .menu-wrapper .main-title {
     display: flex;
     align-items: center;
+    justify-content: center;
     width: 100%;
-    height: 70px;
+    height: 60px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-image: linear-gradient(to right, rgb(43, 3, 3), rgb(148, 58, 58));
@@ -24,13 +23,13 @@
 
 .menu-wrapper .main-title p {
     color: white;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: bold;
-    margin-left: 20px;
 }
 
 /**------------------------------------------------MENU SECTIONS------------------------------------------------------*/
 .menu-wrapper .menus {
+    max-height: 320px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -42,9 +41,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 90%;
+    width: 100%;
     border-radius: 10px;
-    margin-top: 25px;
+    margin-top: 20px;
 }
 
 /*Category Title*/
@@ -65,4 +64,48 @@
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 1024px (large)*/
+@media (max-width: 1024px) {
+    .menu-wrapper .main-title p {
+        font-size: 38px;
+    }
+    .menu-wrapper .menu-sections #menu-title {
+        font-size: 28px;
+    }
+}
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    .menu-wrapper .main-title p {
+        font-size: 36px;
+    }
+    .menu-wrapper .menu-sections #menu-title {
+        font-size: 26px;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .menu-wrapper .main-title p {
+        font-size: 32px;
+    }
+    .menu-wrapper .menu-sections #menu-title {
+        font-size: 24px;
+    }
+}
+
+/*above 475px (xsmall)*/
+@media (max-width: 475px) {
+    .menu-wrapper .main-title p {
+        font-size: 30px;
+    }
+    .menu-wrapper .menu-sections #menu-title {
+        font-size: 22px;
+    }
 }

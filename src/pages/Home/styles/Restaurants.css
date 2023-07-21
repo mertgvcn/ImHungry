@@ -1,6 +1,6 @@
 .restaurant-list-wrapper {
     width: 80%;
-    height: 370px;
+    height: 480px;
     margin: 30px auto;
     border-radius: 10px;
     background-color: #ffdadbb1;
@@ -33,13 +33,43 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    overflow-wrap: break-word;
+    align-items: center;
     overflow-y: scroll;
     width: 95%;
-    height: 530px;
+    height: 409.5px;
     margin: auto;
 }
 
 ::-webkit-scrollbar {
     display: none;
+}
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 1024px (large)*/
+@media (max-width: 1024px) {
+    .restaurant-title-wrapper #restaurant-title {
+        font-size: 42px;
+    }
+}
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    .restaurant-title-wrapper #restaurant-title {
+        font-size: 38px;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .restaurant-title-wrapper #restaurant-title {
+        font-size: 34px;
+    }
+}
+
+/*above 475px (xsmall)*/
+@media (max-width: 475px) {
+    .restaurant-title-wrapper #restaurant-title {
+        font-size: 25px;
+    }
 }

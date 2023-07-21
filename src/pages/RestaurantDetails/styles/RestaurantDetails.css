@@ -1,93 +1,366 @@
 .restaurant-details-wrapper {
     display: flex;
-    flex-direction: column;
-    width: 25%;
-    height: 550px;
+    flex-direction: row;
+    width: 90%;
+    height: 200px;
     border-radius: 15px;
     box-shadow: rgba(255, 255, 255, .4) 0 5px 8px;
     background-color: rgba(255, 255, 255);
-    margin-top: 30px;
 }
 
 /**---------------------------------------------------IMAGE------------------------------------------------*/
 .restaurant-details-wrapper .restaurant-image {
-    width: 100%;
-    height: 180px;
+    width: 30%;
+    height: 200px;
 }
 
 .restaurant-details-wrapper .restaurant-image img {
     border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/**---------------------------------------------------TITLE------------------------------------------------*/
-.restaurant-details-wrapper .restaurant-title {
+/**---------------------------------------------------INFO------------------------------------------------*/
+.restaurant-details-wrapper .restaurant-info {
+    width: 70%;
+    height: 200;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/*!TITLE*/
+.restaurant-details-wrapper .restaurant-info .restaurant-title {
+    width: 60%;
     display: flex;
     flex-direction: column;
     padding-left: 10px;
     padding-right: 10px;
-
 }
 
-.restaurant-details-wrapper .restaurant-title #restaurant-name {
+.restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-name {
     margin-top: 10px;
-    font-size: 60px;
+    font-size: 65px;
     font-weight: bold;
     color: rgb(30, 30, 30);
 }
 
-.restaurant-details-wrapper .restaurant-title #restaurant-description {
+.restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-description {
     margin-top: 10px;
-    font-size: 22px;
+    font-size: 30px;
     color: rgb(124, 124, 124);
 }
 
-/**---------------------------------------------------RATE------------------------------------------------*/
-.restaurant-details-wrapper .restaurant-rating {
+/*!RATING-CONTACT*/
+.restaurant-details-wrapper .restaurant-info .restaurant-rating-contact {
+    width: 35%;
+    height: 220;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+}
+
+/*Rate-RateNo-Comments*/
+.restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating {
+    display: flex;
     align-items: center;
+    flex-direction: row;
+    padding-left: 10%;
+    padding-right: 5px;
     margin-top: 25px;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
-.restaurant-details-wrapper .restaurant-rating #restaurant-rate {
-    font-size: 24px;
-}
-
-.restaurant-details-wrapper .restaurant-rating #restaurant-rate-number {
-    margin-left: 20px;
+.restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate {
     font-size: 22px;
+    text-align: center;
 }
 
-.restaurant-details-wrapper .restaurant-rating #restaurant-comment-number {
-    margin-left: 20px;
-    font-size: 22px;
+.restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate-number {
+    margin-left: 15px;
+    font-size: 20px;
+    text-align: center;
 }
 
-/**---------------------------------------------------CONTACT------------------------------------------------*/
+.restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-comment-number {
+    margin-left: 15px;
+    font-size: 20px;
+    text-align: center;
+}
+
+/*Contact*/
 .restaurant-details-wrapper .restaurant-contact {
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
-    padding-left: 10px;
+    margin-top: 60px;
+    padding-left: 10%;
     padding-right: 10px;
 }
 
-.restaurant-details-wrapper .restaurant-contact #restaurant-contact-title{
+.restaurant-details-wrapper .restaurant-contact #restaurant-contact-title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 5px;
 }
-.restaurant-details-wrapper .restaurant-contact #restaurant-email{
+
+.restaurant-details-wrapper .restaurant-contact #restaurant-email {
     margin-top: 5px;
     font-size: 18px;
 }
-.restaurant-details-wrapper .restaurant-contact #restaurant-phone-number{
+
+.restaurant-details-wrapper .restaurant-contact #restaurant-phone-number {
     margin-top: 2px;
     font-size: 18px;
+}
+
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 1200px (xlarge)*/
+@media (max-width: 1200px) {
+    .restaurant-details-wrapper .restaurant-image {
+        width: 25%;
+    }
+
+    .restaurant-details-wrapper .restaurant-info {
+        width: 75%;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-name {
+        font-size: 60px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-description {
+        font-size: 26px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate {
+        font-size: 20px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate-number {
+        font-size: 18px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-comment-number {
+        font-size: 18px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-contact-title {
+        font-size: 18px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-email {
+        font-size: 16px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-phone-number {
+        font-size: 16px;
+    }
+}
+
+/*above 1024px (large)*/
+@media (max-width: 1024px) {
+    .restaurant-details-wrapper .restaurant-image {
+        width: 22%;
+    }
+
+    .restaurant-details-wrapper .restaurant-info {
+        width: 78%;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-name {
+        font-size: 50px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-description {
+        font-size: 24px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating {
+        padding-left: 10%;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate {
+        font-size: 20px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate-number {
+        font-size: 18px;
+        margin-left: 22px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-comment-number {
+        font-size: 18px;
+        margin-left: 22px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact {
+        padding-left: 0px;
+        margin-top: 50px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-contact-title {
+        font-size: 16px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-email {
+        font-size: 14px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-phone-number {
+        font-size: 14px;
+    }
+}
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    .restaurant-details-wrapper .restaurant-image {
+        display: none;
+    }
+
+    .restaurant-details-wrapper .restaurant-info {
+        width: 100%;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-name {
+        font-size: 46px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-description {
+        font-size: 20px;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .restaurant-details-wrapper .restaurant-info {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title {
+        width: 100%;
+        padding-left: 10px;
+        padding-right: 2px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-name {
+        font-size: 40px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-description {
+        font-size: 18px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact {
+        width: 100%;
+        height: 220;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating {
+        width: 40%;
+        align-items: center;
+        justify-content: center;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-top: 20px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate-number {
+        font-size: 16px;
+        margin-left: 15px;
+        margin-bottom: 5px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-comment-number {
+        font-size: 16px;
+        margin-left: 15px;
+        margin-bottom: 5px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact {
+        width: 60%;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        padding-left: 20px;
+        padding-right: 10px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-contact-title {
+        font-size: 14px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-email {
+        font-size: 14px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-phone-number {
+        font-size: 14px;
+    }
+}
+
+/*above 475px (xsmall)*/
+@media (max-width: 475px) {
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-name {
+        font-size: 34px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-description {
+        font-size: 14px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating {
+        width: 20%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate {
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-rate-number {
+        font-size: 12px;
+        margin-left: 0px;
+        margin-bottom: 5px;
+    }
+
+    .restaurant-details-wrapper .restaurant-info .restaurant-rating-contact .restaurant-rating #restaurant-comment-number {
+        font-size: 12px;
+        margin-left: 0px;
+        margin-bottom: 5px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact {
+        width: 80%;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        padding-left: 20px;
+        padding-right: 10px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-contact-title {
+        font-size: 14px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-email {
+        font-size: 12px;
+    }
+
+    .restaurant-details-wrapper .restaurant-contact #restaurant-phone-number {
+        font-size: 12px;
+    }
 }
