@@ -1,14 +1,32 @@
 import React, { useState } from 'react'
+//EXPORTED FUNCTIONS
+import { adminLogin } from '../setup/API/admin_api';
+import { Encode } from '../setup/Crypto/Encryption';
+//CSS
+import './styles/AdminLoginPage.css'
 
 const AdminLoginPage = () => {
-    const [userName, setUserName] = useState<string>("");
+    const [adminName, setAdminName] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
+    const handleLogin = async () => {
+        const encodedPass = Encode(password);
+
+        if(await adminLogin(adminName, encodedPass)) {
+            window.location.href = "/admin-panel"
+        }else {
+            console.log(false)
+        }
+    }
+
     return (
-        <>
-            <input type="text" placeholder='User name' value={userName} onChange={(e)=> setUserName(e.target.value)}/>
-            <input type="text" placeholder='Password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
-        </>
+        <div className='admin-login-background'>
+            <h1>ADMIN LOGIN</h1>
+            <input type="text" placeholder='User name' value={adminName} onChange={(e)=> setAdminName(e.target.value)}/>
+            <input type="password" placeholder='Password' value={password} onChange={(e)=> setPassword(e.target.value)}/>
+
+            <input type='button' value="Login" onClick={handleLogin}/>
+        </div>
     )
 }
 
