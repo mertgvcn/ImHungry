@@ -1,28 +1,28 @@
 .container {
     width: 90%;
-    height: 300px;
-    margin: 0 auto;
-    margin-top: 100px;
+    height: 100vh;
+    margin: auto;
+    margin-top: -65px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 
 #text-welcome {
-    font-size: 90px;
-    font-weight: 400;
-    font-style: italic;
-    color: #F0F0F0;
+    font-size: 110px;
+    font-weight: bold;
+    text-align: center;
+    color: #402E32;
     font-family: 'Overpass', sans-serif;
-    text-shadow:2px 2px #9f9f9f;
 }
 
 #text-info {
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 300;
-    font-style: italic;
-    color: #F0F0F0;
+    text-align: center;
+    color: #402E32;
     font-family: 'Overpass', sans-serif;
 }
 
@@ -34,8 +34,8 @@
 
 #button-wrapper .input-button {
     width: 280px;
-    height: 60px;
-    font-size: 30px;
+    height: 50px;
+    font-size: 26px;
     font-weight: bold;
     cursor: pointer;
     margin-top: 40px;
@@ -44,25 +44,46 @@
 }
 
 #button-wrapper #login {
-    border: 1px solid #FDF0D5;
-    background-color: transparent;
-    color: #F0F0F0;
+    border: none;
+    background-color: #C9A38D;
+    color: #FFF6EA;
 }
 
 #button-wrapper #login:hover {
-    background-color: #908d8f;
+    background-color: #9a7b6a;
     transition: 0.3s;
 }
 
 #button-wrapper #register {
-    border: 1px solid #FDF0D5;
+    border: 3px solid #C9A38D;
     background-color: transparent;
-    color: #F0F0F0;
+    color: #C9A38D;
 }
 
 #button-wrapper #register:hover {
-    background-color: #24121e;
+    background-color: #f9e3d4;
     transition: 0.3s;
+}
+
+/*above 1200px (xlarge)*/
+@media (max-width: 1200px) {
+    #text-welcome {
+        font-size: 92px;
+    }
+    
+    #text-info {
+        font-size: 32px;
+    }
+    
+    #button-wrapper {
+        width: 480px;
+    }
+
+    #button-wrapper .input-button {
+        width: 220px;
+        height: 46px;
+        font-size: 24px;
+    }
 }
 
 /*above 1024px (large)*/
@@ -72,36 +93,36 @@
     }
     
     #text-info {
-        font-size: 22px;
+        font-size: 25px;
     }
     
     #button-wrapper {
-        width: 460px;
+        width: 380px;
     }
 
     #button-wrapper .input-button {
-        width: 220px;
-        height: 50px;
-        font-size: 25px;
+        width: 180px;
+        height: 40px;
+        font-size: 22px;
     }
 }
 
 /*above 768px (medium)*/
 @media (max-width: 768px) {
     #text-welcome {
-        font-size: 50px;
+        font-size: 58px;
     }
     
     #text-info {
-        font-size: 18px;
+        font-size: 22px;
     }
     
     #button-wrapper {
-        width: 360px;
+        width: 340px;
     }
 
     #button-wrapper .input-button {
-        width: 170px;
+        width: 160px;
         height: 35px;
         font-size: 18px;
     }
@@ -110,21 +131,21 @@
 /*above 640px (small)*/
 @media (max-width: 640px) {
     #text-welcome {
-        font-size: 40px;
+        font-size: 44px;
     }
     
     #text-info {
-        font-size: 15px;
+        font-size: 18px;
     }
     
     #button-wrapper {
-        width: 300px;
+        width: 260px;
     }
 
     #button-wrapper .input-button {
-        width: 140px;
-        height: 35px;
-        font-size: 16px;
+        width: 120px;
+        height: 30px;
+        font-size: 14px;
     }
 }
 
@@ -132,13 +153,11 @@
 @media (max-width: 475px) {
     #text-welcome {
         font-size: 40px;
-        text-align: center;
     }
     
     #text-info {
-        margin-top: 15px;
-        font-size: 14px;
-        text-align: center;
+        margin-top: 10px;
+        font-size: 17px;
     }
     
     #button-wrapper {
@@ -146,7 +165,7 @@
         justify-content: center;
         width: 220px;
         height: 140px;
-        margin-top: 15px;
+        margin-top: 10px;
     }
 
     #button-wrapper .input-button {

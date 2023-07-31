@@ -1,19 +1,19 @@
-import React from 'react'
-import { useState } from "react"
+import React, { useContext, useState } from 'react'
 //EXPORTED FUNCTIONS
-import { login } from '../../../setup/API/user_api'
-import { Encode } from '../../../setup/Crypto/Encryption'
+import { getIDByUserName, login } from '../../../setup/API/user_api'
+import { Encode } from '../../../setup/Crypto/Cryption'
+import { UserContext } from '../../../UserContext'
 //COMPONENTS
 import IForgotMyPassword from './IForgotMyPassword'
-import Alert from '../../../components/Alert'
+import Alert from '../../../components/Shared/Alert'
 //CSS
 import "../styles/Login.css"
 
 
 
 
-
 const Login = () => {
+    const {setIsLogin, setCurrentUserID} = useContext(UserContext)
 
     //*LOGIN INPUTS
     const [userName, setUserName] = useState<string>("");
@@ -41,9 +41,17 @@ const Login = () => {
         if(await login(userName, encodedPass) == false) {
             popAlert("red", "User name or password is wrong!")
         }   
-        else { //LOGIN SUCCESSFUL
+        else { //*LOGIN SUCCESSFUL
+            //set user that logged in as current user 
+            const data = await getIDByUserName(userName)
+            const currentUserID = data[0].userID.toString()
+            const _currentUserID = Encode(currentUserID)
+            setCurrentUserID(_currentUserID)
+            setIsLogin("true")
+
+            //redirect to home page
             popAlert("green", "Login successful!")
-            window.location.href = `home/${userName}`
+            window.location.href = "home"
             return;       
         }         
     }

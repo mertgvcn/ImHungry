@@ -3,9 +3,12 @@
     flex-direction: row;
     width: 90%;
     height: 200px;
+    border: 1px solid rgb(64, 46, 50, 0.2);
     border-radius: 15px;
-    box-shadow: rgba(255, 255, 255, .4) 0 5px 8px;
-    background-color: rgba(255, 255, 255);
+    box-shadow: #c3c3c3 0px 8px 8px;
+    background-color: #FFF4EE;
+    margin-top: 30px;
+    color: #402E32;
 }
 
 /**---------------------------------------------------IMAGE------------------------------------------------*/
@@ -44,7 +47,6 @@
     margin-top: 10px;
     font-size: 65px;
     font-weight: bold;
-    color: rgb(30, 30, 30);
 }
 
 .restaurant-details-wrapper .restaurant-info .restaurant-title #restaurant-description {

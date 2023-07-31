@@ -1,13 +1,13 @@
 #register-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin-top: -30px;
     width: 700px;
     height: 500px;
     background-color: transparent;
-    margin: auto;
-    margin-top: 40px;
-    color: white;
+    color: #402E32;
 }
 
 /**---------------------------------------------------Title-------------------------------------------------------*/
@@ -48,19 +48,20 @@
     margin-bottom: 8px;
     width: 310px;
     height: 35px;
-    border: none;
-    box-shadow: rgba(39, 174, 96, .15) 0 8px 9px;
-    border-radius: 4px;
+    border: 1px solid #402E32;
+    background-color: #fef2ec;
+    border-radius: 10px;
+    box-shadow: #d1d1d1 0px 4px 7px;
     padding-left: 10px;
     font-size: 20px;
 }
 
 #register-inputs-wrapper .input-text:hover {
-    background-color: rgb(237, 231, 231);
+    background-color: #eae1dc;
 }
 
 #register-inputs-wrapper .input-text:focus {
-    outline-color: #24121e;
+    outline-color: #241812;
 }
 
 /*firstname-lastname*/
@@ -92,31 +93,32 @@
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 15px;
+    border-radius: 10px;
 }
 
 #register-buttons-wrapper #register {
-    box-shadow: rgba(255, 255, 255, .15) 0 4px 7px;
-    border: 1px solid white;
-    border-radius: 5px;
-    background-color: transparent;
+    border:none;
+    background-color: #C9A38D;
+    box-shadow: #c7b1a5 0 4px 7px;
     color: white;
 }
 
 #register-buttons-wrapper #register:hover {
-    background-color: #ffbfdf36;
+    background-color: #9a7b6a;
 }
 
 #register-buttons-wrapper #ihaveaccount {
+    box-shadow: none;
     margin-top: -8px;
     border: none;
     background-color: transparent;
     font-size: 18px;
-    font-weight: 500;
-    color: white;
+    font-weight: 700;
+    color: #C9A38D;
 }
 
 #register-buttons-wrapper #ihaveaccount:hover {
-    color: #ffbddd1b;
+    color: #9a7b6a;
 }
 
 

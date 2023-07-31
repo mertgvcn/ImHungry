@@ -1,13 +1,13 @@
 #login-wrapper {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin-top: -65px;
     width: 500px;
     height: 500px;
     background-color: transparent;
-    margin: auto;
-    margin-top: 50px;
-    color: white;
+    color: #402E32;
 }
 
 /**---------------------------------------------------Title--------------------------------------------------*/
@@ -15,7 +15,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px;
     font-size: 50px;
     font-weight: bold;
     font-style: italic;
@@ -47,20 +46,21 @@
 #login-inputs-wrapper .input-text {
     margin-bottom: 8px;
     width: 310px;
-    height: 40px;
-    border: none;
-    box-shadow: rgba(39, 174, 96, .15) 0 8px 9px;
-    border-radius: 4px;
+    height: 36px;
+    background-color: #fef2ec;
+    border: 1px solid #402E32;
+    border-radius: 10px;
+    box-shadow: #d1d1d1 0px 4px 7px;
     padding-left: 10px;
     font-size: 20px;
 }
 
 #login-inputs-wrapper .input-text:hover {
-    background-color: rgb(237, 231, 231);
+    background-color: #eae1dc;
 }
 
 #login-inputs-wrapper .input-text:focus {
-    outline-color: #24121e;
+    outline-color: #241812;
 }
 
 /**-----------------------------------------------------Buttons----------------------------------------------------*/
@@ -78,19 +78,29 @@
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 15px;
-    border: 1px solid white;
-    box-shadow: rgba(255, 255, 255, .15) 0 4px 7px;
-    border-radius: 5px;
-    background-color: transparent;
+    border-radius: 10px;
+}
+
+#login-buttons-wrapper #login {
+    border:none;
+    background-color: #C9A38D;
+    box-shadow: #c7b1a5 0 4px 7px;
     color: white;
 }
 
 #login-buttons-wrapper #login:hover {
-    background-color: #aba9aa;
+    background-color: #9a7b6a;
+}
+
+#login-buttons-wrapper #register {
+    border:1px solid #C9A38D;
+    background-color: transparent;
+    box-shadow: #c7b1a5 0 4px 7px;
+    color: #C9A38D;
 }
 
 #login-buttons-wrapper #register:hover {
-    background-color: #ffbfdf36;
+    background-color: #f9e3d4;
 }
 
 #login-buttons-wrapper #forgotpassword {
@@ -100,11 +110,11 @@
     background-color: transparent;
     font-size: 18px;
     font-weight: 700;
-    color: white;
+    color: #C9A38D;
 }
 
 #login-buttons-wrapper #forgotpassword:hover {
-    color: #ffbddd42;
+    color: #9a7b6a;
 }
 
 

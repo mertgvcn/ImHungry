@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 //EXPORTED FUNCTIONS
 import { getMenuTitles, getMenu } from '../../../setup/API/restaurant_api'
 //TYPE
@@ -8,22 +9,24 @@ import '../styles/Menu.css'
 //COMPONENTS
 import MenuItem from './MenuItem'
 
-type propsType = {
-    restaurantID: number
-}
 
-const Menu = (props: propsType) => {
+
+
+
+const Menu = () => {
+    const location = useLocation()
+    const currentRestaurantID = location.state.data;
+
     const [menuTitles, setMenuTitles] = useState<Array<MenuTitlesType>>()
     const [menu, setMenu] = useState<Array<MenuType>>()
 
-    //Fetching Data
     const fetchMenuTitles = async () => { //Gives us distinct category id and category name according to categories the restaurant has
-        const data = await getMenuTitles(props.restaurantID)
+        const data = await getMenuTitles(currentRestaurantID)
         setMenuTitles(data)
     }
 
     const fetchRestaurantMenu = async () => {
-        const data = await getMenu(props.restaurantID)
+        const data = await getMenu(currentRestaurantID)
         setMenu(data)
     }
 

@@ -39,6 +39,19 @@ export const register = async (firstName: string, lastName: string, userName: st
 return response.data;
 }
 
+export const getIDByUserName = async (userName: string) => {
+    const response = await axios.get('https://localhost:7181/api/User/getIDByUserName', {
+        params: {
+            userName: userName,
+        },
+        headers: {
+            'x-api-key': API_KEY
+        }
+    })
+
+    return response.data
+}
+
 export const isUserNameAlreadyExists = async (userName: string) => {
     const response = await axios.get('https://localhost:7181/api/User/searchUserName', {
         params: {
@@ -57,6 +70,53 @@ export const searchEmail = async (email: string) => {
     const response = await axios('https://localhost:7181/api/User/searchEmail', {
         params: {
             email: email
+        },
+        headers: {
+            'x-api-key': API_KEY
+        }
+    })
+
+    return response.data
+}
+
+//!Profile API'S
+export const getAccountInfo = async (userID: number) => {
+    const response = await axios('https://localhost:7181/api/User/getAccountInfo', {
+        params: {
+            userID: userID
+        },
+        headers: {
+            'x-api-key': API_KEY
+        }
+    })
+
+    return response.data
+}
+
+export const updateAccountInfo = async (userID: number, firstName: string, lastName: string, userName: string, email: string, phoneNumber: string) => {
+    const response = await axios.put('https://localhost:7181/api/User/updateAccountInfo', 
+    {
+        userID: userID,
+        firstName: firstName,
+        lastName: lastName,
+        userName: userName,
+        email: email,
+        phoneNumber: phoneNumber,
+        password: ""
+    }, 
+    {
+        headers: {
+            'x-api-key': API_KEY
+        }
+    })
+
+    return response.data
+}
+
+export const searchUserName = async (userName: string) => {
+    const response = await axios.get('https://localhost:7181/api/User/searchUserName',{
+        params: {
+            userName: userName
         },
         headers: {
             'x-api-key': API_KEY

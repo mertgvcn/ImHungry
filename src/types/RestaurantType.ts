@@ -25,6 +25,7 @@ export type MenuTitlesType = {
 
 export type MenuType = {
     restaurantID: string,
+    itemID: number,
     itemName: string,
     itemDescription: string,
     imageSource: string,
@@ -36,6 +37,7 @@ export type MenuType = {
 export type MenuItemType = {
     data: {
         restaurantID: string,
+        itemID: number,
         itemName: string,
         itemDescription: string,
         imageSource: string,

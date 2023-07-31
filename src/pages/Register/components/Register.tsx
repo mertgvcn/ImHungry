@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState } from "react"
 //COMPONENTS
-import Alert from "../../../components/Alert"
+import Alert from "../../../components/Shared/Alert"
 //EXPORTED FUNCTIONS
-import { Encode } from '../../../setup/Crypto/Encryption'
+import { Encode } from '../../../setup/Crypto/Cryption'
 import { register, isUserNameAlreadyExists } from '../../../setup/API/user_api'
 //CSS
 import "../styles/Register.css"

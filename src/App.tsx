@@ -1,13 +1,18 @@
+import { UserContextProvider } from "./UserContext";
 //COMPONENTS
-import Router from "./components/Router"
+import Router from "./components/Shared/Router"
+import Navbar from "./components/Shared/Navbar";
+
+
 
 
 const App = () => {
 
   return (
-    <>
-      <Router/> 
-    </>
+    <UserContextProvider>
+      <Navbar />
+      <Router />
+    </UserContextProvider>
   );
 }
 

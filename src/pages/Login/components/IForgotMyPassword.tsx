@@ -3,14 +3,15 @@ import React, { useState } from 'react'
 import { searchEmail } from '../../../setup/API/user_api';
 //CSS
 import '../styles/IForgotMyPassword.css'
-//TYPE
-import { IForgotMyPassType } from '../../../types/IForgotMyPassType';
 //COMPONENT
-import Alert from '../../../components/Alert';
+import Alert from '../../../components/Shared/Alert';
 
+type propsType = {
+    trigger:boolean,
+    setTrigger:React.Dispatch<React.SetStateAction<boolean>>
+}
 
-
-const IForgotMyPassword = (props: IForgotMyPassType) => {
+const IForgotMyPassword = (props: propsType) => {
     const [email, setEmail] = useState<string>("");
 
     //*ALERT PROPERTIES

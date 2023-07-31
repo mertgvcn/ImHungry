@@ -1,0 +1,63 @@
+.change-pass-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    width: 600px;
+    padding: 20px 20px;
+    background-color: #FFF4EE;
+    color:#402E32;
+    border: 1px solid rgb(64, 46, 50, 0.3);
+    box-shadow: #c3c3c3 0px 8px 8px;
+}
+
+.change-pass-wrapper p {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.change-pass-wrapper .input-group p {
+    margin-left: 2px;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.change-pass-wrapper .input-group input {
+    margin-bottom: 12px;
+    width: 310px;
+    height: 28px;
+    background-color: #ffffff;
+    border: 1px solid #402e3293;
+    border-radius: 5px;
+    box-shadow: #d1d1d1 0px 4px 7px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+.change-pass-wrapper .change-pass-save {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 310px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #D67244;
+    color: white;
+    box-shadow: #969696 0px 4px 5px;
+    cursor: pointer;
+}
+
+.change-pass-wrapper .change-pass-save:hover {
+    background-color: #e78a60;
+}
+
+.change-pass-wrapper .change-pass-save:active {
+    background-color: #ff5e00;
+}

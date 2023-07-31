@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 //EXPORTED FUNCTIONS
 import { getRestaurantDetail } from '../../../setup/API/restaurant_api'
+//Type
 import { RestaurantDetail } from '../../../types/RestaurantType'
 //CSS
 import '../styles/RestaurantDetails.css'
 
-type propsType = {
-    restaurantID: number
-}
 
-const RestaurantDetails = (props: propsType) => {
+
+
+
+const RestaurantDetails = () => {
+    const location = useLocation()
+    const currentRestaurantID = location.state.data;
+
     const [restaurantDetails, setRestaurantDetails] = useState<RestaurantDetail>({ restaurantID: "", name: "", description: "", email: "", imageSource: "", phoneNumber: "" })
 
-    const fetchRestaurantDetails = async () => {
-        const data = await getRestaurantDetail(props.restaurantID)
-        setRestaurantDetails(data[0])
-    }
-
     useEffect(() => {
+        const fetchRestaurantDetails = async () => {
+            const data = await getRestaurantDetail(currentRestaurantID)
+            setRestaurantDetails(data[0])
+        }
+
         fetchRestaurantDetails()
     }, [])
 
@@ -36,9 +41,9 @@ const RestaurantDetails = (props: propsType) => {
                 </div>
                 <div className="restaurant-rating-contact">
                     <div className="restaurant-rating">
-                        <p id="restaurant-rate"><i className="fa-solid fa-star" style={{ color: "#87314e" }}></i>4/5</p>
-                        <p id="restaurant-rate-number"><i className="fa-solid fa-users" style={{ marginRight: 5, color: "#512645" }}></i>478</p>
-                        <p id="restaurant-comment-number"><i className="fa-solid fa-comment" style={{ marginRight: 3, color: "#512645" }}></i>102</p>
+                        <p id="restaurant-rate"><i className="fa-solid fa-star" style={{ color: "#B78670" }}></i>4/5</p>
+                        <p id="restaurant-rate-number"><i className="fa-solid fa-users" style={{ marginRight: 5, color: "#B78670" }}></i>478</p>
+                        <p id="restaurant-comment-number"><i className="fa-solid fa-comment" style={{ marginRight: 3, color: "#B78670" }}></i>102</p>
                     </div>
 
                     <div className="restaurant-contact">
