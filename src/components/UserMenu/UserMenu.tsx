@@ -12,12 +12,11 @@ type propsType = {
 const UserMenu = (props: propsType) => {
     const { setCurrentUserID, setIsLogin } = useContext(UserContext)
 
-
-    const handleAdresses = () => {
-        console.log("handle adresses")
+    const handlePreviousOrders = () => {
+        
     }
 
-    const handleAccount = () => {
+    const handleAccountSettings = () => {
         window.location.href = "/profile"
     }
 
@@ -31,9 +30,8 @@ const UserMenu = (props: propsType) => {
         <>
             <div className='user-menu'>
                 <div className="user-menu-buttons-wrapper">
-                    <button onClick={handleAdresses}>Previous Orders</button>
-                    <button onClick={handleAdresses}>My Addresses</button>
-                    <button onClick={handleAccount}>Account Settings</button>
+                    <button onClick={handlePreviousOrders}>Previous Orders</button>
+                    <button onClick={handleAccountSettings}>Account Settings</button>
                     <button onClick={handleLogOut}>Log Out</button>
                 </div>
             </div>

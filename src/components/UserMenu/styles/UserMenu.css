@@ -1,10 +1,10 @@
 .user-menu {
-    position: absolute;
+    position: fixed;
     z-index: 2;
     top: 65px;
     right: 9%;
     width: 160px;
-    height: 135px;
+    height: 100px;
     border: 2px solid rgb(106, 89, 79, 0.3);
     background-color: #f1e9e5;
 }

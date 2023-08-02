@@ -75,6 +75,10 @@ const Register = () => {
         return true;
     }
 
+    function stringHasNumber(text: string): boolean { //yukarıdaki fonksiyonla aynı işlevi görüyor.
+        return /\d/.test(text);
+    }
+
     const popAlert = (color: string, msg: string) => {
         setIsOpen(true)
         setColor(color)
@@ -157,8 +161,5 @@ const Register = () => {
 //     return true;
 // }
 
-function stringHasNumber(text: string): boolean { //yukarıdaki fonksiyonla aynı işlevi görüyor.
-    return /\d/.test(text);
-}
 
 export default Register

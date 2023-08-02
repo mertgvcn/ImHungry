@@ -125,3 +125,26 @@ export const searchUserName = async (userName: string) => {
 
     return response.data
 }
+
+export const changePass = async (userID: number, currentPassword: string, newPassword: string) => {
+    const response = await axios.put('https://localhost:7181/api/User/changePassword',     
+    {
+        userID: userID,
+        firstName: "",
+        lastName: "",
+        userName: "",
+        email: "",
+        phoneNumber: "",
+        password: newPassword
+    },
+    {
+        params: {
+            currentPassword: currentPassword
+        },
+        headers: {
+            'x-api-key': API_KEY
+        }
+    })
+
+    return response.data
+}

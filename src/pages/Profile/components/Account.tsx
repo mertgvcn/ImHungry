@@ -51,7 +51,7 @@ const Account = () => {
       await updateAccountInfo(_currentUserID, firstName, lastName, userName, email, phoneNumber)
       popAlert("green", "Update successful")
     } catch (error) {
-      popAlert("red", "Update not successful")
+      popAlert("red", "Update unsuccessful")
     }
   }
 
