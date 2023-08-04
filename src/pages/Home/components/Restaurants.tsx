@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { RestaurantContext } from '../../../context/RestaurantContext'
+import { ChangeContext } from '../../../context/ChangeContext'
 //COMPONENTS
 import RestaurantCard from './RestaurantCard'
 //CSS
@@ -11,16 +13,18 @@ import { RestaurantInfo } from '../../../types/RestaurantType'
 
 
 const Restaurants = () => {
+  const { filteredName } = useContext(RestaurantContext)
+  const { toggle } = useContext(ChangeContext)
   const [restaurants, setRestaurants] = useState<RestaurantInfo[]>([]);
 
   const getRestaurantInfos = async () => {
-    const response = await getRestaurants();
+    const response = await getRestaurants(filteredName);
     setRestaurants(response);
   }
 
   useEffect(() => {
     getRestaurantInfos();
-  }, [])
+  }, [toggle])
   
 
   return (

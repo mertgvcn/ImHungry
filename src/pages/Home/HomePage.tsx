@@ -1,5 +1,6 @@
 import React from 'react'
 import { RestaurantContextProvider } from '../../context/RestaurantContext'
+import { ChangeContextProvider } from '../../context/ChangeContext'
 //css
 import './HomePage.css'
 //COMPONENTS
@@ -11,11 +12,13 @@ const HomePage = () => {
 
   return (
     <RestaurantContextProvider>
-      <div className="search-location">
-        <SearchRestaurant />
-        <SearchRestaurant />
-      </div>
-      <Restaurants />
+      <ChangeContextProvider>
+        <div className="search-location">
+          <SearchRestaurant />
+          <SearchRestaurant />
+        </div>
+        <Restaurants />
+      </ChangeContextProvider>
     </RestaurantContextProvider>
 
   )
