@@ -4,12 +4,13 @@
     align-items: center;
     margin: auto;
     margin-top: 60px;
-    width: 600px;
+    width: 640px;
     padding: 20px 20px;
     background-color: #FFF4EE;
     color:#402E32;
     border: 1px solid rgb(64, 46, 50, 0.3);
     box-shadow: #c3c3c3 0px 8px 8px;
+    box-sizing: border-box;
 }
 
 .account-wrapper p {
@@ -59,4 +60,48 @@
 
 .account-wrapper .account-save:active {
     background-color: #ff5e00;
+}
+
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    .account-wrapper {
+        width: 100%;
+    }
+    .account-wrapper p {
+        font-size: 30px;
+    }
+    
+    .account-wrapper .input-group p {
+        font-size: 12px;
+    }
+    
+    .account-wrapper .input-group input {
+        font-size: 16px;
+    }
+    
+    .account-wrapper .account-save {
+        font-size: 18px;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .account-wrapper p {
+        font-size: 26px;
+    }
+    
+    .account-wrapper .input-group {
+        width: 80%;
+    }
+    
+    .account-wrapper .input-group input {
+        width: 100%;
+    }
+    
+    .account-wrapper .account-save {
+        width: 80%;
+    }
 }

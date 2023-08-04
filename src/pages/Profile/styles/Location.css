@@ -1,62 +1,68 @@
-.address-wrapper {
+.location-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto;
     margin-top: 60px;
-    width: 600px;
+    width: 640px;
     padding: 20px 20px;
     background-color: #FFF4EE;
     color:#402E32;
     border: 1px solid rgb(64, 46, 50, 0.3);
     box-shadow: #c3c3c3 0px 8px 8px;
+    box-sizing: border-box;
 }
 
-.address-wrapper p {
+.location-wrapper p {
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.address-wrapper .input-group p {
-    margin-left: 2px;
-    margin-bottom: 3px;
-    font-size: 14px;
-    font-weight: 500;
+.location-wrapper .locations {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
 }
 
-.address-wrapper .input-group input {
-    margin-bottom: 12px;
-    width: 310px;
-    height: 28px;
-    background-color: #ffffff;
-    border: 1px solid #402e3293;
-    border-radius: 5px;
-    box-shadow: #d1d1d1 0px 4px 7px;
-    box-sizing: border-box;
-    padding-left: 10px;
-    font-size: 18px;
-}
-
-.address-wrapper .address-save {
-    margin-top: 5px;
-    margin-bottom: 5px;
-    width: 310px;
-    height: 30px;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    background-color: #D67244;
-    color: white;
-    box-shadow: #969696 0px 4px 5px;
+.location-wrapper .add-location  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px 8px;
+    font-size: 40px;
+    width: 40px;
+    height: 100px;
+    background-color: #FFF4EE;
+    color:#8a8a8a;
+    border: 1px solid rgb(64, 46, 50, 0.3);
+    box-shadow: #c3c3c3 0px 8px 8px;
     cursor: pointer;
 }
 
-.address-wrapper .address-save:hover {
-    background-color: #e78a60;
+.location-wrapper .add-location:hover {
+    color:rgb(97, 97, 97)
 }
 
-.address-wrapper .address-save:active {
-    background-color: #ff5e00;
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    .location-wrapper {
+        width: 100%;
+    }
+    .location-wrapper p {
+        font-size: 30px;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .location-wrapper p {
+        font-size: 26px;
+    }
 }

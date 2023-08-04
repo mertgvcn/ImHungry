@@ -1,4 +1,4 @@
-import { UserContextProvider } from "./UserContext";
+import { UserContextProvider } from "./context/UserContext";
 //COMPONENTS
 import Router from "./components/Shared/Router"
 import Navbar from "./components/Shared/Navbar";

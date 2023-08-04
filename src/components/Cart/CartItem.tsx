@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { UserContext } from '../../UserContext'
+import { UserContext } from '../../context/UserContext'
 //type
 import { CartItemType } from '../../types/CartType'
 //css

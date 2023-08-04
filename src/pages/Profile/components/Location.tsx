@@ -1,68 +1,60 @@
-import React, { useContext, useState } from 'react'
-import { UserContext } from '../../../UserContext'
+import React, { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../../../context/UserContext'
+import { ChangeContext } from '../../../context/ChangeContext'
 //exported functions
 import { Decrypt } from '../../../setup/Crypto/Cryption'
+import { getLocationsByUserID } from '../../../setup/API/location_api'
+//type
+import { LocationType } from '../../../types/LocationType'
 //Css
 import '../styles/Location.css'
 //Component
-import Alert from '../../../components/Shared/Alert'
+import LocationAdd from './LocationAdd'
+import LocationCard from './LocationCard'
+
 
 const Location = () => {
-    //Local Storage
+    //Context
+    const { toggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
-    //Input States
-    const [province, setProvince] = useState<string>("")
-    const [district, setDistrict] = useState<string>("")
-    const [neighbourhood, setNeighbourhood] = useState<string>("")
-    const [address, setAddress] = useState<string>("") 
+    //Locations
+    const [userLocations, setUserLocations] = useState<Array<LocationType>>([])
 
-    //Alert States
-    const [color, setColor] = useState<string>("");
-    const [msg, setMsg] = useState<string>("");
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    //Add Location State
+    const [addLocationStatus, setAddLocationStatus] = useState<boolean>(false);
 
-
-    const handleSave = async () => {
-
+    const fetchUserLocations = async () => {
+        const data = await getLocationsByUserID(_currentUserID)
+        setUserLocations(data)
     }
 
-    //Support functions
-    const popAlert = (color: string, msg: string) => {
-        setIsOpen(true)
-        setColor(color)
-        setMsg(msg)
-
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 3000)
-    }
+    useEffect(() => {
+      fetchUserLocations()
+    }, [toggle])
+    
 
     return (
         <>
-            <div className='address-wrapper'>
+            <div className='location-wrapper'>
                 <p>ADDRESSES</p>
-                <div className='input-group'>
-                    <p>Province</p>
-                    <input value={province} type="text" onChange={(e) => { setProvince(e.target.value) }} />
+
+                <div className='locations'>
+
+                    {userLocations.map((location, idx) => (
+                        <LocationCard data={location} key={idx}/>
+                    ))}
+
+                    <div className="add-location" onClick={() => setAddLocationStatus(true)}>
+                        +
+                    </div>
                 </div>
-                <div className="input-group">
-                    <p>District</p>
-                    <input value={district} type="text" onChange={(e) => { setDistrict(e.target.value) }} />
-                </div>
-                <div className='input-group'>
-                    <p>Neighbourhood</p>
-                    <input value={neighbourhood} type="text" onChange={(e) => { setNeighbourhood(e.target.value) }} />
-                </div>
-                <div className="input-group">
-                    <p>Address</p>
-                    <input value={address} type="text" onChange={(e) => { setAddress(e.target.value) }} />
-                </div>
-                <button className='address-save' onClick={handleSave}>SAVE</button>
+
+
             </div>
-            
-            <Alert isOpen={isOpen} color={color} msg={msg} />
+
+            <LocationAdd trigger={addLocationStatus} setTrigger={setAddLocationStatus} />
         </>
     )
 }

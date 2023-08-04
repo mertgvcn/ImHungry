@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../../UserContext'
+import { UserContext } from '../../../context/UserContext'
 //css
 import '../styles/Account.css'
 import { Decrypt } from '../../../setup/Crypto/Cryption'

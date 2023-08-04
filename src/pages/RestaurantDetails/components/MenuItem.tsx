@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { UserContext } from '../../../UserContext'
+import { UserContext } from '../../../context/UserContext'
 //CSS
 import '../styles/MenuItem.css'
 //TYPE

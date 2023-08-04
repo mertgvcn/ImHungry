@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 //EXPORTED FUNCTIONS
 import { getIDByUserName, login } from '../../../setup/API/user_api'
 import { Encode } from '../../../setup/Crypto/Cryption'
-import { UserContext } from '../../../UserContext'
+import { UserContext } from '../../../context/UserContext'
 //COMPONENTS
 import IForgotMyPassword from './IForgotMyPassword'
 import Alert from '../../../components/Shared/Alert'

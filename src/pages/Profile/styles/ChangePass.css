@@ -5,12 +5,13 @@
     margin: auto;
     margin-top: 60px;
     margin-bottom: 60px;
-    width: 600px;
+    width: 640px;
     padding: 20px 20px;
     background-color: #FFF4EE;
     color:#402E32;
     border: 1px solid rgb(64, 46, 50, 0.3);
     box-shadow: #c3c3c3 0px 8px 8px;
+    box-sizing: border-box;
 }
 
 .change-pass-wrapper p {
@@ -60,4 +61,49 @@
 
 .change-pass-wrapper .change-pass-save:active {
     background-color: #ff5e00;
+}
+
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    .change-pass-wrapper {
+        width: 100%;
+    }
+    
+    .change-pass-wrapper p {
+        font-size: 30px;
+    }
+    
+    .change-pass-wrapper .input-group p {
+        font-size: 12px;
+    }
+    
+    .change-pass-wrapper .input-group input {
+        font-size: 16px;
+    }
+    
+    .change-pass-wrapper .change-pass-save {
+        font-size: 18px;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .change-pass-wrapper p {
+        font-size: 26px;
+    }
+    
+    .change-pass-wrapper .input-group {
+        width: 80%;
+    }
+
+    .change-pass-wrapper .input-group input {
+        width: 100%;
+    }
+    
+    .change-pass-wrapper .change-pass-save {
+        width: 80%;
+    }
 }

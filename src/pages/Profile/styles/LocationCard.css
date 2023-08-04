@@ -1,0 +1,34 @@
+.location-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    width: 180px;
+    height: 100px;
+    margin: 8px 8px;
+    padding: 5px 5px;
+    background-color: #FFF4EE;
+    color:#402E32;
+    border: 1px solid rgb(64, 46, 50, 0.3);
+    box-shadow: #c3c3c3 0px 8px 8px;
+    box-sizing: border-box;
+}
+
+.location-card-wrapper .delete-location {
+    width: 100%;
+}
+
+.location-card-wrapper .delete-location i{
+    float: right;
+    cursor: pointer;
+    color: rgb(77, 76, 76);
+}
+
+.location-card-wrapper .delete-location i:hover{
+    color: black;
+}
+
+.location-card-wrapper p{
+    color:#402E32;
+    font-size: 12px;
+    overflow-wrap: break-word;
+}

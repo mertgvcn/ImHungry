@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "../../context/UserContext";
 //CSS
 import "./styles/Navbar.css";
 //EXPORTED FUNCTIONS

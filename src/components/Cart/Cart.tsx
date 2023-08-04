@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../UserContext'
+import { UserContext } from '../../context/UserContext'
 //CSS
 import './styles/Cart.css'
 //Exported Functions

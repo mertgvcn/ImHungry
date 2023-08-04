@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { getUserCartItemNumber } from "./setup/API/cart_api";
-import { Decrypt } from "./setup/Crypto/Cryption";
+import { getUserCartItemNumber } from "../setup/API/cart_api";
+import { Decrypt } from "../setup/Crypto/Cryption";
 
 
 export const UserContext = createContext<any | null>(null)

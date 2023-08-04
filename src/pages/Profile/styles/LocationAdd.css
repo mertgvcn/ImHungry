@@ -1,0 +1,138 @@
+.add-address-background {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%; 
+    height: 100vh; /*buraya kadar tüm ekranı kapsattık ki arkaplan gri olsun*/
+    background-color: rgba(0, 0, 0, 0.701); /*Arka planı karartır*/
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-address-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    width: 540px;
+    padding: 20px 20px;
+    background-color: #FFF4EE;
+    color:#402E32;
+    border: 1px solid rgb(64, 46, 50, 0.3);
+    border-radius: 5px;
+    box-shadow: #b9b9b9 0px 3px 4px;
+    box-sizing: border-box;
+}
+
+.add-address-wrapper .close-add-address {
+    width: 100%;
+}
+
+.add-address-wrapper .close-add-address i {
+    float: right;
+    cursor: pointer;
+}
+
+.add-address-wrapper .close-add-address i:hover {
+    color: black;
+}
+
+.add-address-wrapper p {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.add-address-wrapper .input-group p {
+    margin-left: 2px;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.add-address-wrapper .input-group input {
+    margin-bottom: 12px;
+    width: 310px;
+    height: 28px;
+    background-color: #ffffff;
+    border: 1px solid #402e3293;
+    border-radius: 5px;
+    box-shadow: #d1d1d1 0px 4px 7px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 16px;
+}
+
+.add-address-wrapper .input-group textarea {
+    margin-bottom: 12px;
+    width: 310px;
+    background-color: #ffffff;
+    border: 1px solid #402e3293;
+    border-radius: 5px;
+    box-shadow: #d1d1d1 0px 4px 7px;
+    padding: 10px 10px;
+    box-sizing: border-box; 
+    font-size: 16px;
+    resize: none;
+}
+
+.add-address-wrapper .address-add {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 310px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #D67244;
+    color: white;
+    box-shadow: #969696 0px 4px 5px;
+    cursor: pointer;
+}
+
+.add-address-wrapper .address-add:hover {
+    background-color: #e78a60;
+}
+
+.add-address-wrapper .address-add:active {
+    background-color: #ff5e00;
+}
+
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .add-address-wrapper {
+        width: 100%;
+    }
+    .add-address-wrapper>p {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .add-address-wrapper .input-group {
+        width: 100%;
+    }
+    
+    .add-address-wrapper .input-group p {
+        font-size: 12px;
+    }
+    
+    .add-address-wrapper .input-group input {
+        width: 100%;
+        font-size: 16px;
+    }
+    
+    .add-address-wrapper .input-group textarea {
+        width: 100%;
+    }
+    
+    .add-address-wrapper .address-add {
+        width: 100%;
+        font-size: 18px;
+    }
+}
