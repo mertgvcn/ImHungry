@@ -1,0 +1,118 @@
+.current-location-wrapper {
+    width: 45%;
+    height: 120px;
+    margin-top: 50px;
+    background-color: #FFF4EE;
+    border: 1px solid rgb(64, 46, 50, 0.3);
+    box-shadow: #c3c3c3 0px 8px 8px;
+}
+
+.current-location-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #D67244;
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 5px 3px;
+    width: 100%;
+    height: 40%;
+}
+
+.current-location-title-wrapper #location-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(238, 231, 231);
+}
+
+.current-location-wrapper .current-location-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60%;
+    box-sizing: border-box;
+    padding: 10px 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.current-location-wrapper .current-location-selection #current-location {
+    border: none;
+    background-color: transparent;
+    width: 100%;
+    height: 80%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.current-location-wrapper .current-location-selection #current-location:focus {
+    outline:none;
+}
+
+.current-location-wrapper .locations {
+    position: relative;
+    z-index: 1px;
+    border: 1px solid rgb(64, 46, 50, 0.3);
+    box-shadow: #c3c3c3 0px 3px 4px;
+    margin-top: 1px;
+}
+
+.current-location-wrapper .locations ul{
+    background-color: #FFF4EE;
+    box-sizing: border-box;
+    padding: 0px 0px;
+}
+
+.current-location-wrapper .locations ul li {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 5px 5px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.current-location-wrapper .locations ul li:hover {
+    background-color: #edcfbf;
+}
+
+
+/**-----------------------------------------------RESPONSIVE----------------------------------------------*/
+
+/*above 1024px (large)*/
+@media (max-width: 1024px) {
+    .current-location-title-wrapper #location-title {
+        font-size: 25px;
+    }
+
+    .current-location-wrapper .current-location-selection {
+        font-size: 18px;
+    }
+    
+    .current-location-wrapper .current-location-selection #current-location {
+        font-size: 18px;
+    }
+}
+
+/*above 768px (medium)*/
+@media (max-width: 768px) {
+    .current-location-title-wrapper #location-title {
+        font-size: 22px;
+    }
+
+    .current-location-wrapper .current-location-selection {
+        font-size: 16px;
+    }
+    
+    .current-location-wrapper .current-location-selection #current-location {
+        font-size: 16px;
+    }
+}
+
+/*above 640px (small)*/
+@media (max-width: 640px) {
+    .current-location-wrapper {
+        width: 100%;
+    }
+}

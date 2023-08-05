@@ -6,6 +6,7 @@ import './HomePage.css'
 //COMPONENTS
 import Restaurants from './components/Restaurants'
 import SearchRestaurant from './components/SearchRestaurant'
+import CurrentLocation from './components/CurrentLocation'
 
 
 const HomePage = () => {
@@ -15,7 +16,7 @@ const HomePage = () => {
       <ChangeContextProvider>
         <div className="search-location">
           <SearchRestaurant />
-          <SearchRestaurant />
+          <CurrentLocation />
         </div>
         <Restaurants />
       </ChangeContextProvider>

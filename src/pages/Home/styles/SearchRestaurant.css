@@ -69,6 +69,9 @@
     background-color: #d6a284;
 }
 
+.search-restaurant-wrapper #search-button:active {
+    background-color: #e3a079;
+}
 
 /**-----------------------------------------------RESPONSIVE----------------------------------------------*/
 
