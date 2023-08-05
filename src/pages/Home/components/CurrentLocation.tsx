@@ -3,6 +3,7 @@ import { UserContext } from '../../../context/UserContext'
 //exported functions
 import { getLocationsByUserID } from '../../../setup/API/location_api'
 import { Decrypt } from '../../../setup/Crypto/Cryption'
+import { setCurrentLocation } from '../../../setup/API/user_api'
 //type
 import { LocationType } from '../../../types/LocationType'
 //css
@@ -15,9 +16,8 @@ const CurrentLocation = () => {
 
     //Locations
     const [userLocations, setUserLocations] = useState<Array<LocationType>>([])
-    const [currentLocation, setCurrentLocation] = useState("")
+    const [location, setLocation] = useState<string>("")
     const [locationsState, setLocationsState] = useState<boolean>(false)
-
 
     const fetchLocations = async () => {
         const data = await getLocationsByUserID(_currentUserID)
@@ -36,14 +36,25 @@ const CurrentLocation = () => {
 
             <div className="current-location-selection" onClick={() => setLocationsState(!locationsState)}>
                 <input id="current-location" type="text" placeholder='Select Current Location'
-                    value={currentLocation} readOnly={true} />
+                    value={location} readOnly={true} />
                 <i className="fa-solid fa-chevron-down"></i>
             </div>
 
             {locationsState && (<div className='locations'>
                 <ul>
                     {userLocations.map((location, idx) => (
-                        <li key={idx} onClick={(e) => { setCurrentLocation(e.currentTarget.innerText); setLocationsState(false) }}>
+                        <li key={idx} onClick={async (e) => {
+                            await setCurrentLocation(_currentUserID, location.locationID);
+                            setLocation(
+                                `${location.locationTitle}, ${location.province}/${location.district}` +
+                                `${location.neighbourhood.length > 12 ? `, ${location.neighbourhood.substring(0, 12)}...` : `, ${location.neighbourhood}`}` +
+                                `${location.street ? (location.street.length > 12 ? `, ${location.street.substring(0, 12)}...` : `, ${location.street}`) : ""}` +
+                                `${location.buildingNo ? (location.buildingNo.length > 5 ? `, ${location.buildingNo.substring(0, 5)}...` : `, ${location.buildingNo}`) : ""}` +
+                                `${location.apartmentNo ? (location.apartmentNo.length > 5 ? `, ${location.apartmentNo.substring(0, 5)}...` : `, ${location.apartmentNo}`) : ""}` +
+                                `${location.addition ? (location.addition.length > 15 ? `, ${location.addition.substring(0, 15)}...` : `, ${location.addition}`) : ""}`
+                            );
+                            setLocationsState(false);
+                        }}>
                             <i className="fa-solid fa-location-dot" style={{ marginRight: 2, fontSize: 16 }}></i>
                             {location.locationTitle}
                             , {location.province}/{location.district}
