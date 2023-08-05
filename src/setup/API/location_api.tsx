@@ -16,14 +16,18 @@ export const getLocationsByUserID = async (userID: number) => {
     return response.data
 }
 
-export const addLocation = async (userID: number, province: string, district: string, neighbourhood: string, address: string) => {
+export const addLocation = async (userID: number, locationTitle:string, province: string, district: string, neighbourhood: string, street: string, buildingNo: string, apartmentNo: string, addition:string) => {
     const response = await axios.post('https://localhost:7181/api/Location/addLocation', 
     {
         userID: userID,
+        locationTitle: locationTitle,
         province: province,
         district: district,
         neighbourhood: neighbourhood,
-        address: address,
+        street: street,
+        buildingNo: buildingNo,
+        apartmentNo: apartmentNo,
+        addition: addition
     },
     {
         headers: {

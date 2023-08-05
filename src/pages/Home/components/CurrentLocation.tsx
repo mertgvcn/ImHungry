@@ -35,23 +35,42 @@ const CurrentLocation = () => {
             </div>
 
             <div className="current-location-selection" onClick={() => setLocationsState(!locationsState)}>
-                <input id="current-location" type="text" placeholder='Select Current Location' 
-                value={currentLocation} readOnly={true}/>
+                <input id="current-location" type="text" placeholder='Select Current Location'
+                    value={currentLocation} readOnly={true} />
                 <i className="fa-solid fa-chevron-down"></i>
             </div>
 
             {locationsState && (<div className='locations'>
                 <ul>
                     {userLocations.map((location, idx) => (
-                        <li key={idx} onClick={(e) => {setCurrentLocation(e.currentTarget.innerText); setLocationsState(false)}}>
+                        <li key={idx} onClick={(e) => { setCurrentLocation(e.currentTarget.innerText); setLocationsState(false) }}>
                             <i className="fa-solid fa-location-dot" style={{ marginRight: 2, fontSize: 16 }}></i>
-                            {location.province}/{location.district}
-                            , {location.neighbourhood.length > 12 ? 
-                                `${location.neighbourhood.substring(0,12)}...` : location.neighbourhood
-                              }
-                            , {location.address.length > 12 ?
-                                `${location.address.substring(0,12)}...` : location.address
+                            {location.locationTitle}
+                            , {location.province}/{location.district}
+                            {location.neighbourhood.length > 12 ?
+                                `, ${location.neighbourhood.substring(0, 12)}...` : `, ${location.neighbourhood}`
                             }
+                            {location.street ?
+                                location.street.length > 12 ?
+                                    `, ${location.street.substring(0, 12)}...` : `, ${location.street}`
+                                : null
+                            }
+                            {location.buildingNo ?
+                                location.buildingNo.length > 5 ?
+                                    `, ${location.street.substring(0, 5)}...` : `, ${location.buildingNo}`
+                                : null
+                            }
+                            {location.apartmentNo ?
+                                location.apartmentNo.length > 5 ?
+                                    `, ${location.apartmentNo.substring(0, 5)}...` : `, ${location.apartmentNo}`
+                                : null
+                            }
+                            {location.addition ?
+                                location.addition.length > 15 ?
+                                    `, ${location.addition.substring(0, 15)}...` : `, ${location.addition}`
+                                : null
+                            }
+
                         </li>
                     ))}
                 </ul>

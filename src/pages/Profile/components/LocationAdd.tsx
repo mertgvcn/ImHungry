@@ -21,10 +21,14 @@ const LocationAdd = (props: propsType) => {
     const _currentUserID = Decrypt(currentUserID)
 
     //Add Location States
+    const [title, setTitle] = useState<string>("")
     const [province, setProvince] = useState<string>("")
     const [district, setDistrict] = useState<string>("")
     const [neighbourhood, setNeighbourhood] = useState<string>("")
-    const [address, setAddress] = useState<string>("")
+    const [street, setStreet] = useState<string>("")
+    const [buildingNo, setBuildingNo] = useState<string>("")
+    const [apartmentNo, setApartmentNo] = useState<string>("")
+    const [addition, setAddition] = useState<string>("")
 
     //Alert States
     const [color, setColor] = useState<string>("");
@@ -34,7 +38,7 @@ const LocationAdd = (props: propsType) => {
     const handleAdd = async () => {
         if (checkInputs()) {
             try {
-                const response = await addLocation(_currentUserID, province, district, neighbourhood, address)
+                const response = await addLocation(_currentUserID, title, province, district, neighbourhood, street, buildingNo, apartmentNo, addition)
                 popAlert("green", "Addrees successfuly added")
                 setToggle(!toggle)
                 return response
@@ -46,11 +50,11 @@ const LocationAdd = (props: propsType) => {
 
     //Support functions
     const checkInputs = () => {
-        if (address.length > 120) {
-            popAlert("orange", "Address is too long (should shorter than 120 character)")
+        if (addition.length > 50) {
+            popAlert("orange", "Addition is too long (should shorter than 50 character)")
             return false;
         }
-        if (province.trim() == "" || district.trim() == "" || neighbourhood.trim() == "" || address.trim() == "") {
+        if (title.trim() == "" || province.trim() == "" || district.trim() == "" || neighbourhood.trim() == "") {
             popAlert("orange", "Dont leave blank spaces")
             return false;
         }
@@ -78,6 +82,10 @@ const LocationAdd = (props: propsType) => {
 
                 <p>ADD ADDRESS</p>
                 <div className='input-group'>
+                    <p>Title</p>
+                    <input value={title} type="text" onChange={(e) => { setTitle(e.target.value) }} />
+                </div>
+                <div className='input-group'>
                     <p>Province</p>
                     <input value={province} type="text" onChange={(e) => { setProvince(e.target.value) }} />
                 </div>
@@ -89,9 +97,23 @@ const LocationAdd = (props: propsType) => {
                     <p>Neighbourhood</p>
                     <input value={neighbourhood} type="text" onChange={(e) => { setNeighbourhood(e.target.value) }} />
                 </div>
+                <div className='input-group'>
+                    <p>Street</p>
+                    <input value={street} type="text" onChange={(e) => { setStreet(e.target.value) }} />
+                </div>
+                <div className="row"> 
+                    <div className='input-group'>
+                        <p>Building No</p>
+                        <input value={buildingNo} type="text" onChange={(e) => { setBuildingNo(e.target.value) }} />
+                    </div>
+                    <div className='input-group'>
+                        <p>Apartment No</p>
+                        <input value={apartmentNo} type="text" onChange={(e) => { setApartmentNo(e.target.value) }} />
+                    </div>
+                </div>
                 <div className="input-group">
-                    <p>Address</p>
-                    <textarea value={address} rows={4} onChange={(e) => { setAddress(e.target.value) }} />
+                    <p>Addition</p>
+                    <textarea value={addition} rows={3} onChange={(e) => { setAddition(e.target.value) }} />
                 </div>
                 <button className='address-add' onClick={handleAdd}>ADD</button>
             </div >
