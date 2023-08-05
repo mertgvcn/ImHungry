@@ -27,7 +27,8 @@ export const register = async (firstName: string, lastName: string, userName: st
         userName: userName,
         email: email,
         phoneNumber: phoneNumber,
-        password: encrptedPassword
+        password: encrptedPassword,
+        locationID: null
     },
     {
         headers: {
@@ -102,7 +103,8 @@ export const updateAccountInfo = async (userID: number, firstName: string, lastN
         userName: userName,
         email: email,
         phoneNumber: phoneNumber,
-        password: ""
+        password: "",
+        locationID: null
     }, 
     {
         headers: {
