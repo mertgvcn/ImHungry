@@ -5,7 +5,7 @@
     width: 300px;
     height: 100vh;
     border-left: 2px solid rgb(106, 89, 79, 0.3);
-    background-color: #eddad0; 
+    background-color: #efe4de; 
     color: #402E32;
     transition: all .3s;
 }
@@ -71,10 +71,10 @@
     margin-top: 30px;
     width: 80%;
     height: 50px;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 600;
     border: none;
-    border-radius: 15px;
+    border-radius: 10px;
     background-color: #D67244;
     color: white;
     box-shadow: #969696 0px 4px 5px;
@@ -83,7 +83,7 @@
 
 .cart-body #cart-confirm-button:hover {
     background-color: #e78a60;
-    scale: 1.04;
+    scale: 1.02;
 }
 
 .cart-body #cart-confirm-button:active {

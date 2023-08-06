@@ -1,0 +1,12 @@
+.row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.col {
+    width: 50%;
+    height: 89vh;
+    display: flex;
+    flex-direction: column;
+}

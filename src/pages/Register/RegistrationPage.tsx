@@ -2,7 +2,7 @@ import React from 'react'
 //COMPONENTS
 import Register from "./components/Register"
 //CSS
-import './styles/RegistrationPage.css'
+import './RegistrationPage.css'
 
 
 function RegistrationPage() {

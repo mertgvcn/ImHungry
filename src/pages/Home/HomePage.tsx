@@ -16,7 +16,7 @@ const HomePage = () => {
       <ChangeContextProvider>
         <div className="search-location">
           <SearchRestaurant />
-          <CurrentLocation />
+          <CurrentLocation width='45'/>
         </div>
         <Restaurants />
       </ChangeContextProvider>

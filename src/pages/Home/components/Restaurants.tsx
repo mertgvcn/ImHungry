@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { RestaurantContext } from '../../../context/RestaurantContext'
+import { UserContext } from '../../../context/UserContext'
 import { ChangeContext } from '../../../context/ChangeContext'
+//exported functions
+import { getCurrentLocation } from '../../../setup/API/user_api'
+import { Decrypt } from '../../../setup/Crypto/Cryption'
 //COMPONENTS
 import RestaurantCard from './RestaurantCard'
 //CSS
@@ -13,17 +17,27 @@ import { RestaurantInfo } from '../../../types/RestaurantType'
 
 
 const Restaurants = () => {
+  //context
   const { filteredName } = useContext(RestaurantContext)
   const { toggle } = useContext(ChangeContext)
+  const { currentUserID } = useContext(UserContext)
+  const _currentUserID = Decrypt(currentUserID)
+
+  //restaurant properties
   const [restaurants, setRestaurants] = useState<RestaurantInfo[]>([]);
 
-  const getRestaurantInfos = async () => {
-    const response = await getRestaurants(filteredName);
+  const fetchRestaurants = async () => {
+    const data = await getCurrentLocation(_currentUserID)
+    const response = await getRestaurants(filteredName, data[0].province, data[0].district);
     setRestaurants(response);
   }
 
   useEffect(() => {
-    getRestaurantInfos();
+    fetchRestaurants();
+  }, [])
+
+  useEffect(() => {
+    fetchRestaurants();
   }, [toggle])
   
 

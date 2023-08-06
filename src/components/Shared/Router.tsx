@@ -11,8 +11,8 @@ import RegistrationPage from "../../pages/Register/RegistrationPage"
 import RestaurantDetailsPage from "../../pages/RestaurantDetails/RestaurantDetailsPage"
 import AdminLoginPage from "../../administration/AdminLoginPage"
 import AdminPanel from "../../administration/AdminPanel"
-import NotFound from "../../pages/NotFound"
 import ProfilePage from "../../pages/Profile/ProfilePage"
+import PaymentPage from "../../pages/Payment/PaymentPage"
 
 
 
@@ -27,9 +27,10 @@ export default function Router() {
                 <Route path="/" element={_isLogin ? <HomePage/> : <MainPage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/registration" element={<RegistrationPage />} />
-                <Route path="/home" element={_isLogin ? <HomePage /> : <NotFound msg="login to view the page"/>} />
-                <Route path="/profile" element={_isLogin ? <ProfilePage /> : <NotFound msg="login to view the page"/>}/>
-                <Route path="/restaurant" element={_isLogin ? <RestaurantDetailsPage /> : <NotFound msg="login to view the page"/>} />
+                <Route path="/home" element={_isLogin ? <HomePage /> : <LoginPage/>} />
+                <Route path="/profile" element={_isLogin ? <ProfilePage /> : <LoginPage/>}/>
+                <Route path="/restaurant" element={_isLogin ? <RestaurantDetailsPage /> : <LoginPage/>} />
+                <Route path="/payment" element={_isLogin ? <PaymentPage/> : <LoginPage/>}/>
                 {/*ADMIN*/}
                 <Route path="/admin-login" element={<AdminLoginPage />} />
                 <Route path="/admin-panel" element={<AdminPanel />} />

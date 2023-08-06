@@ -30,7 +30,7 @@ const CartItem = ({ currentUserID, data: { itemID, restaurantID, itemName, image
 
                 <div className='item-info'>
                     <p>{itemName}</p>
-                    <p style={{ color: '#555555', fontSize: '14px' }}>{price}TL</p>
+                    <p style={{ color: '#555555', fontSize: '14px' }}>{price*amount}TL</p>
                 </div>
 
                 <div className='item-process'>

@@ -9,16 +9,25 @@ import { Decrypt } from '../../setup/Crypto/Cryption'
 import { CartType } from '../../types/CartType'
 //Components
 import CartItem from './CartItem'
+import CartAlert from './CartAlert'
+
 
 type propsType = {
   trigger: boolean,
   setTrigger: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+
 const Cart = (props: propsType) => {
+  //Context
   const { currentUserID, cartItemNumber } = useContext(UserContext)
   const _currentUserID = Decrypt(currentUserID)
 
+  //Cart Alert State
+  const [isAlert, setIsAlert] = useState<boolean>(false)
+  const [msg, setMsg] = useState<string>("")
+
+  //Item Info
   const [items, setItems] = useState<Array<CartType>>()
   const [totalPrice, setTotalPrice] = useState<number>(0)
 
@@ -44,6 +53,21 @@ const Cart = (props: propsType) => {
     fetchCartTotalPrice()
   }, [props.trigger, cartItemNumber])
 
+  const handleConfirm = () => {
+    if(items?.length==0) {
+      setIsAlert(true)
+      setMsg("Please add product to the cart first")
+
+      setTimeout(() => {
+        setIsAlert(false)
+      }, 2500)
+
+      return;
+    }
+
+    window.location.href = "/payment"
+  }
+
   return (
     <div className='cart-wrapper' style={props.trigger ? { right: "0px" } : { right: "-100%" }}>
       <i id='back' className="fa-solid fa-left-long" onClick={() => props.setTrigger(false)}></i>
@@ -62,8 +86,10 @@ const Cart = (props: propsType) => {
 
         <p id="total-price">Total Price: {totalPrice} TL</p>
 
-        <button id="cart-confirm-button">CONFIRM CART</button>
+        <button id="cart-confirm-button" onClick={handleConfirm}>CONFIRM CART</button>
       </div>
+
+      <CartAlert trigger={isAlert} setTrigger={setIsAlert} msg={msg}/>
     </div>
   )
 }
