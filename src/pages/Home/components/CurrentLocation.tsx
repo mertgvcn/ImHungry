@@ -25,7 +25,7 @@ const CurrentLocation = (props: propType) => {
     //Locations
     const [userLocations, setUserLocations] = useState<Array<LocationType>>([])
     const [location, setLocation] = useState<string>("")
-    const [locationsState, setLocationsState] = useState<boolean>(false)
+    const [dropDownState, setDropDownState] = useState<boolean>(false)
 
     const fetchLocations = async () => {
         const data = await getLocationsByUserID(_currentUserID)
@@ -49,22 +49,22 @@ const CurrentLocation = (props: propType) => {
     return (
         <div className='current-location-wrapper' style={{width: props.width+"%"}}>
             <div className="current-location-title-wrapper">
-                <p id="location-title">CURRENT LOCATION</p>
+                <p id="location-title">LOCATION</p>
             </div>
 
-            <div className="current-location-selection" onClick={() => setLocationsState(!locationsState)}>
+            <div className="current-location-selection" onClick={() => setDropDownState(!dropDownState)}>
                 <input id="current-location" type="text" placeholder='Select Current Location'
                     value={location} readOnly={true} />
                 <i className="fa-solid fa-chevron-down"></i>
             </div>
 
-            {locationsState && (<div className='locations'>
+            {dropDownState && (<div className='locations'>
                 <ul>
                     {userLocations.map((location, idx) => (
                         <li key={idx} onClick={async () => {
                             await setCurrentLocation(_currentUserID, location.locationID);
                             setToggle(!toggle);
-                            setLocationsState(false);
+                            setDropDownState(false);
                         }}>
                             <i className="fa-solid fa-location-dot" style={{ marginRight: 2, fontSize: 16 }}></i>
                             {location.locationTitle}

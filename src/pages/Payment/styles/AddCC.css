@@ -1,0 +1,138 @@
+.payment-wrapper {
+    width: 90%;
+    margin-top: 50px;
+    background-color: #FFF4EE;
+    border: 1px solid rgb(64, 46, 50, 0.3);
+    box-shadow: #c3c3c3 0px 8px 8px;
+}
+
+.payment-wrapper .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.payment-wrapper .col {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+/*! Title */
+.payment-title-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #D67244;
+    box-shadow: rgba(99, 99, 99, 0.3) 0px 5px 3px;
+    width: 100%;
+    height: 50px;
+}
+
+.payment-title-wrapper #payment-title {
+    font-size: 30px;
+    font-weight: bold;
+    color: rgb(238, 231, 231);
+}
+
+/*! BODY */
+.payment-wrapper .credit-card-info {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 90%;
+    box-sizing: border-box;
+    padding: 20px 20px;
+}
+
+.payment-wrapper .credit-card-info p {
+    font-size: 22px;
+    color: rgb(40, 40, 40);
+    margin-bottom: 20px;
+}
+
+.payment-wrapper .credit-card-info .input-group {
+    margin-top: 16px;
+}
+
+.payment-wrapper .credit-card-info .input-group p {
+    margin-left: 2px;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.payment-wrapper .credit-card-info .input-group input {
+    margin-bottom: 6px;
+    width: 100%;
+    height: 30px;
+    background-color: #ffffff;
+    border: 1px solid #402e3293;
+    border-radius: 5px;
+    box-shadow: #d1d1d1 0px 4px 7px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.payment-wrapper .credit-card-info> .row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-wrapper .credit-card-info .row input {
+    width: 80px;
+    padding: 0px 0px;
+    text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.payment-wrapper .button-wrapper {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.payment-wrapper #submit-cc {
+    float: right;
+    width: 80px;
+    height: 35px;
+    background-color: #D67244;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    box-shadow: #c3c3c3 0px 4px 5px;
+    cursor: pointer;
+}
+
+.payment-wrapper #submit-cc:hover {
+    background-color: #e28356;
+    scale: 1.02;
+}
+
+.payment-wrapper #submit-cc:active {
+    background-color: #c36337;
+}
+
+/*! Alert */
+.payment-wrapper .add-cc-alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+    height: 30px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
