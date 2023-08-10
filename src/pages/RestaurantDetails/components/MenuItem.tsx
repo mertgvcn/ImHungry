@@ -20,16 +20,35 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
   const { currentUserID, cartItemNumber, setCartItemNumber }: any = useContext(UserContext)
   const _currentUserID = Number(Decrypt(currentUserID))
 
-  const handleAddToCard = async () => {
-    await addToCart(_currentUserID, itemID, currentRestaurantID)
-    setCartItemNumber(Number(cartItemNumber)+1)
-    popAlert("green", itemName + " added to cart!")
-  }
+  //Button state
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   //*ALERT PROPERTIES
   const [color, setColor] = useState<string>("");
   const [msg, setMsg] = useState<string>("");
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const AddToCart = () => {
+    if(!disabled) {
+      handleAddToCart()
+    }
+  }
+
+  const handleAddToCart = async () => {
+    setDisabled(true)
+    const response = await addToCart(_currentUserID, itemID, currentRestaurantID)
+
+    if (response != "different_restaurant") {
+      setCartItemNumber(Number(cartItemNumber) + 1)
+      popAlert("green", itemName + " added to cart!")
+    }
+    else {
+      popAlert("red", "There are products from another restaurants in the cart!")
+    }
+
+    setDisabled(false)
+  }
+
 
   //Support functions
   const popAlert = (color: string, msg: string) => {
@@ -42,10 +61,12 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
     }, 2000)
   }
 
+
+
   return (
     <>
       <Alert isOpen={isOpen} color={color} msg={msg} />
-      
+
       <div className='menu-item-wrapper'>
         {imageSource && (
           <div className="item-image">
@@ -62,7 +83,7 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
         </div>
 
 
-        <div id="add-to-cart" onClick={handleAddToCard}><i className="fa-solid fa-cart-plus"></i></div>
+        <button id="add-to-cart" onClick={AddToCart} disabled={disabled}><i className="fa-solid fa-cart-plus"></i></button>
 
       </div>
     </>

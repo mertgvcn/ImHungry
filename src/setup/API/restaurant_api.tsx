@@ -32,6 +32,19 @@ export const getRestaurantDetail = async (restaurantID: number) => {
     return response.data
 }
 
+export const getRestaurantName = async (restaurantID: number) => {
+    const response = await axios.get('https://localhost:7181/api/Restaurant/GetNameByRestaurantID', {
+        params: {
+            restaurantID: restaurantID
+        },
+        headers: {
+            'x-api-key': API_KEY
+        }
+    }) 
+
+    return response.data
+}
+
 //Gives us distinct category id and category name according to categories the restaurant has
 export const getMenuTitles = async (restaurantID: number) => { 
     const response = await axios.get('https://localhost:7181/api/Restaurant/GetMenuTitlesByRestaurantID', {

@@ -10,7 +10,6 @@ type changeContextProviderProps = {
 
 export const ChangeContextProvider = ({ children }: changeContextProviderProps) => {
     const [toggle, setToggle] = useState<boolean>(false)
-
     const data = {
         toggle,
         setToggle

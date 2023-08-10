@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
+import { PaymentContext } from '../../../context/PaymentContext'
 import { UserContext } from '../../../context/UserContext'
 import { ChangeContext } from '../../../context/ChangeContext'
 //exported functions
@@ -13,13 +14,13 @@ import AddCC from './AddCC'
 
 const RegisteredCC = () => {
     //Context
+    const { ccID } = useContext(PaymentContext)
     const { toggle, setToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
     //CC states
     const [userCCs, setUserCCs] = useState<Array<CCType>>([])
-    const selected_ccID = useRef<number>()
     const [displayedCC, setDisplayedCC] = useState<string>("")
     const [dropDownState, setDropDownState] = useState<boolean>(false)
 
@@ -67,8 +68,7 @@ const RegisteredCC = () => {
                         {/* cc list */}
                         {userCCs.map((cc, idx) => (
                             <li key={idx} onClick={() => {
-                                selected_ccID.current = cc.ccID
-                                console.log(selected_ccID)
+                                ccID.current = cc.ccID
                                 setDisplayedCC(`${cc.ccNo.slice(0, 4)} **** **** ${cc.ccNo.slice(12, 16)}`)
                                 setDropDownState(false)
                                 setIsAddCC(false)
