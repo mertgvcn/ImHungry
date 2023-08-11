@@ -69,7 +69,7 @@ const Account = () => {
   return (
     <>
       <div className='account-wrapper'>
-        <p>ACCOUNT</p>
+        <p>Account</p>
         <div className='input-group'>
           <p>First Name</p>
           <input value={firstName} type="text" onChange={(e) => { setFirstName(e.target.value) }} />
@@ -90,7 +90,7 @@ const Account = () => {
           <p>Phone Number</p>
           <input value={phoneNumber} type="text" onChange={(e) => { setPhoneNumber(e.target.value) }} />
         </div>
-        <button className='account-save' onClick={handleSave}>SAVE</button>
+        <button className='account-save' onClick={handleSave}>Save</button>
       </div>
       <Alert isOpen={isOpen} color={color} msg={msg} />
     </>

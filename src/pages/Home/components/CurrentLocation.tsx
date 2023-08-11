@@ -49,7 +49,7 @@ const CurrentLocation = (props: propType) => {
     return (
         <div className='current-location-wrapper' style={{width: props.width+"%"}}>
             <div className="current-location-title-wrapper">
-                <p id="location-title">LOCATION</p>
+                <p id="location-title">Location</p>
             </div>
 
             <div className="current-location-selection" onClick={() => setDropDownState(!dropDownState)}>

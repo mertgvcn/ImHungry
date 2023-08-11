@@ -38,7 +38,7 @@ const Location = () => {
     return (
         <>
             <div className='location-wrapper'>
-                <p>ADDRESSES</p>
+                <p>Addresses</p>
 
                 <div className='locations'>
 

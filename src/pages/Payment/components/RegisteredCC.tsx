@@ -51,13 +51,13 @@ const RegisteredCC = () => {
 
                 {/* Title */}
                 <div className="registered-cc-title-wrapper">
-                    <p id='registered-cc-title'>REGISTERED CCs</p>
+                    <p id='registered-cc-title'>Registered Cards</p>
                 </div>
 
                 {/* BODY */}
                 <div className="cc-selection" onClick={() => setDropDownState(!dropDownState)}>
                     <i className="fa-solid fa-credit-card" style={{ marginRight: 5 }}></i>
-                    <input id="current-cc" type="text" placeholder='Select Credit Cart'
+                    <input id="current-cc" type="text" placeholder='Select Credit Card'
                         value={displayedCC} readOnly={true} />
                     <i className="fa-solid fa-chevron-down"></i>
                 </div>
@@ -89,7 +89,7 @@ const RegisteredCC = () => {
                         {/* add new cc */}
                         <li onClick={handleAddCC}>
                             <i className="fa-regular fa-square-plus" style={{ marginRight: 5 }}></i>
-                            <p>Add new credit cart...</p>
+                            <p>Add new credit card...</p>
                         </li>
                     </ul>
                 </div>)}

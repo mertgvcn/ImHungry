@@ -66,7 +66,7 @@ const ChangePass = () => {
   return (
     <>
       <div className='change-pass-wrapper'>
-        <p>PASSWORD</p>
+        <p>Password</p>
         <div className='input-group'>
           <p>Current Password</p>
           <input value={password} type="password" onChange={(e) => { setPassword(e.target.value) }} />
@@ -75,7 +75,7 @@ const ChangePass = () => {
           <p>New Password</p>
           <input value={newPassword} type="password" onChange={(e) => { setNewPassword(e.target.value) }} />
         </div>
-        <button className='change-pass-save' onClick={handleSave}>SAVE</button>
+        <button className='change-pass-save' onClick={handleSave}>Save</button>
       </div>
       <Alert isOpen={isOpen} color={color} msg={msg} />
     </>

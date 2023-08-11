@@ -86,7 +86,7 @@ const Cart = (props: propsType) => {
 
         <p id="total-price">Total Price: {totalPrice} TL</p>
 
-        <button id="cart-confirm-button" onClick={handleConfirm}>CONFIRM CART</button>
+        <button id="cart-confirm-button" onClick={handleConfirm}>Confirm Cart</button>
       </div>
 
       <CartAlert trigger={isAlert} setTrigger={setIsAlert} msg={msg}/>

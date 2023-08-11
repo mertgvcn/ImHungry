@@ -4,7 +4,7 @@
     top: 65px;
     right: 9%;
     width: 160px;
-    height: 100px;
+    height: 120px;
     border: 2px solid rgb(106, 89, 79, 0.3);
     background-color: #f1e9e5;
 }
@@ -13,20 +13,25 @@
 .user-menu .user-menu-buttons-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
 }
 
 .user-menu .user-menu-buttons-wrapper button {
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: 30px;
+    height: 40px;
     font-size: 16px;
-    margin-bottom: 5px;
     background-color: transparent;
     border: #402E32;
     cursor: pointer;
 }
+
+.user-menu .user-menu-buttons-wrapper button i {
+    color: rgb(84, 84, 84);
+    margin-right: 5px;
+}
+
 
 .user-menu .user-menu-buttons-wrapper button:hover {
     background-color: #d79e875b;
@@ -55,7 +60,7 @@
         top: 65px;
         right: 0;
         width: 100%;
-        height: 100px;
+        height: 120px;
         border: 2px solid rgb(106, 89, 79, 0.3);
         background-color: #f1e9e5;
     }

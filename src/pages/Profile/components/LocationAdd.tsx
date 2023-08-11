@@ -80,7 +80,7 @@ const LocationAdd = (props: propsType) => {
                     <i className="fa-solid fa-x" onClick={() => props.setTrigger(false)}></i>
                 </div>
 
-                <p>ADD ADDRESS</p>
+                <p>Add Address</p>
                 <div className='input-group'>
                     <p>Title</p>
                     <input value={title} type="text" onChange={(e) => { setTitle(e.target.value) }} />
@@ -115,7 +115,7 @@ const LocationAdd = (props: propsType) => {
                     <p>Addition</p>
                     <textarea value={addition} rows={3} onChange={(e) => { setAddition(e.target.value) }} />
                 </div>
-                <button className='address-add' onClick={handleAdd}>ADD</button>
+                <button className='address-add' onClick={handleAdd}>Add</button>
             </div >
 
             <Alert isOpen={isOpen} color={color} msg={msg} />

@@ -79,7 +79,7 @@ const AddCC = (props: propsType) => {
 
             {/* TITLE */}
             <div className='payment-title-wrapper'>
-                <p id='payment-title'>ADD A NEW CC</p>
+                <p id='payment-title'>Add Credit Card</p>
             </div>
 
             {/* BODY */}
@@ -130,7 +130,7 @@ const AddCC = (props: propsType) => {
                 </div>
 
                 <div className="button-wrapper">
-                    <input id="submit-cc" type="button" value="SUBMIT" onClick={handleSubmit} />
+                    <input id="submit-cc" type="button" value="Submit" onClick={handleSubmit} />
                 </div>
 
             </div>

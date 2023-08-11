@@ -11,7 +11,7 @@ const SearchRestaurant = () => {
     return (
         <div className='search-restaurant-wrapper'>
             <div className="search-restaurant-title-wrapper">
-                <p id="search-title">SEARCH</p>
+                <p id="search-title">Search</p>
             </div>
             <div className="search-inputs">
                 <div className="searchbar-wrapper">

@@ -13,7 +13,7 @@ const UserMenu = (props: propsType) => {
     const { setCurrentUserID, setIsLogin } = useContext(UserContext)
 
     const handlePreviousOrders = () => {
-        
+
     }
 
     const handleAccountSettings = () => {
@@ -30,9 +30,18 @@ const UserMenu = (props: propsType) => {
         <>
             <div className='user-menu'>
                 <div className="user-menu-buttons-wrapper">
-                    <button onClick={handlePreviousOrders}>Previous Orders</button>
-                    <button onClick={handleAccountSettings}>Account Settings</button>
-                    <button onClick={handleLogOut}>Log Out</button>
+                    <button onClick={handlePreviousOrders}>
+                        <i className="fa-solid fa-boxes-stacked"></i>
+                        <p>Previous Orders</p>
+                    </button>
+                    <button onClick={handleAccountSettings}>
+                        <i className="fa-solid fa-gear"></i>
+                        <p>Account Settings</p>
+                    </button>
+                    <button onClick={handleLogOut}>
+                        <i className="fa-solid fa-right-from-bracket"></i>
+                        <p>Log Out</p>
+                    </button>
                 </div>
             </div>
         </>

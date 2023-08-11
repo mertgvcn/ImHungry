@@ -37,7 +37,7 @@ const Order = () => {
 
                 {/* Title */}
                 <div className="order-title-wrapper">
-                    <p id='order-title'>ORDER</p>
+                    <p id='order-title'>Order Details</p>
                 </div>
 
                 {/* Body */}

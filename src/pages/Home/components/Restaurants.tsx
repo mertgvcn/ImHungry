@@ -44,7 +44,7 @@ const Restaurants = () => {
   return (
     <div className='restaurant-list-wrapper'>
         <div className="restaurant-title-wrapper">
-            <p id="restaurant-title">RESTAURANTS</p>
+            <p id="restaurant-title">Restaurants</p>
         </div>
 
         <div className="restaurant-wrapper">
