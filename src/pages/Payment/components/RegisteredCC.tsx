@@ -85,13 +85,13 @@ const RegisteredCC = () => {
                                 </div>
                             </li>
                         ))}
-
-                        {/* add new cc */}
-                        <li onClick={handleAddCC}>
-                            <i className="fa-regular fa-square-plus" style={{ marginRight: 5 }}></i>
-                            <p>Add new credit card...</p>
-                        </li>
                     </ul>
+
+                    {/* add new cc */}
+                    <div className='add-new-card' onClick={handleAddCC}>
+                        <i className="fa-regular fa-square-plus" style={{ marginLeft: 2, marginRight: 8 }}></i>
+                        <p>Add new credit card...</p>
+                    </div>
                 </div>)}
             </div>
 

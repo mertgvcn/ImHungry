@@ -165,7 +165,7 @@ export const getCurrentLocation = async (userID: number) => {
     return response.data
 }
 
-export const setCurrentLocation = async (userID: number, locationID: number) => {
+export const setCurrentLocation = async (userID: number, locationID: number|null) => {
     const response = await axios.put('https://localhost:7181/api/User/setCurrentLocation',
         {
             userID: userID,

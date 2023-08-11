@@ -50,7 +50,7 @@
 }
 
 .registered-cc-wrapper .cc-selection #current-cc:focus {
-    outline:none;
+    outline: none;
 }
 
 /*! DROP DOWN SELECTION */
@@ -66,6 +66,8 @@
     background-color: #FFF4EE;
     box-sizing: border-box;
     padding: 0px 0px;
+    max-height: 100px;
+    overflow-y: scroll;
 }
 
 .registered-cc-wrapper .cc-list ul li {
@@ -81,8 +83,23 @@
     background-color: #edcfbf;
 }
 
-.registered-cc-wrapper .cc-list ul li> div {
+.registered-cc-wrapper .cc-list ul li>div {
     width: 100%;
+}
+
+.registered-cc-wrapper .cc-list .add-new-card {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgb(64, 46, 50, 0.3);
+    box-sizing: border-box;
+    background-color: #FFF4EE;
+    padding: 10px 10px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.registered-cc-wrapper .cc-list .add-new-card:hover {
+    background-color: #edcfbf;
 }
 
 /**-----------------------------------------------RESPONSIVE----------------------------------------------*/
@@ -96,7 +113,7 @@
     .current-location-wrapper .current-location-selection {
         font-size: 18px;
     }
-    
+
     .current-location-wrapper .current-location-selection #current-location {
         font-size: 18px;
     }
@@ -111,7 +128,7 @@
     .current-location-wrapper .current-location-selection {
         font-size: 16px;
     }
-    
+
     .current-location-wrapper .current-location-selection #current-location {
         font-size: 16px;
     }
