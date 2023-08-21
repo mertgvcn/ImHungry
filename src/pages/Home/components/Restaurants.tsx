@@ -27,8 +27,8 @@ const Restaurants = () => {
   const [restaurants, setRestaurants] = useState<RestaurantInfo[]>([]);
 
   const fetchRestaurants = async () => {
-    const data = await getCurrentLocation(_currentUserID)
-    const response = await getRestaurants(filteredName, data[0].province, data[0].district);
+    const data: any = await getCurrentLocation(_currentUserID)
+    const response = await getRestaurants(data[0].province, data[0].district);
     setRestaurants(response);
   }
 
@@ -36,22 +36,21 @@ const Restaurants = () => {
     fetchRestaurants();
   }, [])
 
-  useEffect(() => {
-    fetchRestaurants();
-  }, [toggle])
-  
-
   return (
     <div className='restaurant-list-wrapper'>
-        <div className="restaurant-title-wrapper">
-            <p id="restaurant-title">Restaurants</p>
-        </div>
+      <div className="restaurant-title-wrapper">
+        <p id="restaurant-title">Restaurants</p>
+      </div>
 
-        <div className="restaurant-wrapper">
-            {restaurants.map((restaurant:any, key)=> (
-              <RestaurantCard data={restaurant} key={key} />
-            ))}
-        </div>
+      <div className="restaurant-wrapper">
+        {restaurants.filter((restaurant: any) => {
+            return filteredName.toLowerCase() === ''
+              ? restaurant
+              : restaurant.name.toLowerCase().includes(filteredName.toLowerCase())
+        }).map((restaurant: any, key) => (
+          <RestaurantCard data={restaurant} key={key} />
+        ))}
+      </div>
     </div>
   )
 }

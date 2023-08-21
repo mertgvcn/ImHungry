@@ -1,12 +1,26 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { RestaurantContext } from '../../../context/RestaurantContext'
-import { ChangeContext } from '../../../context/ChangeContext'
 //css
 import '../styles/SearchRestaurant.css'
 
 const SearchRestaurant = () => {
-    const { filteredName, setFilteredName } = useContext(RestaurantContext)
-    const { toggle, setToggle } = useContext(ChangeContext)
+    //context
+    const { setFilteredName } = useContext(RestaurantContext)
+
+    //states
+    const [timer, setTimer] = useState<any>(null)
+    const searchInputRef = useRef("")
+
+    const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+        searchInputRef.current = e.target.value
+        clearTimeout(timer) //her tuş girildiğinde timer'ı sıfırlıyoruz
+
+        const newTimer = setTimeout(() => {
+            setFilteredName(searchInputRef.current) //kullanıcı 300ms tuş girmediğinde restaurantContextteki filtered name'i setliyoruz
+        }, 300)
+
+        setTimer(newTimer)
+    }
 
     return (
         <div className='search-restaurant-wrapper'>
@@ -17,10 +31,8 @@ const SearchRestaurant = () => {
                 <div className="searchbar-wrapper">
                     <i className="fa-solid fa-magnifying-glass"></i>
                     <input type="text" placeholder='Search restaurants'
-                        value={filteredName} onChange={(e) => setFilteredName(e.target.value)}/>
+                        value={searchInputRef.current} onChange={handleChange} />
                 </div>
-
-                <input id='search-button' type="button" value="SEARCH" onClick={() => setToggle(!toggle)}/>
             </div>
         </div>
     )

@@ -3,39 +3,43 @@ import { useState } from "react"
 //COMPONENTS
 import Alert from "../../../components/Shared/Alert"
 //EXPORTED FUNCTIONS
-import { Encode } from '../../../setup/Crypto/Cryption'
-import { register, isUserNameAlreadyExists } from '../../../setup/API/user_api'
+import { Encrypt } from '../../../setup/Crypto/Cryption'
+import { register, isUserNameAlreadyExists, searchUserName } from '../../../setup/API/user_api'
 //CSS
 import "../styles/Register.css"
 
 const Register = () => {
 
-    //*REGISTRATION INPUTS
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
-    const [email, setEmail] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [phoneNumber, setPhoneNumber] = useState<string>("");
-    const [userName, setUserName] = useState<string>("");
+    //REGISTRATION INPUTS
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        phoneNumber: "",
+        username: ""
+    })
+    const [errors, setErrors] = useState<any>({})
 
-    //*ALERT PROPERTIES
-    const [color, setColor] = useState<any>("");
-    const [msg, setMsg] = useState<string>("");
-    const [isOpen, setIsOpen] = useState<boolean>(false);
+    const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+    const phoneNumberPattern = new RegExp(/^(\+90|0)?\s*(\(\d{3}\)[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}|\(\d{3}\)[\s-]*\d{3}[\s-]*\d{4}|\(\d{3}\)[\s-]*\d{7}|\d{3}[\s-]*\d{3}[\s-]*\d{4}|\d{3}[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2})$/);
+    const passwordPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(\S).{8,20}$/)
 
-    
-    //*FUNCTIONS
-    //OnClick Handlers
+    const handleChange = (e: any) => {
+        const { name, value } = e.target
+
+        setFormData({ ...formData, [name]: value })
+    }
+
     const createUser = async () => {
-        if(await isInputsValid() == false) {
-            return;
+        if (await Validation()) {
+            const encryptedPass = Encrypt(formData.password)
+
+            await register(formData.firstName, formData.lastName, formData.username, formData.email, formData.phoneNumber, encryptedPass);
+            resetInputs()
+            popAlert("green", "Registration successful")
+            window.location.href = "/"
         }
-
-        const encodedPass = Encode(password)
-
-        await register(firstName,lastName,userName,email,phoneNumber,encodedPass);
-        popAlert("green", "Registration successful")
-        window.location.href = "/"
     }
 
     const goLogin = () => {
@@ -43,42 +47,85 @@ const Register = () => {
     }
 
     //Support functions
-    const isInputsValid = async () => {
-        if (firstName.trim() == "" || lastName.trim() == "" || email.trim() == "" || userName.trim() == "" || phoneNumber.trim() == "") {
-            popAlert("orange", "Please dont leave blank spaces")
-            return false;
+    const Validation = async () => {
+        let isValid = true
+        const validationErrors: any = {}
+
+        //firstname
+        if (!formData.firstName.trim()) {
+            validationErrors.firstName = "*Required"
+        }
+        else if (formData.firstName.trim().length < 2 || formData.firstName.trim().length > 25) {
+            validationErrors.firstName = "*First name must be between 2-25 characters"
         }
 
-        if(await isUserNameAlreadyExists(userName)) {
-            popAlert("orange", "Username must be unique")
-            return false;
+        //lastname
+        if (!formData.lastName.trim()) {
+            validationErrors.lastName = "*Required"
+        }
+        else if (formData.lastName.trim().length < 2 || formData.lastName.trim().length > 25) {
+            validationErrors.lastName = "*Last name must be between 2-25 characters"
         }
 
-        if (!(email.includes("@") && email.endsWith(".com"))) {
-            popAlert("orange", "Please enter a valid mail")
-            return false;
+        //username
+        if (!formData.username.trim()) {
+            validationErrors.username = "*Required"
+        }
+        else if (formData.username.trim().length < 4 || formData.username.trim().length > 25) {
+            validationErrors.username = "*Username must be between 4-25 characters"
+        }
+        else if (await isUserNameAlreadyExists(formData.username)) {
+            validationErrors.username = "*Invalid username"
         }
 
-        if (phoneNumber.length != 11) {
-            popAlert("orange", "Please enter a valid phone number : 05xxxxxxxxx")
-            return false;
+        //email
+        if (!formData.email.trim()) {
+            validationErrors.email = "*Required"
+        }
+        else if (!emailPattern.test(formData.email)) {
+            validationErrors.email = "*Invalid email"
         }
 
-        if (password.trim().length < 8) {
-            popAlert("orange", "Password must be at least 8 characters")
-            return false;
-        } else if (!stringHasNumber(password)) {
-            popAlert("orange", "Password must contain at least one numeric value")
-            return false;
+        //phonenumber
+        if (!formData.phoneNumber.trim()) {
+            validationErrors.phoneNumber = "*Required"
+        }
+        else if (!phoneNumberPattern.test(formData.phoneNumber)) {
+            validationErrors.phoneNumber = "*Invalid phone number"
         }
 
-        return true;
+        //password
+        if (!formData.password.trim()) {
+            validationErrors.password = "*Required"
+        }
+        else if (!passwordPattern.test(formData.password)) {
+            validationErrors.password = "*Password must contain at least 8 characters, 1 capital letter and 1 number"
+        }
+
+        if (Object.keys(validationErrors).length != 0) {
+            isValid = false
+            setErrors(validationErrors)
+        }
+
+        return isValid
     }
 
-    function stringHasNumber(text: string): boolean { //yukarıdaki fonksiyonla aynı işlevi görüyor.
-        return /\d/.test(text);
+    const resetInputs = () => {
+        setErrors({})
+        setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            phoneNumber: "",
+            username: ""
+        })
     }
 
+    //*ALERT PROPERTIES
+    const [color, setColor] = useState<any>("");
+    const [msg, setMsg] = useState<string>("");
+    const [isOpen, setIsOpen] = useState<boolean>(false);
     const popAlert = (color: string, msg: string) => {
         setIsOpen(true)
         setColor(color)
@@ -93,7 +140,7 @@ const Register = () => {
     return (
 
         <>
-            <Alert isOpen={isOpen} color={color} msg={msg}/>
+            <Alert isOpen={isOpen} color={color} msg={msg} />
 
             <div id='register-wrapper'>
                 <div id='register-title-wrapper'>
@@ -106,36 +153,48 @@ const Register = () => {
                     <div id="input-full-name">
                         <div className="input-template">
                             <p className="input-label">First Name</p>
-                            <input className='input-text' type="text"
-                                value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                            <input className='input-text' type="text" name="firstName" onChange={handleChange} />
+                            <div>
+                                {errors.firstName && <span>{errors.firstName}</span>}
+                            </div>
                         </div>
                         <div className="input-template">
                             <p className="input-label">Last Name</p>
-                            <input className='input-text' type="text"
-                                value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                            <input className='input-text' type="text" name="lastName" onChange={handleChange} />
+                            <div>
+                                {errors.lastName && <span>{errors.lastName}</span>}
+                            </div>
                         </div>
                     </div>
 
                     {/*Other Inputs*/}
                     <div className="input-template">
-                        <p className="input-label">User Name</p>
-                        <input className='input-text' type="text"
-                            value={userName} onChange={(e) => setUserName(e.target.value)} />
+                        <p className="input-label">Username</p>
+                        <input className='input-text' type="text" name="username" onChange={handleChange} />
+                        <div>
+                            {errors.username && <span>{errors.username}</span>}
+                        </div>
                     </div>
                     <div className="input-template">
                         <p className="input-label">Email</p>
-                        <input className='input-text' type="text"
-                            value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input className='input-text' type="text" name="email" onChange={handleChange} />
+                        <div>
+                            {errors.email && <span>{errors.email}</span>}
+                        </div>
                     </div>
                     <div className="input-template">
                         <p className="input-label">Phone Number</p>
-                        <input className='input-text' type="text"
-                            value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                        <input className='input-text' type="text" name="phoneNumber" onChange={handleChange} />
+                        <div>
+                            {errors.phoneNumber && <span>{errors.phoneNumber}</span>}
+                        </div>
                     </div>
                     <div className="input-template">
                         <p className="input-label">Password</p>
-                        <input className='input-text' type="password"
-                            value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <input className='input-text' type="password" name="password" onChange={handleChange} />
+                        <div>
+                            {errors.password && <span>{errors.password}</span>}
+                        </div>
                     </div>
 
 

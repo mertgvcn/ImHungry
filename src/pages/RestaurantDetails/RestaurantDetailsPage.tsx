@@ -2,7 +2,7 @@
 import RestaurantDetails from './components/RestaurantDetails'
 import Menu from './components/Menu'
 //CSS
-import './styles/RestaurantDetailsPage.css'
+import './RestaurantDetailsPage.css'
 
 const RestaurantDetailsPage = () => {
 

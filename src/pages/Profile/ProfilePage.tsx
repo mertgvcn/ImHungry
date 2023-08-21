@@ -1,17 +1,17 @@
 import React from 'react'
 import { ChangeContextProvider } from '../../context/ChangeContext'
 //Components
-import Account from './components/Account'
-import Location from './components/Location'
-import ChangePass from './components/ChangePass'
+import Account from './components/Account/Account'
+import Location from './components/Location/Location'
+import CreditCard from './components/CreditCard/CreditCard'
 
 const ProfilePage = () => {
   return (
-    <ChangeContextProvider>
-        <Account/>
-        <Location/>
-        <ChangePass/>
-    </ChangeContextProvider>
+    <>
+      <Account />
+      <Location />
+      <CreditCard />
+    </>
   )
 }
 

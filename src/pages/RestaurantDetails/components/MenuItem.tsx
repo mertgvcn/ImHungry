@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContext'
+import { CartContext } from '../../../context/CartContext'
 //CSS
 import '../styles/MenuItem.css'
 //TYPE
@@ -17,7 +18,8 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
   const location = useLocation()
   const currentRestaurantID = location.state.data;
 
-  const { currentUserID, cartItemNumber, setCartItemNumber }: any = useContext(UserContext)
+  const { setCartItemAmount } = useContext(CartContext)
+  const { currentUserID }: any = useContext(UserContext)
   const _currentUserID = Number(Decrypt(currentUserID))
 
   //Button state
@@ -29,7 +31,7 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const AddToCart = () => {
-    if(!disabled) {
+    if (!disabled) {
       handleAddToCart()
     }
   }
@@ -38,9 +40,11 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
     setDisabled(true)
     const response = await addToCart(_currentUserID, itemID, currentRestaurantID)
 
-    if (response != "different_restaurant") {
-      setCartItemNumber(Number(cartItemNumber) + 1)
+    if (response.data != "different_restaurant") {
       popAlert("green", itemName + " added to cart!")
+      setCartItemAmount((currentAmount: any) => {
+        return Number(currentAmount) + 1
+      })
     }
     else {
       popAlert("red", "There are products from another restaurants in the cart!")

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 //EXPORTED FUNCTIONS
 import { adminLogin } from '../setup/API/admin_api';
-import { Encode } from '../setup/Crypto/Cryption';
+import { Encrypt } from '../setup/Crypto/Cryption';
 //CSS
 import './styles/AdminLoginPage.css'
 
@@ -10,9 +10,9 @@ const AdminLoginPage = () => {
     const [password, setPassword] = useState<string>("");
 
     const handleLogin = async () => {
-        const encodedPass = Encode(password);
+        const encryptedPass = Encrypt(password);
 
-        if(await adminLogin(adminName, encodedPass)) {
+        if(await adminLogin(adminName, encryptedPass)) {
             window.location.href = "/admin-panel"
         }else {
             console.log(false)

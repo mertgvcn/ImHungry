@@ -11,6 +11,7 @@
     cursor: pointer;
     text-decoration: none;
     color: #402E32;
+    transition: all 0.2s;
 }
 
 .restaurant-card-wrapper:hover {
@@ -18,6 +19,7 @@
     transform: scale(1.08);
     border: 2px solid rgba(55, 15, 23, 0.8)
 }
+
 
 /**------------------------------------------------------------------IMAGE---------------------------------------------------------*/
 .restaurant-card-wrapper .restaurant-image {

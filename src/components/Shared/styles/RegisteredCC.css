@@ -83,8 +83,20 @@
     background-color: #edcfbf;
 }
 
-.registered-cc-wrapper .cc-list ul li>div {
-    width: 100%;
+.registered-cc-wrapper .cc-list ul li .cc-info {
+    width: 95%;
+}
+
+.registered-cc-wrapper .cc-list ul li .cc-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    height: 100%;
+}
+
+.registered-cc-wrapper .cc-list ul li .cc-delete:hover {
+    color:rgb(199, 97, 46); 
 }
 
 .registered-cc-wrapper .cc-list .add-new-card {
@@ -101,6 +113,7 @@
 .registered-cc-wrapper .cc-list .add-new-card:hover {
     background-color: #edcfbf;
 }
+
 
 /**-----------------------------------------------RESPONSIVE----------------------------------------------*/
 

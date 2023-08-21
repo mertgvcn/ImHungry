@@ -1,11 +1,10 @@
 import React from 'react'
 import { PaymentContextProvider } from '../../context/PaymentContext'
-import { ChangeContextProvider } from '../../context/ChangeContext'
 //css
 import './PaymentPage.css'
 //components
-import CurrentLocation from '../Home/components/CurrentLocation'
-import RegisteredCC from './components/RegisteredCC'
+import CurrentLocation from '../../components/Shared/CurrentLocation'
+import RegisteredCC from '../../components/Shared/RegisteredCC'
 import Order from './components/Order'
 
 const PaymentPage = () => {
@@ -13,7 +12,6 @@ const PaymentPage = () => {
 
     return (
         <PaymentContextProvider>
-            <ChangeContextProvider>
                 <div className='layout'>
                     <div className='row'>
                         <div className='col'>
@@ -26,7 +24,6 @@ const PaymentPage = () => {
                         </div>
                     </div>
                 </div>
-            </ChangeContextProvider>
         </PaymentContextProvider>
     )
 }

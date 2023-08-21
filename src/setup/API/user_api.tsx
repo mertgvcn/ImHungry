@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React from 'react'
 
 const API_KEY = process.env.REACT_APP_APIKEY
@@ -128,7 +128,7 @@ export const searchUserName = async (userName: string) => {
     return response.data
 }
 
-export const changePass = async (userID: number, currentPassword: string, newPassword: string) => {
+export const changePass = async (userID: number, newPassword: string) => {
     const response = await axios.put('https://localhost:7181/api/User/changePassword',
         {
             userID: userID,
@@ -140,9 +140,6 @@ export const changePass = async (userID: number, currentPassword: string, newPas
             password: newPassword
         },
         {
-            params: {
-                currentPassword: currentPassword
-            },
             headers: {
                 'x-api-key': API_KEY
             }
@@ -151,8 +148,23 @@ export const changePass = async (userID: number, currentPassword: string, newPas
     return response.data
 }
 
+export const verifyPass = async (userID: number, password: string) => {
+    const response = await axios.get('https://localhost:7181/api/User/verifyPassByID',
+    {
+        params: {
+            userID: userID,
+            password: password
+        },
+        headers: {
+            'x-api-key': API_KEY
+        }
+    })
+
+return response.data
+}
+
 //!LOCATION
-export const getCurrentLocation = async (userID: number) => {
+export const getCurrentLocation = async (userID: number): Promise<AxiosResponse> => {
     const response = await axios.get('https://localhost:7181/api/User/getCurrentLocation', {
         params: {
             userID: userID
@@ -165,7 +177,7 @@ export const getCurrentLocation = async (userID: number) => {
     return response.data
 }
 
-export const setCurrentLocation = async (userID: number, locationID: number|null) => {
+export const setCurrentLocation = async (userID: number, locationID: number) => {
     const response = await axios.put('https://localhost:7181/api/User/setCurrentLocation',
         {
             userID: userID,

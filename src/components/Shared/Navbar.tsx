@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../../context/UserContext";
+import { CartContext, CartContextProvider } from "../../context/CartContext";
 //CSS
 import "./styles/Navbar.css";
 //EXPORTED FUNCTIONS
@@ -9,11 +10,10 @@ import UserMenu from "../UserMenu/UserMenu";
 
 
 const Navbar = () => {
-    //Fetch current user
-    const { isLogin, currentUserID, cartItemNumber } = useContext(UserContext)
+    //Context
+    const { cartItemAmount } = useContext(CartContext)
+    const { isLogin } = useContext(UserContext)
     const _isLogin = (isLogin === 'true')
-    const _currentUserID = Decrypt(currentUserID)
-
 
     //States
     const [userMenuState, setUserMenuState] = useState<boolean>(false)
@@ -37,7 +37,7 @@ const Navbar = () => {
 
                             <div className="cart" onClick={() => { setCartState(!cartState) }}>
                                 <i id="cart-logo" className="fa-solid fa-basket-shopping"></i>
-                                <div className="cart-badge">{cartItemNumber}</div>
+                                {cartItemAmount && <div className="cart-badge">{cartItemAmount}</div>}
                             </div>
                         </div>
                     }

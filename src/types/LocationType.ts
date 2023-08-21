@@ -5,8 +5,9 @@ export type LocationType = {
     neighbourhood: string,
     street: string,
     buildingNo: string,
+    buildingAddition: string,
     apartmentNo: string,
-    addition: string,
+    note: string,
     locationID: number
 }
 
@@ -18,8 +19,9 @@ export type LocationCardType = {
         neighbourhood: string,
         street: string,
         buildingNo: string,
+        buildingAddition: string,
         apartmentNo: string,
-        addition: string,
+        note: string,
         locationID: number
     }
 }

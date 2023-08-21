@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { PaymentContext } from '../../../context/PaymentContext'
-import { UserContext } from '../../../context/UserContext'
-import { ChangeContext } from '../../../context/ChangeContext'
+import { PaymentContext } from '../../context/PaymentContext'
+import { UserContext } from '../../context/UserContext'
+import { ChangeContext } from '../../context/ChangeContext'
 //exported functions
-import { deleteCC, getCC } from '../../../setup/API/cc_api'
-import { Decrypt } from '../../../setup/Crypto/Cryption'
+import { deleteCC, getCC } from '../../setup/API/cc_api'
+import { Decrypt } from '../../setup/Crypto/Cryption'
 //css
-import '../styles/RegisteredCC.css'
+import './styles/RegisteredCC.css'
 //type
-import { CCType } from '../../../types/CCType'
+import { CCType } from '../../types/CCType'
 //component
-import AddCC from './AddCC'
+import CreditCardAdd from '../../pages/Profile/components/CreditCard/CreditCardAdd'
 
 const RegisteredCC = () => {
     //Context
@@ -67,21 +67,27 @@ const RegisteredCC = () => {
                     <ul>
                         {/* cc list */}
                         {userCCs.map((cc, idx) => (
-                            <li key={idx} onClick={() => {
-                                ccID.current = cc.ccID
-                                setDisplayedCC(`${cc.ccNo.slice(0, 4)} **** **** ${cc.ccNo.slice(12, 16)}`)
-                                setDropDownState(false)
-                                setIsAddCC(false)
-                            }}>
-                                <div>
+                            <li key={idx}>
+
+                                {/* CC Info */}
+                                <div className='cc-info' onClick={() => {
+                                    ccID.current = cc.ccID
+                                    setDisplayedCC(`${cc.ccNo.slice(0, 4)} **** **** ${cc.ccNo.slice(15, 19)}`)
+                                    setDropDownState(false)
+                                    setIsAddCC(false)
+                                }}>
                                     <i className="fa-solid fa-credit-card" style={{ marginRight: 5 }}></i>
-                                    {cc.ccNo.slice(0, 4)} **** **** {cc.ccNo.slice(12, 16)}
-                                    <i className="fa-solid fa-trash" style={{ float: 'right' }} onClick={async () => {
-                                        await deleteCC(cc.ccID)
-                                        setDisplayedCC("")
-                                        setToggle(!toggle)
-                                        setDropDownState(true)
-                                    }}></i>
+                                    {cc.ccNo.slice(0, 4)} **** **** {cc.ccNo.slice(15, 19)}
+                                </div>
+
+                                {/* Delete CC */}
+                                <div className='cc-delete' onClick={async () => {
+                                    await deleteCC(cc.ccID)
+                                    setDisplayedCC("")
+                                    setToggle(!toggle)
+                                    setDropDownState(true)
+                                }}>
+                                    <i className="fa-solid fa-trash"></i>
                                 </div>
                             </li>
                         ))}
@@ -95,7 +101,7 @@ const RegisteredCC = () => {
                 </div>)}
             </div>
 
-            <AddCC trigger={isAddCC} setTrigger={setIsAddCC} />
+            <CreditCardAdd trigger={isAddCC} setTrigger={setIsAddCC} width='90%'/>
         </>
 
     )

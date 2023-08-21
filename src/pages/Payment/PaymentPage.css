@@ -8,7 +8,6 @@
 
 .layout> .row> .col {
     width: 50%;
-    height: 89vh;
     display: flex;
     flex-direction: column;
     align-items: center;

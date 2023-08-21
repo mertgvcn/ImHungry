@@ -1,32 +1,19 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useEffect, useRef, useState } from "react";
 import { getUserCartItemNumber } from "../setup/API/cart_api";
 import { Decrypt } from "../setup/Crypto/Cryption";
+import axios from "axios";
+
 
 
 export const UserContext = createContext<any | null>(null)
-
-
 
 type userContextProviderProps = {
     children: ReactNode
 }
 
 export const UserContextProvider = ({ children }: userContextProviderProps) => {
-    const [currentUserID, setCurrentUserID] = useState<string>("")
-    const [isLogin, setIsLogin] = useState<string>("")
-    const [cartItemNumber, setCartItemNumber] = useState<string>("")
-
-
-    const fetchItemNumber = async () => {
-        if (currentUserID) {
-            const _currentUserID = Decrypt(currentUserID)
-            const data = await getUserCartItemNumber(Number(_currentUserID))
-            if(data[0].sum == null) {
-                data[0].sum = 0;
-            }
-            setCartItemNumber(data[0].sum.toString())
-        }
-    }
+    const [currentUserID, setCurrentUserID] = useState("")
+    const [isLogin, setIsLogin] = useState("")
 
     //Sayfa yenilendiğinde state sıfırlandığı için local storage ta olan veriyi statelere set ediyoruz
     useEffect(() => {
@@ -35,19 +22,13 @@ export const UserContextProvider = ({ children }: userContextProviderProps) => {
 
         const storedIsLogin = localStorage.getItem("isLogin")
         if (storedIsLogin) setIsLogin(storedIsLogin)
-
-        const storedCartItemNumber = localStorage.getItem("cartItemNumber")
-        if (storedCartItemNumber) setCartItemNumber(storedCartItemNumber)
     }, [])
 
 
     //Statelerde değişim olursa local storage a kaydediyoruz
     useEffect(() => {
-        fetchItemNumber()
-
         localStorage.setItem("currentUserID", currentUserID)
         localStorage.setItem("isLogin", isLogin)
-        localStorage.setItem("cartItemNumber", cartItemNumber)
     })
 
 
@@ -56,8 +37,6 @@ export const UserContextProvider = ({ children }: userContextProviderProps) => {
         setCurrentUserID,
         isLogin,
         setIsLogin,
-        cartItemNumber,
-        setCartItemNumber
     }
 
     return (

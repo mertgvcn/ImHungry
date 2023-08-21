@@ -16,12 +16,11 @@ export const getCC = async (userID: number) => {
     return response.data
 }
 
-export const addCC = async (userID: number, ccNo: string, ccName: string, month: number, year: number, cvv: number) => {
+export const addCC = async (userID: number, ccNo: string, ccName: string, expirationDate: string, cvv: number) => {
     const response = await axios.post('https://localhost:7181/api/CreditCard/addCC', {
         ccNo: ccNo,
         ccName: ccName,
-        month: month,
-        year: year,
+        expirationDate: expirationDate,
         cvv: cvv,
         userID: userID
     },

@@ -3,7 +3,7 @@ import CryptoJS from 'crypto-js'
 const keyValue:any = process.env.REACT_APP_encryptionKey
 const privateKeyValue:any = process.env.REACT_APP_encryptionPrivateKey
 
-export function Encode(data:string) {
+export function Encrypt(data:string) {
     try {
       const _key = CryptoJS.enc.Utf8.parse(keyValue);
       const privatekey = CryptoJS.enc.Utf8.parse(privateKeyValue);

@@ -1,33 +1,32 @@
-.change-pass-wrapper {
+.account-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto;
     margin-top: 60px;
-    margin-bottom: 60px;
     width: 640px;
     padding: 20px 20px;
     background-color: #FFF4EE;
-    color:#402E32;
+    color: #402E32;
     border: 1px solid rgb(64, 46, 50, 0.3);
     box-shadow: #c3c3c3 0px 8px 8px;
     box-sizing: border-box;
 }
 
-.change-pass-wrapper p {
+.account-wrapper p {
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.change-pass-wrapper .input-group p {
+.account-wrapper .input-group p {
     margin-left: 2px;
     margin-bottom: 3px;
     font-size: 14px;
     font-weight: 500;
 }
 
-.change-pass-wrapper .input-group input {
+.account-wrapper .input-group input {
     margin-bottom: 12px;
     width: 310px;
     height: 28px;
@@ -40,7 +39,19 @@
     font-size: 18px;
 }
 
-.change-pass-wrapper .change-pass-save {
+.account-wrapper .input-group input::placeholder {
+    color: rgb(54, 54, 54);
+}
+
+.account-wrapper .input-group div {
+    margin-left: 2px;
+    margin-top: -8px;
+    margin-bottom: 10px;
+    color: red;
+    font-size: 14px;
+}
+
+.account-wrapper .account-save {
     margin-top: 5px;
     margin-bottom: 5px;
     width: 310px;
@@ -55,55 +66,75 @@
     cursor: pointer;
 }
 
-.change-pass-wrapper .change-pass-save:hover {
+.account-wrapper .account-save:hover {
     background-color: #e78a60;
 }
 
-.change-pass-wrapper .change-pass-save:active {
+.account-wrapper .account-save:active {
     background-color: #ff5e00;
 }
 
+.account-wrapper .change-password {
+    margin-top: 8px;
+    margin-bottom: 5px;
+    width: 310px;
+    height: 30px;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    color: #eaa484;
+    cursor: pointer;
+}
+
+.account-wrapper .change-password:hover {
+    color: #e8946e;
+} 
 
 /**-----------------------------------------------RESPONSIVE----------------------------------------------*/
 
 /*above 768px (medium)*/
 @media (max-width: 768px) {
-    .change-pass-wrapper {
+    .account-wrapper {
         width: 100%;
     }
-    
-    .change-pass-wrapper p {
+
+    .account-wrapper p {
         font-size: 30px;
     }
-    
-    .change-pass-wrapper .input-group p {
+
+    .account-wrapper .input-group p {
         font-size: 12px;
     }
-    
-    .change-pass-wrapper .input-group input {
+
+    .account-wrapper .input-group input {
         font-size: 16px;
     }
-    
-    .change-pass-wrapper .change-pass-save {
+
+    .account-wrapper .account-save {
         font-size: 18px;
     }
 }
 
 /*above 640px (small)*/
 @media (max-width: 640px) {
-    .change-pass-wrapper p {
+    .account-wrapper p {
         font-size: 26px;
     }
-    
-    .change-pass-wrapper .input-group {
+
+    .account-wrapper .input-group {
         width: 80%;
     }
 
-    .change-pass-wrapper .input-group input {
+    .account-wrapper .input-group input {
         width: 100%;
     }
-    
-    .change-pass-wrapper .change-pass-save {
+
+    .account-wrapper .account-save {
         width: 80%;
+    }
+
+    .account-wrapper .change-password {
+        width: 80%;
+        font-size: 14px;
     }
 }

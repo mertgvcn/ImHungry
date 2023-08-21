@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { UserContext } from '../../../context/UserContext'
-import { ChangeContext } from '../../../context/ChangeContext'
+import { UserContext } from '../../../../context/UserContext'
+import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
-import { Decrypt } from '../../../setup/Crypto/Cryption'
-import { getLocationsByUserID } from '../../../setup/API/location_api'
+import { Decrypt } from '../../../../setup/Crypto/Cryption'
+import { getLocationsByUserID } from '../../../../setup/API/location_api'
 //type
-import { LocationType } from '../../../types/LocationType'
+import { LocationType } from '../../../../types/LocationType'
 //Css
-import '../styles/Location.css'
+import './styles/Location.css'
 //Component
 import LocationAdd from './LocationAdd'
 import LocationCard from './LocationCard'
@@ -26,7 +26,7 @@ const Location = () => {
     const [addLocationStatus, setAddLocationStatus] = useState<boolean>(false);
 
     const fetchUserLocations = async () => {
-        const data = await getLocationsByUserID(_currentUserID)
+        const data:any = await getLocationsByUserID(_currentUserID)
         setUserLocations(data)
     }
 
@@ -41,7 +41,6 @@ const Location = () => {
                 <p>Addresses</p>
 
                 <div className='locations'>
-
                     {userLocations.map((location, idx) => (
                         <LocationCard data={location} key={idx}/>
                     ))}

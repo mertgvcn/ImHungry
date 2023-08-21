@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
+import { CartContext } from '../../context/CartContext'
 //CSS
 import './styles/UserMenu.css'
 
@@ -10,6 +11,7 @@ type propsType = {
 }
 
 const UserMenu = (props: propsType) => {
+    const { setCartItemAmount } = useContext(CartContext)
     const { setCurrentUserID, setIsLogin } = useContext(UserContext)
 
     const handlePreviousOrders = () => {
@@ -23,6 +25,7 @@ const UserMenu = (props: propsType) => {
     const handleLogOut = () => {
         setCurrentUserID("")
         setIsLogin("false")
+        setCartItemAmount("")
         window.location.href = "/"
     }
 

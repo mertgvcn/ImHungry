@@ -1,9 +1,10 @@
 .payment-wrapper {
-    width: 90%;
+    min-height: 420px;
     margin-top: 50px;
+    margin-bottom: 30px;
     background-color: #FFF4EE;
     border: 1px solid rgb(64, 46, 50, 0.3);
-    box-shadow: #c3c3c3 0px 8px 8px;
+    box-shadow: #c3c3c3 0px 2px 3px;
 }
 
 .payment-wrapper .row {
@@ -37,6 +38,16 @@
     color: rgb(238, 231, 231);
 }
 
+.payment-wrapper .credit-card-info .row .close-add-card i {
+    margin-top: 15px;
+    cursor: pointer;
+    color: rgb(72, 72, 72);
+} 
+
+.payment-wrapper .credit-card-info .row .close-add-card i:hover {
+    color: black;
+}
+
 /*! BODY */
 .payment-wrapper .credit-card-info {
     display: flex;
@@ -50,11 +61,11 @@
 .payment-wrapper .credit-card-info p {
     font-size: 22px;
     color: rgb(40, 40, 40);
-    margin-bottom: 20px;
+    margin-top: 10px;
 }
 
 .payment-wrapper .credit-card-info .input-group {
-    margin-top: 16px;
+    margin-top: 12px;
 }
 
 .payment-wrapper .credit-card-info .input-group p {
@@ -67,17 +78,24 @@
 .payment-wrapper .credit-card-info .input-group input {
     margin-bottom: 6px;
     width: 100%;
-    height: 30px;
+    height: 35px;
     background-color: #ffffff;
     border: 1px solid #402e3293;
     border-radius: 5px;
     box-shadow: #d1d1d1 0px 4px 7px;
     box-sizing: border-box;
     padding-left: 10px;
+    font-size: 16px;
+}
+
+.payment-wrapper .credit-card-info .input-group>div {
+    margin-left: 2px;
+    margin-bottom: -8px;
+    color: red;
     font-size: 14px;
 }
 
-.payment-wrapper .credit-card-info> .row {
+.payment-wrapper .credit-card-info>.row {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -91,12 +109,12 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 .payment-wrapper .button-wrapper {
-    margin-top: 20px;
+    margin-top: 12px;
     width: 100%;
 }
 
@@ -121,18 +139,4 @@ input::-webkit-inner-spin-button {
 
 .payment-wrapper #submit-cc:active {
     background-color: #c36337;
-}
-
-/*! Alert */
-.payment-wrapper .add-cc-alert {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    bottom: 0px;
-    width: 100%;
-    height: 30px;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
 }

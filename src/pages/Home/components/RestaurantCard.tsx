@@ -1,7 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-//EXPORTED FUNCTIONS
-import { Encode } from '../../../setup/Crypto/Cryption'
 //CSS
 import '../styles/RestaurantCard.css'
 //Type

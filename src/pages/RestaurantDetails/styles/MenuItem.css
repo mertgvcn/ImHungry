@@ -68,6 +68,8 @@
 /*Add to Card*/
 .menu-item-wrapper #add-to-cart {
     display: none;
+    background-color: transparent;
+    border: none;
     color: #87314e;
     font-size: 25px;
     margin-right: 5px;

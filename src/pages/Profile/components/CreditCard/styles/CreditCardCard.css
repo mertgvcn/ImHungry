@@ -1,0 +1,72 @@
+.credit-card-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    width: 180px;
+    height: 100px;
+    margin: 8px 8px;
+    padding: 5px 5px;
+    background-color: #FFF4EE;
+    color:#402E32;
+    border: 1px solid rgb(64, 46, 50, 0.3);
+    box-shadow: #c3c3c3 0px 8px 8px;
+    box-sizing: border-box;
+    cursor: default ;
+}
+
+.credit-card-card-wrapper .delete-card {
+    width: 100%;
+}
+
+.credit-card-card-wrapper .delete-card i{
+    float: right;
+    cursor: pointer;
+    color: rgb(77, 76, 76);
+}
+
+.credit-card-card-wrapper .delete-card i:hover{
+    color: black;
+}
+
+.credit-card-card-wrapper .card-number {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 20px;
+    margin: auto;
+    margin-top: 8px;
+    margin-bottom: 0px;
+}
+
+.credit-card-card-wrapper .card-number p{
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.credit-card-card-wrapper .cardholder-name {
+    width: 100%;
+    height: 20px;
+    margin: auto;
+    margin-top: 4px;
+    margin-bottom: 0px;
+}
+
+.credit-card-card-wrapper .cardholder-name p{
+    font-size: 14px;
+    margin-left: 22px;
+    margin-bottom: 0px;
+}
+
+.credit-card-card-wrapper .date-cvv {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+    margin-top: 4px;
+    margin-bottom: 0px;
+    width: 75%;
+}
+
+.credit-card-card-wrapper .date-cvv p{
+    font-size: 12px;
+}

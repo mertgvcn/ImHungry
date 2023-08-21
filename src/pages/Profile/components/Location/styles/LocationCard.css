@@ -11,6 +11,7 @@
     border: 1px solid rgb(64, 46, 50, 0.3);
     box-shadow: #c3c3c3 0px 8px 8px;
     box-sizing: border-box;
+    cursor: default ;
 }
 
 .location-card-wrapper .delete-location {
@@ -27,10 +28,11 @@
     color: black;
 }
 
-.location-card-wrapper p{
-    color:#402E32;
+.location-card-wrapper .info {
+    margin-left: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color:#4c4c4c;
     font-size: 12px;
     overflow-wrap: break-word;
-    margin-bottom: 0px;
-    margin-left: 16px;
 }

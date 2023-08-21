@@ -3,9 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: -30px;
     width: 700px;
-    height: 500px;
+    min-height: 500px;
     background-color: transparent;
     color: #402E32;
 }
@@ -35,6 +34,15 @@
 #register-inputs-wrapper .input-template {
     display: flex;
     flex-direction: column;
+}
+
+#register-inputs-wrapper .input-template div {
+    width: 310px;
+    margin-left: 2px;
+    margin-top: -4px;
+    margin-bottom: 5px;
+    color: red;
+    font-size: 14px;
 }
 
 #register-inputs-wrapper .input-label {
@@ -71,6 +79,11 @@
     justify-content: space-between;
 }
 
+#input-full-name .input-template div {
+    width: 145px;
+}
+
+
 #input-full-name .input-text {
     width: 145px;
     height: 35px;
@@ -97,7 +110,7 @@
 }
 
 #register-buttons-wrapper #register {
-    border:none;
+    border: none;
     background-color: #C9A38D;
     box-shadow: #c7b1a5 0 4px 7px;
     color: white;
@@ -142,7 +155,7 @@
     #register-inputs-wrapper .input-label {
         font-size: 16px;
     }
-    
+
     #register-inputs-wrapper .input-text {
         width: 300px;
         height: 32px;
@@ -184,7 +197,7 @@
     #register-inputs-wrapper .input-label {
         font-size: 14px;
     }
-    
+
     #register-inputs-wrapper .input-text {
         width: 280px;
         height: 30px;
@@ -226,7 +239,7 @@
     #register-inputs-wrapper .input-label {
         font-size: 14px;
     }
-    
+
     #register-inputs-wrapper .input-text {
         width: 210px;
         height: 32px;
@@ -273,13 +286,13 @@
     }
 
     #register-inputs-wrapper {
-        width: 80%;   
+        width: 80%;
     }
 
     #register-inputs-wrapper .input-label {
         font-size: 14px;
     }
-    
+
     #register-inputs-wrapper .input-text {
         padding-left: 0px;
         width: 100%;

@@ -1,32 +1,58 @@
-.account-wrapper {
+.change-pass-background {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100%; 
+    height: 100vh; /*buraya kadar tüm ekranı kapsattık ki arkaplan gri olsun*/
+    background-color: rgba(0, 0, 0, 0.701); /*Arka planı karartır*/
+
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.change-pass-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: auto;
-    margin-top: 60px;
-    width: 640px;
+    width: 540px;
     padding: 20px 20px;
     background-color: #FFF4EE;
     color:#402E32;
     border: 1px solid rgb(64, 46, 50, 0.3);
-    box-shadow: #c3c3c3 0px 8px 8px;
+    border-radius: 5px;
+    box-shadow: #b9b9b9 0px 3px 4px;
     box-sizing: border-box;
 }
 
-.account-wrapper p {
+.change-pass-wrapper .close-change-pass {
+    width: 100%;
+}
+
+.change-pass-wrapper .close-change-pass i {
+    float: right;
+    cursor: pointer;
+}
+
+.change-pass-wrapper .close-change-pass i:hover {
+    color: black;
+}
+
+.change-pass-wrapper p {
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.account-wrapper .input-group p {
+.change-pass-wrapper .input-group p {
     margin-left: 2px;
     margin-bottom: 3px;
     font-size: 14px;
     font-weight: 500;
 }
 
-.account-wrapper .input-group input {
+.change-pass-wrapper .input-group input {
     margin-bottom: 12px;
     width: 310px;
     height: 28px;
@@ -39,9 +65,18 @@
     font-size: 18px;
 }
 
-.account-wrapper .account-save {
+.change-pass-wrapper .input-group div {
+    width: 310px;
+    margin-left: 2px;
+    margin-top: -8px;
+    margin-bottom: 10px;
+    color: red;
+    font-size: 14px;
+}
+
+.change-pass-wrapper .change-pass-save {
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     width: 310px;
     height: 30px;
     font-size: 20px;
@@ -54,11 +89,11 @@
     cursor: pointer;
 }
 
-.account-wrapper .account-save:hover {
+.change-pass-wrapper .change-pass-save:hover {
     background-color: #e78a60;
 }
 
-.account-wrapper .account-save:active {
+.change-pass-wrapper .change-pass-save:active {
     background-color: #ff5e00;
 }
 
@@ -67,41 +102,46 @@
 
 /*above 768px (medium)*/
 @media (max-width: 768px) {
-    .account-wrapper {
+    .change-pass-wrapper {
         width: 100%;
     }
-    .account-wrapper p {
+    
+    .change-pass-wrapper p {
         font-size: 30px;
     }
     
-    .account-wrapper .input-group p {
+    .change-pass-wrapper .input-group p {
         font-size: 12px;
     }
     
-    .account-wrapper .input-group input {
+    .change-pass-wrapper .input-group input {
         font-size: 16px;
     }
     
-    .account-wrapper .account-save {
+    .change-pass-wrapper .change-pass-save {
         font-size: 18px;
     }
 }
 
 /*above 640px (small)*/
 @media (max-width: 640px) {
-    .account-wrapper p {
+    .change-pass-wrapper p {
         font-size: 26px;
     }
     
-    .account-wrapper .input-group {
+    .change-pass-wrapper .input-group {
         width: 80%;
     }
-    
-    .account-wrapper .input-group input {
+
+    .change-pass-wrapper .input-group input {
         width: 100%;
     }
     
-    .account-wrapper .account-save {
+    .change-pass-wrapper .change-pass-save {
+        width: 80%;
+    }
+
+    .change-pass-wrapper .input-group div {
         width: 80%;
     }
 }

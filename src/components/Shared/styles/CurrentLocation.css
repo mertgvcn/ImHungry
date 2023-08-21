@@ -82,8 +82,20 @@
     background-color: #edcfbf;
 }
 
-.current-location-wrapper .locations ul li>div {
-    width: 100%;
+.current-location-wrapper .locations ul li .location-info {
+    width: 95%;
+}
+
+.current-location-wrapper .locations ul li .location-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5%;
+    height: 100%;
+}
+
+.current-location-wrapper .locations ul li .location-delete:hover {
+    color: rgb(199, 97, 46); 
 }
 
 .current-location-wrapper .locations .add-new-location {
@@ -137,6 +149,6 @@
 /*above 640px (small)*/
 @media (max-width: 640px) {
     .current-location-wrapper {
-        width: 100%;
+        width: 100% !important;
     }
 }

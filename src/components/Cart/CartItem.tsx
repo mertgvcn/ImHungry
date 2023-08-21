@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react'
-import { UserContext } from '../../context/UserContext'
+import React, { useContext, useEffect, useState } from 'react'
+import { CartContext } from '../../context/CartContext'
 //type
 import { CartItemType } from '../../types/CartType'
 //css
@@ -9,16 +9,20 @@ import { addToCart, deleteFromCart } from '../../setup/API/cart_api'
 
 
 const CartItem = ({ currentUserID, data: { itemID, restaurantID, itemName, imageSource, price, amount } }: CartItemType) => {
-    const { cartItemNumber, setCartItemNumber } = useContext(UserContext)
+    const { setCartItemAmount } = useContext(CartContext)
 
     const handleRemoveItem = async () => {
         await deleteFromCart(currentUserID, itemID, restaurantID)
-        setCartItemNumber(Number(cartItemNumber) - 1)
+        setCartItemAmount((currentAmount:any) => {
+            return Number(currentAmount) - 1
+        })
     }
 
     const handleAddItem = async () => {
         await addToCart(currentUserID, itemID, restaurantID)
-        setCartItemNumber(Number(cartItemNumber) + 1)
+        setCartItemAmount((currentAmount:any) => {
+            return Number(currentAmount) + 1
+        })
     }
 
     return (
@@ -30,7 +34,7 @@ const CartItem = ({ currentUserID, data: { itemID, restaurantID, itemName, image
 
                 <div className='item-info'>
                     <p>{itemName}</p>
-                    <p style={{ color: '#555555', fontSize: '14px' }}>{price*amount}TL</p>
+                    <p style={{ color: '#555555', fontSize: '14px' }}>{price * amount}TL</p>
                 </div>
 
                 <div className='item-process'>

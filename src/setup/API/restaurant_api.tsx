@@ -4,10 +4,9 @@ import React from 'react'
 const API_KEY = process.env.REACT_APP_APIKEY
 
 
-export const getRestaurants = async (filteredName: string, province: string|null, district: string|null) => {
+export const getRestaurants = async (province: string|null, district: string|null) => {
     const response = await axios.get('https://localhost:7181/api/Restaurant/GetRestaurants', {
         params: {
-            filteredName: filteredName,
             province: province,
             district: district,
         },

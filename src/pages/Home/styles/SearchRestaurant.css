@@ -34,7 +34,7 @@
 .search-restaurant-wrapper .search-inputs .searchbar-wrapper {
     display: flex;
     align-items: center;
-    width: 60%;
+    width: 90%;
     height: 60%;
 }
 
@@ -52,27 +52,6 @@
     outline: none;
 }
 
-.search-restaurant-wrapper #search-button {
-    height: 50%;
-    width: 20%;
-    font-size: 14px;
-    text-align: center;
-    box-shadow: rgb(187, 187, 187) 0px 3px 4px;
-    background-color: #C9A38D;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.search-restaurant-wrapper #search-button:hover {
-    background-color: #d6a284;
-}
-
-.search-restaurant-wrapper #search-button:active {
-    background-color: #e3a079;
-}
-
 /**-----------------------------------------------RESPONSIVE----------------------------------------------*/
 
 /*above 1024px (large)*/
@@ -83,10 +62,6 @@
 
     .search-restaurant-wrapper .search-inputs .searchbar-wrapper input {
         font-size: 18px;
-    }
-
-    .search-restaurant-wrapper #search-button {
-        font-size: 12px;
     }
 }
 
@@ -99,19 +74,11 @@
     .search-restaurant-wrapper .search-inputs .searchbar-wrapper input {
         font-size: 16px;
     }
-
-    .search-restaurant-wrapper #search-button {
-        font-size: 10px;
-    }
 }
 
 /*above 640px (small)*/
 @media (max-width: 640px) {
     .search-restaurant-wrapper {
         width: 100%;
-    }
-
-    .search-restaurant-wrapper #search-button {
-        width: 30%;
     }
 }
