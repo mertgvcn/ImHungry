@@ -74,7 +74,7 @@
 /*above 1024px (large)*/
 @media (max-width: 1024px) {
     .menu-wrapper .main-title p {
-        font-size: 38px;
+        font-size: 36px;
     }
     .menu-wrapper .menu-sections #menu-title {
         font-size: 28px;
@@ -84,7 +84,7 @@
 /*above 768px (medium)*/
 @media (max-width: 768px) {
     .menu-wrapper .main-title p {
-        font-size: 36px;
+        font-size: 32px;
     }
     .menu-wrapper .menu-sections #menu-title {
         font-size: 26px;
@@ -94,7 +94,7 @@
 /*above 640px (small)*/
 @media (max-width: 640px) {
     .menu-wrapper .main-title p {
-        font-size: 32px;
+        font-size: 28px;
     }
     .menu-wrapper .menu-sections #menu-title {
         font-size: 24px;
@@ -104,7 +104,7 @@
 /*above 475px (xsmall)*/
 @media (max-width: 475px) {
     .menu-wrapper .main-title p {
-        font-size: 30px;
+        font-size: 25px;
     }
     .menu-wrapper .menu-sections #menu-title {
         font-size: 22px;

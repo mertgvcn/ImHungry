@@ -17,7 +17,7 @@ import CreditCardAdd from './CreditCardAdd'
 const CreditCard = () => {
 
     //Context
-    const { toggle } = useContext(ChangeContext)
+    const { creditCardToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
@@ -34,7 +34,7 @@ const CreditCard = () => {
 
     useEffect(() => {
         fetchUserCards()
-    }, [toggle])
+    }, [creditCardToggle])
 
     return (
         <>

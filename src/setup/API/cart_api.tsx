@@ -22,22 +22,6 @@ export const getUserCartItems = async (userID: number) => {
     }
 }
 
-export const getUserCartRestaurantID = async (userID: number) => {
-    try {
-        const response = await axios.get('https://localhost:7181/api/Cart/getUserCartRestaurantID', {
-            params: {
-                userID: userID,
-            },
-            headers: {
-                'x-api-key': API_KEY
-            }
-        })
-
-        return response.data
-    } catch (error) {
-      
-    }
-}
 
 export const getUserCartItemNumber = async (userID: number) : Promise<AxiosResponse>  => {
     const response = await axios.get('https://localhost:7181/api/Cart/getUserCartItemNumber', {

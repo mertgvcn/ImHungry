@@ -8,12 +8,12 @@ import { LocationCardType } from '../../../../types/LocationType'
 import './styles/LocationCard.css'
 
 const LocationCard = ({ data: { locationTitle, province, district, neighbourhood, street, buildingNo, buildingAddition, apartmentNo, note, locationID } }: LocationCardType) => {
-    const { toggle, setToggle } = useContext(ChangeContext)
+    const { locationToggle, setLocationToggle } = useContext(ChangeContext)
 
     const deleteLocation = async () => {
         try {
             await deleteLocationByID(locationID);
-            setToggle(!toggle)
+            setLocationToggle(!locationToggle)
         } catch (error) {
             console.log(error)
         }

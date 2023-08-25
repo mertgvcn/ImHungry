@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { ChangeContext } from '../../context/ChangeContext'
+import { RestaurantContext } from '../../context/RestaurantContext'
 //exported functions
 import { deleteLocationByID, getLocationsByUserID } from '../../setup/API/location_api'
 import { Decrypt } from '../../setup/Crypto/Cryption'
@@ -22,7 +23,7 @@ type propType = {
 
 const CurrentLocation = (props: propType) => {
     //Context
-    const { toggle, setToggle } = useContext(ChangeContext)
+    const { locationToggle, setLocationToggle, restaurantToggle, setRestaurantToggle } = useContext(ChangeContext) 
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
@@ -103,8 +104,8 @@ const CurrentLocation = (props: propType) => {
                         return;
                     }
 
-                    const { locationTitle, province, district, neighbourhood, street, buildingNo, apartmentNo, addition } = res.data[0]
-                    setDisplayedLocation(`${locationTitle}, ${province}/${district}, ${neighbourhood} - ${street} ${buildingNo} ${apartmentNo} ${addition}`)
+                    const { locationTitle, province, district, neighbourhood, street, buildingNo, buildingAddition, apartmentNo, note } = res.data[0]
+                    setDisplayedLocation(`${locationTitle}, ${province}/${district}, ${neighbourhood} - ${street} ${buildingNo}-${buildingAddition} ${apartmentNo} ${note}`)
                 })
                 .catch((err) => {
                     if (axios.isCancel(err)) {
@@ -125,13 +126,13 @@ const CurrentLocation = (props: propType) => {
             cancelToken2.cancel()
         }
 
-    }, [])
+    }, [locationToggle])
 
 
 
     useEffect(() => {
         // syncLocation()
-    }, [toggle])
+    }, [locationToggle])
 
 
     return (
@@ -154,7 +155,8 @@ const CurrentLocation = (props: propType) => {
                             {/* Loc Info */}
                             <div className='location-info' onClick={async () => {
                                 await setCurrentLocation(_currentUserID, location.locationID);
-                                setToggle(!toggle);
+                                setLocationToggle(!locationToggle);
+                                setRestaurantToggle(!restaurantToggle); //if current location changes, we need to update restaurant list
                                 setDropDownState(false);
                             }}>
                                 <i className="fa-solid fa-location-dot" style={{ marginLeft: 1, marginRight: 5, fontSize: 16 }}></i>
@@ -193,7 +195,7 @@ const CurrentLocation = (props: propType) => {
                             {/* Delete Loc */}
                             <div className='location-delete' onClick={async () => {
                                 await deleteLocationByID(location.locationID);
-                                setToggle(!toggle);
+                                setLocationToggle(!locationToggle);
                                 setDropDownState(true);
                             }}>
                                 <i className="fa-solid fa-xmark"></i>
@@ -207,7 +209,7 @@ const CurrentLocation = (props: propType) => {
                 {/* add new location */}
                 <div className='add-new-location' onClick={() => {
                     setAddLocState(true);
-                    setToggle(!toggle);
+                    setLocationToggle(!locationToggle);
                 }}>
                     <i className="fa-regular fa-square-plus" style={{ marginRight: 5 }}></i>
                     <p>Add new location..</p>

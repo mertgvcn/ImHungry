@@ -31,8 +31,10 @@ const Cart = (props: propsType) => {
 
   //Item Info
   const [items, setItems] = useState<Array<CartType>>()
+  const [itemRestaurantNames, setItemRestaurantNames] = useState<string[]>([])
   const totalPrice = items?.reduce((total, item) => (total += item.price * item.amount), 0)
 
+  //Fetch items
   const fetchCartItems = async (): Promise<void> => {
     if (_currentUserID) {
       const data = await getUserCartItems(_currentUserID)
@@ -43,12 +45,37 @@ const Cart = (props: propsType) => {
 
   async function syncCart() {
     await fetchCartItems()
+    extractRestaurantNames()
   }
 
   useEffect(() => {
     syncCart()
   }, [props.trigger, cartItemAmount])
 
+
+  //Functions
+  const extractRestaurantNames = () => {
+    var restaurantNames: string[] = []
+
+    items?.map((item) => {
+      if (!restaurantNames.includes(item.name)) {
+        restaurantNames.push(item.name)
+      }
+    })
+
+    setItemRestaurantNames(restaurantNames)
+  }
+
+  const placeItems = (restaurantName: string) => {
+    return items?.map((item) => {
+      if (restaurantName === item.name) {
+        return (
+          <CartItem currentUserID={_currentUserID} data={item}/>
+        )
+      }
+      return null
+    }).filter((item) => item !== null); // null değerleri filtrele
+  }
 
   const handleConfirm = () => {
     if (items?.length == 0) {
@@ -75,9 +102,16 @@ const Cart = (props: propsType) => {
           <p id='product-list-title'>Products</p>
 
           <div className='products'>
-            {items?.map((item, index) => (
-              <CartItem currentUserID={_currentUserID} data={item} key={index} />
-            ))}
+            {itemRestaurantNames &&
+              itemRestaurantNames.map((restaurantName, idx) => (
+                <div className='item-list' key={idx}>
+                  <p>{restaurantName}</p>
+                  <div className='items'>
+                    {placeItems(restaurantName)}
+                  </div>
+                </div>
+              ))
+            }
           </div>
 
           <hr />

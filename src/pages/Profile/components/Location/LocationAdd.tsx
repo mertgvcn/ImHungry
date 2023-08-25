@@ -16,7 +16,7 @@ type propsType = {
 
 const LocationAdd = (props: propsType) => {
     //Context
-    const { toggle, setToggle } = useContext(ChangeContext)
+    const { locationToggle, setLocationToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
@@ -48,7 +48,7 @@ const LocationAdd = (props: propsType) => {
                 await addLocation(_currentUserID, formData.title, formData.province, formData.district, formData.neighbourhood,
                     formData.street, formData.buildingNo, formData.buildingAddition, formData.apartmentNo, formData.note)
                 popAlert("green", "Addrees successfuly added")
-                setToggle(!toggle)
+                setLocationToggle(!locationToggle)
                 resetInputs()
                 setTimeout(() => {
                     props.setTrigger(false)

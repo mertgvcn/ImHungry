@@ -18,7 +18,7 @@ type propsType = {
 
 const CreditCardAdd = (props: propsType) => {
     //Context
-    const { toggle, setToggle } = useContext(ChangeContext)
+    const { creditCardToggle, setCreditCardToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
@@ -44,7 +44,7 @@ const CreditCardAdd = (props: propsType) => {
             try {
                 await addCC(_currentUserID, formData.cardNumber, formData.cardHolderName, formData.expirationDate, parseInt(formData.cvv))
                 popAlert("green", "Card added succesfully")
-                setToggle(!toggle)
+                setCreditCardToggle(!creditCardToggle)
                 resetInputs()
                 setTimeout(() => {
                     props.setTrigger(false)

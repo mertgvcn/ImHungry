@@ -15,7 +15,7 @@ import CreditCardAdd from '../../pages/Profile/components/CreditCard/CreditCardA
 const RegisteredCC = () => {
     //Context
     const { ccID } = useContext(PaymentContext)
-    const { toggle, setToggle } = useContext(ChangeContext)
+    const { creditCardToggle, setCreditCardToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
@@ -38,7 +38,7 @@ const RegisteredCC = () => {
 
     useEffect(() => {
         fetchCC()
-    }, [toggle])
+    }, [creditCardToggle])
 
     const handleAddCC = () => {
         setIsAddCC(true)
@@ -84,7 +84,7 @@ const RegisteredCC = () => {
                                 <div className='cc-delete' onClick={async () => {
                                     await deleteCC(cc.ccID)
                                     setDisplayedCC("")
-                                    setToggle(!toggle)
+                                    setCreditCardToggle(!creditCardToggle)
                                     setDropDownState(true)
                                 }}>
                                     <i className="fa-solid fa-trash"></i>

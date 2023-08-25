@@ -53,6 +53,15 @@
     margin-top: 10px;
 }
 
+.cart-body .products .item-list>p {
+    color: #402E32;
+    float: left;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    margin-left: 8px;
+}
+
 .cart-body hr {
     width: 90%;
     height: 1px;

@@ -9,11 +9,17 @@ type changeContextProviderProps = {
 }
 
 export const ChangeContextProvider = ({ children }: changeContextProviderProps) => {
-    const [toggle, setToggle] = useState<boolean>(false)
-    
+    const [locationToggle, setLocationToggle] = useState<boolean>(false)
+    const [restaurantToggle, setRestaurantToggle] = useState<boolean>(false)
+    const [creditCardToggle, setCreditCardToggle] = useState<boolean>(false)
+     
     const data = {
-        toggle,
-        setToggle,
+        locationToggle,
+        setLocationToggle,
+        restaurantToggle, 
+        setRestaurantToggle,
+        creditCardToggle, 
+        setCreditCardToggle,
     }
 
     return (

@@ -13,7 +13,7 @@ export const RestaurantContextProvider = ({ children }: RestaurantContextProvide
 
     const data = {
         filteredName,
-        setFilteredName
+        setFilteredName,
     }
 
     return (

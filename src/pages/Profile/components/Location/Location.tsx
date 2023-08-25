@@ -15,7 +15,7 @@ import LocationCard from './LocationCard'
 
 const Location = () => {
     //Context
-    const { toggle } = useContext(ChangeContext)
+    const { locationToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
@@ -32,7 +32,7 @@ const Location = () => {
 
     useEffect(() => {
       fetchUserLocations()
-    }, [toggle])
+    }, [locationToggle])
     
 
     return (

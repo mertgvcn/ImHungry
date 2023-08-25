@@ -7,12 +7,12 @@ import { CCCardType } from '../../../../types/CCType'
 import './styles/CreditCardCard.css'
 
 const CreditCardCard = ({ data: { ccID, ccNo, ccName, expirationDate, cvv } }: CCCardType) => {
-  const { toggle, setToggle } = useContext(ChangeContext)
+  const { creditCardToggle, setCreditCardToggle } = useContext(ChangeContext)
 
   const deleteCard = async () => {
     try {
       await deleteCC(ccID);
-      setToggle(!toggle)
+      setCreditCardToggle(!creditCardToggle)
   } catch (error) {
       console.log(error)
   }

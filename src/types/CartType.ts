@@ -1,8 +1,9 @@
 export type CartItemType = {
     currentUserID: number,
     data: {
-        itemID: number,
         restaurantID: number,
+        name: string,
+        itemID: number,
         itemName: string,
         imageSource: string,
         price: number,
@@ -11,8 +12,9 @@ export type CartItemType = {
 }
 
 export type CartType = {
-    itemID: number,
     restaurantID: number,
+    name: string,
+    itemID: number,
     itemName: string,
     imageSource: string,
     price: number,

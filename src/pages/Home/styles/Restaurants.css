@@ -36,6 +36,16 @@
     margin: auto;
 }
 
+.restaurant-error {
+    width: 100%;
+    height: 409.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: #402E32;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
