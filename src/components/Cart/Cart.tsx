@@ -21,7 +21,7 @@ type propsType = {
 
 const Cart = (props: propsType) => {
   //Context
-  const { cartItemAmount } = useContext(CartContext)
+  const { cartItemAmount, setCartItemAmount } = useContext(CartContext)
   const { currentUserID, } = useContext(UserContext)
   const _currentUserID = Decrypt(currentUserID)
 
@@ -33,24 +33,27 @@ const Cart = (props: propsType) => {
   const [items, setItems] = useState<Array<CartType>>()
   const [itemRestaurantNames, setItemRestaurantNames] = useState<string[]>([])
   const totalPrice = items?.reduce((total, item) => (total += item.price * item.amount), 0)
+  const itemAmount = items?.reduce((amount, item) => (amount += item.amount), 0)
 
   //Fetch items
   const fetchCartItems = async (): Promise<void> => {
-    if (_currentUserID) {
-      const data = await getUserCartItems(_currentUserID)
-      setItems(data)
-    }
+    const data = await getUserCartItems(_currentUserID)
+    setItems(data)
+
     return new Promise((resolve) => { resolve() })
   }
 
   async function syncCart() {
-    await fetchCartItems()
-    extractRestaurantNames()
+    if (_currentUserID) {
+      await fetchCartItems()
+      extractRestaurantNames()
+      setCartItemAmount(itemAmount)
+    }
   }
 
   useEffect(() => {
     syncCart()
-  }, [props.trigger, cartItemAmount])
+  }, [props.trigger, cartItemAmount, _currentUserID])
 
 
   //Functions
@@ -67,10 +70,10 @@ const Cart = (props: propsType) => {
   }
 
   const placeItems = (restaurantName: string) => {
-    return items?.map((item) => {
+    return items?.map((item, idx) => {
       if (restaurantName === item.name) {
         return (
-          <CartItem currentUserID={_currentUserID} data={item}/>
+          <CartItem currentUserID={_currentUserID} data={item} key={idx} />
         )
       }
       return null
@@ -102,7 +105,7 @@ const Cart = (props: propsType) => {
           <p id='product-list-title'>Products</p>
 
           <div className='products'>
-            {itemRestaurantNames &&
+            {
               itemRestaurantNames.map((restaurantName, idx) => (
                 <div className='item-list' key={idx}>
                   <p>{restaurantName}</p>

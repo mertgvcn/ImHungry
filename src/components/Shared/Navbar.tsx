@@ -37,7 +37,7 @@ const Navbar = () => {
 
                             <div className="cart" onClick={() => { setCartState(!cartState) }}>
                                 <i id="cart-logo" className="fa-solid fa-basket-shopping"></i>
-                                {cartItemAmount && <div className="cart-badge">{cartItemAmount}</div>}
+                                { cartItemAmount && <div className="cart-badge">{cartItemAmount ? cartItemAmount : 0}</div> }
                             </div>
                         </div>
                     }
