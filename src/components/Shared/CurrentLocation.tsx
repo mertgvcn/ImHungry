@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { ChangeContext } from '../../context/ChangeContext'
 import { RestaurantContext } from '../../context/RestaurantContext'
@@ -23,7 +23,7 @@ type propType = {
 
 const CurrentLocation = (props: propType) => {
     //Context
-    const { locationToggle, setLocationToggle, restaurantToggle, setRestaurantToggle } = useContext(ChangeContext) 
+    const { locationToggle, setLocationToggle, restaurantToggle, setRestaurantToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
@@ -33,64 +33,15 @@ const CurrentLocation = (props: propType) => {
     const [dropDownState, setDropDownState] = useState<boolean>(false)
     const [addLocState, setAddLocState] = useState<boolean>(false)
 
-    // const fetchLocations = async (): Promise<void> => {
-    //     const data: any = await getLocationsByUserID(_currentUserID)
-    //     setUserLocations(data)
 
-    //     return new Promise((resolve) => { resolve() })
-    // }
-
-    // const fetchCurrentLocation = async (): Promise<void> => {
-    //     const data: any = await getCurrentLocation(_currentUserID)
-
-    //     if (data.length == 0) {
-    //         setDisplayedLocation("")
-    //         return;
-    //     }
-
-    //     const { locationTitle, province, district, neighbourhood, street, buildingNo, apartmentNo, addition } = data[0]
-    //     setDisplayedLocation(`${locationTitle}, ${province}/${district}, ${neighbourhood} - ${street} ${buildingNo} ${apartmentNo} ${addition}`)
-
-    //     return new Promise((resolve) => { resolve() })
-    // }
-
-    // const syncLocation = async () => {    
-    //     await fetchLocations()
-    //     await fetchCurrentLocation()
-    // }
-
+    //fetch current location
     useEffect(() => {
-
-        // syncLocation()
-
         const cancelToken = axios.CancelToken.source()
-        const cancelToken2 = axios.CancelToken.source()
 
-        const fetchLocationsOfUser = async () => {
-            console.log("Current Location 65 : fetchLocationsOfUser çalışıyor...")
-            await axios.get('https://localhost:7181/api/Location/getLocationsByUserID', {
-                cancelToken: cancelToken.token,
-                params: {
-                    userID: _currentUserID,
-                },
-                headers: {
-                    'x-api-key': API_KEY
-                }
-            })
-                .then((res) => {
-                    setUserLocations(res.data)
-                })
-                .catch((err) => {
-                    if (axios.isCancel(err)) {
-                        console.log("CurrentLocation 85 : " + err.message)
-                    }
-                })
-        }
-
-        const fetchCurrentLocation = async () => {
-            console.log("Current Location 86: fetchCurrentLocation çalışıyor...")
+        const fetchCurrentLocation = async (): Promise<void> => {
+            console.log("current location fetch")
             await axios.get('https://localhost:7181/api/User/getCurrentLocation', {
-                cancelToken: cancelToken2.token,
+                cancelToken: cancelToken.token,
                 params: {
                     userID: _currentUserID,
                 },
@@ -112,10 +63,11 @@ const CurrentLocation = (props: propType) => {
                         console.log("CurrentLocation 105 : " + err.message)
                     }
                 })
+
+            return new Promise((resolve) => { resolve() })
         }
 
         const syncFetch = async () => {
-            await fetchLocationsOfUser()
             await fetchCurrentLocation()
         }
 
@@ -123,17 +75,29 @@ const CurrentLocation = (props: propType) => {
 
         return () => {
             cancelToken.cancel()
-            cancelToken2.cancel()
         }
-
     }, [locationToggle])
 
 
+    //fetch other locations
+    const fetchLocationsOfUser = async (): Promise<void> => {
+        console.log("other locations fetch")
+        const data: any = await getLocationsByUserID(_currentUserID)
+        setUserLocations(data)
 
-    useEffect(() => {
-        // syncLocation()
-    }, [locationToggle])
+        return new Promise((resolve) => { resolve() })
+    }
 
+    const handleFetchOtherLocations = async (isChange: boolean) => {
+
+        if (isChange) { //delete durumunda live update yapmak için kullandık
+            await fetchLocationsOfUser()
+            setDropDownState(true)
+        }
+        if (!dropDownState) {
+            await fetchLocationsOfUser()
+        }
+    }
 
     return (
         <div className='current-location-wrapper' style={{ width: props.width + "%" }}>
@@ -141,7 +105,10 @@ const CurrentLocation = (props: propType) => {
                 <p id="location-title">Location</p>
             </div>
 
-            <div className="current-location-selection" onClick={() => setDropDownState(!dropDownState)}>
+            <div className="current-location-selection" onClick={() => {
+                setDropDownState(!dropDownState);
+                handleFetchOtherLocations(false);
+            }}>
                 <input id="current-location" type="text" placeholder='Select Current Location'
                     value={displayedLocation} readOnly={true} />
                 <i className="fa-solid fa-chevron-down"></i>
@@ -195,8 +162,8 @@ const CurrentLocation = (props: propType) => {
                             {/* Delete Loc */}
                             <div className='location-delete' onClick={async () => {
                                 await deleteLocationByID(location.locationID);
-                                setLocationToggle(!locationToggle);
-                                setDropDownState(true);
+                                setDropDownState(!dropDownState)
+                                handleFetchOtherLocations(true)
                             }}>
                                 <i className="fa-solid fa-xmark"></i>
                             </div>
@@ -209,7 +176,7 @@ const CurrentLocation = (props: propType) => {
                 {/* add new location */}
                 <div className='add-new-location' onClick={() => {
                     setAddLocState(true);
-                    setLocationToggle(!locationToggle);
+                    setDropDownState(false)
                 }}>
                     <i className="fa-regular fa-square-plus" style={{ marginRight: 5 }}></i>
                     <p>Add new location..</p>
