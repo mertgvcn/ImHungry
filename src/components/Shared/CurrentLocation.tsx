@@ -31,6 +31,8 @@ const CurrentLocation = (props: propType) => {
     const [userLocations, setUserLocations] = useState<Array<LocationType>>([])
     const [displayedLocation, setDisplayedLocation] = useState<string>("")
     const [dropDownState, setDropDownState] = useState<boolean>(false)
+    
+    //Add location state
     const [addLocState, setAddLocState] = useState<boolean>(false)
 
 
@@ -59,7 +61,6 @@ const CurrentLocation = (props: propType) => {
                 })
                 .catch((err) => {
                     if (axios.isCancel(err)) {
-                        console.log("CurrentLocation 105 : " + err.message)
                     }
                 })
 
@@ -87,7 +88,7 @@ const CurrentLocation = (props: propType) => {
     }
 
     const handleFetchOtherLocations = async (isChange: boolean) => {
-        if (!dropDownState) {
+        if (!dropDownState) { //dropdown açıldığında fetchleyecek, state geriden geldiği için false durumunu aldık
             await fetchLocationsOfUser()
         }
         else if (isChange) { //delete durumunda live update yapmak için kullandık

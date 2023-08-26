@@ -27,24 +27,22 @@ const RegisteredCC = () => {
     //Add cc state
     const [isAddCC, setIsAddCC] = useState<boolean>(false)
 
-    const fetchCC = async ():Promise<void> => {
-        const data = await getCC(_currentUserID)
-        setUserCCs(data)
 
+    const fetchCC = async (): Promise<void> => {
+        const data: any = await getCC(_currentUserID)
+        setUserCCs(data)
+        
         return new Promise((resolve) => { resolve() })
     }
 
-    const handleFetchCC = async () => {
-        await fetchCC()
-    }
-
-    useEffect(() => {
-        fetchCC()
-    }, [creditCardToggle])
-
-    const handleAddCC = () => {
-        setIsAddCC(true)
-        setDropDownState(false)
+    const handleFetchCC = async (isChange: boolean) => {
+        if (!dropDownState) { //dropdown açıldığında fetchleyecek, state geriden geldiği için false durumunu aldık
+            await fetchCC()
+        }
+        else if (isChange) {
+            await fetchCC()
+            setDropDownState(true)
+        }
     }
 
     return (
@@ -58,8 +56,8 @@ const RegisteredCC = () => {
 
                 {/* BODY */}
                 <div className="cc-selection" onClick={() => {
-                    handleFetchCC()
                     setDropDownState(!dropDownState)
+                    handleFetchCC(false)
                 }}>
                     <i className="fa-solid fa-credit-card" style={{ marginRight: 5 }}></i>
                     <input id="current-cc" type="text" placeholder='Select Credit Card'
@@ -89,8 +87,8 @@ const RegisteredCC = () => {
                                 <div className='cc-delete' onClick={async () => {
                                     await deleteCC(cc.ccID)
                                     setDisplayedCC("")
-                                    setCreditCardToggle(!creditCardToggle)
-                                    setDropDownState(true)
+                                    setDropDownState(!dropDownState)
+                                    handleFetchCC(true)
                                 }}>
                                     <i className="fa-solid fa-trash"></i>
                                 </div>
@@ -99,7 +97,10 @@ const RegisteredCC = () => {
                     </ul>
 
                     {/* add new cc */}
-                    <div className='add-new-card' onClick={handleAddCC}>
+                    <div className='add-new-card' onClick={() => {
+                        setIsAddCC(true)
+                        setDropDownState(false)
+                    }}>
                         <i className="fa-regular fa-square-plus" style={{ marginLeft: 2, marginRight: 8 }}></i>
                         <p>Add new credit card...</p>
                     </div>

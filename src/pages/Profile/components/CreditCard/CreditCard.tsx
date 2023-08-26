@@ -28,7 +28,7 @@ const CreditCard = () => {
     const [addCardStatus, setAddCardStatus] = useState<boolean>(false);
 
     const fetchUserCards = async () => {
-        const data = await getCC(_currentUserID)
+        const data:any = await getCC(_currentUserID)
         setCreditCards(data)
     }
 

@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import React from 'react'
 
 const API_KEY = process.env.REACT_APP_APIKEY
 
-export const getCC = async (userID: number) => {
+export const getCC = async (userID: number): Promise<AxiosResponse>  => {
     const response = await axios.get('https://localhost:7181/api/CreditCard/getCC', {
         params: {
             userID: userID
