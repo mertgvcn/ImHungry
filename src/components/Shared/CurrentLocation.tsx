@@ -39,7 +39,6 @@ const CurrentLocation = (props: propType) => {
         const cancelToken = axios.CancelToken.source()
 
         const fetchCurrentLocation = async (): Promise<void> => {
-            console.log("current location fetch")
             await axios.get('https://localhost:7181/api/User/getCurrentLocation', {
                 cancelToken: cancelToken.token,
                 params: {
@@ -81,7 +80,6 @@ const CurrentLocation = (props: propType) => {
 
     //fetch other locations
     const fetchLocationsOfUser = async (): Promise<void> => {
-        console.log("other locations fetch")
         const data: any = await getLocationsByUserID(_currentUserID)
         setUserLocations(data)
 
@@ -89,13 +87,12 @@ const CurrentLocation = (props: propType) => {
     }
 
     const handleFetchOtherLocations = async (isChange: boolean) => {
-
-        if (isChange) { //delete durumunda live update yapmak için kullandık
-            await fetchLocationsOfUser()
-            setDropDownState(true)
-        }
         if (!dropDownState) {
             await fetchLocationsOfUser()
+        }
+        else if (isChange) { //delete durumunda live update yapmak için kullandık
+            await fetchLocationsOfUser()
+            setDropDownState(true)
         }
     }
 

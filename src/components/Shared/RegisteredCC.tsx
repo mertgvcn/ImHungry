@@ -34,8 +34,8 @@ const RegisteredCC = () => {
         return new Promise((resolve) => { resolve() })
     }
 
-    const handleFetchCC = () => {
-        fetchCC()
+    const handleFetchCC = async () => {
+        await fetchCC()
     }
 
     useEffect(() => {
