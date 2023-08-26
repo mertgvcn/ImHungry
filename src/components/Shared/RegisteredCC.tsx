@@ -27,14 +27,16 @@ const RegisteredCC = () => {
     //Add cc state
     const [isAddCC, setIsAddCC] = useState<boolean>(false)
 
-    const fetchCC = async () => {
+    const fetchCC = async ():Promise<void> => {
         const data = await getCC(_currentUserID)
         setUserCCs(data)
+
+        return new Promise((resolve) => { resolve() })
     }
 
-    useEffect(() => {
+    const handleFetchCC = () => {
         fetchCC()
-    }, [])
+    }
 
     useEffect(() => {
         fetchCC()
@@ -55,7 +57,10 @@ const RegisteredCC = () => {
                 </div>
 
                 {/* BODY */}
-                <div className="cc-selection" onClick={() => setDropDownState(!dropDownState)}>
+                <div className="cc-selection" onClick={() => {
+                    handleFetchCC()
+                    setDropDownState(!dropDownState)
+                }}>
                     <i className="fa-solid fa-credit-card" style={{ marginRight: 5 }}></i>
                     <input id="current-cc" type="text" placeholder='Select Credit Card'
                         value={displayedCC} readOnly={true} />
@@ -101,7 +106,7 @@ const RegisteredCC = () => {
                 </div>)}
             </div>
 
-            <CreditCardAdd trigger={isAddCC} setTrigger={setIsAddCC} width='90%'/>
+            <CreditCardAdd trigger={isAddCC} setTrigger={setIsAddCC} width='90%' />
         </>
 
     )
