@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { Axios, AxiosResponse } from 'axios';
 import React from 'react'
 
 const API_KEY = process.env.REACT_APP_APIKEY
@@ -81,19 +81,6 @@ export const searchEmail = async (email: string) => {
 }
 
 //!Profile API'S
-export const getAccountInfo = async (userID: number) => {
-    const response = await axios('https://localhost:7181/api/User/getAccountInfo', {
-        params: {
-            userID: userID
-        },
-        headers: {
-            'x-api-key': API_KEY
-        }
-    })
-
-    return response.data
-}
-
 export const updateAccountInfo = async (userID: number, firstName: string, lastName: string, userName: string, email: string, phoneNumber: string) => {
     const response = await axios.put('https://localhost:7181/api/User/updateAccountInfo',
         {

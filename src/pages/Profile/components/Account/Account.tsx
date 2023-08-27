@@ -2,12 +2,15 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Crypto/Cryption'
-import { getAccountInfo, searchUserName, updateAccountInfo } from '../../../../setup/API/user_api'
+import { searchUserName, updateAccountInfo } from '../../../../setup/API/user_api'
 //css
 import './styles/Account.css'
 //components
 import Alert from '../../../../components/Shared/Alert'
 import ChangePass from './ChangePass'
+import axios from 'axios'
+
+const API_KEY = process.env.REACT_APP_APIKEY
 
 
 
@@ -30,22 +33,45 @@ const Account = () => {
   const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
   const phoneNumberPattern = new RegExp(/^(\+90|0)?\s*(\(\d{3}\)[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}|\(\d{3}\)[\s-]*\d{3}[\s-]*\d{4}|\(\d{3}\)[\s-]*\d{7}|\d{3}[\s-]*\d{3}[\s-]*\d{4}|\d{3}[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2})$/);
 
-  //Fetch Account Info
-  const fetchAccountInfo = async () => {
-    const data = await getAccountInfo(_currentUserID)
-    setFormData({
-      firstName: data[0].firstName,
-      lastName: data[0].lastName,
-      userName: data[0].userName,
-      defaultUserName: data[0].userName,
-      email: data[0].email,
-      phoneNumber: data[0].phoneNumber
-    })
-  }
 
+  //fetch account info
   useEffect(() => {
-    fetchAccountInfo()
+    const cancelToken = axios.CancelToken.source()
+
+    const fetchAccountInfo = async (): Promise<void> => {
+      await axios('https://localhost:7181/api/User/getAccountInfo', {
+        cancelToken: cancelToken.token,
+        params: {
+          userID: _currentUserID
+        },
+        headers: {
+          'x-api-key': API_KEY
+        }
+      }).then((res) => {
+        setFormData({
+          firstName: res.data[0].firstName,
+          lastName: res.data[0].lastName,
+          userName: res.data[0].userName,
+          defaultUserName: res.data[0].userName,
+          email: res.data[0].email,
+          phoneNumber: res.data[0].phoneNumber
+        })
+      }).catch((err) => {})
+
+      return new Promise((resolve) => { resolve() })
+    }
+
+    const syncFetch = async () => {
+      await fetchAccountInfo()
+    }
+    
+    syncFetch()
+
+    return () => {
+      cancelToken.cancel()
+    }
   }, [])
+
 
   //Functions
   const handleChange = (e: any) => {
@@ -67,7 +93,7 @@ const Account = () => {
       }
     }
   }
-  
+
   const Validation = async () => {
     let isValid = true
     const validationErrors: any = {}
@@ -198,7 +224,7 @@ const Account = () => {
       </div>
 
       <Alert isOpen={isOpen} color={color} msg={msg} />
-      <ChangePass trigger={changePassTrigger} setTrigger={setChangePassTrigger}/>
+      <ChangePass trigger={changePassTrigger} setTrigger={setChangePassTrigger} />
     </>
   )
 }

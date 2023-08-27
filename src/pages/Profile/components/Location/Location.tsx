@@ -3,7 +3,6 @@ import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Crypto/Cryption'
-import { getLocationsByUserID } from '../../../../setup/API/location_api'
 //type
 import { LocationType } from '../../../../types/LocationType'
 //Css
@@ -11,6 +10,10 @@ import './styles/Location.css'
 //Component
 import LocationAdd from './LocationAdd'
 import LocationCard from './LocationCard'
+import axios from 'axios'
+
+const API_KEY = process.env.REACT_APP_APIKEY
+
 
 
 const Location = () => {
@@ -25,15 +28,38 @@ const Location = () => {
     //Add Location State
     const [addLocationStatus, setAddLocationStatus] = useState<boolean>(false);
 
-    const fetchUserLocations = async () => {
-        const data:any = await getLocationsByUserID(_currentUserID)
-        setUserLocations(data)
-    }
 
+    //fetch locations
     useEffect(() => {
-      fetchUserLocations()
+        const cancelToken = axios.CancelToken.source()
+
+        const fetchLocations = async (): Promise<void> => {
+            await axios.get('https://localhost:7181/api/Location/getLocationsByUserID', {
+                cancelToken: cancelToken.token,
+                params: {
+                    userID: _currentUserID
+                },
+                headers: {
+                    'x-api-key': API_KEY
+                }
+            }).then((res) => {
+                setUserLocations(res.data)
+            }).catch((err) => {})
+
+            return new Promise((resolve) => resolve())
+        }
+
+        const syncFetch = async () => {
+            await fetchLocations()
+        }
+
+        syncFetch()
+
+        return () => {
+            cancelToken.cancel()
+        }
     }, [locationToggle])
-    
+
 
     return (
         <>
@@ -42,7 +68,7 @@ const Location = () => {
 
                 <div className='locations'>
                     {userLocations.map((location, idx) => (
-                        <LocationCard data={location} key={idx}/>
+                        <LocationCard data={location} key={idx} />
                     ))}
 
                     <div className="add-location" onClick={() => setAddLocationStatus(true)}>

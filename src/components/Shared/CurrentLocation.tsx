@@ -5,7 +5,7 @@ import { RestaurantContext } from '../../context/RestaurantContext'
 //exported functions
 import { deleteLocationByID, getLocationsByUserID } from '../../setup/API/location_api'
 import { Decrypt } from '../../setup/Crypto/Cryption'
-import { getCurrentLocation, setCurrentLocation } from '../../setup/API/user_api'
+import { setCurrentLocation } from '../../setup/API/user_api'
 //type
 import { LocationType } from '../../types/LocationType'
 //css

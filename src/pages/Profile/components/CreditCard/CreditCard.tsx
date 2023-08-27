@@ -11,6 +11,9 @@ import './styles/CreditCard.css'
 //components
 import CreditCardCard from './CreditCardCard'
 import CreditCardAdd from './CreditCardAdd'
+import axios from 'axios'
+
+const API_KEY = process.env.REACT_APP_APIKEY
 
 
 
@@ -27,13 +30,36 @@ const CreditCard = () => {
     //Add Card State
     const [addCardStatus, setAddCardStatus] = useState<boolean>(false);
 
-    const fetchUserCards = async () => {
-        const data:any = await getCC(_currentUserID)
-        setCreditCards(data)
-    }
 
+    //fetch cc
     useEffect(() => {
-        fetchUserCards()
+        const cancelToken = axios.CancelToken.source()
+
+        const fetchCC = async (): Promise<void> => {
+            await axios.get('https://localhost:7181/api/CreditCard/getCC', {
+                cancelToken: cancelToken.token,
+                params: {
+                    userID: _currentUserID
+                },
+                headers: {
+                    'x-api-key': API_KEY
+                }
+            }).then((res) => {
+                setCreditCards(res.data)
+            }).catch((err) => {})
+
+            return new Promise((resolve) => resolve())
+        }
+
+        const syncFetch = async () => {
+            await fetchCC()
+        }
+
+        syncFetch()
+
+        return () => {
+            cancelToken.cancel()
+        }
     }, [creditCardToggle])
 
     return (
