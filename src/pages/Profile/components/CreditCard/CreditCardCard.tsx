@@ -19,7 +19,6 @@ const CreditCardCard = ({ data: { ccID, ccNo, ccName, expirationDate, cvv } }: C
   }
 
   const hideName = () => {
-    debugger;
     let hiddenName = ""
     const nameArray = ccName.split(" ")
 

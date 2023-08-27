@@ -15,7 +15,6 @@ import CreditCardAdd from '../../pages/Profile/components/CreditCard/CreditCardA
 const RegisteredCC = () => {
     //Context
     const { ccID } = useContext(PaymentContext)
-    const { creditCardToggle, setCreditCardToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
@@ -28,10 +27,11 @@ const RegisteredCC = () => {
     const [isAddCC, setIsAddCC] = useState<boolean>(false)
 
 
+    //fetch cc
     const fetchCC = async (): Promise<void> => {
         const data: any = await getCC(_currentUserID)
         setUserCCs(data)
-        
+
         return new Promise((resolve) => { resolve() })
     }
 
@@ -43,6 +43,27 @@ const RegisteredCC = () => {
             await fetchCC()
             setDropDownState(true)
         }
+    }
+
+
+    const hideName = (cardHolderName: string) => {
+        let hiddenName = ""
+        const nameArray = cardHolderName.split(" ")
+
+        for (let i = 0; i < nameArray.length; i++) {
+            for (let j = 0; j < nameArray[i].length; j++) {
+                if (j == 0) {
+                    hiddenName += nameArray[i].charAt(0).toUpperCase()
+                }
+                else {
+                    hiddenName += "*"
+                }
+            }
+
+            hiddenName += " "
+        }
+
+        return hiddenName
     }
 
     return (
@@ -80,7 +101,7 @@ const RegisteredCC = () => {
                                     setIsAddCC(false)
                                 }}>
                                     <i className="fa-solid fa-credit-card" style={{ marginRight: 5 }}></i>
-                                    {cc.ccNo.slice(0, 4)} **** **** {cc.ccNo.slice(15, 19)}
+                                    {cc.ccNo.slice(0, 4)} **** **** {cc.ccNo.slice(15, 19) + " - " + hideName(cc.ccName)}
                                 </div>
 
                                 {/* Delete CC */}
