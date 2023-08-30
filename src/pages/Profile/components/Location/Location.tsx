@@ -33,20 +33,23 @@ const Location = () => {
     useEffect(() => {
         const cancelToken = axios.CancelToken.source()
 
-        const fetchLocations = async (): Promise<void> => {
-            await axios.get('https://localhost:7181/api/Location/getLocationsByUserID', {
-                cancelToken: cancelToken.token,
-                params: {
-                    userID: _currentUserID
-                },
-                headers: {
-                    'x-api-key': API_KEY
-                }
-            }).then((res) => {
-                setUserLocations(res.data)
-            }).catch((err) => {})
-
-            return new Promise((resolve) => resolve())
+        const fetchLocations = async () => {
+            try {
+                await axios.get('https://localhost:7181/api/Location/getLocationsByUserID', {
+                    cancelToken: cancelToken.token,
+                    params: {
+                        userID: _currentUserID
+                    },
+                    headers: {
+                        'x-api-key': API_KEY
+                    }
+                }).then((res) => {
+                    setUserLocations(res.data)
+                    console.log(userLocations)
+                }).catch((err) => {})
+            }catch (e) {
+                
+            }
         }
 
         const syncFetch = async () => {

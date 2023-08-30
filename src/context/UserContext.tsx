@@ -1,5 +1,4 @@
 import { ReactNode, createContext, useEffect, useRef, useState } from "react";
-import { getUserCartItemNumber } from "../setup/API/cart_api";
 import { Decrypt } from "../setup/Crypto/Cryption";
 import axios from "axios";
 

@@ -11,12 +11,15 @@ import { CartType } from '../../types/CartType'
 //Components
 import CartItem from './CartItem'
 import CartAlert from './CartAlert'
+import axios from 'axios'
 
+const API_KEY = process.env.REACT_APP_APIKEY
 
 type propsType = {
   trigger: boolean,
   setTrigger: React.Dispatch<React.SetStateAction<boolean>>
 }
+
 
 
 const Cart = (props: propsType) => {
@@ -35,24 +38,40 @@ const Cart = (props: propsType) => {
   const totalPrice = items?.reduce((total, item) => (total += item.price * item.amount), 0)
   const itemAmount = items?.reduce((amount, item) => (amount += item.amount), 0)
 
-  //Fetch items
-  const fetchCartItems = async (): Promise<void> => {
-    const data = await getUserCartItems(_currentUserID)
-    setItems(data)
 
-    return new Promise((resolve) => { resolve() })
-  }
-
-  async function syncCart() {
-    if (_currentUserID) {
-      await fetchCartItems()
-      extractRestaurantNames()
-      setCartItemAmount(itemAmount)
-    }
-  }
-
+  //Fetch Items
   useEffect(() => {
-    syncCart()
+    const cancelToken = axios.CancelToken.source()
+
+    const fetchCartItems = async (): Promise<void> => {
+      await axios.get('https://localhost:7181/api/Cart/getUserCartItems', {
+        cancelToken: cancelToken.token,
+        params: {
+          userID: _currentUserID,
+        },
+        headers: {
+          'x-api-key': API_KEY
+        }
+      }).then((res) => {
+        setItems(res.data)
+      }).catch()
+
+      return new Promise((resolve) => resolve())
+    }
+
+    async function syncFetch() {
+      if (_currentUserID) {
+        await fetchCartItems()
+        extractRestaurantNames()
+        setCartItemAmount(itemAmount)
+      }
+    }
+  
+    syncFetch()
+
+    return () => {
+      cancelToken.cancel()
+    }
   }, [props.trigger, cartItemAmount, _currentUserID])
 
 
