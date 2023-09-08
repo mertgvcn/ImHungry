@@ -1,14 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
+//context
 import { CartContext } from '../../context/CartContext'
+import { ChangeContext } from '../../context/ChangeContext'
 //type
 import { CartItemType } from '../../types/CartType'
 //css
 import './styles/CartItem.css'
-//exported functions
+//helpers
 import { addToCart, deleteFromCart } from '../../setup/API/cart_api'
 
 
 const CartItem = ({ currentUserID, data: { itemID, restaurantID, itemName, imageSource, price, amount } }: CartItemType) => {
+    const { cartToggle, setCartToggle } = useContext(ChangeContext)
     const { setCartItemAmount } = useContext(CartContext)
 
     const handleRemoveItem = async () => {
@@ -16,6 +19,7 @@ const CartItem = ({ currentUserID, data: { itemID, restaurantID, itemName, image
         setCartItemAmount((currentAmount:any) => {
             return Number(currentAmount) - 1
         })
+        setCartToggle(!cartToggle)
     }
 
     const handleAddItem = async () => {
@@ -23,6 +27,7 @@ const CartItem = ({ currentUserID, data: { itemID, restaurantID, itemName, image
         setCartItemAmount((currentAmount:any) => {
             return Number(currentAmount) + 1
         })
+        setCartToggle(!cartToggle)
     }
 
     return (

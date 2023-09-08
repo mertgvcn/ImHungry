@@ -37,46 +37,46 @@ const CurrentLocation = (props: propType) => {
 
 
     //fetch current location
-    useEffect(() => {
-        const cancelToken = axios.CancelToken.source()
+    // useEffect(() => {
+    //     const cancelToken = axios.CancelToken.source()
 
-        const fetchCurrentLocation = async (): Promise<void> => {
-            await axios.get('https://localhost:7181/api/User/getCurrentLocation', {
-                cancelToken: cancelToken.token,
-                params: {
-                    userID: _currentUserID,
-                },
-                headers: {
-                    'x-api-key': API_KEY
-                }
-            })
-                .then((res) => {
-                    if (res.data.length == 0) {
-                        setDisplayedLocation("")
-                        return;
-                    }
+    //     const fetchCurrentLocation = async (): Promise<void> => {
+    //         await axios.get('https://localhost:7181/api/User/getCurrentLocation', {
+    //             cancelToken: cancelToken.token,
+    //             params: {
+    //                 userID: _currentUserID,
+    //             },
+    //             headers: {
+    //                 'x-api-key': API_KEY
+    //             }
+    //         })
+    //             .then((res) => {
+    //                 if (res.data.length == 0) {
+    //                     setDisplayedLocation("")
+    //                     return;
+    //                 }
 
-                    const { locationTitle, province, district, neighbourhood, street, buildingNo, buildingAddition, apartmentNo, note } = res.data[0]
-                    setDisplayedLocation(`${locationTitle}, ${province}/${district}, ${neighbourhood} - ${street} ${buildingNo}-${buildingAddition} ${apartmentNo} ${note}`)
-                })
-                .catch((err) => {
-                    if (axios.isCancel(err)) {
-                    }
-                })
+    //                 const { locationTitle, province, district, neighbourhood, street, buildingNo, buildingAddition, apartmentNo, note } = res.data[0]
+    //                 setDisplayedLocation(`${locationTitle}, ${province}/${district}, ${neighbourhood} - ${street} ${buildingNo}-${buildingAddition} ${apartmentNo} ${note}`)
+    //             })
+    //             .catch((err) => {
+    //                 if (axios.isCancel(err)) {
+    //                 }
+    //             })
 
-            return new Promise((resolve) => { resolve() })
-        }
+    //         return new Promise((resolve) => { resolve() })
+    //     }
 
-        const syncFetch = async () => {
-            await fetchCurrentLocation()
-        }
+    //     const syncFetch = async () => {
+    //         await fetchCurrentLocation()
+    //     }
 
-        syncFetch()
+    //     syncFetch()
 
-        return () => {
-            cancelToken.cancel()
-        }
-    }, [locationToggle])
+    //     return () => {
+    //         cancelToken.cancel()
+    //     }
+    // }, [locationToggle])
 
 
     //fetch other locations
@@ -96,6 +96,7 @@ const CurrentLocation = (props: propType) => {
             setDropDownState(true)
         }
     }
+
 
     return (
         <div className='current-location-wrapper' style={{ width: props.width + "%" }}>

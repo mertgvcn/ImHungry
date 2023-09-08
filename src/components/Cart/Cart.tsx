@@ -1,29 +1,35 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import axios from 'axios'
+//context
 import { UserContext } from '../../context/UserContext'
-import { CartContext, CartContextProvider } from '../../context/CartContext'
-//CSS
+import { CartContext } from '../../context/CartContext'
+import { ChangeContext } from '../../context/ChangeContext'
+//css
 import './styles/Cart.css'
-//Exported Functions
+//helpers
 import { getUserCartItems } from '../../setup/API/cart_api'
 import { Decrypt } from '../../setup/Crypto/Cryption'
 //Types
-import { CartType } from '../../types/CartType'
+import { CartDataType, CartItemsType } from '../../types/CartTypes/CartDataType'
 //Components
 import CartItem from './CartItem'
 import CartAlert from './CartAlert'
-import axios from 'axios'
+import useDidMountUpdate from '../../hooks/useDidMountUpdate'
+
 
 const API_KEY = process.env.REACT_APP_APIKEY
 
 type propsType = {
   trigger: boolean,
-  setTrigger: React.Dispatch<React.SetStateAction<boolean>>
+  setTrigger: React.Dispatch<React.SetStateAction<boolean>>,
+  cart: CartDataType
 }
 
 
 
 const Cart = (props: propsType) => {
   //Context
+  const { cartToggle } = useContext(ChangeContext)
   const { cartItemAmount, setCartItemAmount } = useContext(CartContext)
   const { currentUserID, } = useContext(UserContext)
   const _currentUserID = Decrypt(currentUserID)
@@ -33,47 +39,29 @@ const Cart = (props: propsType) => {
   const [msg, setMsg] = useState<string>("")
 
   //Item Info
-  const [items, setItems] = useState<Array<CartType>>()
+  const didComponentMount = useRef(false)
+  const [items, setItems] = useState<CartItemsType[]>(props.cart.cartItems)
   const [itemRestaurantNames, setItemRestaurantNames] = useState<string[]>([])
   const totalPrice = items?.reduce((total, item) => (total += item.price * item.amount), 0)
   const itemAmount = items?.reduce((amount, item) => (amount += item.amount), 0)
 
+  const fetchCartItems = async () => {
+    console.log("cart items fetchleniyorr..")
+    const data: any = await getUserCartItems(_currentUserID)
+    setItems(data)
+  }
 
-  //Fetch Items
-  useEffect(() => {
-    const cancelToken = axios.CancelToken.source()
-
-    const fetchCartItems = async (): Promise<void> => {
-      await axios.get('https://localhost:7181/api/Cart/getUserCartItems', {
-        cancelToken: cancelToken.token,
-        params: {
-          userID: _currentUserID,
-        },
-        headers: {
-          'x-api-key': API_KEY
-        }
-      }).then((res) => {
-        setItems(res.data)
-      }).catch()
-
-      return new Promise((resolve) => resolve())
+  async function syncFetch() {
+    if (_currentUserID) {
+      await fetchCartItems()
+      extractRestaurantNames()
+      setCartItemAmount(itemAmount)
     }
+  }
 
-    async function syncFetch() {
-      if (_currentUserID) {
-        await fetchCartItems()
-        extractRestaurantNames()
-        setCartItemAmount(itemAmount)
-      }
-    }
-  
+  useDidMountUpdate(() => {
     syncFetch()
-
-    return () => {
-      cancelToken.cancel()
-    }
-  }, [props.trigger, cartItemAmount, _currentUserID])
-
+  }, [cartToggle])
 
   //Functions
   const extractRestaurantNames = () => {
@@ -113,6 +101,15 @@ const Cart = (props: propsType) => {
 
     window.location.href = "/payment"
   }
+
+  useEffect(() => {
+    if(didComponentMount.current) {
+      setCartItemAmount(itemAmount)
+      extractRestaurantNames()
+    }
+
+    didComponentMount.current = true
+  }, [])
 
   return (
     <>

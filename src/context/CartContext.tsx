@@ -34,7 +34,7 @@ export const CartContextProvider = ({ children }: cartContextProviderProps) => {
                     }
                 })
                 .then((res) => {
-                    setCartItemAmount(res.data[0].sum)
+                    setCartItemAmount(res.data)
                 })
                 .catch((err) => {
                     if(axios.isCancel(err)) {

@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react'
+//context
 import { useLocation } from 'react-router-dom'
 import { UserContext } from '../../../context/UserContext'
 import { CartContext } from '../../../context/CartContext'
+import { ChangeContext } from '../../../context/ChangeContext'
 //CSS
 import '../styles/MenuItem.css'
 //TYPE
@@ -18,6 +20,7 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
   const location = useLocation()
   const currentRestaurantID = location.state.data;
 
+  const {cartToggle, setCartToggle} = useContext(ChangeContext)
   const { setCartItemAmount } = useContext(CartContext)
   const { currentUserID }: any = useContext(UserContext)
   const _currentUserID = Number(Decrypt(currentUserID))
@@ -45,6 +48,7 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
       setCartItemAmount((currentAmount: any) => {
         return Number(currentAmount) + 1
       })
+      setCartToggle(!cartToggle)
     }
     else {
       popAlert("red", "There are products from another restaurants in the cart!")

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { PaymentContext } from '../../context/PaymentContext'
 import { UserContext } from '../../context/UserContext'
 import { ChangeContext } from '../../context/ChangeContext'
@@ -44,7 +44,6 @@ const RegisteredCC = () => {
             setDropDownState(true)
         }
     }
-
 
     const hideName = (cardHolderName: string) => {
         let hiddenName = ""

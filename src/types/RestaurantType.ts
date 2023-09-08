@@ -1,13 +1,3 @@
-export type RestaurantInfo = {
-    data: {
-        restaurantID: string,
-        name: string,
-        phoneNumber: string,
-        email: string,
-        description: string,
-        imageSource: string
-    }
-}
 
 export type RestaurantDetail = {
     restaurantID: string,

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 //CSS
 import '../styles/RestaurantCard.css'
 //Type
-import { RestaurantInfo } from '../../../types/RestaurantType'
+import { RestaurantCardType } from '../../../types/RestaurantTypes/RestaurantDataType'
 
 
-const RestaurantCard = ({ data: { restaurantID, name, description, imageSource } }: RestaurantInfo) => {
+const RestaurantCard = ({ data: { restaurantID, name, description, imageSource } }: RestaurantCardType) => {
 
     return (
         <Link to="/restaurant" state={{data: restaurantID}} className='restaurant-card-wrapper'> {/*gönderilen dataya restaurant details sayfasındaki bütün componentlardan erişebiliyoruz*/}
