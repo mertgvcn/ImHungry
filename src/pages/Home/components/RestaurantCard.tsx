@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 //CSS
 import '../styles/RestaurantCard.css'
 //Type
-import { RestaurantCardType } from '../../../types/RestaurantTypes/RestaurantDataType'
+import { RestaurantCardType } from '../../../types/RestaurantDataType'
 
 
 const RestaurantCard = ({ data: { restaurantID, name, description, imageSource } }: RestaurantCardType) => {

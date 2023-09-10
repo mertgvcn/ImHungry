@@ -10,73 +10,32 @@ import { setCurrentLocation } from '../../setup/API/user_api'
 import { LocationType } from '../../types/LocationType'
 //css
 import './styles/CurrentLocation.css'
+//types
+import { CurrentLocationType } from '../../types/UserDataType'
 //components
 import LocationAdd from '../../pages/Profile/components/Location/LocationAdd'
-import axios from 'axios'
 
-const API_KEY = process.env.REACT_APP_APIKEY
 
-type propType = {
-    width: string
+type currentLocationType = {
+    width: string,
+    currentLocation: CurrentLocationType | null,
 }
 
 
-const CurrentLocation = (props: propType) => {
+const CurrentLocation = (props: currentLocationType) => {
     //Context
     const { locationToggle, setLocationToggle, restaurantToggle, setRestaurantToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
+
+    //Constants
     const _currentUserID = Decrypt(currentUserID)
+    const initialLocationString = props.currentLocation ? getLocString(props.currentLocation) : ""
 
-    //Locations
+    //States
+    const [displayedLocation, setDisplayedLocation] = useState<string>(initialLocationString)
     const [userLocations, setUserLocations] = useState<Array<LocationType>>([])
-    const [displayedLocation, setDisplayedLocation] = useState<string>("")
     const [dropDownState, setDropDownState] = useState<boolean>(false)
-    
-    //Add location state
     const [addLocState, setAddLocState] = useState<boolean>(false)
-
-
-    //fetch current location
-    // useEffect(() => {
-    //     const cancelToken = axios.CancelToken.source()
-
-    //     const fetchCurrentLocation = async (): Promise<void> => {
-    //         await axios.get('https://localhost:7181/api/User/getCurrentLocation', {
-    //             cancelToken: cancelToken.token,
-    //             params: {
-    //                 userID: _currentUserID,
-    //             },
-    //             headers: {
-    //                 'x-api-key': API_KEY
-    //             }
-    //         })
-    //             .then((res) => {
-    //                 if (res.data.length == 0) {
-    //                     setDisplayedLocation("")
-    //                     return;
-    //                 }
-
-    //                 const { locationTitle, province, district, neighbourhood, street, buildingNo, buildingAddition, apartmentNo, note } = res.data[0]
-    //                 setDisplayedLocation(`${locationTitle}, ${province}/${district}, ${neighbourhood} - ${street} ${buildingNo}-${buildingAddition} ${apartmentNo} ${note}`)
-    //             })
-    //             .catch((err) => {
-    //                 if (axios.isCancel(err)) {
-    //                 }
-    //             })
-
-    //         return new Promise((resolve) => { resolve() })
-    //     }
-
-    //     const syncFetch = async () => {
-    //         await fetchCurrentLocation()
-    //     }
-
-    //     syncFetch()
-
-    //     return () => {
-    //         cancelToken.cancel()
-    //     }
-    // }, [locationToggle])
 
 
     //fetch other locations
@@ -87,11 +46,11 @@ const CurrentLocation = (props: propType) => {
         return new Promise((resolve) => { resolve() })
     }
 
-    const handleFetchOtherLocations = async (isChange: boolean) => {
+    const handleFetchOtherLocations = async (needUpdate: boolean) => {
         if (!dropDownState) { //dropdown açıldığında fetchleyecek, state geriden geldiği için false durumunu aldık
             await fetchLocationsOfUser()
         }
-        else if (isChange) { //delete durumunda live update yapmak için kullandık
+        else if (needUpdate) { //delete durumunda live update yapmak için kullandık
             await fetchLocationsOfUser()
             setDropDownState(true)
         }
@@ -121,6 +80,7 @@ const CurrentLocation = (props: propType) => {
                             {/* Loc Info */}
                             <div className='location-info' onClick={async () => {
                                 await setCurrentLocation(_currentUserID, location.locationID);
+                                setDisplayedLocation(getLocString(location))
                                 setLocationToggle(!locationToggle);
                                 setRestaurantToggle(!restaurantToggle); //if current location changes, we need to update restaurant list
                                 setDropDownState(false);
@@ -188,3 +148,9 @@ const CurrentLocation = (props: propType) => {
 }
 
 export default CurrentLocation
+
+
+//Helper
+function getLocString(loc: CurrentLocationType) {
+    return `${loc.locationTitle}, ${loc.province}/${loc.district}, ${loc.neighbourhood} - ${loc.street} ${loc.buildingNo}-${loc.buildingAddition} ${loc.apartmentNo} ${loc.note}`
+}

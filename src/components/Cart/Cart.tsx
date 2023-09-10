@@ -10,7 +10,7 @@ import './styles/Cart.css'
 import { getUserCartItems } from '../../setup/API/cart_api'
 import { Decrypt } from '../../setup/Crypto/Cryption'
 //Types
-import { CartDataType, CartItemsType } from '../../types/CartTypes/CartDataType'
+import { CartDataType, CartItemsType } from '../../types/CartDataType'
 //Components
 import CartItem from './CartItem'
 import CartAlert from './CartAlert'
@@ -30,13 +30,15 @@ type propsType = {
 const Cart = (props: propsType) => {
   //Context
   const { cartToggle } = useContext(ChangeContext)
-  const { cartItemAmount, setCartItemAmount } = useContext(CartContext)
+  const { setCartItemAmount } = useContext(CartContext)
   const { currentUserID, } = useContext(UserContext)
   const _currentUserID = Decrypt(currentUserID)
+
 
   //Cart Alert State
   const [isAlert, setIsAlert] = useState<boolean>(false)
   const [msg, setMsg] = useState<string>("")
+
 
   //Item Info
   const didComponentMount = useRef(false)
@@ -45,6 +47,19 @@ const Cart = (props: propsType) => {
   const totalPrice = items?.reduce((total, item) => (total += item.price * item.amount), 0)
   const itemAmount = items?.reduce((amount, item) => (amount += item.amount), 0)
 
+  
+  //On first render
+  useEffect(() => {
+    if(didComponentMount.current) {
+      setCartItemAmount(itemAmount)
+      extractRestaurantNames()
+    }
+
+    didComponentMount.current = true
+  }, [])
+
+
+  //If change occurs, re-fetch cart. 
   const fetchCartItems = async () => {
     console.log("cart items fetchleniyorr..")
     const data: any = await getUserCartItems(_currentUserID)
@@ -63,6 +78,7 @@ const Cart = (props: propsType) => {
     syncFetch()
   }, [cartToggle])
 
+  
   //Functions
   const extractRestaurantNames = () => {
     var restaurantNames: string[] = []
@@ -101,15 +117,6 @@ const Cart = (props: propsType) => {
 
     window.location.href = "/payment"
   }
-
-  useEffect(() => {
-    if(didComponentMount.current) {
-      setCartItemAmount(itemAmount)
-      extractRestaurantNames()
-    }
-
-    didComponentMount.current = true
-  }, [])
 
   return (
     <>

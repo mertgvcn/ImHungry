@@ -12,8 +12,6 @@ import UserMenu from "../UserMenu/UserMenu";
 
 type NavbarType = {
     isLogin: boolean,
-    isFetched: boolean,
-    data: DataType
 }
 
 
@@ -51,12 +49,12 @@ const Navbar = (props: NavbarType) => {
                 </div>
             </nav>
 
-            {props.isFetched &&
+            {/* {props.isFetched &&
                 <>
                     <UserMenu trigger={userMenuState} setTrigger={setUserMenuState} />
                     <Cart trigger={cartState} setTrigger={setCartState} cart={props.data.cart}/>
                 </>
-            }
+            } */}
 
         </>
     )

@@ -1,6 +1,6 @@
 export type UserDataType = {
-    accountInfo: AccountInfoType[],
-    currentLocation: CurrentLocationType[],
+    accountInfo: AccountInfoType | null,
+    currentLocation: CurrentLocationType | null,
 }
 
 export type AccountInfoType = {

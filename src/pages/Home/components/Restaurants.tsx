@@ -1,27 +1,25 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
+//context
 import { RestaurantContext } from '../../../context/RestaurantContext'
 import { UserContext } from '../../../context/UserContext'
 import { ChangeContext } from '../../../context/ChangeContext'
 //exported functions
 import { getCurrentLocation } from '../../../setup/API/user_api'
-import { Decrypt } from '../../../setup/Crypto/Cryption'
-//COMPONENTS
-import RestaurantCard from './RestaurantCard'
-//CSS
-import '../styles/Restaurants.css'
-//API
 import { getRestaurants } from '../../../setup/API/restaurant_api'
-//TYPE
-import { RestaurantDataType, RestaurantListType } from '../../../types/RestaurantTypes/RestaurantDataType'
-import { CurrentLocationType } from '../../../types/UserTypes/UserDataType'
+import { Decrypt } from '../../../setup/Crypto/Cryption'
 import useDidMountUpdate from '../../../hooks/useDidMountUpdate'
+//type
+import { RestaurantDataType, RestaurantListType } from '../../../types/RestaurantDataType'
+//css
+import '../styles/Restaurants.css'
+//components
+import RestaurantCard from './RestaurantCard'
 
 
 type RestaurantsType = {
-  restaurant: RestaurantDataType,
+  restaurant: RestaurantDataType | null,
   hasLocation: boolean
 }
-
 
 
 const Restaurants = (props: RestaurantsType) => {
@@ -31,25 +29,28 @@ const Restaurants = (props: RestaurantsType) => {
   const { currentUserID } = useContext(UserContext)
   const _currentUserID = Decrypt(currentUserID)
 
-  const [restaurants, setRestaurants] = useState<RestaurantListType[]>(props.restaurant?.restaurantList)
+  //if prop.restaurant is null, restaurantList = []. Otherwise it gets the list from prop.restaurant.restaurantList
+  const [restaurantList, setRestaurantList] = useState<RestaurantListType[]>(props.restaurant ? props.restaurant.restaurantList : [])
 
   //if change occurs on location, restaurants gonna be fetched and set locally. 
   const fetchRestaurants = async () => {
     const data: any = await getCurrentLocation(_currentUserID)
 
-    if (data.length == 0) {
+    if (!data) {
       props.hasLocation = false
       return;
     }
     else {
-      const response = await getRestaurants(data[0].province, data[0].district);
-      setRestaurants(response)
+      const response = await getRestaurants(data.province, data.district);
+      setRestaurantList(response)
     }
   }
 
   useDidMountUpdate(() => {
     fetchRestaurants();
   }, [restaurantToggle])
+
+
 
   return (
     <div className='restaurant-list-wrapper'>
@@ -59,7 +60,7 @@ const Restaurants = (props: RestaurantsType) => {
 
       {props.hasLocation ?
         <div className="restaurant-wrapper">
-          {restaurants?.filter((restaurant: any) => {
+          {restaurantList?.filter((restaurant: any) => {
             return filteredName.toLowerCase() === ''
               ? restaurant
               : restaurant.name.toLowerCase().includes(filteredName.toLowerCase())

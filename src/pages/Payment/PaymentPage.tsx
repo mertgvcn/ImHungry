@@ -19,7 +19,7 @@ const PaymentPage = () => {
                         </div>
 
                         <div className="col">
-                            <CurrentLocation width='90' />
+                            {/*<CurrentLocation width='90' />*/}
                             <Order/>
                         </div>
                     </div>

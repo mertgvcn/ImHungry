@@ -1,8 +1,8 @@
-import { CartDataType } from "./CartTypes/CartDataType"
-import { CreditCardDataType } from "./CreditCardTypes/CreditCardDataType"
-import { LocationDataType } from "./LocationTypes/LocationDataType"
-import { RestaurantDataType } from "./RestaurantTypes/RestaurantDataType"
-import { UserDataType } from "./UserTypes/UserDataType"
+import { CartDataType } from "./CartDataType"
+import { CreditCardDataType } from "./CreditCardDataType"
+import { LocationDataType } from "./LocationDataType"
+import { RestaurantDataType } from "./RestaurantDataType"
+import { UserDataType } from "./UserDataType"
 
 export type DataType = {
     cart: CartDataType,

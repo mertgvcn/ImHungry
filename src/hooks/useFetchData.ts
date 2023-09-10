@@ -6,38 +6,23 @@ import { UserContext } from "../context/UserContext"
 import { Decrypt } from "../setup/Crypto/Cryption"
 //types
 import { DataType } from "../types/DataType"
-import { CartItemsType } from "../types/CartTypes/CartDataType"
+import { CartItemsType } from "../types/CartDataType"
+import { Type } from "typescript"
 
 const API_KEY = process.env.REACT_APP_APIKEY
+export const HOME_PAGE_URL = "https://localhost:7181/api/PageContent/HomePageData"
 
 
-export const useFetchData = () => {
+export const useFetchData = <T>(apiURL: string) => {
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
-    const [data, setData] = useState<DataType>({ //Backendte null yerine boş array döndür
-        cart: {
-            cartItems: [],
-            cartItemNumber: 0
-        },
-        location: {
-            userLocations: []
-        },
-        user: {
-            accountInfo: [],
-            currentLocation: []
-        },
-        creditCard: {
-            userCreditCards: []
-        },
-        restaurant: {
-            restaurantList: []
-        }
-    })
+    const [data, setData] = useState<T | null>(null) //Generic return type
     const isFetched = useRef<boolean>(false)
 
-    async function fetchData():Promise<void> {
-        const response = await axios.get("https://localhost:7181/api/FetchData/getData", {
+    //Fetching Data
+    async function fetchData(): Promise<void> {
+        const response = await axios.get(apiURL, {
             params: {
                 userID: _currentUserID
             },
@@ -54,14 +39,15 @@ export const useFetchData = () => {
         await fetchData()
     }
 
+    //Avoid fetch twice
     useEffect(() => {
         if (currentUserID && !isFetched.current) {
             asyncFetch()
             isFetched.current = true
-        }    
+        }
     }, [currentUserID])
 
 
-
-    return {data, isFetched};
+    const isSuccess = isFetched.current
+    return { data, isSuccess };
 }

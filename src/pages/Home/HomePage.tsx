@@ -1,30 +1,34 @@
 import React, { useState } from 'react'
 import { RestaurantContextProvider } from '../../context/RestaurantContext'
+import { HOME_PAGE_URL, useFetchData } from '../../hooks/useFetchData'
 //css
 import './HomePage.css'
 //types
-import { DataType } from '../../types/DataType'
+import { HomePageDataType } from '../../types/PageDataTypes/HomePageDataType'
 //components
 import Restaurants from './components/Restaurants'
 import SearchRestaurant from './components/SearchRestaurant'
 import CurrentLocation from '../../components/Shared/CurrentLocation'
 
 
-type HomePageDataType = {
-  data: DataType
-}
 
-const HomePage = (props: HomePageDataType) => {
-  const hasLocation = (props.data.user?.currentLocation?.length > 0) //değişecek
+const HomePage = () => {
+  const {data,isSuccess} = useFetchData<HomePageDataType>(HOME_PAGE_URL)
+  const hasLocation = (data?.currentLocation != null)
 
-  return (
+  return isSuccess? 
+  (
     <RestaurantContextProvider>
       <div className="search-location">
         <SearchRestaurant />
-        <CurrentLocation width='45' />
+        <CurrentLocation width='45' currentLocation={data!.currentLocation}/>
       </div>
-      <Restaurants restaurant={props.data.restaurant} hasLocation={hasLocation} />
+      <Restaurants restaurant={data!.restaurant} hasLocation={hasLocation} />
     </RestaurantContextProvider>
+  )
+  : 
+  (
+    <>Loading...</>
   )
 
 }
