@@ -4,10 +4,7 @@ import axios from "axios"
 import { UserContext } from "../context/UserContext"
 //helpers
 import { Decrypt } from "../setup/Crypto/Cryption"
-//types
-import { DataType } from "../types/DataType"
-import { CartItemsType } from "../types/CartDataType"
-import { Type } from "typescript"
+
 
 const API_KEY = process.env.REACT_APP_APIKEY
 export const HOME_PAGE_URL = "https://localhost:7181/api/PageContent/HomePageData"

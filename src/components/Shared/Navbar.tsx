@@ -3,8 +3,6 @@ import { UserContext } from "../../context/UserContext";
 import { CartContext, CartContextProvider } from "../../context/CartContext";
 //css
 import "./styles/Navbar.css";
-//types
-import { DataType } from "../../types/DataType";
 //components
 import Cart from "../Cart/Cart";
 import UserMenu from "../UserMenu/UserMenu";

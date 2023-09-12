@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { PaymentContext } from '../../context/PaymentContext'
 import { UserContext } from '../../context/UserContext'
-import { ChangeContext } from '../../context/ChangeContext'
 //exported functions
 import { deleteCC, getCC } from '../../setup/API/cc_api'
 import { Decrypt } from '../../setup/Crypto/Cryption'
 //css
 import './styles/RegisteredCC.css'
 //type
-import { CCType } from '../../types/CCType'
+import { UserCreditCardsType } from '../../types/CreditCardDataType'
 //component
 import CreditCardAdd from '../../pages/Profile/components/CreditCard/CreditCardAdd'
+
 
 const RegisteredCC = () => {
     //Context
@@ -19,7 +19,7 @@ const RegisteredCC = () => {
     const _currentUserID = Decrypt(currentUserID)
 
     //CC states
-    const [userCCs, setUserCCs] = useState<Array<CCType>>([])
+    const [userCCs, setUserCCs] = useState<UserCreditCardsType[]>([])
     const [displayedCC, setDisplayedCC] = useState<string>("")
     const [dropDownState, setDropDownState] = useState<boolean>(false)
 
@@ -27,7 +27,7 @@ const RegisteredCC = () => {
     const [isAddCC, setIsAddCC] = useState<boolean>(false)
 
 
-    //fetch cc
+    //Fetch credit cards when user clicks
     const fetchCC = async (): Promise<void> => {
         const data: any = await getCC(_currentUserID)
         setUserCCs(data)
@@ -45,6 +45,8 @@ const RegisteredCC = () => {
         }
     }
 
+    
+    //Hide name on card for security
     const hideName = (cardHolderName: string) => {
         let hiddenName = ""
         const nameArray = cardHolderName.split(" ")

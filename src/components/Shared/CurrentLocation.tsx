@@ -6,12 +6,11 @@ import { RestaurantContext } from '../../context/RestaurantContext'
 import { deleteLocationByID, getLocationsByUserID } from '../../setup/API/location_api'
 import { Decrypt } from '../../setup/Crypto/Cryption'
 import { setCurrentLocation } from '../../setup/API/user_api'
-//type
-import { LocationType } from '../../types/LocationType'
 //css
 import './styles/CurrentLocation.css'
 //types
 import { CurrentLocationType } from '../../types/UserDataType'
+import { UserLocationsType } from '../../types/LocationDataType'
 //components
 import LocationAdd from '../../pages/Profile/components/Location/LocationAdd'
 
@@ -33,7 +32,7 @@ const CurrentLocation = (props: currentLocationType) => {
 
     //States
     const [displayedLocation, setDisplayedLocation] = useState<string>(initialLocationString)
-    const [userLocations, setUserLocations] = useState<Array<LocationType>>([])
+    const [userLocations, setUserLocations] = useState<UserLocationsType[]>([])
     const [dropDownState, setDropDownState] = useState<boolean>(false)
     const [addLocState, setAddLocState] = useState<boolean>(false)
 
