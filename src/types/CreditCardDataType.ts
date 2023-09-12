@@ -10,3 +10,13 @@ export type UserCreditCardsType = {
     userID: number,
     expirationDate: string
 }
+
+export type CCCardType = {
+    data: {
+        ccID: number,
+        ccNo: string,
+        ccName: string,
+        expirationDate: string,
+        cvv: number
+    }
+}

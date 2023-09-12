@@ -3,6 +3,7 @@ import { UserContext } from '../../../../context/UserContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Crypto/Cryption'
 import { searchUserName, updateAccountInfo } from '../../../../setup/API/user_api'
+import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/Account.css'
 //type
@@ -10,7 +11,6 @@ import { AccountInfoType } from '../../../../types/UserDataType'
 //components
 import Alert from '../../../../components/Shared/Alert'
 import ChangePass from './ChangePass'
-import { usePopAlert } from '../../../../hooks/usePopAlert'
 
 
 const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);

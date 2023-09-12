@@ -1,8 +1,7 @@
-import React from 'react'
-//COMPONENTS
-import Register from "./components/Register"
-//CSS
+//css
 import './RegistrationPage.css'
+//components
+import Register from "./components/Register"
 
 
 function RegistrationPage() {

@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { addLocation } from '../../../../setup/API/location_api'
 import { Decrypt } from '../../../../setup/Crypto/Cryption'
+import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/LocationAdd.css'
 //components
@@ -20,6 +21,7 @@ const LocationAdd = (props: propsType) => {
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
+
     //Add Location States
     const [formData, setFormData] = useState({
         title: "",
@@ -33,7 +35,10 @@ const LocationAdd = (props: propsType) => {
         note: ""
     })
     const [errors, setErrors] = useState<any>({})
+    const {alertStates, popAlert} = usePopAlert()
 
+
+    //Functions
     const handleChange = (e: any) => {
         const { name, value } = e.target;
 
@@ -58,6 +63,7 @@ const LocationAdd = (props: propsType) => {
             }
         }
     }
+
 
     //Support functions
     const Validation = () => {
@@ -144,20 +150,6 @@ const LocationAdd = (props: propsType) => {
         })
     }
 
-    //Alert States
-    const [color, setColor] = useState<string>("");
-    const [msg, setMsg] = useState<string>("");
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const popAlert = (color: string, msg: string) => {
-        setIsOpen(true)
-        setColor(color)
-        setMsg(msg)
-
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 3000)
-    }
 
     return props.trigger ? (
         <div className='add-address-background'>
@@ -245,7 +237,7 @@ const LocationAdd = (props: propsType) => {
                 <button className='address-add' onClick={handleAdd}>Add</button>
             </div >
 
-            <Alert isOpen={isOpen} color={color} msg={msg} />
+            <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
         </div>
     ) : null
 }

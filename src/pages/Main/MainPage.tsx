@@ -1,8 +1,8 @@
-import React from 'react'
-//CSS
+//css
 import "./styles/MainPage.css"
-//COMPONENTS
+//components
 import Title from './components/Title'
+
 
 const MainPage = () => {
   return (

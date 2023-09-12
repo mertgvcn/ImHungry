@@ -1,11 +1,12 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { deleteLocationByID } from '../../../../setup/API/location_api'
 //type
-import { LocationCardType } from '../../../../types/LocationType'
+import { LocationCardType } from '../../../../types/LocationDataType'
 //css
 import './styles/LocationCard.css'
+
 
 const LocationCard = ({ data: { locationTitle, province, district, neighbourhood, street, buildingNo, buildingAddition, apartmentNo, note, locationID } }: LocationCardType) => {
     const { locationToggle, setLocationToggle } = useContext(ChangeContext)

@@ -1,11 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { addCC } from '../../../../setup/API/cc_api'
 import { Decrypt } from '../../../../setup/Crypto/Cryption'
+import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/CreditCardAdd.css'
+//component
 import Alert from '../../../../components/Shared/Alert'
 
 
@@ -30,6 +32,7 @@ const CreditCardAdd = (props: propsType) => {
         cvv: ""
     })
     const [errors, setErrors] = useState<any>({})
+    const {alertStates, popAlert} = usePopAlert()
 
     const handleChange = (e: any) => {
         const { name, value } = e.target
@@ -127,21 +130,6 @@ const CreditCardAdd = (props: propsType) => {
         })
     }
 
-    //ALERT PROPERTIES
-    const [color, setColor] = useState<string>("");
-    const [msg, setMsg] = useState<string>("");
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const popAlert = (color: string, msg: string) => {
-        setColor(color)
-        setIsOpen(true)
-        setMsg(msg)
-
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 2000)
-    }
-
 
     return props.trigger ? (
 
@@ -231,7 +219,7 @@ const CreditCardAdd = (props: propsType) => {
 
             </div>
 
-            <Alert isOpen={isOpen} color={color} msg={msg} />
+            <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
         </div>
 
     ) : null

@@ -1,10 +1,12 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { ChangeContext } from '../../../../context/ChangeContext'
+//helpers
 import { deleteCC } from '../../../../setup/API/cc_api'
 //type
-import { CCCardType } from '../../../../types/CCType'
+import { CCCardType } from '../../../../types/CreditCardDataType'
 //css
 import './styles/CreditCardCard.css'
+
 
 const CreditCardCard = ({ data: { ccID, ccNo, ccName, expirationDate, cvv } }: CCCardType) => {
   const { creditCardToggle, setCreditCardToggle } = useContext(ChangeContext)

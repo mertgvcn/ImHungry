@@ -1,5 +1,4 @@
-import React from 'react'
-import { ChangeContextProvider } from '../../context/ChangeContext'
+//helpers
 import { PROFILE_PAGE_URL, useFetchData } from '../../hooks/useFetchData'
 //type
 import { ProfilePageDataType } from '../../types/PageDataTypes/ProfilePageDataType'
@@ -7,6 +6,8 @@ import { ProfilePageDataType } from '../../types/PageDataTypes/ProfilePageDataTy
 import Account from './components/Account/Account'
 import Location from './components/Location/Location'
 import CreditCard from './components/CreditCard/CreditCard'
+
+
 
 const ProfilePage = () => {
   const {data,isSuccess} = useFetchData<ProfilePageDataType>(PROFILE_PAGE_URL)

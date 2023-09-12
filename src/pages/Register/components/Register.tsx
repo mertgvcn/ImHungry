@@ -1,16 +1,23 @@
 import React from 'react'
 import { useState } from "react"
-//COMPONENTS
-import Alert from "../../../components/Shared/Alert"
-//EXPORTED FUNCTIONS
+//helpers
 import { Encrypt } from '../../../setup/Crypto/Cryption'
-import { register, isUserNameAlreadyExists, searchUserName } from '../../../setup/API/user_api'
-//CSS
+import { register, isUserNameAlreadyExists } from '../../../setup/API/user_api'
+import { usePopAlert } from '../../../hooks/usePopAlert'
+//css
 import "../styles/Register.css"
+//components
+import Alert from "../../../components/Shared/Alert"
+
+
+const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+const phoneNumberPattern = new RegExp(/^(\+90|0)?\s*(\(\d{3}\)[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}|\(\d{3}\)[\s-]*\d{3}[\s-]*\d{4}|\(\d{3}\)[\s-]*\d{7}|\d{3}[\s-]*\d{3}[\s-]*\d{4}|\d{3}[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2})$/);
+const passwordPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(\S).{8,20}$/)
+
 
 const Register = () => {
 
-    //REGISTRATION INPUTS
+    //States
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -20,11 +27,10 @@ const Register = () => {
         username: ""
     })
     const [errors, setErrors] = useState<any>({})
+    const {alertStates, popAlert} = usePopAlert()
 
-    const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-    const phoneNumberPattern = new RegExp(/^(\+90|0)?\s*(\(\d{3}\)[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}|\(\d{3}\)[\s-]*\d{3}[\s-]*\d{4}|\(\d{3}\)[\s-]*\d{7}|\d{3}[\s-]*\d{3}[\s-]*\d{4}|\d{3}[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2})$/);
-    const passwordPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(\S).{8,20}$/)
 
+    //Functions
     const handleChange = (e: any) => {
         const { name, value } = e.target
 
@@ -45,6 +51,7 @@ const Register = () => {
     const goLogin = () => {
         window.location.href = "/login"
     }
+
 
     //Support functions
     const Validation = async () => {
@@ -122,25 +129,10 @@ const Register = () => {
         })
     }
 
-    //*ALERT PROPERTIES
-    const [color, setColor] = useState<any>("");
-    const [msg, setMsg] = useState<string>("");
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-    const popAlert = (color: string, msg: string) => {
-        setIsOpen(true)
-        setColor(color)
-        setMsg(msg)
-
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 3000)
-    }
-
 
     return (
-
         <>
-            <Alert isOpen={isOpen} color={color} msg={msg} />
+            <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
 
             <div id='register-wrapper'>
                 <div id='register-title-wrapper'>
@@ -211,14 +203,5 @@ const Register = () => {
 
     )
 }
-
-// function stringHasNumber(text: String) {
-//     if (!(text.includes("1") && text.includes("2") && text.includes("3") && text.includes("4") && text.includes("5") &&
-//         text.includes("6") && text.includes("7") && text.includes("8") && text.includes("9") && text.includes("0"))) {
-//         return false;
-//     }
-//     return true;
-// }
-
 
 export default Register

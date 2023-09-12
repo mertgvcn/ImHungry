@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
-//CSS
-import './styles/ChangePass.css'
 //exported functions
 import { Decrypt, Encrypt } from '../../../../setup/Crypto/Cryption'
 import { changePass, verifyPass } from '../../../../setup/API/user_api'
-//Component
-import Alert from '../../../../components/Shared/Alert'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
+//css
+import './styles/ChangePass.css'
+//component
+import Alert from '../../../../components/Shared/Alert'
 
 
 const passwordPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(\S).{8,20}$/)

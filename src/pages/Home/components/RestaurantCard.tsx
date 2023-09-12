@@ -1,8 +1,7 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
-//CSS
+//css
 import '../styles/RestaurantCard.css'
-//Type
+//type
 import { RestaurantCardType } from '../../../types/RestaurantDataType'
 
 
