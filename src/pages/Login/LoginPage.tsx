@@ -1,11 +1,10 @@
-import React from 'react'
-//COMPONENTS
+//components
 import Login from "./components/Login"
-//CSS
+//css
 import './styles/LoginPage.css'
 
-function LoginPage() {
 
+function LoginPage() {
     return (
         <div className='login-page-background'>
             <Login />

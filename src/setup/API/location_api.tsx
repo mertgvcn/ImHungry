@@ -16,7 +16,7 @@ export const getLocationsByUserID = async (userID: number): Promise<AxiosRespons
     return response.data
 }
 
-export const addLocation = async (userID: number, locationTitle:string, province: string, district: string, neighbourhood: string, street: string, buildingNo: string, buildingAddition:string, apartmentNo: string, note:string) => {
+export const addLocation = async (userID: number, locationTitle:string, province: string, district: string, neighbourhood: string, street: string, buildingNo: string, buildingAddition:string, apartmentNo: string, note:string): Promise<AxiosResponse> => {
     const response = await axios.post('https://localhost:7181/api/Location/addLocation', 
     {
         userID: userID,
@@ -40,7 +40,7 @@ export const addLocation = async (userID: number, locationTitle:string, province
 return response.data;
 }
 
-export const deleteLocationByID = async (locationID: number) => {
+export const deleteLocationByID = async (locationID: number): Promise<AxiosResponse> => {
     const response = await axios.delete('https://localhost:7181/api/Location/deleteByID', {
         params: {
             locationID: locationID,

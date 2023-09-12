@@ -1,76 +1,44 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Crypto/Cryption'
 import { searchUserName, updateAccountInfo } from '../../../../setup/API/user_api'
 //css
 import './styles/Account.css'
+//type
+import { AccountInfoType } from '../../../../types/UserDataType'
 //components
 import Alert from '../../../../components/Shared/Alert'
 import ChangePass from './ChangePass'
-import axios from 'axios'
-
-const API_KEY = process.env.REACT_APP_APIKEY
+import { usePopAlert } from '../../../../hooks/usePopAlert'
 
 
+const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+const phoneNumberPattern = new RegExp(/^(\+90|0)?\s*(\(\d{3}\)[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}|\(\d{3}\)[\s-]*\d{3}[\s-]*\d{4}|\(\d{3}\)[\s-]*\d{7}|\d{3}[\s-]*\d{3}[\s-]*\d{4}|\d{3}[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2})$/);
 
-const Account = () => {
+
+type AccountType = {
+  accountInfo : AccountInfoType
+}
+
+
+const Account = (props: AccountType) => {
   //Local Storage
   const { currentUserID } = useContext(UserContext)
   const _currentUserID = Decrypt(currentUserID)
 
-  //Input States
+  //States
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    userName: "",
-    defaultUserName: "",
-    email: "",
-    phoneNumber: ""
+    firstName: props.accountInfo.firstName,
+    lastName: props.accountInfo.lastName,
+    userName: props.accountInfo.userName,
+    defaultUserName: props.accountInfo.userName,
+    email: props.accountInfo.email,
+    phoneNumber: props.accountInfo.phoneNumber
   })
   const [errors, setErrors] = useState<any>({})
-
-  const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
-  const phoneNumberPattern = new RegExp(/^(\+90|0)?\s*(\(\d{3}\)[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2}|\(\d{3}\)[\s-]*\d{3}[\s-]*\d{4}|\(\d{3}\)[\s-]*\d{7}|\d{3}[\s-]*\d{3}[\s-]*\d{4}|\d{3}[\s-]*\d{3}[\s-]*\d{2}[\s-]*\d{2})$/);
-
-
-  //fetch account info
-  useEffect(() => {
-    const cancelToken = axios.CancelToken.source()
-
-    const fetchAccountInfo = async (): Promise<void> => {
-      await axios('https://localhost:7181/api/User/getAccountInfo', {
-        cancelToken: cancelToken.token,
-        params: {
-          userID: _currentUserID
-        },
-        headers: {
-          'x-api-key': API_KEY
-        }
-      }).then((res) => {
-        setFormData({
-          firstName: res.data[0].firstName,
-          lastName: res.data[0].lastName,
-          userName: res.data[0].userName,
-          defaultUserName: res.data[0].userName,
-          email: res.data[0].email,
-          phoneNumber: res.data[0].phoneNumber
-        })
-      }).catch((err) => {})
-
-      return new Promise((resolve) => { resolve() })
-    }
-
-    const syncFetch = async () => {
-      await fetchAccountInfo()
-    }
-    
-    syncFetch()
-
-    return () => {
-      cancelToken.cancel()
-    }
-  }, [])
+  const [changePassTrigger, setChangePassTrigger] = useState<boolean>(false)
+  const {alertStates, popAlert} = usePopAlert()
 
 
   //Functions
@@ -152,27 +120,6 @@ const Account = () => {
   }
 
 
-  //Change Pass State
-  const [changePassTrigger, setChangePassTrigger] = useState<boolean>(false)
-  const handleChangePassword = () => {
-    setChangePassTrigger(true)
-  }
-
-
-  //Alert States
-  const [color, setColor] = useState<string>("");
-  const [msg, setMsg] = useState<string>("");
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const popAlert = (color: string, msg: string) => {
-    setIsOpen(true)
-    setColor(color)
-    setMsg(msg)
-
-    setTimeout(() => {
-      setIsOpen(false)
-    }, 3000)
-  }
-
   return (
     <>
       <div className='account-wrapper'>
@@ -219,11 +166,10 @@ const Account = () => {
         </div>
 
         <button className='account-save' onClick={handleSave}>Save</button>
-
-        <button className="change-password" onClick={handleChangePassword}>Change Password</button>
+        <button className="change-password" onClick={() => setChangePassTrigger(true)}>Change Password</button>
       </div>
 
-      <Alert isOpen={isOpen} color={color} msg={msg} />
+      <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
       <ChangePass trigger={changePassTrigger} setTrigger={setChangePassTrigger} />
     </>
   )

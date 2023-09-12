@@ -1,66 +1,46 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Crypto/Cryption'
 import { getCC } from '../../../../setup/API/cc_api'
+import useDidMountUpdate from '../../../../hooks/useDidMountUpdate'
 //type
-import { CCType } from '../../../../types/CCType'
+import { CreditCardDataType, UserCreditCardsType } from '../../../../types/CreditCardDataType'
 //css
 import './styles/CreditCard.css'
 //components
 import CreditCardCard from './CreditCardCard'
 import CreditCardAdd from './CreditCardAdd'
-import axios from 'axios'
-
-const API_KEY = process.env.REACT_APP_APIKEY
 
 
+type CreditCardType = {
+    creditCard: CreditCardDataType
+}
 
-const CreditCard = () => {
 
+const CreditCard = (props: CreditCardType) => {
     //Context
     const { creditCardToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
     //Credit Cards
-    const [creditCards, setCreditCards] = useState<Array<CCType>>([])
+    const [creditCards, setCreditCards] = useState<UserCreditCardsType[]>(props.creditCard.userCreditCards)
 
     //Add Card State
     const [addCardStatus, setAddCardStatus] = useState<boolean>(false);
 
+    //Live Update if change occurs
+    const fetchCreditCards = async () => {
+        const data:any = await getCC(_currentUserID)
+        setCreditCards(data)
+    }
 
-    //fetch cc
-    useEffect(() => {
-        const cancelToken = axios.CancelToken.source()
-
-        const fetchCC = async (): Promise<void> => {
-            await axios.get('https://localhost:7181/api/CreditCard/getCC', {
-                cancelToken: cancelToken.token,
-                params: {
-                    userID: _currentUserID
-                },
-                headers: {
-                    'x-api-key': API_KEY
-                }
-            }).then((res) => {
-                setCreditCards(res.data)
-            }).catch((err) => {})
-
-            return new Promise((resolve) => resolve())
-        }
-
-        const syncFetch = async () => {
-            await fetchCC()
-        }
-
-        syncFetch()
-
-        return () => {
-            cancelToken.cancel()
-        }
+    useDidMountUpdate(() => {
+        fetchCreditCards()
     }, [creditCardToggle])
+
 
     return (
         <>

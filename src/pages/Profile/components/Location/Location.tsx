@@ -1,66 +1,44 @@
-import React, { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Crypto/Cryption'
+import { getLocationsByUserID } from '../../../../setup/API/location_api'
+import useDidMountUpdate from '../../../../hooks/useDidMountUpdate'
 //type
-import { LocationType } from '../../../../types/LocationType'
+import { LocationDataType, UserLocationsType } from '../../../../types/LocationDataType'
 //Css
 import './styles/Location.css'
 //Component
 import LocationAdd from './LocationAdd'
 import LocationCard from './LocationCard'
-import axios from 'axios'
-
-const API_KEY = process.env.REACT_APP_APIKEY
 
 
+type LocationType = {
+    location: LocationDataType
+}
 
-const Location = () => {
+
+const Location = (props: LocationType) => {
     //Context
     const { locationToggle } = useContext(ChangeContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
     //Locations
-    const [userLocations, setUserLocations] = useState<Array<LocationType>>([])
+    const [userLocations, setUserLocations] = useState<UserLocationsType[]>(props.location.userLocations)
 
     //Add Location State
     const [addLocationStatus, setAddLocationStatus] = useState<boolean>(false);
 
+    //Live Update if change occurs
+    const fetchLocations = async () => {
+        const data: any = await getLocationsByUserID(_currentUserID)
+        setUserLocations(data)
+    }
 
-    //fetch locations
-    useEffect(() => {
-        const cancelToken = axios.CancelToken.source()
-
-        const fetchLocations = async () => {
-            try {
-                await axios.get('https://localhost:7181/api/Location/getLocationsByUserID', {
-                    cancelToken: cancelToken.token,
-                    params: {
-                        userID: _currentUserID
-                    },
-                    headers: {
-                        'x-api-key': API_KEY
-                    }
-                }).then((res) => {
-                    setUserLocations(res.data)
-                    console.log(userLocations)
-                }).catch((err) => {})
-            }catch (e) {
-                
-            }
-        }
-
-        const syncFetch = async () => {
-            await fetchLocations()
-        }
-
-        syncFetch()
-
-        return () => {
-            cancelToken.cancel()
-        }
+    useDidMountUpdate(() => {
+        fetchLocations()
     }, [locationToggle])
 
 

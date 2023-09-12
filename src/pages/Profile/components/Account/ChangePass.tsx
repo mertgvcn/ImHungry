@@ -7,6 +7,10 @@ import { Decrypt, Encrypt } from '../../../../setup/Crypto/Cryption'
 import { changePass, verifyPass } from '../../../../setup/API/user_api'
 //Component
 import Alert from '../../../../components/Shared/Alert'
+import { usePopAlert } from '../../../../hooks/usePopAlert'
+
+
+const passwordPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(\S).{8,20}$/)
 
 
 type propsType = {
@@ -28,8 +32,8 @@ const ChangePass = (props: propsType) => {
     confirmPassword: ""
   })
   const [errors, setErrors] = useState<any>({})
+  const {alertStates, popAlert} = usePopAlert()
 
-  const passwordPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(\S).{8,20}$/)
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -98,20 +102,7 @@ const ChangePass = (props: propsType) => {
     })
   }
 
-  //Alert States
-  const [color, setColor] = useState<string>("");
-  const [msg, setMsg] = useState<string>("");
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const popAlert = (color: string, msg: string) => {
-    setIsOpen(true)
-    setColor(color)
-    setMsg(msg)
-
-    setTimeout(() => {
-      setIsOpen(false)
-    }, 3000)
-  }
 
   return props.trigger ? (
     <div className='change-pass-background'>
@@ -154,7 +145,7 @@ const ChangePass = (props: propsType) => {
         <button className='change-pass-save' onClick={handleSave}>Save</button>
       </div>
 
-      <Alert isOpen={isOpen} color={color} msg={msg} />
+      <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
     </div>
   ) : null
 }

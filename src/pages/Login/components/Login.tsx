@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
-//EXPORTED FUNCTIONS
+import { useContext, useState } from 'react'
+//helpers
 import { getIDByUserName, login } from '../../../setup/API/user_api'
 import { Encrypt } from '../../../setup/Crypto/Cryption'
 import { UserContext } from '../../../context/UserContext'
-//COMPONENTS
+import { usePopAlert } from '../../../hooks/usePopAlert'
+//components
 import IForgotMyPassword from './IForgotMyPassword'
 import Alert from '../../../components/Shared/Alert'
-//CSS
+//css
 import "../styles/Login.css"
 
 
@@ -21,6 +22,7 @@ const Login = () => {
         password: ""
     })
     const [errors, setErrors] = useState<any>({})
+    const {alertStates, popAlert} = usePopAlert()
 
     //IFORGOTMYPASSWORD 
     const [iForgotMyPass, setIForgotMyPass] = useState<boolean>(false);
@@ -94,25 +96,9 @@ const Login = () => {
     }
 
 
-    //ALERT PROPERTIES
-    const [color, setColor] = useState<string>("");
-    const [msg, setMsg] = useState<string>("");
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    const popAlert = (color: string, msg: string) => {
-        setIsOpen(true)
-        setColor(color)
-        setMsg(msg)
-
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 3000)
-    }
-
-
     return (
         <>
-            <Alert isOpen={isOpen} color={color} msg={msg} />
+            <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
 
             <div id='login-wrapper'>
                 <div id='login-title'>

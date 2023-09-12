@@ -16,7 +16,7 @@ const HomePage = () => {
   const {data,isSuccess} = useFetchData<HomePageDataType>(HOME_PAGE_URL)
   const hasLocation = (data?.currentLocation != null)
 
-  return isSuccess? 
+  return isSuccess ? 
   (
     <RestaurantContextProvider>
       <div className="search-location">

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-//API
+//helpers
 import { searchEmail } from '../../../setup/API/user_api';
-//CSS
+import { usePopAlert } from '../../../hooks/usePopAlert';
+//css
 import '../styles/IForgotMyPassword.css'
-//COMPONENT
+//components
 import Alert from '../../../components/Shared/Alert';
 
 type propsType = {
@@ -13,14 +14,9 @@ type propsType = {
 
 const IForgotMyPassword = (props: propsType) => {
     const [email, setEmail] = useState<string>("");
+    const {alertStates, popAlert} = usePopAlert()
 
-    //*ALERT PROPERTIES
-    const [color, setColor] = useState<string>("");
-    const [msg, setMsg] = useState<string>("");
-    const [isOpen, setIsOpen] = useState<boolean>(false);
-
-    //*FUNCTIONS
-    //OnClick Handlers
+  
     const handleSend = async () => {
         if(email.trim() === "") {
             popAlert("orange", "Email is blank");
@@ -38,20 +34,10 @@ const IForgotMyPassword = (props: propsType) => {
         }
     }
 
-    //Support functions
-    const popAlert = (color: string, msg: string) => {
-        setIsOpen(true)
-        setColor(color)
-        setMsg(msg)
-
-        setTimeout(() => {
-            setIsOpen(false)
-        }, 3000)
-    }
 
     return (props.trigger) ? (
         <div className='iforgotmypass-background'>
-            <Alert isOpen={isOpen} color={color} msg={msg} />
+            <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
             <div className='iforgotmypass-wrapper'>
                 <div className='title'>
                     I Forgot My Password

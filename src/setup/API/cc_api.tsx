@@ -16,7 +16,7 @@ export const getCC = async (userID: number): Promise<AxiosResponse>  => {
     return response.data
 }
 
-export const addCC = async (userID: number, ccNo: string, ccName: string, expirationDate: string, cvv: number) => {
+export const addCC = async (userID: number, ccNo: string, ccName: string, expirationDate: string, cvv: number): Promise<AxiosResponse> => {
     const response = await axios.post('https://localhost:7181/api/CreditCard/addCC', {
         ccNo: ccNo,
         ccName: ccName,
@@ -33,7 +33,7 @@ export const addCC = async (userID: number, ccNo: string, ccName: string, expira
     return response.data
 }
 
-export const deleteCC = async (ccID: number) => {
+export const deleteCC = async (ccID: number): Promise<AxiosResponse> => {
     const response = await axios.delete('https://localhost:7181/api/CreditCard/deleteCC', {
         params: {
             ccID: ccID,

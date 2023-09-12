@@ -11,6 +11,7 @@ import { Type } from "typescript"
 
 const API_KEY = process.env.REACT_APP_APIKEY
 export const HOME_PAGE_URL = "https://localhost:7181/api/PageContent/HomePageData"
+export const PROFILE_PAGE_URL = "https://localhost:7181/api/PageContent/ProfilePageData"
 
 
 export const useFetchData = <T>(apiURL: string) => {
