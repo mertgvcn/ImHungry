@@ -3,41 +3,31 @@ import { useLocation } from 'react-router-dom'
 //EXPORTED FUNCTIONS
 import { getRestaurantDetail } from '../../../setup/API/restaurant_api'
 //Type
-import { RestaurantDetail } from '../../../types/RestaurantType'
+import { RestaurantDetail } from '../../../types/RestaurantDataType'
 //CSS
 import '../styles/RestaurantDetails.css'
 
 
+type RestaurantDetailsType = {
+    restaurantDetails: RestaurantDetail
+}
 
 
-
-const RestaurantDetails = () => {
-    const location = useLocation()
-    const currentRestaurantID = location.state.data;
-
-    const [restaurantDetails, setRestaurantDetails] = useState<RestaurantDetail>({ restaurantID: "", name: "", description: "", email: "", imageSource: "", phoneNumber: "" })
-
-    useEffect(() => {
-        const fetchRestaurantDetails = async () => {
-            const data = await getRestaurantDetail(currentRestaurantID)
-            setRestaurantDetails(data[0])
-        }
-
-        fetchRestaurantDetails()
-    }, [])
+const RestaurantDetails = (props: RestaurantDetailsType) => {
+    const {restaurantID, name, phoneNumber, email, description, imageSource} = props.restaurantDetails
 
     return (
         <div className='restaurant-details-wrapper'>
-            {restaurantDetails.imageSource && (
+            {imageSource && (
                 <div className="restaurant-image">
-                    <img src={require(`../../../assets/RestaurantImages/${restaurantDetails.imageSource}`)} alt="img not found" />
+                    <img src={require(`../../../assets/RestaurantImages/${imageSource}`)} alt="img not found" />
                 </div>
             )}
 
             <div className="restaurant-info">
                 <div className="restaurant-title">
-                    <span id="restaurant-name">{restaurantDetails.name}</span>
-                    <span id="restaurant-description">{restaurantDetails.description}</span>
+                    <span id="restaurant-name">{name}</span>
+                    <span id="restaurant-description">{description}</span>
                 </div>
                 <div className="restaurant-rating-contact">
                     <div className="restaurant-rating">
@@ -49,8 +39,8 @@ const RestaurantDetails = () => {
                     <div className="restaurant-contact">
                         <p id="restaurant-contact-title">CONTACT</p>
                         <hr />
-                        <p id="restaurant-email"><i className="fa-solid fa-envelope" style={{ marginRight: 5 }}></i>{restaurantDetails.email}</p>
-                        <p id="restaurant-phone-number"><i className="fa-solid fa-phone" style={{ marginRight: 5 }}></i>{restaurantDetails.phoneNumber}</p>
+                        <p id="restaurant-email"><i className="fa-solid fa-envelope" style={{ marginRight: 5 }}></i>{email}</p>
+                        <p id="restaurant-phone-number"><i className="fa-solid fa-phone" style={{ marginRight: 5 }}></i>{phoneNumber}</p>
                     </div>
                 </div>
             </div>

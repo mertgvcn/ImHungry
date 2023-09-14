@@ -19,11 +19,50 @@ export type RestaurantListType = {
 
 export type RestaurantCardType = {
     data: {
-        restaurantID: string,
+        restaurantID: number,
         name: string,
         phoneNumber: string,
         email: string,
         description: string,
         imageSource: string
+    }
+}
+
+//Details & Menu Types
+export type RestaurantDetail = {
+    restaurantID: number,
+    name: string,
+    phoneNumber: string,
+    email: string,
+    description: string,
+    imageSource: string
+}
+
+export type CategoryType = {
+    categoryID: string,
+    categoryName: string
+}
+
+export type MenuType = {
+    restaurantID: string,
+    itemID: number,
+    itemName: string,
+    itemDescription: string,
+    imageSource: string,
+    categoryID: string,
+    price: string,
+    categoryName: string
+}
+
+export type MenuItemType = {
+    data: {
+        restaurantID: string,
+        itemID: number,
+        itemName: string,
+        itemDescription: string,
+        imageSource: string,
+        categoryID: string,
+        price: string,
+        categoryName: string
     }
 }

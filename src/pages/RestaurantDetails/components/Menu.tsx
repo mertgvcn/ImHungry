@@ -1,42 +1,56 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 //EXPORTED FUNCTIONS
 import { getMenuTitles, getMenu } from '../../../setup/API/restaurant_api'
 //TYPE
-import { MenuTitlesType, MenuType } from '../../../types/RestaurantType'
+import { CategoryType, MenuType } from '../../../types/RestaurantDataType'
 //CSS
 import '../styles/Menu.css'
 //COMPONENTS
 import MenuItem from './MenuItem'
 
 
+type MenuPropType = {
+    menu: MenuType[]
+}
 
 
-
-const Menu = () => {
-    const location = useLocation()
-    const currentRestaurantID = location.state.data;
-
-    const [menuTitles, setMenuTitles] = useState<Array<MenuTitlesType>>()
-    const [menu, setMenu] = useState<Array<MenuType>>()
-
-    const fetchMenuTitles = async () => { //Gives us distinct category id and category name according to categories the restaurant has
-        const data = await getMenuTitles(currentRestaurantID)
-        setMenuTitles(data)
-    }
-
-    const fetchRestaurantMenu = async () => {
-        const data = await getMenu(currentRestaurantID)
-        setMenu(data)
-    }
-
+const Menu = (props: MenuPropType) => {
+    const [menuTitles, setMenuTitles] = useState<CategoryType[]>([])
+    const [menu, setMenu] = useState<MenuType[]>(props.menu)
+    const didComponentMount = useRef(false)
+    
+    
+    //On first render
     useEffect(() => {
-        fetchMenuTitles()
-        fetchRestaurantMenu()
+        if(!didComponentMount.current) {
+            extractCategoryNames()
+        }
+
+        didComponentMount.current = true
     }, [])
 
-    //Placing menu items to correct sections (each item should be under its own category)
-    const ExtractMenuItemByCategoryID = (categoryID: string) => {
+
+    //Functions
+    const extractCategoryNames = () => {
+        var categoryNames: string[] = []
+        var menuTitles: CategoryType[] = [] //not primitive type, includes() doesnt work for this.
+
+        menu.map((item) => {
+            if (!categoryNames.includes(item.categoryName)) {
+                categoryNames.push(item.categoryName)
+                menuTitles.push({
+                    categoryID: item.categoryID,
+                    categoryName: item.categoryName
+                })
+            }
+        })
+
+        setMenuTitles(menuTitles)
+    }
+
+
+    const placeItems = (categoryID: string) => { //Placing menu items to correct sections (each item should be under its own category)
         return menu?.map((menuItem) => {
             if (menuItem.categoryID === categoryID) {
                 return (
@@ -46,6 +60,7 @@ const Menu = () => {
             return null;
         }).filter((item) => item !== null); // null değerleri filtrele
     };
+
 
     return (
         <div className='menu-wrapper'>
@@ -57,7 +72,7 @@ const Menu = () => {
                     <div className='menu-sections' key={title.categoryID}>
                         <p id="menu-title">{title.categoryName}</p>
                         <div className="menu-items">
-                            {ExtractMenuItemByCategoryID(title.categoryID)}
+                            {placeItems(title.categoryID)}
                         </div>
                     </div>
                 ))}

@@ -18,47 +18,47 @@ export const CartContextProvider = ({ children }: cartContextProviderProps) => {
 
     const [cartItemAmount, setCartItemAmount] = useState("")
 
-    useEffect(() => {
-        const cancelToken = axios.CancelToken.source()
+    // useEffect(() => {
+    //     const cancelToken = axios.CancelToken.source()
 
-        const fetchItemAmount = async () => {
-            if(currentUserID) {
+    //     const fetchItemAmount = async () => {
+    //         if(currentUserID) {
 
-                await axios.get('https://localhost:7181/api/Cart/getUserCartItemNumber', {
-                    cancelToken: cancelToken.token,
-                    params: {
-                        userID: _currentUserID,
-                    },
-                    headers: {
-                        'x-api-key': API_KEY
-                    }
-                })
-                .then((res) => {
-                    setCartItemAmount(res.data)
-                })
-                .catch((err) => {
-                    if(axios.isCancel(err)) {
-                        console.log("CartContext 41 : " + err.message)
-                    }
-                })
-            }
-        }
+    //             await axios.get('https://localhost:7181/api/Cart/getUserCartItemNumber', {
+    //                 cancelToken: cancelToken.token,
+    //                 params: {
+    //                     userID: _currentUserID,
+    //                 },
+    //                 headers: {
+    //                     'x-api-key': API_KEY
+    //                 }
+    //             })
+    //             .then((res) => {
+    //                 setCartItemAmount(res.data)
+    //             })
+    //             .catch((err) => {
+    //                 if(axios.isCancel(err)) {
+    //                     console.log("CartContext 41 : " + err.message)
+    //                 }
+    //             })
+    //         }
+    //     }
 
-        fetchItemAmount()
+    //     fetchItemAmount()
 
-        return () => {
-            cancelToken.cancel()
-        }
-    }, [])
+    //     return () => {
+    //         cancelToken.cancel()
+    //     }
+    // }, [])
 
-    useEffect(() => {
-        const storedItemAmount = localStorage.getItem("cartItemAmount")
-        if (storedItemAmount) setCartItemAmount(storedItemAmount)
-    }, [])
+    // useEffect(() => {
+    //     const storedItemAmount = localStorage.getItem("cartItemAmount")
+    //     if (storedItemAmount) setCartItemAmount(storedItemAmount)
+    // }, [])
 
-    useEffect(() => {
-        localStorage.setItem("cartItemAmount", cartItemAmount)
-    })
+    // useEffect(() => {
+    //     localStorage.setItem("cartItemAmount", cartItemAmount)
+    // })
 
     const data = {
         cartItemAmount,

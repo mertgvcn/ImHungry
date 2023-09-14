@@ -10,19 +10,17 @@ import './styles/Cart.css'
 import { getUserCartItems } from '../../setup/API/cart_api'
 import { Decrypt } from '../../setup/Crypto/Cryption'
 //Types
-import { CartDataType, CartItemsType } from '../../types/CartDataType'
+import { CartItemsType } from '../../types/CartDataType'
 //Components
 import CartItem from './CartItem'
 import CartAlert from './CartAlert'
 import useDidMountUpdate from '../../hooks/useDidMountUpdate'
 
 
-const API_KEY = process.env.REACT_APP_APIKEY
-
 type propsType = {
   trigger: boolean,
   setTrigger: React.Dispatch<React.SetStateAction<boolean>>,
-  cart: CartDataType
+  cartItems: CartItemsType[]
 }
 
 
@@ -42,7 +40,7 @@ const Cart = (props: propsType) => {
 
   //Item Info
   const didComponentMount = useRef(false)
-  const [items, setItems] = useState<CartItemsType[]>(props.cart.cartItems)
+  const [items, setItems] = useState<CartItemsType[]>(props.cartItems)
   const [itemRestaurantNames, setItemRestaurantNames] = useState<string[]>([])
   const totalPrice = items?.reduce((total, item) => (total += item.price * item.amount), 0)
   const itemAmount = items?.reduce((amount, item) => (amount += item.amount), 0)
@@ -50,7 +48,7 @@ const Cart = (props: propsType) => {
   
   //On first render
   useEffect(() => {
-    if(didComponentMount.current) {
+    if(!didComponentMount.current) {
       setCartItemAmount(itemAmount)
       extractRestaurantNames()
     }
@@ -60,10 +58,11 @@ const Cart = (props: propsType) => {
 
 
   //If change occurs, re-fetch cart. 
-  const fetchCartItems = async () => {
-    console.log("cart items fetchleniyorr..")
+  const fetchCartItems = async (): Promise<void> => {
     const data: any = await getUserCartItems(_currentUserID)
     setItems(data)
+
+    return new Promise((resolve) => { resolve() })
   }
 
   async function syncFetch() {

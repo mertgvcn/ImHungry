@@ -1,6 +1,9 @@
-import React, { useState } from 'react'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserContext'
 import { RestaurantContextProvider } from '../../context/RestaurantContext'
+//helpers
 import { HOME_PAGE_URL, useFetchData } from '../../hooks/useFetchData'
+import { Decrypt } from '../../setup/Crypto/Cryption'
 //css
 import './HomePage.css'
 //types
@@ -13,7 +16,10 @@ import CurrentLocation from '../../components/Shared/CurrentLocation'
 
 
 const HomePage = () => {
-  const {data,isSuccess} = useFetchData<HomePageDataType>(HOME_PAGE_URL)
+  const {currentUserID} = useContext(UserContext)
+  const _currentUserID = Decrypt(currentUserID)
+
+  const {data,isSuccess} = useFetchData<HomePageDataType>(HOME_PAGE_URL, {userID: _currentUserID})
   const hasLocation = (data?.currentLocation != null)
 
   return isSuccess ? 

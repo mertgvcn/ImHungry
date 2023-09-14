@@ -7,7 +7,7 @@ import { ChangeContext } from '../../../context/ChangeContext'
 //CSS
 import '../styles/MenuItem.css'
 //TYPE
-import { MenuItemType } from '../../../types/RestaurantType'
+import { MenuItemType } from '../../../types/RestaurantDataType'
 //EXPORTED FUNCTIONS
 import { addToCart } from '../../../setup/API/cart_api'
 import { Decrypt } from '../../../setup/Crypto/Cryption'

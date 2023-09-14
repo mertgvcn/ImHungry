@@ -1,11 +1,18 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+//helpers
 import { UserContext } from "../../context/UserContext";
-import { CartContext, CartContextProvider } from "../../context/CartContext";
+import { CartContext } from "../../context/CartContext";
+import { getUserCartItemNumber, getUserCartItems } from "../../setup/API/cart_api";
+import { Decrypt } from "../../setup/Crypto/Cryption";
 //css
 import "./styles/Navbar.css";
+//type
+import { CartDataType, CartItemsType } from "../../types/CartDataType";
 //components
 import Cart from "../Cart/Cart";
 import UserMenu from "../UserMenu/UserMenu";
+import useDidMountUpdate from "../../hooks/useDidMountUpdate";
+import { useFetchData } from "../../hooks/useFetchData";
 
 
 type NavbarType = {
@@ -16,11 +23,35 @@ type NavbarType = {
 
 const Navbar = (props: NavbarType) => {
     //Context
-    const { cartItemAmount } = useContext(CartContext)
+    const { cartItemAmount, setCartItemAmount } = useContext(CartContext)
+    const { currentUserID } = useContext(UserContext)
+    const _currentUserID = Decrypt(currentUserID)
 
     //States
+    const [cartItems, setCartItems] = useState({
+        items: [],
+        isSuccess: false
+    })
     const [userMenuState, setUserMenuState] = useState<boolean>(false)
     const [cartState, setCartState] = useState<boolean>(false)
+
+    //Fetch cart items only if user clicks cart button.
+    const fetchCartItems = async (): Promise<void> => {
+        if (cartState) {
+            const data: any = await getUserCartItems(_currentUserID)
+            setCartItems({
+                items: data,
+                isSuccess: true
+            })
+        }
+
+        return new Promise((resolve) => { resolve() })
+    }
+
+    useDidMountUpdate(() => {
+        fetchCartItems()
+    }, [cartState])
+
 
     const goHome = () => {
         window.location.href = "/"
@@ -40,19 +71,16 @@ const Navbar = (props: NavbarType) => {
 
                             <div className="cart" onClick={() => { setCartState(!cartState) }}>
                                 <i id="cart-logo" className="fa-solid fa-basket-shopping"></i>
-                                {cartItemAmount && <div className="cart-badge">{cartItemAmount ? cartItemAmount : 0}</div>}
+                                {cartItemAmount && <div className="cart-badge">{cartItemAmount}</div>}
                             </div>
                         </div>
                     }
                 </div>
             </nav>
 
-            {/* {props.isFetched &&
-                <>
-                    <UserMenu trigger={userMenuState} setTrigger={setUserMenuState} />
-                    <Cart trigger={cartState} setTrigger={setCartState} cart={props.data.cart}/>
-                </>
-            } */}
+
+            {userMenuState && <UserMenu trigger={userMenuState} setTrigger={setUserMenuState} />}
+            {cartItems.isSuccess && <Cart trigger={cartState} setTrigger={setCartState} cartItems={cartItems.items} />}
 
         </>
     )

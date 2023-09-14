@@ -6,11 +6,17 @@ import { ProfilePageDataType } from '../../types/PageDataTypes/ProfilePageDataTy
 import Account from './components/Account/Account'
 import Location from './components/Location/Location'
 import CreditCard from './components/CreditCard/CreditCard'
+import { useContext } from 'react'
+import { UserContext } from '../../context/UserContext'
+import { Decrypt } from '../../setup/Crypto/Cryption'
 
 
 
 const ProfilePage = () => {
-  const {data,isSuccess} = useFetchData<ProfilePageDataType>(PROFILE_PAGE_URL)
+  const {currentUserID} = useContext(UserContext)
+  const _currentUserID = Decrypt(currentUserID)
+
+  const {data,isSuccess} = useFetchData<ProfilePageDataType>(PROFILE_PAGE_URL, {userID: _currentUserID})
 
   return isSuccess ? 
   (
