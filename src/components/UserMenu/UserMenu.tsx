@@ -3,6 +3,7 @@ import { UserContext } from '../../context/UserContext'
 import { CartContext } from '../../context/CartContext'
 //CSS
 import './styles/UserMenu.css'
+import { Link } from 'react-router-dom'
 
 
 type propsType = {
@@ -14,37 +15,37 @@ const UserMenu = (props: propsType) => {
     const { setCartItemAmount } = useContext(CartContext)
     const { setCurrentUserID, setIsLogin } = useContext(UserContext)
 
-    const handlePreviousOrders = () => {
-
-    }
-
-    const handleAccountSettings = () => {
-        window.location.href = "/profile"
-    }
+    const handlePreviousOrders = () => {}
 
     const handleLogOut = () => {
         setCurrentUserID("")
         setIsLogin("false")
         setCartItemAmount("")
-        window.location.href = "/"
+        props.setTrigger(false)
     }
 
     return props.trigger ? (
         <>
             <div className='user-menu'>
                 <div className="user-menu-buttons-wrapper">
-                    <button onClick={handlePreviousOrders}>
-                        <i className="fa-solid fa-boxes-stacked"></i>
-                        <p>Previous Orders</p>
-                    </button>
-                    <button onClick={handleAccountSettings}>
-                        <i className="fa-solid fa-gear"></i>
-                        <p>Account Settings</p>
-                    </button>
-                    <button onClick={handleLogOut}>
-                        <i className="fa-solid fa-right-from-bracket"></i>
-                        <p>Log Out</p>
-                    </button>
+                    <div>
+                        <Link to="/orders" className='link' onClick={handlePreviousOrders}>
+                            <i className="fa-solid fa-boxes-stacked"></i>
+                            <p>Previous Orders</p>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/profile" className='link' onClick={() => props.setTrigger(false)}>
+                            <i className="fa-solid fa-gear"></i>
+                            <p>Account Settings</p>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/" className='link' onClick={handleLogOut}>
+                            <i className="fa-solid fa-right-from-bracket"></i>
+                            <p>Log Out</p>
+                        </Link>
+                    </div>
                 </div>
             </div>
         </>
@@ -52,4 +53,4 @@ const UserMenu = (props: propsType) => {
     ) : null
 }
 
-export default UserMenu
+export default React.memo(UserMenu)

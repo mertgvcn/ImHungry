@@ -3,7 +3,7 @@ import { UserContext } from '../../context/UserContext'
 import { RestaurantContextProvider } from '../../context/RestaurantContext'
 //helpers
 import { HOME_PAGE_URL, useFetchData } from '../../hooks/useFetchData'
-import { Decrypt } from '../../setup/Crypto/Cryption'
+import { Decrypt } from '../../setup/Cryption'
 //css
 import './HomePage.css'
 //types

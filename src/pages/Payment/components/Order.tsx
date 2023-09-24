@@ -3,7 +3,7 @@ import { PaymentContext } from '../../../context/PaymentContext'
 import { ChangeContext } from '../../../context/ChangeContext'
 import { UserContext } from '../../../context/UserContext'
 //exported functions
-import { Decrypt } from '../../../setup/Crypto/Cryption'
+import { Decrypt } from '../../../setup/Cryption'
 //css
 import '../styles/Order.css'
 

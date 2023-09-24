@@ -16,7 +16,7 @@
     width: 100%;
 }
 
-.user-menu .user-menu-buttons-wrapper button {
+.user-menu .user-menu-buttons-wrapper div {
     display: flex;
     align-items: center;
     width: 100%;
@@ -27,13 +27,14 @@
     cursor: pointer;
 }
 
-.user-menu .user-menu-buttons-wrapper button i {
+.user-menu .user-menu-buttons-wrapper div i {
     color: rgb(84, 84, 84);
     margin-right: 5px;
+    margin-left: 5px;
 }
 
 
-.user-menu .user-menu-buttons-wrapper button:hover {
+.user-menu .user-menu-buttons-wrapper div:hover {
     background-color: #d79e875b;
 }
 

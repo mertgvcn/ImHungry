@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 //exported functions
-import { Decrypt, Encrypt } from '../../../../setup/Crypto/Cryption'
+import { Decrypt, Encrypt } from '../../../../setup/Cryption'
 import { changePass, verifyPass } from '../../../../setup/API/user_api'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css

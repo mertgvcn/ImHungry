@@ -4,6 +4,7 @@ import "./styles/MainPage.css"
 import Title from './components/Title'
 
 
+
 const MainPage = () => {
   return (
     <div className='main-background'>

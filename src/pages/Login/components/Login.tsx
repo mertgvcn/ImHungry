@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 //helpers
 import { getIDByUserName, login } from '../../../setup/API/user_api'
-import { Encrypt } from '../../../setup/Crypto/Cryption'
+import { Encrypt } from '../../../setup/Cryption'
 import { UserContext } from '../../../context/UserContext'
 import { usePopAlert } from '../../../hooks/usePopAlert'
 //components
@@ -11,9 +12,8 @@ import Alert from '../../../components/Shared/Alert'
 import "../styles/Login.css"
 
 
-
-
 const Login = () => {
+    const navigate = useNavigate()
     const { setIsLogin, setCurrentUserID } = useContext(UserContext)
 
     //LOGIN INPUTS
@@ -22,7 +22,7 @@ const Login = () => {
         password: ""
     })
     const [errors, setErrors] = useState<any>({})
-    const {alertStates, popAlert} = usePopAlert()
+    const { alertStates, popAlert } = usePopAlert()
 
     //IFORGOTMYPASSWORD 
     const [iForgotMyPass, setIForgotMyPass] = useState<boolean>(false);
@@ -46,14 +46,11 @@ const Login = () => {
             //redirect to home page
             popAlert("green", "Login successful!")
             resetInputs()
-            window.location.href = "home"
+            navigate("/home")
             return;
         }
     }
 
-    const handleRegister = () => {
-        window.location.href = "/registration"
-    }
 
     //Support functions
     const Validation = async () => {
@@ -127,8 +124,10 @@ const Login = () => {
                 <div id='login-buttons-wrapper'>
                     <input className='input-button' id='login' type="button"
                         value="Login" onClick={handleLogin} />
+
                     <input className='input-button' id='register' type="button"
-                        value="Register" onClick={handleRegister} />
+                        value="Register" onClick={() => navigate("/registration")} />
+                        
                     <input className='input-button' id='forgotpassword' type="button"
                         value="I forgot my password" onClick={() => setIForgotMyPass(true)} />
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 //EXPORTED FUNCTIONS
 import { adminLogin } from '../setup/API/admin_api';
-import { Encrypt } from '../setup/Crypto/Cryption';
+import { Encrypt } from '../setup/Cryption';
 //CSS
 import './styles/AdminLoginPage.css'
 

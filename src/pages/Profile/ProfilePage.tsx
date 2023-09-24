@@ -8,7 +8,7 @@ import Location from './components/Location/Location'
 import CreditCard from './components/CreditCard/CreditCard'
 import { useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
-import { Decrypt } from '../../setup/Crypto/Cryption'
+import { Decrypt } from '../../setup/Cryption'
 
 
 

@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { CartContext } from "../../context/CartContext";
 import { getUserCartItemNumber, getUserCartItems } from "../../setup/API/cart_api";
-import { Decrypt } from "../../setup/Crypto/Cryption";
+import { Decrypt } from "../../setup/Cryption";
 //css
 import "./styles/Navbar.css";
 //type
@@ -12,7 +12,8 @@ import { CartDataType, CartItemsType } from "../../types/CartDataType";
 import Cart from "../Cart/Cart";
 import UserMenu from "../UserMenu/UserMenu";
 import useDidMountUpdate from "../../hooks/useDidMountUpdate";
-import { useFetchData } from "../../hooks/useFetchData";
+import { Link } from "react-router-dom";
+
 
 
 type NavbarType = {
@@ -20,13 +21,14 @@ type NavbarType = {
 }
 
 
-
 const Navbar = (props: NavbarType) => {
+
     //Context
     const { cartItemAmount, setCartItemAmount } = useContext(CartContext)
     const { currentUserID } = useContext(UserContext)
     const _currentUserID = Decrypt(currentUserID)
 
+    
     //States
     const [cartItems, setCartItems] = useState({
         items: [],
@@ -34,6 +36,7 @@ const Navbar = (props: NavbarType) => {
     })
     const [userMenuState, setUserMenuState] = useState<boolean>(false)
     const [cartState, setCartState] = useState<boolean>(false)
+
 
     //Fetch cart items only if user clicks cart button.
     const fetchCartItems = async (): Promise<void> => {
@@ -53,16 +56,16 @@ const Navbar = (props: NavbarType) => {
     }, [cartState])
 
 
-    const goHome = () => {
-        window.location.href = "/"
-    }
 
     return (
         <>
             <nav id="navbar-wrapper">
                 <div id="navbar-components">
-                    <div id="navbar-title" onClick={goHome}>
-                        <p id="title"><i className="fa-solid fa-drumstick-bite" style={{ paddingRight: "8px" }}></i>Im Hungry</p>
+
+                    <div id="navbar-title">
+                        <Link to="/" className='link'>
+                            <p id="title"><i className="fa-solid fa-drumstick-bite" style={{ paddingRight: "8px" }}></i>Im Hungry</p>
+                        </Link>
                     </div>
 
                     {props.isLogin &&
@@ -76,7 +79,7 @@ const Navbar = (props: NavbarType) => {
                         </div>
                     }
                 </div>
-            </nav>
+            </nav >
 
 
             {userMenuState && <UserMenu trigger={userMenuState} setTrigger={setUserMenuState} />}

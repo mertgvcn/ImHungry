@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 //context
 import { UserContext } from '../../context/UserContext'
 import { CartContext } from '../../context/CartContext'
@@ -8,7 +8,7 @@ import { ChangeContext } from '../../context/ChangeContext'
 import './styles/Cart.css'
 //helpers
 import { getUserCartItems } from '../../setup/API/cart_api'
-import { Decrypt } from '../../setup/Crypto/Cryption'
+import { Decrypt } from '../../setup/Cryption'
 //Types
 import { CartItemsType } from '../../types/CartDataType'
 //Components
@@ -31,6 +31,7 @@ const Cart = (props: propsType) => {
   const { setCartItemAmount } = useContext(CartContext)
   const { currentUserID, } = useContext(UserContext)
   const _currentUserID = Decrypt(currentUserID)
+  const navigate = useNavigate()
 
 
   //Cart Alert State
@@ -114,7 +115,7 @@ const Cart = (props: propsType) => {
       return;
     }
 
-    window.location.href = "/payment"
+    navigate("/payment")
   }
 
   return (

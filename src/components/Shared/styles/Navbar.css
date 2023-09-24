@@ -128,3 +128,12 @@
         font-size: 10px;
     }
 }
+
+
+
+/*link style*/
+.link {
+    display: inherit;
+    text-decoration: inherit;
+    color: inherit;
+}

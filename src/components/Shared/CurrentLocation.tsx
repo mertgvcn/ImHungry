@@ -4,7 +4,7 @@ import { ChangeContext } from '../../context/ChangeContext'
 import { RestaurantContext } from '../../context/RestaurantContext'
 //exported functions
 import { deleteLocationByID, getLocationsByUserID } from '../../setup/API/location_api'
-import { Decrypt } from '../../setup/Crypto/Cryption'
+import { Decrypt } from '../../setup/Cryption'
 import { setCurrentLocation } from '../../setup/API/user_api'
 //css
 import './styles/CurrentLocation.css'

@@ -3,7 +3,7 @@ import { PaymentContext } from '../../context/PaymentContext'
 import { UserContext } from '../../context/UserContext'
 //exported functions
 import { deleteCC, getCC } from '../../setup/API/cc_api'
-import { Decrypt } from '../../setup/Crypto/Cryption'
+import { Decrypt } from '../../setup/Cryption'
 //css
 import './styles/RegisteredCC.css'
 //type
@@ -31,7 +31,6 @@ const RegisteredCC = () => {
     const fetchCC = async (): Promise<void> => {
         const data: any = await getCC(_currentUserID)
         setUserCCs(data)
-
         return new Promise((resolve) => { resolve() })
     }
 
@@ -45,7 +44,7 @@ const RegisteredCC = () => {
         }
     }
 
-    
+
     //Hide name on card for security
     const hideName = (cardHolderName: string) => {
         let hiddenName = ""

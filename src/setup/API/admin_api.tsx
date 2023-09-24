@@ -20,7 +20,7 @@ export const adminLogin = async (adminName: string, encrptedPassword: string) =>
 
 export const addRestaurant = (name: string, phoneNumber:string, email:string, description:string, imageSource:string) => {
     const response = axios.post('https://localhost:7181/api/Admin/addRestaurant', 
-    {
+    { 
         name: name,
         phoneNumber: phoneNumber,
         email: email,

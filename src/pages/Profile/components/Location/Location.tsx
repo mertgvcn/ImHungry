@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
-import { Decrypt } from '../../../../setup/Crypto/Cryption'
+import { Decrypt } from '../../../../setup/Cryption'
 import { getLocationsByUserID } from '../../../../setup/API/location_api'
 import useDidMountUpdate from '../../../../hooks/useDidMountUpdate'
 //type

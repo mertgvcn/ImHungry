@@ -6,7 +6,7 @@ import { ChangeContext } from '../../../context/ChangeContext'
 //exported functions
 import { getCurrentLocation } from '../../../setup/API/user_api'
 import { getRestaurants } from '../../../setup/API/restaurant_api'
-import { Decrypt } from '../../../setup/Crypto/Cryption'
+import { Decrypt } from '../../../setup/Cryption'
 import useDidMountUpdate from '../../../hooks/useDidMountUpdate'
 //type
 import { RestaurantDataType, RestaurantListType } from '../../../types/RestaurantDataType'

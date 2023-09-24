@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState } from "react"
+import { useNavigate } from 'react-router-dom'
 //helpers
-import { Encrypt } from '../../../setup/Crypto/Cryption'
+import { Encrypt } from '../../../setup/Cryption'
 import { register, isUserNameAlreadyExists } from '../../../setup/API/user_api'
 import { usePopAlert } from '../../../hooks/usePopAlert'
 //css
@@ -16,6 +17,7 @@ const passwordPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(\S).{8,20}$/
 
 
 const Register = () => {
+    const navigate = useNavigate() 
 
     //States
     const [formData, setFormData] = useState({
@@ -44,12 +46,8 @@ const Register = () => {
             await register(formData.firstName, formData.lastName, formData.username, formData.email, formData.phoneNumber, encryptedPass);
             resetInputs()
             popAlert("green", "Registration successful")
-            window.location.href = "/"
+            navigate("/login")
         }
-    }
-
-    const goLogin = () => {
-        window.location.href = "/login"
     }
 
 
@@ -195,8 +193,9 @@ const Register = () => {
                 <div id='register-buttons-wrapper'>
                     <input className='input-button' id='register' type="button"
                         value="Register" onClick={createUser} />
+
                     <input className='input-button' id='ihaveaccount' type="button"
-                        value="I already have an account" onClick={goLogin} />
+                        value="I already have an account" onClick={() => navigate("/login")} />
                 </div>
             </div>
         </>

@@ -3,7 +3,7 @@ import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { addCC } from '../../../../setup/API/cc_api'
-import { Decrypt } from '../../../../setup/Crypto/Cryption'
+import { Decrypt } from '../../../../setup/Cryption'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/CreditCardAdd.css'

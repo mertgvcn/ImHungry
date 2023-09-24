@@ -10,7 +10,7 @@ import '../styles/MenuItem.css'
 import { MenuItemType } from '../../../types/RestaurantDataType'
 //EXPORTED FUNCTIONS
 import { addToCart } from '../../../setup/API/cart_api'
-import { Decrypt } from '../../../setup/Crypto/Cryption'
+import { Decrypt } from '../../../setup/Cryption'
 import Alert from '../../../components/Shared/Alert'
 
 

@@ -123,3 +123,13 @@
 [0913/084734.253:ERROR:check.cc(222)] Check failed: false. 
 [0914/000252.636:ERROR:check.cc(222)] Check failed: false. 
 [0914/182207.855:ERROR:check.cc(222)] Check failed: false. 
+[0914/183758.345:ERROR:check.cc(222)] Check failed: false. 
+[0914/224719.166:ERROR:check.cc(222)] Check failed: false. 
+[0916/162341.429:ERROR:check.cc(222)] Check failed: false. 
+[0918/220515.959:ERROR:check.cc(222)] Check failed: false. 
+[0918/230350.537:ERROR:check.cc(222)] Check failed: false. 
+[0918/234404.533:ERROR:check.cc(222)] Check failed: false. 
+[0918/235138.012:ERROR:check.cc(222)] Check failed: false. 
+[0918/235222.293:ERROR:check.cc(222)] Check failed: false. 
+[0921/153705.817:ERROR:check.cc(298)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
+[0924/221736.141:ERROR:check.cc(298)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!

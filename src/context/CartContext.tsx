@@ -1,7 +1,7 @@
 import axios from "axios";
 import { ReactNode, createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import { Decrypt } from "../setup/Crypto/Cryption";
+import { Decrypt } from "../setup/Cryption";
 
 const API_KEY = process.env.REACT_APP_APIKEY
 

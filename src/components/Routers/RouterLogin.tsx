@@ -13,7 +13,7 @@ import PaymentPage from "../../pages/Payment/PaymentPage"
 export default function RouterLogin() {
 
     return (
-        <BrowserRouter>
+        <>
             <Routes>
                 {/*USER*/}
                 <Route path="/" element={<HomePage/>} />
@@ -25,7 +25,7 @@ export default function RouterLogin() {
                 <Route path="/admin-login" element={<AdminLoginPage />} />
                 <Route path="/admin-panel" element={<AdminPanel />} />
             </Routes>
-        </BrowserRouter>
+        </>
     )
 
 
