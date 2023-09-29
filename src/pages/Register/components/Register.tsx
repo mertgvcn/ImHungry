@@ -2,13 +2,15 @@ import React from 'react'
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
 //helpers
+import { RegisterUserAsync } from '../../../setup/API/auth_api'
 import { Encrypt } from '../../../setup/Cryption'
-import { register, isUserNameAlreadyExists } from '../../../setup/API/user_api'
 import { usePopAlert } from '../../../hooks/usePopAlert'
 //css
 import "../styles/Register.css"
 //components
 import Alert from "../../../components/Shared/Alert"
+//types
+import { UserRegisterRequest } from '../../../models/parameters/authParams/UserRegisterRequest'
 
 
 const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -42,11 +44,26 @@ const Register = () => {
     const createUser = async () => {
         if (await Validation()) {
             const encryptedPass = Encrypt(formData.password)
+            const registerParams: UserRegisterRequest = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                username: formData.username,
+                email: formData.email,
+                phoneNumber: formData.phoneNumber,
+                password: encryptedPass,
+            }
+            const response = await RegisterUserAsync(registerParams)
 
-            await register(formData.firstName, formData.lastName, formData.username, formData.email, formData.phoneNumber, encryptedPass);
-            resetInputs()
-            popAlert("green", "Registration successful")
-            navigate("/login")
+            if(response.isSuccess) {
+                resetInputs()
+                popAlert("green", "Registration successful")
+                setTimeout(() => {
+                    navigate("/login")
+                }, 2000)
+            }
+            else {
+                popAlert("red", response.errorMessage)
+            }
         }
     }
 
@@ -78,9 +95,6 @@ const Register = () => {
         }
         else if (formData.username.trim().length < 4 || formData.username.trim().length > 25) {
             validationErrors.username = "*Username must be between 4-25 characters"
-        }
-        else if (await isUserNameAlreadyExists(formData.username)) {
-            validationErrors.username = "*Invalid username"
         }
 
         //email

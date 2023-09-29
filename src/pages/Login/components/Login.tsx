@@ -1,20 +1,22 @@
-import { useContext, useState } from 'react'
+import {  useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 //helpers
-import { getIDByUserName, login } from '../../../setup/API/user_api'
+import { LoginUserAsync } from '../../../setup/API/auth_api'
+import { setCookie } from '../../../setup/Cookie'
 import { Encrypt } from '../../../setup/Cryption'
-import { UserContext } from '../../../context/UserContext'
 import { usePopAlert } from '../../../hooks/usePopAlert'
 //components
 import IForgotMyPassword from './IForgotMyPassword'
 import Alert from '../../../components/Shared/Alert'
 //css
 import "../styles/Login.css"
+//types
+import { UserLoginRequest } from '../../../models/parameters/authParams/UserLoginRequest'
+
 
 
 const Login = () => {
     const navigate = useNavigate()
-    const { setIsLogin, setCurrentUserID } = useContext(UserContext)
 
     //LOGIN INPUTS
     const [formData, setFormData] = useState({
@@ -36,18 +38,26 @@ const Login = () => {
 
     const handleLogin = async () => {
         if (await Validation()) {
-            //set user that logged in as current user 
-            const data = await getIDByUserName(formData.userName)
-            const userID = data[0].userID.toString()
-            const _currentUserID = Encrypt(userID)
-            setCurrentUserID(_currentUserID)
-            setIsLogin("true")
+            const encryptedPass = Encrypt(formData.password);
+            const loginParams: UserLoginRequest = {
+                username: formData.userName,
+                password: encryptedPass
+            }
+            const response = await LoginUserAsync(loginParams)
 
-            //redirect to home page
-            popAlert("green", "Login successful!")
-            resetInputs()
-            navigate("/home")
-            return;
+            if(!response.authenticateResult) {
+                popAlert("red", "Username or password is wrong!")
+                return;
+            }
+            else {
+                setCookie("jwt", response.authToken, response.accessTokenExpireDate)
+                popAlert("green", "Login successful!")
+                resetInputs()
+                setTimeout(() => {
+                    navigate("/home")
+                }, 2000)
+                return;
+            }
         }
     }
 
@@ -71,14 +81,6 @@ const Login = () => {
         if (Object.keys(validationErrors).length != 0) {
             isValid = false
             setErrors(validationErrors)
-        }
-        else {
-            const encryptedPass = Encrypt(formData.password);
-            if (await login(formData.userName, encryptedPass) == false) {
-                validationErrors.password = "*User name or password is wrong"
-                isValid = false
-                setErrors(validationErrors)
-            }
         }
 
         return isValid
@@ -127,7 +129,7 @@ const Login = () => {
 
                     <input className='input-button' id='register' type="button"
                         value="Register" onClick={() => navigate("/registration")} />
-                        
+
                     <input className='input-button' id='forgotpassword' type="button"
                         value="I forgot my password" onClick={() => setIForgotMyPass(true)} />
                 </div>

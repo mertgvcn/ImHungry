@@ -1,13 +1,14 @@
-export function setCookie(key: string, value: any, daysToLive: number) {
-    const date = new Date()
-    date.setTime(date.getTime() + (daysToLive * 24 * 60 * 60 * 1000)) //convert to ms
-    
-    let expires = "expires=" + date.toUTCString()
+export function setCookie(key: string, value: any, expireDate: Date) {
+    const date = new Date(expireDate)
+
+    let expires = "expires=" + date
     document.cookie = `${key}=${value}; ${expires};`
 } 
 
 export function deleteCookie(key: string) {
-    setCookie(key, null, 0)
+    const date = new Date()
+    date.setTime(date.getTime())
+    setCookie(key, null, date)
 }
 
 export function getCookie(key: string) {
