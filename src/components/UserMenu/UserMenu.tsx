@@ -1,9 +1,8 @@
-import React, { useContext, useState } from 'react'
-import { UserContext } from '../../context/UserContext'
-import { CartContext } from '../../context/CartContext'
+import React from 'react'
 //CSS
 import './styles/UserMenu.css'
 import { Link } from 'react-router-dom'
+import { deleteCookie } from '../../setup/Cookie'
 
 
 type propsType = {
@@ -12,16 +11,13 @@ type propsType = {
 }
 
 const UserMenu = (props: propsType) => {
-    const { setCartItemAmount } = useContext(CartContext)
-    const { setCurrentUserID, setIsLogin } = useContext(UserContext)
 
     const handlePreviousOrders = () => {}
 
     const handleLogOut = () => {
-        setCurrentUserID("")
-        setIsLogin("false")
-        setCartItemAmount("")
+        deleteCookie("jwt")
         props.setTrigger(false)
+        window.location.href = "/"
     }
 
     return props.trigger ? (
@@ -40,11 +36,9 @@ const UserMenu = (props: propsType) => {
                             <p>Account Settings</p>
                         </Link>
                     </div>
-                    <div>
-                        <Link to="/" className='link' onClick={handleLogOut}>
+                    <div onClick={handleLogOut}>
                             <i className="fa-solid fa-right-from-bracket"></i>
                             <p>Log Out</p>
-                        </Link>
                     </div>
                 </div>
             </div>

@@ -136,3 +136,5 @@
 [0925/010309.662:ERROR:check.cc(298)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
 [0929/215520.048:ERROR:check.cc(298)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
 [0929/220737.342:ERROR:check.cc(298)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
+[0930/141422.686:ERROR:check.cc(298)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
+[0930/180327.929:ERROR:check.cc(298)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!

@@ -6,9 +6,7 @@ export function setCookie(key: string, value: any, expireDate: Date) {
 } 
 
 export function deleteCookie(key: string) {
-    const date = new Date()
-    date.setTime(date.getTime())
-    setCookie(key, null, date)
+    document.cookie = key + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 }
 
 export function getCookie(key: string) {

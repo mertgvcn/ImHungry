@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 //helpers
 import { LoginUserAsync } from '../../../setup/API/auth_api'
@@ -45,7 +45,7 @@ const Login = () => {
             }
             const response = await LoginUserAsync(loginParams)
 
-            if(!response.authenticateResult) {
+            if (!response.authenticateResult) {
                 popAlert("red", "Username or password is wrong!")
                 return;
             }
@@ -54,7 +54,7 @@ const Login = () => {
                 popAlert("green", "Login successful!")
                 resetInputs()
                 setTimeout(() => {
-                    navigate("/home")
+                    window.location.href = "/home"
                 }, 2000)
                 return;
             }

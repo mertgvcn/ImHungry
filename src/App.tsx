@@ -1,27 +1,19 @@
 //Context
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./context/UserContext";
 //Components
 import Layout from "./Layout";
+import { getCookie } from "./setup/Cookie";
 
 
 const App = () => {
-  const { isLogin } = useContext(UserContext)
-  const _isLogin: boolean = (isLogin == "true")
+  const isLogin = getCookie("jwt").length != 0
 
-
-  //If isLogin is not a empty string, it means that we fetched isLogin value from LocalStorage.
-  return isLogin ? 
-  (
+  return (
     <>
-      <Layout isLogin={_isLogin} />
+      <Layout isLogin={isLogin} />
     </>
-  ) 
-  : 
-  (
-    <>Loading...</>
   )
-
 }
 
 export default App;

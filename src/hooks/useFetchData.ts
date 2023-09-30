@@ -1,18 +1,16 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import axios from "axios"
-//context
-import { UserContext } from "../context/UserContext"
+//helpers
+import { getCookie } from "../setup/Cookie"
 
 
-const API_KEY = process.env.REACT_APP_APIKEY
+const API_KEY = 'bearer ' + getCookie("jwt")
 export const HOME_PAGE_URL = "https://localhost:7181/api/PageContent/HomePageData"
 export const PROFILE_PAGE_URL = "https://localhost:7181/api/PageContent/ProfilePageData"
 export const RES_DETAILS_PAGE_URL = "https://localhost:7181/api/PageContent/RestaurantDetailsPageData"
 
 
-export const useFetchData = <T>(apiURL: string, params: {}) => {
-    
-    const { currentUserID } = useContext(UserContext) //understand if logged in
+export const useFetchData = <T>(apiURL: string, params?: {}) => {
 
     const [data, setData] = useState<T | null>(null) //Generic return type
     const isFetched = useRef<boolean>(false)
@@ -22,7 +20,7 @@ export const useFetchData = <T>(apiURL: string, params: {}) => {
         const response = await axios.get(apiURL, {
             params: params,
             headers: {
-                'x-api-key': API_KEY
+                'Authorization': API_KEY
             }
         })
 
@@ -36,11 +34,11 @@ export const useFetchData = <T>(apiURL: string, params: {}) => {
 
     //Avoid fetch twice
     useEffect(() => {
-        if (currentUserID && !isFetched.current) {
+        if (getCookie("jwt") && !isFetched.current) {
             asyncFetch()
             isFetched.current = true
         }
-    }, [currentUserID])
+    }, [getCookie("jwt")])
 
 
     const isSuccess = isFetched.current
