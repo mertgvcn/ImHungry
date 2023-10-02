@@ -2,13 +2,14 @@ import React, { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
-import { addLocation } from '../../../../setup/API/location_api'
+import { AddLocation } from '../../../../setup/API/location_api'
 import { Decrypt } from '../../../../setup/Cryption'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/LocationAdd.css'
 //components
 import Alert from '../../../../components/Shared/Alert'
+import { AddLocationRequest } from '../../../../models/parameters/locationParams/AddLocationRequest'
 
 type propsType = {
     trigger: boolean,
@@ -50,8 +51,19 @@ const LocationAdd = (props: propsType) => {
     const handleAdd = async () => {
         if (Validation()) {
             try {
-                await addLocation(_currentUserID, formData.title, formData.province, formData.district, formData.neighbourhood,
-                    formData.street, formData.buildingNo, formData.buildingAddition, formData.apartmentNo, formData.note)
+                const addLocationParams: AddLocationRequest = {
+                    locationTitle: formData.title,
+                    province: formData.province,
+                    district: formData.district,
+                    neighbourhood: formData.neighbourhood,
+                    street: formData.street,
+                    buildingNo: formData.buildingNo,
+                    buildingAddition: formData.buildingAddition,
+                    apartmentNo: formData.apartmentNo,
+                    note: formData.note
+                }
+
+                await AddLocation(addLocationParams)
                 popAlert("green", "Addrees successfuly added")
                 setLocationToggle(!locationToggle)
                 resetInputs()

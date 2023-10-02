@@ -5,7 +5,6 @@ import { UserLoginResponse } from "../../models/parameters/authParams/UserLoginR
 import { UserRegisterRequest } from "../../models/parameters/authParams/UserRegisterRequest"
 import { UserRegisterResponse } from "../../models/parameters/authParams/UserRegisterResponse"
 
-const API_KEY = process.env.REACT_APP_APIKEY
 
 export const LoginUserAsync = async (params: UserLoginRequest): Promise<UserLoginResponse> => {
     const response = await axios.post('https://localhost:7181/api/Auth/login', {

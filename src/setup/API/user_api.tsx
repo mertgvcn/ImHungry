@@ -1,137 +1,107 @@
 import axios, { Axios, AxiosResponse } from 'axios';
 import React from 'react'
+import { getCookie } from '../Cookie';
+import { SetAccountInfoRequest } from '../../models/parameters/userParams/SetAccountInfoRequest';
 
-const API_KEY = process.env.REACT_APP_APIKEY
+const API_KEY = 'bearer ' + getCookie("jwt")
+
+
+export const GetCurrentLocation = async (): Promise<AxiosResponse> => {
+    const response = await axios.get('https://localhost:7181/api/User/GetCurrentLocation', {
+        headers: {
+            'Authorization': API_KEY
+        }
+    })
+
+    return response.data
+}
+
+export const SetCurrentLocation = async (locationID: number) => {
+    const response = await axios.put('https://localhost:7181/api/User/setCurrentLocation',
+        {
+            locationID
+        },
+        {
+            headers: {
+                'Authorization': API_KEY
+            }
+        })
+
+    return response.data
+}
+
+export const SetAccountInfo = async (params: SetAccountInfoRequest) => {
+    const response = await axios.put('https://localhost:7181/api/User/SetAccountInfo',
+        {
+            firstName: params.firstName,
+            lastName: params.lastName,
+            userName: params.userName,
+            email: params.email,
+            phoneNumber: params.phoneNumber,
+        },
+        {
+            headers: {
+                'Authorization': API_KEY
+            }
+        })
+
+    return response.data
+}
 
 export const VerifyUsername = async (username: string) => {
-    const response = await axios.put('https://localhost:7181/api/User/VerifyUsername', 
+    const response = await axios.post('https://localhost:7181/api/User/VerifyUsername', 
     {
         username
     },
     {
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     });
 
     return response.data;
 }
 
-//!IForgotMyPassword API's
-export const searchEmail = async (email: string) => {
-    const response = await axios('https://localhost:7181/api/User/searchEmail', {
-        params: {
-            email: email
-        },
-        headers: {
-            'x-api-key': API_KEY
-        }
-    })
-
-    return response.data
-}
-
-//!Profile API'S
-export const updateAccountInfo = async (userID: number, firstName: string, lastName: string, userName: string, email: string, phoneNumber: string) => {
-    const response = await axios.put('https://localhost:7181/api/User/updateAccountInfo',
-        {
-            userID: userID,
-            firstName: firstName,
-            lastName: lastName,
-            userName: userName,
-            email: email,
-            phoneNumber: phoneNumber,
-            password: "",
-            locationID: null
-        },
-        {
-            headers: {
-                'x-api-key': API_KEY
-            }
-        })
-
-    return response.data
-}
-
-export const searchUserName = async (userName: string) => {
-    const response = await axios.get('https://localhost:7181/api/User/searchUserName', {
-        params: {
-            userName: userName
-        },
-        headers: {
-            'x-api-key': API_KEY
-        }
-    })
-
-    return response.data
-}
-
-export const changePass = async (userID: number, newPassword: string) => {
-    const response = await axios.put('https://localhost:7181/api/User/changePassword',
-        {
-            userID: userID,
-            firstName: "",
-            lastName: "",
-            userName: "",
-            email: "",
-            phoneNumber: "",
-            password: newPassword
-        },
-        {
-            headers: {
-                'x-api-key': API_KEY
-            }
-        })
-
-    return response.data
-}
-
-export const verifyPass = async (userID: number, password: string) => {
-    const response = await axios.get('https://localhost:7181/api/User/verifyPassByID',
+export const VerifyEmail = async (email: string) => {
+    const response = await axios.post('https://localhost:7181/api/User/VerifyEmail', 
     {
-        params: {
-            userID: userID,
-            password: password
-        },
+        email
+    },
+    {
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
+        }
+    })
+
+    return response.data
+}
+
+export const VerifyPassword = async (password: string) => {
+    const response = await axios.post('https://localhost:7181/api/User/VerifyPassword',
+    {
+        password
+    },
+    {
+        headers: {
+            'Authorization': API_KEY
         }
     })
 
 return response.data
 }
 
-//!LOCATION
-export const getCurrentLocation = async (userID: number): Promise<AxiosResponse> => {
-    const response = await axios.get('https://localhost:7181/api/User/getCurrentLocation', {
-        params: {
-            userID: userID
-        },
-        headers: {
-            'x-api-key': API_KEY
-        }
-    })
-
-    return response.data
-}
-
-export const setCurrentLocation = async (userID: number, locationID: number) => {
-    const response = await axios.put('https://localhost:7181/api/User/setCurrentLocation',
+export const ChangePassword = async (encryptedPassword: string) => {
+    const response = await axios.put('https://localhost:7181/api/User/ChangePassword',
         {
-            userID: userID,
-            firstName: "",
-            lastName: "",
-            userName: "",
-            email: "",
-            phoneNumber: "",
-            password: "",
-            locationID: locationID
+            encryptedPassword
         },
         {
             headers: {
-                'x-api-key': API_KEY
+                'Authorization': API_KEY
             }
         })
 
     return response.data
 }
+
+

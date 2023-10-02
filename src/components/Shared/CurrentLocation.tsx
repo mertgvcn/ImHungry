@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { UserContext } from '../../context/UserContext'
+import { useContext, useState } from 'react'
 import { ChangeContext } from '../../context/ChangeContext'
-import { RestaurantContext } from '../../context/RestaurantContext'
 //exported functions
-import { deleteLocationByID, getLocationsByUserID } from '../../setup/API/location_api'
-import { Decrypt } from '../../setup/Cryption'
-import { setCurrentLocation } from '../../setup/API/user_api'
+import { DeleteLocationByLocationID, GetUserLocationList } from '../../setup/API/location_api'
+import { SetCurrentLocation } from '../../setup/API/user_api'
 //css
 import './styles/CurrentLocation.css'
 //types
@@ -24,10 +21,8 @@ type currentLocationType = {
 const CurrentLocation = (props: currentLocationType) => {
     //Context
     const { locationToggle, setLocationToggle, restaurantToggle, setRestaurantToggle } = useContext(ChangeContext)
-    const { currentUserID } = useContext(UserContext)
 
     //Constants
-    const _currentUserID = Decrypt(currentUserID)
     const initialLocationString = props.currentLocation ? getLocString(props.currentLocation) : ""
 
     //States
@@ -39,7 +34,7 @@ const CurrentLocation = (props: currentLocationType) => {
 
     //fetch other locations
     const fetchLocationsOfUser = async (): Promise<void> => {
-        const data: any = await getLocationsByUserID(_currentUserID)
+        const data: any = await GetUserLocationList()
         setUserLocations(data)
 
         return new Promise((resolve) => { resolve() })
@@ -78,7 +73,7 @@ const CurrentLocation = (props: currentLocationType) => {
 
                             {/* Loc Info */}
                             <div className='location-info' onClick={async () => {
-                                await setCurrentLocation(_currentUserID, location.locationID);
+                                await SetCurrentLocation(location.locationID);
                                 setDisplayedLocation(getLocString(location))
                                 setLocationToggle(!locationToggle);
                                 setRestaurantToggle(!restaurantToggle); //if current location changes, we need to update restaurant list
@@ -119,7 +114,7 @@ const CurrentLocation = (props: currentLocationType) => {
 
                             {/* Delete Loc */}
                             <div className='location-delete' onClick={async () => {
-                                await deleteLocationByID(location.locationID);
+                                await DeleteLocationByLocationID(location.locationID);
                                 setDropDownState(!dropDownState)
                                 handleFetchOtherLocations(true)
                             }}>

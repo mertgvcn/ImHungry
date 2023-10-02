@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-//EXPORTED FUNCTIONS
-import { getRestaurantDetail } from '../../../setup/API/restaurant_api'
 //Type
 import { RestaurantDetail } from '../../../types/RestaurantDataType'
 //CSS

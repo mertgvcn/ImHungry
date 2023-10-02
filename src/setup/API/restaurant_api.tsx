@@ -1,73 +1,22 @@
 import axios from 'axios';
 import React from 'react'
+import { getCookie } from '../Cookie';
+import { GetRestaurantListByLocationRequest } from '../../models/parameters/restaurantParams/GetRestaurantListByLocationRequest';
 
-const API_KEY = process.env.REACT_APP_APIKEY
+const API_KEY = 'bearer ' + getCookie("jwt")
 
 
-export const getRestaurants = async (province: string|null, district: string|null) => {
-    const response = await axios.get('https://localhost:7181/api/Restaurant/GetRestaurants', {
-        params: {
-            province: province,
-            district: district,
-        },
+export const GetRestaurantListByLocation = async (params: GetRestaurantListByLocationRequest | null) => {
+    const response = await axios.post('https://localhost:7181/api/Restaurant/GetRestaurantListByLocation',
+    {
+        province: params?.province,
+        district: params?.district
+    },
+    {
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     })
-
-    return response.data
-}
-
-export const getRestaurantDetail = async (restaurantID: number) => {
-    const response = await axios.get('https://localhost:7181/api/Restaurant/GetDetailsByRestaurantID', {
-        params: {
-            restaurantID: restaurantID
-        },
-        headers: {
-            'x-api-key': API_KEY
-        }
-    }) 
-
-    return response.data
-}
-
-export const getRestaurantName = async (restaurantID: number) => {
-    const response = await axios.get('https://localhost:7181/api/Restaurant/GetNameByRestaurantID', {
-        params: {
-            restaurantID: restaurantID
-        },
-        headers: {
-            'x-api-key': API_KEY
-        }
-    }) 
-
-    return response.data
-}
-
-//Gives us distinct category id and category name according to categories the restaurant has
-export const getMenuTitles = async (restaurantID: number) => { 
-    const response = await axios.get('https://localhost:7181/api/Restaurant/GetMenuTitlesByRestaurantID', {
-        params: {
-            restaurantID: restaurantID
-        },
-        headers: {
-            'x-api-key': API_KEY
-        }
-    }) 
-
-    return response.data
-}
-
-//Gives us all menu items (to extract by categories, combine it with getMenuTitles)
-export const getMenu = async (restaurantID: number) => {
-    const response = await axios.get('https://localhost:7181/api/Restaurant/GetMenuByRestaurantID', {
-        params: {
-            restaurantID: restaurantID
-        },
-        headers: {
-            'x-api-key': API_KEY
-        }
-    }) 
 
     return response.data
 }

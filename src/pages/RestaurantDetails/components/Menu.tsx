@@ -1,7 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-//EXPORTED FUNCTIONS
-import { getMenuTitles, getMenu } from '../../../setup/API/restaurant_api'
+import { useEffect, useRef, useState } from 'react'
 //TYPE
 import { CategoryType, MenuType } from '../../../types/RestaurantDataType'
 //CSS
@@ -33,11 +30,11 @@ const Menu = (props: MenuPropType) => {
 
     //Functions
     const extractCategoryNames = () => {
-        var categoryNames: string[] = []
+        var categoryNames: string[] = [] //we need categoryNames to track menuTitles
         var menuTitles: CategoryType[] = [] //not primitive type, includes() doesnt work for this.
 
         menu.map((item) => {
-            if (!categoryNames.includes(item.categoryName)) {
+            if (!categoryNames.includes(item.categoryName)) { 
                 categoryNames.push(item.categoryName)
                 menuTitles.push({
                     categoryID: item.categoryID,

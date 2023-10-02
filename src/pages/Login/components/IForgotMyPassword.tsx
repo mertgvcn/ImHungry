@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 //helpers
-import { searchEmail } from '../../../setup/API/user_api';
+import { VerifyEmail } from '../../../setup/API/user_api';
 import { usePopAlert } from '../../../hooks/usePopAlert';
 //css
 import '../styles/IForgotMyPassword.css'
@@ -27,7 +27,7 @@ const IForgotMyPassword = (props: propsType) => {
             return;
         }
 
-        if(await searchEmail(email)) {
+        if(await VerifyEmail(email)) {
             popAlert("green", "We sent your new password to your email adress!")
         }else {
             popAlert("red", "This email is not registered!")

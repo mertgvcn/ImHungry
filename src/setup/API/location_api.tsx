@@ -1,38 +1,36 @@
 import axios, { AxiosResponse } from 'axios';
 import React from 'react'
+import { getCookie } from '../Cookie';
+import { AddLocationRequest } from '../../models/parameters/locationParams/AddLocationRequest';
 
-const API_KEY = process.env.REACT_APP_APIKEY
+const API_KEY = 'bearer ' + getCookie("jwt")
 
-export const getLocationsByUserID = async (userID: number): Promise<AxiosResponse> => {
-    const response = await axios.get('https://localhost:7181/api/Location/getLocationsByUserID', {
-        params: {
-            userID: userID
-        }, 
+export const GetUserLocationList = async (): Promise<AxiosResponse> => {
+    const response = await axios.get('https://localhost:7181/api/Location/GetUserLocationList', {
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     })
 
     return response.data
 }
 
-export const addLocation = async (userID: number, locationTitle:string, province: string, district: string, neighbourhood: string, street: string, buildingNo: string, buildingAddition:string, apartmentNo: string, note:string): Promise<AxiosResponse> => {
+export const AddLocation = async (params: AddLocationRequest): Promise<AxiosResponse> => {
     const response = await axios.post('https://localhost:7181/api/Location/addLocation', 
     {
-        userID: userID,
-        locationTitle: locationTitle,
-        province: province,
-        district: district,
-        neighbourhood: neighbourhood,
-        street: street,
-        buildingNo: buildingNo,
-        buildingAddition: buildingAddition,
-        apartmentNo: apartmentNo,
-        note: note
+        locationTitle: params.locationTitle,
+        province: params.province,
+        district: params.district,
+        neighbourhood: params.neighbourhood,
+        street: params.street,
+        buildingNo: params.buildingNo,
+        buildingAddition: params.buildingAddition,
+        apartmentNo: params.apartmentNo,
+        note: params.note
     },
     {
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     }
     );
@@ -40,13 +38,13 @@ export const addLocation = async (userID: number, locationTitle:string, province
 return response.data;
 }
 
-export const deleteLocationByID = async (locationID: number): Promise<AxiosResponse> => {
+export const DeleteLocationByLocationID = async (locationID: number): Promise<AxiosResponse> => {
     const response = await axios.delete('https://localhost:7181/api/Location/deleteByID', {
         params: {
             locationID: locationID,
         },
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     })
 

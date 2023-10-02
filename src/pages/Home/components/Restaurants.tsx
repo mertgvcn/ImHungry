@@ -1,12 +1,10 @@
 import { useContext, useState } from 'react'
 //context
 import { RestaurantContext } from '../../../context/RestaurantContext'
-import { UserContext } from '../../../context/UserContext'
 import { ChangeContext } from '../../../context/ChangeContext'
 //exported functions
-import { getCurrentLocation } from '../../../setup/API/user_api'
-import { getRestaurants } from '../../../setup/API/restaurant_api'
-import { Decrypt } from '../../../setup/Cryption'
+import { GetCurrentLocation } from '../../../setup/API/user_api'
+import { GetRestaurantListByLocation } from '../../../setup/API/restaurant_api'
 import useDidMountUpdate from '../../../hooks/useDidMountUpdate'
 //type
 import { RestaurantDataType, RestaurantListType } from '../../../types/RestaurantDataType'
@@ -14,6 +12,7 @@ import { RestaurantDataType, RestaurantListType } from '../../../types/Restauran
 import '../styles/Restaurants.css'
 //components
 import RestaurantCard from './RestaurantCard'
+import { GetRestaurantListByLocationRequest } from '../../../models/parameters/restaurantParams/GetRestaurantListByLocationRequest'
 
 
 type RestaurantsType = {
@@ -26,22 +25,25 @@ const Restaurants = (props: RestaurantsType) => {
   //context
   const { filteredName } = useContext(RestaurantContext)
   const { restaurantToggle } = useContext(ChangeContext)
-  const { currentUserID } = useContext(UserContext)
-  const _currentUserID = Decrypt(currentUserID)
 
   //if prop.restaurant is null, restaurantList = []. Otherwise it gets the list from prop.restaurant.restaurantList
   const [restaurantList, setRestaurantList] = useState<RestaurantListType[]>(props.restaurant ? props.restaurant.restaurantList : [])
 
   //if change occurs on location, restaurants gonna be fetched and set locally. 
   const fetchRestaurants = async () => {
-    const data: any = await getCurrentLocation(_currentUserID)
+    const data: any = await GetCurrentLocation()
 
     if (!data) {
       props.hasLocation = false
       return;
     }
     else {
-      const response = await getRestaurants(data.province, data.district);
+      const getRestaurantListByLocationParams: GetRestaurantListByLocationRequest = {
+        province: data.province,
+        district: data.district
+      }
+
+      const response = await GetRestaurantListByLocation(getRestaurantListByLocationParams);
       setRestaurantList(response)
     }
   }
@@ -49,7 +51,6 @@ const Restaurants = (props: RestaurantsType) => {
   useDidMountUpdate(() => {
     fetchRestaurants();
   }, [restaurantToggle])
-
 
 
   return (

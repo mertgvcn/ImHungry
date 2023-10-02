@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
-import { deleteLocationByID } from '../../../../setup/API/location_api'
+import { DeleteLocationByLocationID } from '../../../../setup/API/location_api'
 //type
 import { LocationCardType } from '../../../../types/LocationDataType'
 //css
@@ -13,7 +13,7 @@ const LocationCard = ({ data: { locationTitle, province, district, neighbourhood
 
     const deleteLocation = async () => {
         try {
-            await deleteLocationByID(locationID);
+            await DeleteLocationByLocationID(locationID);
             setLocationToggle(!locationToggle)
         } catch (error) {
             console.log(error)

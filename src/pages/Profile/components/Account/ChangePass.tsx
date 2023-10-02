@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 //exported functions
 import { Decrypt, Encrypt } from '../../../../setup/Cryption'
-import { changePass, verifyPass } from '../../../../setup/API/user_api'
+import { ChangePassword, VerifyPassword } from '../../../../setup/API/user_api'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/ChangePass.css'
@@ -45,7 +45,7 @@ const ChangePass = (props: propsType) => {
   
   const handleSave = async () => {
     if (await Validation()) {
-      if (await changePass(_currentUserID, Encrypt(formData.newPassword))) {
+      if (await ChangePassword(Encrypt(formData.newPassword))) {
         popAlert("green", "Password successfuly changed")
         resetInputs()
         setTimeout(() => {
@@ -65,7 +65,7 @@ const ChangePass = (props: propsType) => {
     if(!formData.password.trim()) {
       validationErrors.password = "*Cannot be left blank"
     }
-    else if(!await verifyPass(_currentUserID, formData.password)) {
+    else if(!await VerifyPassword(formData.password)) {
       validationErrors.password = "*Password is wrong"
     }
 

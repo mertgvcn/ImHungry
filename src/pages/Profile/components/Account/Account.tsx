@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Cryption'
-import { searchUserName, updateAccountInfo } from '../../../../setup/API/user_api'
+import { VerifyUsername, SetAccountInfo } from '../../../../setup/API/user_api'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/Account.css'
@@ -11,6 +11,7 @@ import { AccountInfoType } from '../../../../types/UserDataType'
 //components
 import Alert from '../../../../components/Shared/Alert'
 import ChangePass from './ChangePass'
+import { SetAccountInfoRequest } from '../../../../models/parameters/userParams/SetAccountInfoRequest'
 
 
 const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -54,10 +55,19 @@ const Account = (props: AccountType) => {
     if (await Validation()) {
       setErrors({})
       try {
-        await updateAccountInfo(_currentUserID, formData.firstName, formData.lastName, formData.userName, formData.email, formData.phoneNumber)
-        popAlert("green", "Account Informations Updated Successfuly")
-      } catch (error) {
+        const accountParams: SetAccountInfoRequest = {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          userName: formData.userName,
+          email: formData.email,
+          phoneNumber: formData.phoneNumber
+        }
 
+        await SetAccountInfo(accountParams)
+        popAlert("green", "Account Informations Updated Successfuly")
+      }
+      catch (error) {
+        console.log(error)
       }
     }
   }
@@ -90,7 +100,7 @@ const Account = (props: AccountType) => {
       validationErrors.userName = "*Username must be between 4-25 characters"
     }
     else if (formData.userName.trim() !== formData.defaultUserName) {
-      if (await searchUserName(formData.userName.trim())) {
+      if (await VerifyUsername(formData.userName.trim())) {
         validationErrors.userName = "*Username must be unique"
       }
     }

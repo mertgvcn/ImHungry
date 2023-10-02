@@ -3,7 +3,7 @@ import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Cryption'
-import { getLocationsByUserID } from '../../../../setup/API/location_api'
+import { GetUserLocationList } from '../../../../setup/API/location_api'
 import useDidMountUpdate from '../../../../hooks/useDidMountUpdate'
 //type
 import { LocationDataType, UserLocationsType } from '../../../../types/LocationDataType'
@@ -33,7 +33,7 @@ const Location = (props: LocationType) => {
 
     //Live Update if change occurs
     const fetchLocations = async () => {
-        const data: any = await getLocationsByUserID(_currentUserID)
+        const data: any = await GetUserLocationList()
         setUserLocations(data)
     }
 
