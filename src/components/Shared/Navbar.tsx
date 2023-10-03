@@ -1,9 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react";
-//helpers
-import { UserContext } from "../../context/UserContext";
+import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
-import { getUserCartItemNumber, getUserCartItems } from "../../setup/API/cart_api";
-import { Decrypt } from "../../setup/Cryption";
+//helpers
+import { GetUserCartItemNumber, GetUserCartItemList } from "../../setup/API/cart_api";
 //css
 import "./styles/Navbar.css";
 //type
@@ -15,7 +13,6 @@ import useDidMountUpdate from "../../hooks/useDidMountUpdate";
 import { Link } from "react-router-dom";
 
 
-
 type NavbarType = {
     isLogin: boolean,
 }
@@ -25,9 +22,6 @@ const Navbar = (props: NavbarType) => {
 
     //Context
     const { cartItemAmount, setCartItemAmount } = useContext(CartContext)
-    const { currentUserID } = useContext(UserContext)
-    const _currentUserID = Decrypt(currentUserID)
-
     
     //States
     const [cartItems, setCartItems] = useState({
@@ -41,7 +35,7 @@ const Navbar = (props: NavbarType) => {
     //Fetch cart items only if user clicks cart button.
     const fetchCartItems = async (): Promise<void> => {
         if (cartState) {
-            const data: any = await getUserCartItems(_currentUserID)
+            const data: any = await GetUserCartItemList()
             setCartItems({
                 items: data,
                 isSuccess: true
@@ -54,7 +48,6 @@ const Navbar = (props: NavbarType) => {
     useDidMountUpdate(() => {
         fetchCartItems()
     }, [cartState])
-
 
 
     return (

@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react'
 //context
 import { useLocation } from 'react-router-dom'
-import { UserContext } from '../../../context/UserContext'
 import { CartContext } from '../../../context/CartContext'
 import { ChangeContext } from '../../../context/ChangeContext'
 //CSS
 import '../styles/MenuItem.css'
 //TYPE
 import { MenuItemType } from '../../../types/RestaurantDataType'
+import { CartTransactionRequest } from '../../../models/parameters/cartParams/CartTransactionRequest'
 //EXPORTED FUNCTIONS
-import { addToCart } from '../../../setup/API/cart_api'
-import { Decrypt } from '../../../setup/Cryption'
+import { usePopAlert } from '../../../hooks/usePopAlert'
 import Alert from '../../../components/Shared/Alert'
+import { AddItemToCart } from '../../../setup/API/cart_api'
 
 
 
@@ -20,18 +20,12 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
   const location = useLocation()
   const currentRestaurantID = location.state.data;
 
-  const {cartToggle, setCartToggle} = useContext(ChangeContext)
+  const { cartToggle, setCartToggle } = useContext(ChangeContext)
   const { setCartItemAmount } = useContext(CartContext)
-  const { currentUserID }: any = useContext(UserContext)
-  const _currentUserID = Number(Decrypt(currentUserID))
+  const {alertStates, popAlert} = usePopAlert()
 
   //Button state
   const [disabled, setDisabled] = useState<boolean>(false);
-
-  //*ALERT PROPERTIES
-  const [color, setColor] = useState<string>("");
-  const [msg, setMsg] = useState<string>("");
-  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const AddToCart = () => {
     if (!disabled) {
@@ -41,7 +35,12 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
 
   const handleAddToCart = async () => {
     setDisabled(true)
-    const response = await addToCart(_currentUserID, itemID, currentRestaurantID)
+
+    const addItemToCartRequest: CartTransactionRequest = {
+      itemID: itemID,
+      restaurantID: currentRestaurantID
+    }
+    const response = await AddItemToCart(addItemToCartRequest)
 
     if (response.data != "different_restaurant") {
       popAlert("green", itemName + " added to cart!")
@@ -58,22 +57,9 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
   }
 
 
-  //Support functions
-  const popAlert = (color: string, msg: string) => {
-    setIsOpen(true)
-    setColor(color)
-    setMsg(msg)
-
-    setTimeout(() => {
-      setIsOpen(false)
-    }, 2000)
-  }
-
-
-
   return (
     <>
-      <Alert isOpen={isOpen} color={color} msg={msg} />
+      <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
 
       <div className='menu-item-wrapper'>
         {imageSource && (

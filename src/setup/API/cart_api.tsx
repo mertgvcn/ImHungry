@@ -1,63 +1,56 @@
-import axios, { AxiosResponse, CancelTokenSource } from 'axios';
-import { promises } from 'dns';
-import React from 'react'
+import axios, { AxiosResponse } from 'axios';
+import { getCookie } from '../Cookie';
+//models
+import { CartTransactionRequest } from '../../models/parameters/cartParams/CartTransactionRequest';
 
-const API_KEY = process.env.REACT_APP_APIKEY
+
+const API_KEY = 'bearer ' + getCookie("jwt")
 
 
-export const getUserCartItems = async (userID: number): Promise<AxiosResponse> => {
-    const response = await axios.get('https://localhost:7181/api/Cart/getUserCartItems', {
-        params: {
-            userID: userID,
-        },
+export const GetUserCartItemList = async (): Promise<AxiosResponse> => {
+    const response = await axios.get('https://localhost:7181/api/Cart/GetUserCartItemList', {
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     })
 
     return response.data
 }
 
-
-export const getUserCartItemNumber = async (userID: number): Promise<AxiosResponse> => {
-    const response = await axios.get('https://localhost:7181/api/Cart/getUserCartItemNumber', {
-        params: {
-            userID: userID,
-        },
+export const GetUserCartItemNumber = async (): Promise<AxiosResponse> => {
+    const response = await axios.get('https://localhost:7181/api/Cart/GetUserCartItemNumber', {
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     })
 
     return response.data
 }
 
-
-export const addToCart = async (userID: number, itemID: number, restaurantID: number): Promise<AxiosResponse> => {
-    const response = await axios.post('https://localhost:7181/api/Cart/addToCart', {
-        userID: userID,
-        itemID: itemID,
-        restaurantID: restaurantID
-    },
+export const AddItemToCart = async (params: CartTransactionRequest): Promise<AxiosResponse> => {
+    const response = await axios.post('https://localhost:7181/api/Cart/AddItemToCart',
+        {
+            itemID: params.itemID,
+            restaurantID: params.restaurantID
+        },
         {
             headers: {
-                'x-api-key': API_KEY
+                'Authorization': API_KEY
             }
         })
 
     return response.data
 }
 
-
-export const deleteFromCart = async (userID: number, itemID: number, restaurantID: number) => {
-    const response = await axios.delete('https://localhost:7181/api/Cart/deleteFromCart', {
+export const DeleteItemFromCart = async (params: CartTransactionRequest) => {
+    const response = await axios.delete('https://localhost:7181/api/Cart/DeleteItemFromCart', 
+    {
         params: {
-            userID: userID,
-            itemID: itemID,
-            restaurantID: restaurantID
+            itemID: params.itemID,
+            restaurantID: params.restaurantID
         },
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     })
 

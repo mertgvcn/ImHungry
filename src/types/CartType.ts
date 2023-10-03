@@ -1,5 +1,4 @@
 export type CartItemType = {
-    currentUserID: number,
     data: {
         restaurantID: number,
         name: string,

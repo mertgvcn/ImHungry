@@ -1,45 +1,44 @@
 import axios, { AxiosResponse } from 'axios';
-import React from 'react'
+import { getCookie } from '../Cookie';
+//models
+import { AddCreditCardRequest } from '../../models/parameters/creditCardParams/AddCreditCardRequest';
 
-const API_KEY = process.env.REACT_APP_APIKEY
+const API_KEY = 'bearer ' + getCookie("jwt")
 
-export const getCC = async (userID: number): Promise<AxiosResponse>  => {
-    const response = await axios.get('https://localhost:7181/api/CreditCard/getCC', {
-        params: {
-            userID: userID
-        },
+export const GetUserCreditCards = async (): Promise<AxiosResponse> => {
+    const response = await axios.get('https://localhost:7181/api/CreditCard/GetUserCreditCards', {
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     })
 
-    return response.data
+    return response.data.userCreditCards
 }
 
-export const addCC = async (userID: number, ccNo: string, ccName: string, expirationDate: string, cvv: number): Promise<AxiosResponse> => {
-    const response = await axios.post('https://localhost:7181/api/CreditCard/addCC', {
-        ccNo: ccNo,
-        ccName: ccName,
-        expirationDate: expirationDate,
-        cvv: cvv,
-        userID: userID
-    },
+export const AddCreditCard = async (params: AddCreditCardRequest): Promise<AxiosResponse> => {
+    const response = await axios.post('https://localhost:7181/api/CreditCard/AddCreditCard',
+        {
+            creditCardNumber: params.creditCardNumber,
+            creditCardHolderName: params.creditCardHolderName,
+            expirationDate: params.expirationDate,
+            cvv: params.cvv,
+        },
         {
             headers: {
-                'x-api-key': API_KEY
+                'Authorization': API_KEY
             }
         })
 
     return response.data
 }
 
-export const deleteCC = async (ccID: number): Promise<AxiosResponse> => {
-    const response = await axios.delete('https://localhost:7181/api/CreditCard/deleteCC', {
+export const DeleteCreditCardByID = async (creditCardID: number): Promise<AxiosResponse> => {
+    const response = await axios.delete('https://localhost:7181/api/CreditCard/DeleteCreditCardByID', {
         params: {
-            ccID: ccID,
+            creditCardID: creditCardID,
         },
         headers: {
-            'x-api-key': API_KEY
+            'Authorization': API_KEY
         }
     })
 

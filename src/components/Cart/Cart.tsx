@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 //context
-import { UserContext } from '../../context/UserContext'
 import { CartContext } from '../../context/CartContext'
 import { ChangeContext } from '../../context/ChangeContext'
 //css
 import './styles/Cart.css'
 //helpers
-import { getUserCartItems } from '../../setup/API/cart_api'
-import { Decrypt } from '../../setup/Cryption'
+import { GetUserCartItemList } from '../../setup/API/cart_api'
+import { getCookie } from '../../setup/Cookie'
 //Types
 import { CartItemsType } from '../../types/CartDataType'
 //Components
@@ -29,8 +28,6 @@ const Cart = (props: propsType) => {
   //Context
   const { cartToggle } = useContext(ChangeContext)
   const { setCartItemAmount } = useContext(CartContext)
-  const { currentUserID, } = useContext(UserContext)
-  const _currentUserID = Decrypt(currentUserID)
   const navigate = useNavigate()
 
 
@@ -60,14 +57,14 @@ const Cart = (props: propsType) => {
 
   //If change occurs, re-fetch cart. 
   const fetchCartItems = async (): Promise<void> => {
-    const data: any = await getUserCartItems(_currentUserID)
+    const data: any = await GetUserCartItemList()
     setItems(data)
 
     return new Promise((resolve) => { resolve() })
   }
 
   async function syncFetch() {
-    if (_currentUserID) {
+    if (getCookie("jwt")) {
       await fetchCartItems()
       extractRestaurantNames()
       setCartItemAmount(itemAmount)
@@ -96,7 +93,7 @@ const Cart = (props: propsType) => {
     return items?.map((item, idx) => {
       if (restaurantName === item.name) {
         return (
-          <CartItem currentUserID={_currentUserID} data={item} key={idx} />
+          <CartItem data={item} key={idx} />
         )
       }
       return null

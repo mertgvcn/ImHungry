@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //helpers
-import { deleteCC } from '../../../../setup/API/cc_api'
+import { DeleteCreditCardByID } from '../../../../setup/API/cc_api'
 //type
 import { CCCardType } from '../../../../types/CreditCardDataType'
 //css
@@ -13,7 +13,7 @@ const CreditCardCard = ({ data: { ccID, ccNo, ccName, expirationDate, cvv } }: C
 
   const deleteCard = async () => {
     try {
-      await deleteCC(ccID);
+      await DeleteCreditCardByID(ccID);
       setCreditCardToggle(!creditCardToggle)
   } catch (error) {
       console.log(error)

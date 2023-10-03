@@ -39,7 +39,7 @@ return response.data;
 }
 
 export const DeleteLocationByLocationID = async (locationID: number): Promise<AxiosResponse> => {
-    const response = await axios.delete('https://localhost:7181/api/Location/deleteByID', {
+    const response = await axios.delete('https://localhost:7181/api/Location/DeleteLocationByLocationID', {
         params: {
             locationID: locationID,
         },

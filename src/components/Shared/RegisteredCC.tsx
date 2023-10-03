@@ -1,9 +1,7 @@
 import { useContext, useState } from 'react'
 import { PaymentContext } from '../../context/PaymentContext'
-import { UserContext } from '../../context/UserContext'
 //exported functions
-import { deleteCC, getCC } from '../../setup/API/cc_api'
-import { Decrypt } from '../../setup/Cryption'
+import { DeleteCreditCardByID, GetUserCreditCards } from '../../setup/API/cc_api'
 //css
 import './styles/RegisteredCC.css'
 //type
@@ -15,8 +13,6 @@ import CreditCardAdd from '../../pages/Profile/components/CreditCard/CreditCardA
 const RegisteredCC = () => {
     //Context
     const { ccID } = useContext(PaymentContext)
-    const { currentUserID } = useContext(UserContext)
-    const _currentUserID = Decrypt(currentUserID)
 
     //CC states
     const [userCCs, setUserCCs] = useState<UserCreditCardsType[]>([])
@@ -29,7 +25,7 @@ const RegisteredCC = () => {
 
     //Fetch credit cards when user clicks
     const fetchCC = async (): Promise<void> => {
-        const data: any = await getCC(_currentUserID)
+        const data: any = await GetUserCreditCards()
         setUserCCs(data)
         return new Promise((resolve) => { resolve() })
     }
@@ -106,7 +102,7 @@ const RegisteredCC = () => {
 
                                 {/* Delete CC */}
                                 <div className='cc-delete' onClick={async () => {
-                                    await deleteCC(cc.ccID)
+                                    await DeleteCreditCardByID(cc.ccID)
                                     setDisplayedCC("")
                                     setDropDownState(!dropDownState)
                                     handleFetchCC(true)

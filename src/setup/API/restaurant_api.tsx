@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React from 'react'
 import { getCookie } from '../Cookie';
+//models
 import { GetRestaurantListByLocationRequest } from '../../models/parameters/restaurantParams/GetRestaurantListByLocationRequest';
 
 const API_KEY = 'bearer ' + getCookie("jwt")

@@ -2,13 +2,14 @@ import React, { useContext, useState } from 'react'
 import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
-import { addCC } from '../../../../setup/API/cc_api'
+import { AddCreditCard } from '../../../../setup/API/cc_api'
 import { Decrypt } from '../../../../setup/Cryption'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/CreditCardAdd.css'
 //component
 import Alert from '../../../../components/Shared/Alert'
+import { AddCreditCardRequest } from '../../../../models/parameters/creditCardParams/AddCreditCardRequest'
 
 
 type propsType = {
@@ -45,7 +46,14 @@ const CreditCardAdd = (props: propsType) => {
     const handleSubmit = async () => {
         if (Validation()) {
             try {
-                await addCC(_currentUserID, formData.cardNumber, formData.cardHolderName, formData.expirationDate, parseInt(formData.cvv))
+                const addCreditCardRequest: AddCreditCardRequest = {
+                    creditCardNumber: formData.cardNumber,
+                    creditCardHolderName: formData.cardHolderName,
+                    expirationDate: formData.expirationDate,
+                    cvv: parseInt(formData.cvv)
+                }
+
+                await AddCreditCard(addCreditCardRequest)
                 popAlert("green", "Card added succesfully")
                 setCreditCardToggle(!creditCardToggle)
                 resetInputs()

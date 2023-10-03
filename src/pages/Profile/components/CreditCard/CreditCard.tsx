@@ -3,7 +3,7 @@ import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { Decrypt } from '../../../../setup/Cryption'
-import { getCC } from '../../../../setup/API/cc_api'
+import { GetUserCreditCards } from '../../../../setup/API/cc_api'
 import useDidMountUpdate from '../../../../hooks/useDidMountUpdate'
 //type
 import { CreditCardDataType, UserCreditCardsType } from '../../../../types/CreditCardDataType'
@@ -33,7 +33,7 @@ const CreditCard = (props: CreditCardType) => {
 
     //Live Update if change occurs
     const fetchCreditCards = async () => {
-        const data:any = await getCC(_currentUserID)
+        const data:any = await GetUserCreditCards()
         setCreditCards(data)
     }
 

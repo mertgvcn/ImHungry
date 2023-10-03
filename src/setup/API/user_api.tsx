@@ -1,7 +1,8 @@
-import axios, { Axios, AxiosResponse } from 'axios';
-import React from 'react'
+import axios, { AxiosResponse } from 'axios';
 import { getCookie } from '../Cookie';
+//models
 import { SetAccountInfoRequest } from '../../models/parameters/userParams/SetAccountInfoRequest';
+
 
 const API_KEY = 'bearer ' + getCookie("jwt")
 
