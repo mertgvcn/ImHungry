@@ -7,11 +7,11 @@ import { GetRestaurantListByLocationRequest } from '../../models/parameters/rest
 const API_KEY = 'bearer ' + getCookie("jwt")
 
 
-export const GetRestaurantListByLocation = async (params: GetRestaurantListByLocationRequest | null) => {
+export const GetRestaurantListByLocation = async (params: GetRestaurantListByLocationRequest) => {
     const response = await axios.post('https://localhost:7181/api/Restaurant/GetRestaurantListByLocation',
     {
-        province: params?.province,
-        district: params?.district
+        province: params.province,
+        district: params.district
     },
     {
         headers: {
@@ -19,5 +19,5 @@ export const GetRestaurantListByLocation = async (params: GetRestaurantListByLoc
         }
     })
 
-    return response.data
+    return response.data.restaurantList
 }

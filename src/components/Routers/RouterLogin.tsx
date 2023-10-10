@@ -13,7 +13,6 @@ export default function RouterLogin() {
     return (
         <>
             <Routes>
-                {/*USER*/}
                 <Route path="/" element={<HomePage/>} />
                 <Route path="/home" element={<HomePage/>} />
                 <Route path="/profile" element={<ProfilePage />} />

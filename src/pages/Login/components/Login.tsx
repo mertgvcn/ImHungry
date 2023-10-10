@@ -55,7 +55,7 @@ const Login = () => {
                 resetInputs()
                 setTimeout(() => {
                     window.location.href = "/home"
-                }, 2000)
+                }, 1000)
                 return;
             }
         }

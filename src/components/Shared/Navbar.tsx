@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 //helpers
 import { GetUserCartItemNumber, GetUserCartItemList } from "../../setup/API/cart_api";
@@ -11,6 +11,9 @@ import Cart from "../Cart/Cart";
 import UserMenu from "../UserMenu/UserMenu";
 import useDidMountUpdate from "../../hooks/useDidMountUpdate";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { GetRestaurantListByLocation } from "../../setup/API/restaurant_api";
+import { GetRestaurantListByLocationRequest } from "../../models/parameters/restaurantParams/GetRestaurantListByLocationRequest";
 
 
 type NavbarType = {
@@ -20,9 +23,9 @@ type NavbarType = {
 
 const Navbar = (props: NavbarType) => {
 
-    //Context
+    //Set current cart item amount
     const { cartItemAmount, setCartItemAmount } = useContext(CartContext)
-    
+
     //States
     const [cartItems, setCartItems] = useState({
         items: [],
@@ -49,6 +52,22 @@ const Navbar = (props: NavbarType) => {
         fetchCartItems()
     }, [cartState])
 
+
+    const didMount = useRef(false)
+    const [cartItemNo, setCartItemNo] = useState<any>(null)
+
+    const fetchItemAmount = async () => {
+        const data = await GetUserCartItemNumber()
+        setCartItemNo(data)      
+    }
+
+    useEffect(() => {
+        if (didMount.current) {
+            fetchItemAmount()
+        }
+
+        didMount.current = true;
+    }, [])
 
     return (
         <>
