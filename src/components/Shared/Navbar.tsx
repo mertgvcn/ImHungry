@@ -53,21 +53,21 @@ const Navbar = (props: NavbarType) => {
     }, [cartState])
 
 
-    const didMount = useRef(false)
-    const [cartItemNo, setCartItemNo] = useState<any>(null)
+    // const didMount = useRef(false)
+    // const [cartItemNo, setCartItemNo] = useState<any>(null)
 
-    const fetchItemAmount = async () => {
-        const data = await GetUserCartItemNumber()
-        setCartItemNo(data)      
-    }
+    // const fetchItemAmount = async () => {
+    //     const data = await GetUserCartItemNumber()
+    //     setCartItemNo(data)      
+    // }
 
-    useEffect(() => {
-        if (didMount.current) {
-            fetchItemAmount()
-        }
+    // useEffect(() => {
+    //     if (didMount.current) {
+    //         fetchItemAmount()
+    //     }
 
-        didMount.current = true;
-    }, [])
+    //     didMount.current = true;
+    // }, [])
 
     return (
         <>

@@ -66,3 +66,8 @@ export type MenuItemType = {
         categoryName: string
     }
 }
+
+export type IngredientType = {
+    name: string,
+    isActive: boolean
+}

@@ -1,0 +1,20 @@
+.ingredient-card-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    height: 30px;
+    margin: 5px 5px;
+    padding: 2px 5px;
+    font-size: 15px;
+    
+    background-color: #e4cbbb;
+    box-sizing: border-box;
+    border-radius: 8px;
+
+    cursor: pointer;
+}
+
+.ingredient-card-wrapper:hover{
+    background-color: #dcb9a3;
+}

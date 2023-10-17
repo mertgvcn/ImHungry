@@ -3,63 +3,64 @@ import React, { useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { CartContext } from '../../../context/CartContext'
 import { ChangeContext } from '../../../context/ChangeContext'
-//CSS
+//css
 import '../styles/MenuItem.css'
-//TYPE
-import { MenuItemType } from '../../../types/RestaurantDataType'
+//types
+import { IngredientType, MenuItemType } from '../../../types/RestaurantDataType'
 import { CartTransactionRequest } from '../../../models/parameters/cartParams/CartTransactionRequest'
-//EXPORTED FUNCTIONS
+//helpers
 import { usePopAlert } from '../../../hooks/usePopAlert'
 import Alert from '../../../components/Shared/Alert'
 import { AddItemToCart } from '../../../setup/API/cart_api'
+//components
+import AddItem from '../../../components/AddItem/AddItem'
+import { GetItemIngredients } from '../../../setup/API/item_api'
 
 
 
-const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, price } }: MenuItemType) => {
+const MenuItem = (props: MenuItemType) => {
+  const { itemID, itemName, itemDescription, imageSource, price } = props.data
 
   const location = useLocation()
   const currentRestaurantID = location.state.data;
 
   const { cartToggle, setCartToggle } = useContext(ChangeContext)
   const { setCartItemAmount } = useContext(CartContext)
-  const {alertStates, popAlert} = usePopAlert()
+  const { alertStates, popAlert } = usePopAlert()
 
-  //Button state
-  const [disabled, setDisabled] = useState<boolean>(false);
+  //AddItem state
+  const [addItemState, setAddItemState] = useState<boolean>(false);
+  const [ingredients, setIngredients] = useState<IngredientType[]>([]);
 
-  const AddToCart = () => {
-    if (!disabled) {
-      handleAddToCart()
-    }
-  }
 
   const handleAddToCart = async () => {
-    setDisabled(true)
+    const ingredientList: any = await GetItemIngredients(itemID)
+    setIngredients(ingredientList)
 
-    const addItemToCartRequest: CartTransactionRequest = {
-      itemID: itemID,
-      restaurantID: currentRestaurantID
-    }
-    const response = await AddItemToCart(addItemToCartRequest)
+    setAddItemState(true)
+    // const addItemToCartRequest: CartTransactionRequest = {
+    //   itemID: itemID,
+    //   restaurantID: currentRestaurantID
+    // }
+    // const response = await AddItemToCart(addItemToCartRequest)
 
-    if (response.data != "different_restaurant") {
-      popAlert("green", itemName + " added to cart!")
-      setCartItemAmount((currentAmount: any) => {
-        return Number(currentAmount) + 1
-      })
-      setCartToggle(!cartToggle)
-    }
-    else {
-      popAlert("red", "There are products from another restaurants in the cart!")
-    }
-
-    setDisabled(false)
+    // if (response.data != "different_restaurant") {
+    //   popAlert("green", itemName + " added to cart!")
+    //   setCartItemAmount((currentAmount: any) => {
+    //     return Number(currentAmount) + 1
+    //   })
+    //   setCartToggle(!cartToggle)
+    // }
+    // else {
+    //   popAlert("red", "There are products from another restaurants in the cart!")
+    // }
   }
 
 
   return (
     <>
       <Alert isOpen={alertStates.isOpen} color={alertStates.color} msg={alertStates.msg} />
+      <AddItem trigger={addItemState} setTrigger={setAddItemState} itemData={props} ingredients={ingredients} />
 
       <div className='menu-item-wrapper'>
         {imageSource && (
@@ -77,7 +78,7 @@ const MenuItem = ({ data: { itemID, itemName, itemDescription, imageSource, pric
         </div>
 
 
-        <button id="add-to-cart" onClick={AddToCart} disabled={disabled}><i className="fa-solid fa-cart-plus"></i></button>
+        <button id="add-to-cart" onClick={handleAddToCart}><i className="fa-solid fa-cart-plus"></i></button>
 
       </div>
     </>
