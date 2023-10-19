@@ -11,16 +11,19 @@ import { AddItemToCart, DeleteItemFromCart } from '../../setup/API/cart_api'
 import { CartTransactionRequest } from '../../models/parameters/cartParams/CartTransactionRequest'
 
 
-const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, amount } }: CartItemType) => {
+const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, amount, ingredients } }: CartItemType) => {
     const { cartToggle, setCartToggle } = useContext(ChangeContext)
     const { setCartItemAmount } = useContext(CartContext)
 
     const cartTransactionRequest: CartTransactionRequest = {
         itemID: itemID,
-        restaurantID: restaurantID
+        restaurantID: restaurantID,
+        ingredients: ingredients,
+        amount: 0
     }
 
     const handleRemoveItem = async () => {
+        cartTransactionRequest.amount = -1
         await DeleteItemFromCart(cartTransactionRequest)
 
         setCartItemAmount((currentAmount: any) => {
@@ -30,6 +33,7 @@ const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, 
     }
 
     const handleAddItem = async () => {
+        cartTransactionRequest.amount = 1
         await AddItemToCart(cartTransactionRequest)
         setCartItemAmount((currentAmount: any) => {
             return Number(currentAmount) + 1
@@ -46,6 +50,7 @@ const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, 
 
                 <div className='item-info'>
                     <p>{itemName}</p>
+                    <p style={{fontSize:7}}>{ingredients}</p>
                     <p style={{ color: '#555555', fontSize: '14px' }}>{price * amount}TL</p>
                 </div>
 

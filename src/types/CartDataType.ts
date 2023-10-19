@@ -10,5 +10,6 @@ export type CartItemsType = {
     itemName: string,
     imageSource: string,
     price: number,
-    amount: number
+    amount: number,
+    ingredients: string
 }

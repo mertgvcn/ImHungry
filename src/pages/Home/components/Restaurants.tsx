@@ -28,13 +28,14 @@ const Restaurants = (props: RestaurantsType) => {
 
   //if prop.restaurant is null, restaurantList = []. Otherwise it gets the list from prop.restaurant.restaurantList
   const [restaurantList, setRestaurantList] = useState<RestaurantListType[]>(props.restaurant ? props.restaurant.restaurantList : [])
+  const [hasLocation, setHasLocation] = useState<boolean>(props.hasLocation)
 
   //if change occurs on location, restaurants gonna be fetched and set locally. 
   const fetchRestaurants = async () => {
     const data: any = await GetCurrentLocation()
 
     if (!data) {
-      props.hasLocation = false
+      setHasLocation(false)
       return;
     }
     else {
@@ -45,6 +46,7 @@ const Restaurants = (props: RestaurantsType) => {
 
       const response = await GetRestaurantListByLocation(getRestaurantListByLocationParams);
       setRestaurantList(response)
+      setHasLocation(true)
     }
   }
 
@@ -59,7 +61,7 @@ const Restaurants = (props: RestaurantsType) => {
         <p id="restaurant-title">Restaurants</p>
       </div>
 
-      {props.hasLocation ?
+      {hasLocation ?
         <div className="restaurant-wrapper">
           {restaurantList?.filter((restaurant: any) => {
             return filteredName.toLowerCase() === ''

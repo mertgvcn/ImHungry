@@ -1,4 +1,6 @@
 export interface CartTransactionRequest {
     itemID : number,
-    restaurantID : number
+    restaurantID : number,
+    ingredients : string,
+    amount: number
 }

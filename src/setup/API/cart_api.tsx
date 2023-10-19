@@ -31,7 +31,9 @@ export const AddItemToCart = async (params: CartTransactionRequest): Promise<Axi
     const response = await axios.post('https://localhost:7181/api/Cart/AddItemToCart',
         {
             itemID: params.itemID,
-            restaurantID: params.restaurantID
+            restaurantID: params.restaurantID,
+            ingredients: params.ingredients,
+            amount: params.amount
         },
         {
             headers: {
@@ -43,11 +45,15 @@ export const AddItemToCart = async (params: CartTransactionRequest): Promise<Axi
 }
 
 export const DeleteItemFromCart = async (params: CartTransactionRequest) => {
+    const ingredientsValue = params.ingredients === "" ? "boş" : params.ingredients;
+    
     const response = await axios.delete('https://localhost:7181/api/Cart/DeleteItemFromCart', 
     {
         params: {
             itemID: params.itemID,
-            restaurantID: params.restaurantID
+            restaurantID: params.restaurantID,
+            ingredients: ingredientsValue,
+            amount: params.amount
         },
         headers: {
             'Authorization': API_KEY

@@ -6,7 +6,8 @@ export type CartItemType = {
         itemName: string,
         imageSource: string,
         price: number,
-        amount: number
+        amount: number,
+        ingredients: string
     }
 }
 
@@ -18,4 +19,5 @@ export type CartType = {
     imageSource: string,
     price: number,
     amount: number
+    ingredients: string
 }

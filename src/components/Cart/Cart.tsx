@@ -41,14 +41,13 @@ const Cart = (props: propsType) => {
   const [items, setItems] = useState<CartItemsType[]>(props.cartItems)
   const [itemRestaurantNames, setItemRestaurantNames] = useState<string[]>([])
   const totalPrice = items?.reduce((total, item) => (total += item.price * item.amount), 0)
-  const itemAmount = items?.reduce((amount, item) => (amount += item.amount), 0)
-
+ 
   
   //On first render
   useEffect(() => {
     if(!didComponentMount.current) {
-      setCartItemAmount(itemAmount)
-      extractRestaurantNames()
+      setCartItemAmount(getItemAmount(items))
+      extractRestaurantNames(items)
     }
 
     didComponentMount.current = true
@@ -59,28 +58,24 @@ const Cart = (props: propsType) => {
   const fetchCartItems = async (): Promise<void> => {
     const data: any = await GetUserCartItemList()
     setItems(data)
+    extractRestaurantNames(data)
+    setCartItemAmount(getItemAmount(data))
 
     return new Promise((resolve) => { resolve() })
   }
 
-  async function syncFetch() {
-    if (getCookie("jwt")) {
-      await fetchCartItems()
-      extractRestaurantNames()
-      setCartItemAmount(itemAmount)
-    }
-  }
-
   useDidMountUpdate(() => {
-    syncFetch()
+    if (getCookie("jwt")) {
+      fetchCartItems()
+    }
   }, [cartToggle])
 
   
   //Functions
-  const extractRestaurantNames = () => {
+  const extractRestaurantNames = (itemList: CartItemsType[]) => {
     var restaurantNames: string[] = []
 
-    items?.map((item) => {
+    itemList?.map((item) => {
       if (!restaurantNames.includes(item.name)) {
         restaurantNames.push(item.name)
       }
@@ -113,6 +108,10 @@ const Cart = (props: propsType) => {
     }
 
     navigate("/payment")
+  }
+
+  const getItemAmount = (itemList: CartItemsType[]) => {
+    return itemList.reduce((amount, item) => (amount += item.amount), 0)
   }
 
   return (
