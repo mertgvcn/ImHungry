@@ -127,7 +127,7 @@ const AddItem = (props: AddItemProps) => {
                             <i id='change-amount-button' className="fa-solid fa-circle-minus" onClick={handleDecreaseAmount}></i>
                             <p>{amount}</p>
                             <i id='change-amount-button' className="fa-solid fa-circle-plus" onClick={handleIncreaseAmount}></i>
-                            <p id='total-price'>Total Price : {amount * parseInt(price)}TL</p>
+                            <p id='total-price'>Price : {amount * parseInt(price)}TL</p>
                         </div>
                         <button id='confirm-add-item' onClick={handleAddToCart}><i className="fa-solid fa-cart-plus" style={{ marginRight: 5 }}></i>Add To Cart</button>
                     </div>
