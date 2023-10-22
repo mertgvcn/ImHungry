@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import { ChangeContext } from '../../context/ChangeContext'
 //exported functions
 import { DeleteLocationByLocationID, GetUserLocationList } from '../../setup/API/location_api'
-import { SetCurrentLocation } from '../../setup/API/user_api'
+import { GetCurrentLocation, SetCurrentLocation } from '../../setup/API/user_api'
 //css
 import './styles/CurrentLocation.css'
 //types
@@ -115,6 +115,10 @@ const CurrentLocation = (props: currentLocationType) => {
                             {/* Delete Loc */}
                             <div className='location-delete' onClick={async () => {
                                 await DeleteLocationByLocationID(location.locationID);
+                                if(await GetCurrentLocation() == null) {
+                                    setDisplayedLocation("")
+                                    setRestaurantToggle(!restaurantToggle)
+                                }
                                 setDropDownState(!dropDownState)
                                 handleFetchOtherLocations(true)
                             }}>

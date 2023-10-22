@@ -74,7 +74,7 @@ const Restaurants = (props: RestaurantsType) => {
         :
         <div className='restaurant-error'>
           <i className="fa-solid fa-circle-exclamation" style={{ marginRight: 10 }}></i>
-          <p>Please add a adress to see restaurants</p>
+          <p>Please select an adress to see restaurants</p>
         </div>
       }
 

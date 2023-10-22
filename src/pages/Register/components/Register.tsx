@@ -158,14 +158,14 @@ const Register = () => {
                         <div className="input-template">
                             <p className="input-label">First Name</p>
                             <input className='input-text' type="text" name="firstName" onChange={handleChange} />
-                            <div>
+                            <div className='error-message'>
                                 {errors.firstName && <span>{errors.firstName}</span>}
                             </div>
                         </div>
                         <div className="input-template">
                             <p className="input-label">Last Name</p>
                             <input className='input-text' type="text" name="lastName" onChange={handleChange} />
-                            <div>
+                            <div className='error-message'>
                                 {errors.lastName && <span>{errors.lastName}</span>}
                             </div>
                         </div>
@@ -175,28 +175,28 @@ const Register = () => {
                     <div className="input-template">
                         <p className="input-label">Username</p>
                         <input className='input-text' type="text" name="username" onChange={handleChange} />
-                        <div>
+                        <div className='error-message'>
                             {errors.username && <span>{errors.username}</span>}
                         </div>
                     </div>
                     <div className="input-template">
                         <p className="input-label">Email</p>
                         <input className='input-text' type="text" name="email" onChange={handleChange} />
-                        <div>
+                        <div className='error-message'>
                             {errors.email && <span>{errors.email}</span>}
                         </div>
                     </div>
                     <div className="input-template">
                         <p className="input-label">Phone Number</p>
                         <input className='input-text' type="text" name="phoneNumber" onChange={handleChange} />
-                        <div>
+                        <div className='error-message'>
                             {errors.phoneNumber && <span>{errors.phoneNumber}</span>}
                         </div>
                     </div>
                     <div className="input-template">
                         <p className="input-label">Password</p>
                         <input className='input-text' type="password" name="password" onChange={handleChange} />
-                        <div>
+                        <div className='error-message'>
                             {errors.password && <span>{errors.password}</span>}
                         </div>
                     </div>
