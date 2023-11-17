@@ -1,19 +1,14 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 //helpers
-import { GetUserCartItemNumber, GetUserCartItemList } from "../../setup/API/cart_api";
+import { GetUserCartItemList } from "../../setup/API/cart_api";
 //css
 import "./styles/Navbar.css";
-//type
-import { CartDataType, CartItemsType } from "../../types/CartDataType";
 //components
 import Cart from "../Cart/Cart";
 import UserMenu from "../UserMenu/UserMenu";
 import useDidMountUpdate from "../../hooks/useDidMountUpdate";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { GetRestaurantListByLocation } from "../../setup/API/restaurant_api";
-import { GetRestaurantListByLocationRequest } from "../../models/parameters/restaurantParams/GetRestaurantListByLocationRequest";
 
 
 type NavbarType = {

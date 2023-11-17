@@ -5,9 +5,8 @@ import { useLocation } from 'react-router-dom'
 import './styles/AddItem.css'
 //types
 import { IngredientType, MenuItemType } from '../../types/RestaurantDataType'
-import { CartTransactionRequest } from '../../models/parameters/cartParams/CartTransactionRequest'
+import { CartTransactionRequest } from '../../models/ParameterModels/CartParameterModels'
 //helpers
-import { GetItemIngredients } from '../../setup/API/item_api'
 import { usePopAlert } from '../../hooks/usePopAlert'
 import { AddItemToCart } from '../../setup/API/cart_api'
 //components
@@ -56,7 +55,7 @@ const AddItem = (props: AddItemProps) => {
         if (!isAddingProcessContinuing.current) {
             isAddingProcessContinuing.current = true
 
-            const addItemToCartRequest: CartTransactionRequest = {
+            const addItemToCartRequest : CartTransactionRequest= {
                 itemID: itemID,
                 restaurantID: currentRestaurantID,
                 ingredients: getRequestedIngredients(),

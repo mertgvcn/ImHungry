@@ -9,8 +9,9 @@ import { usePopAlert } from '../../../hooks/usePopAlert'
 import "../styles/Register.css"
 //components
 import Alert from "../../../components/Shared/Alert"
-//types
-import { UserRegisterRequest } from '../../../models/parameters/authParams/UserRegisterRequest'
+//models
+import { UserRegisterRequest } from '../../../models/ParameterModels/AuthParameterModels'
+
 
 
 const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);

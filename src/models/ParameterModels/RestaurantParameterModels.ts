@@ -1,4 +1,4 @@
-interface GetRestaurantListByLocationRequest {
-    province: string;
-    district: string;
-  }
+export interface GetRestaurantListByLocationRequest {
+  province: string;
+  district: string;
+}

@@ -9,7 +9,9 @@ import { usePopAlert } from '../../../../hooks/usePopAlert'
 import './styles/LocationAdd.css'
 //components
 import Alert from '../../../../components/Shared/Alert'
-import { AddLocationRequest } from '../../../../models/parameters/locationParams/AddLocationRequest'
+//models
+import { AddLocationRequest } from '../../../../models/ParameterModels/LocationParameterModels'
+
 
 type propsType = {
     trigger: boolean,

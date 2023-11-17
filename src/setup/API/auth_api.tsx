@@ -1,15 +1,13 @@
 import axios from "axios"
-//Params
-import { UserLoginRequest } from "../../models/parameters/authParams/UserLoginRequest"
-import { UserLoginResponse } from "../../models/parameters/authParams/UserLoginResponse"
-import { UserRegisterRequest } from "../../models/parameters/authParams/UserRegisterRequest"
-import { UserRegisterResponse } from "../../models/parameters/authParams/UserRegisterResponse"
+//Models
+import { UserLoginRequest, UserLoginResponse, UserRegisterRequest, UserRegisterResponse } from "../../models/ParameterModels/AuthParameterModels"
+
 
 
 export const LoginUserAsync = async (params: UserLoginRequest): Promise<UserLoginResponse> => {
     const response = await axios.post('https://localhost:7181/api/Auth/login', {
         username: params.username,
-        encryptedPassword: params.password
+        encryptedPassword: params.encryptedPassword
     })
 
     return response.data

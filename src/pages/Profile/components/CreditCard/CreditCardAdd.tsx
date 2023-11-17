@@ -9,7 +9,8 @@ import { usePopAlert } from '../../../../hooks/usePopAlert'
 import './styles/CreditCardAdd.css'
 //component
 import Alert from '../../../../components/Shared/Alert'
-import { AddCreditCardRequest } from '../../../../models/parameters/creditCardParams/AddCreditCardRequest'
+//models
+import { AddCreditCardRequest } from '../../../../models/ParameterModels/CreditCardParameterModels'
 
 
 type propsType = {

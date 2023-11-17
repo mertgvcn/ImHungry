@@ -11,7 +11,8 @@ import Alert from '../../../components/Shared/Alert'
 //css
 import "../styles/Login.css"
 //types
-import { UserLoginRequest } from '../../../models/parameters/authParams/UserLoginRequest'
+import { UserLoginRequest } from '../../../models/ParameterModels/AuthParameterModels'
+
 
 
 
@@ -41,7 +42,7 @@ const Login = () => {
             const encryptedPass = Encrypt(formData.password);
             const loginParams: UserLoginRequest = {
                 username: formData.userName,
-                password: encryptedPass
+                encryptedPassword: encryptedPass
             }
             const response = await LoginUserAsync(loginParams)
 

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { getCookie } from '../Cookie';
+import { UserAccountViewModel } from '../../models/ViewModels/UserAccountViewModel';
 //models
-import { SetAccountInfoRequest } from '../../models/parameters/userParams/SetAccountInfoRequest';
 
 
 const API_KEY = 'bearer ' + getCookie("jwt")
@@ -31,12 +31,12 @@ export const SetCurrentLocation = async (locationID: number) => {
     return response.data
 }
 
-export const SetAccountInfo = async (params: SetAccountInfoRequest) => {
+export const SetAccountInfo = async (params: UserAccountViewModel) => {
     const response = await axios.put('https://localhost:7181/api/User/SetAccountInfo',
         {
             firstName: params.firstName,
             lastName: params.lastName,
-            userName: params.userName,
+            username: params.username,
             email: params.email,
             phoneNumber: params.phoneNumber,
         },

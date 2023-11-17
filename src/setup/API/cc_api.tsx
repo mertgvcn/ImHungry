@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { getCookie } from '../Cookie';
 //models
-import { AddCreditCardRequest } from '../../models/parameters/creditCardParams/AddCreditCardRequest';
+import { AddCreditCardRequest } from '../../models/ParameterModels/CreditCardParameterModels';
+
 
 const API_KEY = 'bearer ' + getCookie("jwt")
 

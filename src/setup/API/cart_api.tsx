@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { getCookie } from '../Cookie';
 //models
-import { CartTransactionRequest } from '../../models/parameters/cartParams/CartTransactionRequest';
+import { CartTransactionRequest } from '../../models/ParameterModels/CartParameterModels';
+
 
 
 const API_KEY = 'bearer ' + getCookie("jwt")

@@ -8,11 +8,11 @@ import { GetRestaurantListByLocation } from '../../../setup/API/restaurant_api'
 import useDidMountUpdate from '../../../hooks/useDidMountUpdate'
 //type
 import { RestaurantDataType, RestaurantListType } from '../../../types/RestaurantDataType'
+import { GetRestaurantListByLocationRequest } from '../../../models/ParameterModels/RestaurantParameterModels'
 //css
 import '../styles/Restaurants.css'
 //components
 import RestaurantCard from './RestaurantCard'
-import { GetRestaurantListByLocationRequest } from '../../../models/parameters/restaurantParams/GetRestaurantListByLocationRequest'
 
 
 type RestaurantsType = {

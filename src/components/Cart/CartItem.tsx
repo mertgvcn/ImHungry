@@ -2,13 +2,13 @@ import React, { useContext, useState } from 'react'
 //context
 import { CartContext } from '../../context/CartContext'
 import { ChangeContext } from '../../context/ChangeContext'
-//type
+//models
 import { CartItemType } from '../../types/CartType'
+import { CartTransactionRequest } from '../../models/ParameterModels/CartParameterModels'
 //css
 import './styles/CartItem.css'
 //helpers
 import { AddItemToCart, DeleteItemFromCart } from '../../setup/API/cart_api'
-import { CartTransactionRequest } from '../../models/parameters/cartParams/CartTransactionRequest'
 //components
 import ConfirmPopUp from '../Shared/ConfirmPopUp'
 

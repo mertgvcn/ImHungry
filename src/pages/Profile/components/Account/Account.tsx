@@ -8,10 +8,11 @@ import { usePopAlert } from '../../../../hooks/usePopAlert'
 import './styles/Account.css'
 //type
 import { AccountInfoType } from '../../../../types/UserDataType'
+import { UserAccountViewModel } from '../../../../models/ViewModels/UserAccountViewModel'
 //components
 import Alert from '../../../../components/Shared/Alert'
 import ChangePass from './ChangePass'
-import { SetAccountInfoRequest } from '../../../../models/parameters/userParams/SetAccountInfoRequest'
+
 
 
 const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
@@ -55,10 +56,10 @@ const Account = (props: AccountType) => {
     if (await Validation()) {
       setErrors({})
       try {
-        const accountParams: SetAccountInfoRequest = {
+        const accountParams: UserAccountViewModel = {
           firstName: formData.firstName,
           lastName: formData.lastName,
-          userName: formData.userName,
+          username: formData.userName,
           email: formData.email,
           phoneNumber: formData.phoneNumber
         }

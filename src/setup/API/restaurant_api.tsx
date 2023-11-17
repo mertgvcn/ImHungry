@@ -1,8 +1,8 @@
 import axios from 'axios';
-import React from 'react'
 import { getCookie } from '../Cookie';
 //models
-import { GetRestaurantListByLocationRequest } from '../../models/parameters/restaurantParams/GetRestaurantListByLocationRequest';
+import { GetRestaurantListByLocationRequest } from '../../models/ParameterModels/RestaurantParameterModels';
+
 
 const API_KEY = 'bearer ' + getCookie("jwt")
 

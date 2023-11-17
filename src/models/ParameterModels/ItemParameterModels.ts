@@ -1,4 +1,4 @@
-interface GetItemIngredientResponse {
-    name: string;
-    isActive: boolean;
-  }
+export interface GetItemIngredientResponse {
+  name: string;
+  isActive: boolean;
+}
