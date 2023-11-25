@@ -1,19 +1,19 @@
 export interface CartItemViewModel {
-  id: number;
-  ingredientList?: string | null;
-  amount: number;
-  restaurant: CartItem_RestaurantViewModel;
-  item: CartItem_ItemViewModel;
+  Id: number;
+  IngredientList?: string | null;
+  Amount: number;
+  Restaurant: CartItem_RestaurantViewModel;
+  Item: CartItem_ItemViewModel;
 }
 
 export interface CartItem_RestaurantViewModel {
-  id: number;
-  name: string;
+  Id: number;
+  Name: string;
 }
 
 export interface CartItem_ItemViewModel {
-  id: number;
-  name: string;
-  imageSource?: string | null;
-  price: number;
+  Id: number;
+  Name: string;
+  ImageSource?: string | null;
+  Price: number;
 }

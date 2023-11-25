@@ -3,15 +3,15 @@ import { CreditCard } from "./CreditCard";
 import { UserLocation } from "./UserLocation";
 
 export interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
-  locations: UserLocation[];
-  creditCards: CreditCard[];
-  cartItems: Cart[];
-  currentLocation: UserLocation | null;
+  Id: number;
+  FirstName: string;
+  LastName: string;
+  Username: string;
+  Email: string;
+  PhoneNumber: string;
+  Password: string;
+  Locations: UserLocation[];
+  CreditCards: CreditCard[];
+  CartItems: Cart[];
+  CurrentLocation: UserLocation | null;
 }

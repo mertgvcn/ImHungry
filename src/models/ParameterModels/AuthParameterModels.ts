@@ -1,24 +1,24 @@
 export interface UserLoginRequest {
-  username: string;
-  encryptedPassword: string;
+  Username: string;
+  EncryptedPassword: string;
 }
 
 export interface UserLoginResponse {
-  authenticateResult: boolean;
-  authToken: string;
-  accessTokenExpireDate: Date;
+  AuthenticateResult: boolean;
+  AuthToken: string;
+  AccessTokenExpireDate: Date;
 }
 
 export interface UserRegisterRequest {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  phoneNumber: string;
-  password: string;
+  FirstName: string;
+  LastName: string;
+  Username: string;
+  Email: string;
+  PhoneNumber: string;
+  Password: string;
 }
 
 export interface UserRegisterResponse {
   isSuccess: boolean;
-  errorMessage: string;
+  ErrorMessage: string;
 }

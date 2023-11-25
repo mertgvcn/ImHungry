@@ -1,6 +1,6 @@
 export interface CartTransactionRequest {
-  itemID: number;
-  restaurantID: number;
-  ingredients?: string | null;
-  amount?: number | null;
+  ItemID: number;
+  RestaurantID: number;
+  Ingredients?: string | null;
+  Amount?: number | null;
 }

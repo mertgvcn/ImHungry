@@ -1,8 +1,8 @@
 export interface RestaurantSummaryViewModel {
-  id: number;
-  name: string;
-  phoneNumber: string;
-  email: string;
-  description?: string | null;
-  imageSource?: string | null;
+  Id: number;
+  Name: string;
+  PhoneNumber: string;
+  Email: string;
+  Description?: string | null;
+  ImageSource?: string | null;
 }

@@ -1,8 +1,8 @@
 export interface GenerateTokenRequest {
-  userId: string;
+  UserId: string;
 }
 
 export interface GenerateTokenResponse {
-  token: string;
-  tokenExpireDate: Date;
+  Token: string;
+  TokenExpireDate: Date;
 }

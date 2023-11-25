@@ -1,11 +1,11 @@
 export interface AddLocationRequest {
-  locationTitle: string;
-  province: string;
-  district: string;
-  neighbourhood: string;
-  street: string;
-  buildingNo: string;
-  buildingAddition: string;
-  apartmentNo: string;
-  note: string;
+  LocationTitle: string;
+  Province: string;
+  District: string;
+  Neighbourhood: string;
+  Street: string;
+  BuildingNo: string;
+  BuildingAddition: string;
+  ApartmentNo: string;
+  Note: string;
 }

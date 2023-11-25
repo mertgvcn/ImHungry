@@ -2,9 +2,9 @@ import { Item } from "./Item";
 import { Restaurant } from "./Restaurant";
 
 export interface Cart {
-  id: number;
-  ingredientList?: string | null;
-  amount: number;
-  restaurant: Restaurant;
-  item: Item;
+  Id: number;
+  IngredientList?: string | null;
+  Amount: number;
+  Restaurant: Restaurant;
+  Item: Item;
 }

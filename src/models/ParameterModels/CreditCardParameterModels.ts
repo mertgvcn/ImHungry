@@ -1,6 +1,6 @@
 export interface AddCreditCardRequest {
-  creditCardNumber: string;
-  creditCardHolderName: string;
-  expirationDate: string;
-  cvv: number;
+  CreditCardNumber: string;
+  CreditCardHolderName: string;
+  ExpirationDate: string;
+  CVV: number;
 }

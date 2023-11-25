@@ -3,12 +3,12 @@ import { Ingredient } from "./Ingredient";
 import { Restaurant } from "./Restaurant";
 
 export interface Item {
-  id: number;
-  name: string;
-  description?: string | null;
-  imageSource?: string | null;
-  price: number;
-  restaurant: Restaurant;
-  category: Category;
-  ingredients?: Ingredient[] | null;
+  Id: number;
+  Name: string;
+  Description?: string | null;
+  ImageSource?: string | null;
+  Price: number;
+  Restaurant: Restaurant;
+  Category: Category;
+  Ingredients?: Ingredient[] | null;
 }

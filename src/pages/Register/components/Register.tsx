@@ -46,12 +46,12 @@ const Register = () => {
         if (await Validation()) {
             const encryptedPass = Encrypt(formData.password)
             const registerParams: UserRegisterRequest = {
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                username: formData.username,
-                email: formData.email,
-                phoneNumber: formData.phoneNumber,
-                password: encryptedPass,
+                FirstName: formData.firstName,
+                LastName: formData.lastName,
+                Username: formData.username,
+                Email: formData.email,
+                PhoneNumber: formData.phoneNumber,
+                Password: encryptedPass,
             }
             const response = await RegisterUserAsync(registerParams)
 
@@ -63,7 +63,7 @@ const Register = () => {
                 }, 2000)
             }
             else {
-                popAlert("red", response.errorMessage)
+                popAlert("red", response.ErrorMessage)
             }
         }
     }

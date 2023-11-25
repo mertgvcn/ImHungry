@@ -1,7 +1,7 @@
 export interface CreditCardViewModel {
-  id: number;
-  number: string;
-  holderName: string;
-  expirationDate: string;
-  cvv: number;
+  Id: number;
+  Number: string;
+  HolderName: string;
+  ExpirationDate: string;
+  CVV: number;
 }

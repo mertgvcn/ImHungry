@@ -1,4 +1,4 @@
 export interface IForgotMyPasswordRequest {
-  email: string;
-  plainPassword: string;
+  Email: string;
+  PlainPassword: string;
 }

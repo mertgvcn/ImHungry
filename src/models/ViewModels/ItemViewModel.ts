@@ -1,10 +1,10 @@
 import { Category } from "../EntityModels/Category";
 
 export interface ItemViewModel {
-  id: number;
-  name: string;
-  description?: string | null;
-  imageSource?: string | null;
-  price: number;
-  category: Category;
+  Id: number;
+  Name: string;
+  Description?: string | null;
+  ImageSource?: string | null;
+  Price: number;
+  Category: Category;
 }

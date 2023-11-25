@@ -1,10 +1,10 @@
 export interface RestaurantLocation {
-  id: number;
-  province: string;
-  district: string;
-  neighbourhood: string;
-  street: string;
-  buildingNo: string;
-  apartmentNo?: string | null;
-  addition?: string | null;
+  Id: number;
+  Province: string;
+  District: string;
+  Neighbourhood: string;
+  Street: string;
+  BuildingNo: string;
+  ApartmentNo?: string | null;
+  Addition?: string | null;
 }

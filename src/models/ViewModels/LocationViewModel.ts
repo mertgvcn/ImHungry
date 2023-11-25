@@ -1,12 +1,12 @@
 export interface LocationViewModel {
-  id: number;
-  title: string;
-  province: string;
-  district: string;
-  neighbourhood: string;
-  street?: string | null;
-  buildingNo?: string | null;
-  buildingAddition?: string | null;
-  apartmentNo?: string | null;
-  note?: string | null;
+  Id: number;
+  Title: string;
+  Province: string;
+  District: string;
+  Neighbourhood: string;
+  Street?: string | null;
+  BuildingNo?: string | null;
+  BuildingAddition?: string | null;
+  ApartmentNo?: string | null;
+  Note?: string | null;
 }

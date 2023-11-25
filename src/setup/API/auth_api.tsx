@@ -6,8 +6,8 @@ import { UserLoginRequest, UserLoginResponse, UserRegisterRequest, UserRegisterR
 
 export const LoginUserAsync = async (params: UserLoginRequest): Promise<UserLoginResponse> => {
     const response = await axios.post('https://localhost:7181/api/Auth/login', {
-        username: params.username,
-        encryptedPassword: params.encryptedPassword
+        username: params.Username,
+        encryptedPassword: params.EncryptedPassword
     })
 
     return response.data
@@ -16,12 +16,12 @@ export const LoginUserAsync = async (params: UserLoginRequest): Promise<UserLogi
 
 export const RegisterUserAsync = async (params: UserRegisterRequest): Promise<UserRegisterResponse> => {
     const response = await axios.post('https://localhost:7181/api/Auth/register', {
-        firstName: params.firstName,
-        lastName: params.lastName,
-        userName: params.username,
-        email: params.email,
-        phoneNumber: params.phoneNumber,
-        password: params.password
+        firstName: params.FirstName,
+        lastName: params.LastName,
+        userName: params.Username,
+        email: params.Email,
+        phoneNumber: params.PhoneNumber,
+        password: params.Password
     })
 
     return response.data

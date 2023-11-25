@@ -1,7 +1,7 @@
 export interface UserAccountViewModel {
-  firstName: string;
-  lastName: string;
-  username: string;
-  email: string;
-  phoneNumber: string;
+  FirstName: string;
+  LastName: string;
+  Username: string;
+  Email: string;
+  PhoneNumber: string;
 }

@@ -1,4 +1,4 @@
 export interface GetRestaurantListByLocationRequest {
-  province: string;
-  district: string;
+  Province: string;
+  District: string;
 }

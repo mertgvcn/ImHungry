@@ -38,20 +38,21 @@ const Login = () => {
     }
 
     const handleLogin = async () => {
-        if (await Validation()) {
+        if (Validation()) {
+            debugger;
             const encryptedPass = Encrypt(formData.password);
             const loginParams: UserLoginRequest = {
-                username: formData.userName,
-                encryptedPassword: encryptedPass
+                Username: formData.userName,
+                EncryptedPassword: encryptedPass
             }
             const response = await LoginUserAsync(loginParams)
 
-            if (!response.authenticateResult) {
+            if (!response.AuthenticateResult) {
                 popAlert("red", "Username or password is wrong!")
                 return;
             }
             else {
-                setCookie("jwt", response.authToken, response.accessTokenExpireDate)
+                setCookie("jwt", response.AuthToken, response.AccessTokenExpireDate)
                 popAlert("green", "Login successful!")
                 resetInputs()
                 setTimeout(() => {
@@ -64,7 +65,7 @@ const Login = () => {
 
 
     //Support functions
-    const Validation = async () => {
+    const Validation = () => {
         let isValid = true
         const validationErrors: any = {}
 
@@ -77,7 +78,6 @@ const Login = () => {
         if (!formData.password.trim()) {
             validationErrors.password = "*Required"
         }
-
 
         if (Object.keys(validationErrors).length != 0) {
             isValid = false
