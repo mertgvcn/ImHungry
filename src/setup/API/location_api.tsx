@@ -13,7 +13,7 @@ export const GetUserLocationList = async (): Promise<AxiosResponse> => {
         }
     })
 
-    return response.data.userLocations
+    return response.data
 }
 
 export const AddLocation = async (params: AddLocationRequest): Promise<AxiosResponse> => {
