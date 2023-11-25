@@ -40,8 +40,8 @@ const Restaurants = (props: RestaurantsType) => {
     }
     else {
       const getRestaurantListByLocationParams: GetRestaurantListByLocationRequest = {
-        province: data.province,
-        district: data.district
+        Province: data.province,
+        District: data.district
       }
 
       const response = await GetRestaurantListByLocation(getRestaurantListByLocationParams);

@@ -57,11 +57,11 @@ const Account = (props: AccountType) => {
       setErrors({})
       try {
         const accountParams: UserAccountViewModel = {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          username: formData.userName,
-          email: formData.email,
-          phoneNumber: formData.phoneNumber
+          FirstName: formData.firstName,
+          LastName: formData.lastName,
+          Username: formData.userName,
+          Email: formData.email,
+          PhoneNumber: formData.phoneNumber
         }
 
         await SetAccountInfo(accountParams)

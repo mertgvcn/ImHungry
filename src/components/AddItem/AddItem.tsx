@@ -56,10 +56,10 @@ const AddItem = (props: AddItemProps) => {
             isAddingProcessContinuing.current = true
 
             const addItemToCartRequest : CartTransactionRequest= {
-                itemID: itemID,
-                restaurantID: currentRestaurantID,
-                ingredients: getRequestedIngredients(),
-                amount: amount
+                ItemID: itemID,
+                RestaurantID: currentRestaurantID,
+                Ingredients: getRequestedIngredients(),
+                Amount: amount
             }
             try {
                 await AddItemToCart(addItemToCartRequest)

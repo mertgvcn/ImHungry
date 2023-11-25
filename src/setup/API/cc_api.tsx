@@ -19,10 +19,10 @@ export const GetUserCreditCards = async (): Promise<AxiosResponse> => {
 export const AddCreditCard = async (params: AddCreditCardRequest): Promise<AxiosResponse> => {
     const response = await axios.post('https://localhost:7181/api/CreditCard/AddCreditCard',
         {
-            creditCardNumber: params.creditCardNumber,
-            creditCardHolderName: params.creditCardHolderName,
-            expirationDate: params.expirationDate,
-            cvv: params.cvv,
+            creditCardNumber: params.CreditCardNumber,
+            creditCardHolderName: params.CreditCardHolderName,
+            expirationDate: params.ExpirationDate,
+            cvv: params.CVV,
         },
         {
             headers: {

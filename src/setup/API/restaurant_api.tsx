@@ -10,8 +10,8 @@ const API_KEY = 'bearer ' + getCookie("jwt")
 export const GetRestaurantListByLocation = async (params: GetRestaurantListByLocationRequest) => {
     const response = await axios.post('https://localhost:7181/api/Restaurant/GetRestaurantListByLocation',
     {
-        province: params.province,
-        district: params.district
+        province: params.Province,
+        district: params.District
     },
     {
         headers: {

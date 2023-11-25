@@ -34,11 +34,11 @@ export const SetCurrentLocation = async (locationID: number) => {
 export const SetAccountInfo = async (params: UserAccountViewModel) => {
     const response = await axios.put('https://localhost:7181/api/User/SetAccountInfo',
         {
-            firstName: params.firstName,
-            lastName: params.lastName,
-            username: params.username,
-            email: params.email,
-            phoneNumber: params.phoneNumber,
+            firstName: params.FirstName,
+            lastName: params.LastName,
+            username: params.Username,
+            email: params.Email,
+            phoneNumber: params.PhoneNumber,
         },
         {
             headers: {

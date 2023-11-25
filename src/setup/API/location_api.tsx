@@ -19,15 +19,15 @@ export const GetUserLocationList = async (): Promise<AxiosResponse> => {
 export const AddLocation = async (params: AddLocationRequest): Promise<AxiosResponse> => {
     const response = await axios.post('https://localhost:7181/api/Location/addLocation', 
     {
-        locationTitle: params.locationTitle,
-        province: params.province,
-        district: params.district,
-        neighbourhood: params.neighbourhood,
-        street: params.street,
-        buildingNo: params.buildingNo,
-        buildingAddition: params.buildingAddition,
-        apartmentNo: params.apartmentNo,
-        note: params.note
+        locationTitle: params.LocationTitle,
+        province: params.Province,
+        district: params.District,
+        neighbourhood: params.Neighbourhood,
+        street: params.Street,
+        buildingNo: params.BuildingNo,
+        buildingAddition: params.BuildingAddition,
+        apartmentNo: params.ApartmentNo,
+        note: params.Note
     },
     {
         headers: {

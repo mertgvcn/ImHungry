@@ -48,10 +48,10 @@ const CreditCardAdd = (props: propsType) => {
         if (Validation()) {
             try {
                 const addCreditCardRequest: AddCreditCardRequest = {
-                    creditCardNumber: formData.cardNumber,
-                    creditCardHolderName: formData.cardHolderName,
-                    expirationDate: formData.expirationDate,
-                    cvv: parseInt(formData.cvv)
+                    CreditCardNumber: formData.cardNumber,
+                    CreditCardHolderName: formData.cardHolderName,
+                    ExpirationDate: formData.expirationDate,
+                    CVV: parseInt(formData.cvv)
                 }
 
                 await AddCreditCard(addCreditCardRequest)

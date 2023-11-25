@@ -28,10 +28,10 @@ const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, 
     })
 
     const cartTransactionRequest: CartTransactionRequest = {
-        itemID: itemID,
-        restaurantID: restaurantID,
-        ingredients: ingredients,
-        amount: 0
+        ItemID: itemID,
+        RestaurantID: restaurantID,
+        Ingredients: ingredients,
+        Amount: 0
     }
 
     const handleRemoveItem = async () => {
@@ -48,7 +48,7 @@ const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, 
     }
 
     const handleDeleteItem = async () => {
-        cartTransactionRequest.amount = -1
+        cartTransactionRequest.Amount = -1
         
         await DeleteItemFromCart(cartTransactionRequest)
 
@@ -59,7 +59,7 @@ const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, 
     }
 
     const handleAddItem = async () => {
-        cartTransactionRequest.amount = 1
+        cartTransactionRequest.Amount = 1
 
         await AddItemToCart(cartTransactionRequest)
 

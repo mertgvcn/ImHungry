@@ -54,15 +54,15 @@ const LocationAdd = (props: propsType) => {
         if (Validation()) {
             try {
                 const addLocationParams: AddLocationRequest = {
-                    locationTitle: formData.title,
-                    province: formData.province,
-                    district: formData.district,
-                    neighbourhood: formData.neighbourhood,
-                    street: formData.street,
-                    buildingNo: formData.buildingNo,
-                    buildingAddition: formData.buildingAddition,
-                    apartmentNo: formData.apartmentNo,
-                    note: formData.note
+                    LocationTitle: formData.title,
+                    Province: formData.province,
+                    District: formData.district,
+                    Neighbourhood: formData.neighbourhood,
+                    Street: formData.street,
+                    BuildingNo: formData.buildingNo,
+                    BuildingAddition: formData.buildingAddition,
+                    ApartmentNo: formData.apartmentNo,
+                    Note: formData.note
                 }
 
                 await AddLocation(addLocationParams)
