@@ -16,7 +16,7 @@ const HomePage = () => {
   const {data,isSuccess} = useFetchData<HomePageDataType>(HOME_PAGE_URL)
   const hasLocation = (data?.currentLocation != null)
 
-
+  console.log(data)
   return isSuccess ? 
   (
     <RestaurantContextProvider>
@@ -24,7 +24,7 @@ const HomePage = () => {
         <SearchRestaurant />
         <CurrentLocation width='45' currentLocation={data!.currentLocation}/>
       </div>
-      <Restaurants restaurant={data!.restaurant} hasLocation={hasLocation} />
+      <Restaurants restaurants={data!.restaurant} hasLocation={hasLocation} />
     </RestaurantContextProvider>
   )
   : 

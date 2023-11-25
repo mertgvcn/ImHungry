@@ -1,7 +1,7 @@
-import { RestaurantDataType } from "../RestaurantDataType"
-import { CurrentLocationType } from "../UserDataType"
+import { LocationViewModel } from "../../models/ViewModels/LocationViewModel";
+import { RestaurantListViewModel } from "../../models/ViewModels/RestaurantListViewModel";
 
 export type HomePageDataType = {
-    currentLocation: CurrentLocationType | null,
-    restaurant: RestaurantDataType | null,
+    currentLocation: LocationViewModel | null,
+    restaurant: RestaurantListViewModel[] | null,
 }

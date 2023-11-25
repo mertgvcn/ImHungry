@@ -6,8 +6,8 @@ import { ChangeContext } from '../../../context/ChangeContext'
 import { GetCurrentLocation } from '../../../setup/API/user_api'
 import { GetRestaurantListByLocation } from '../../../setup/API/restaurant_api'
 import useDidMountUpdate from '../../../hooks/useDidMountUpdate'
-//type
-import { RestaurantDataType, RestaurantListType } from '../../../types/RestaurantDataType'
+//models
+import { RestaurantListViewModel } from '../../../models/ViewModels/RestaurantListViewModel'
 import { GetRestaurantListByLocationRequest } from '../../../models/ParameterModels/RestaurantParameterModels'
 //css
 import '../styles/Restaurants.css'
@@ -16,7 +16,7 @@ import RestaurantCard from './RestaurantCard'
 
 
 type RestaurantsType = {
-  restaurant: RestaurantDataType | null,
+  restaurants: RestaurantListViewModel[] | null,
   hasLocation: boolean
 }
 
@@ -27,7 +27,7 @@ const Restaurants = (props: RestaurantsType) => {
   const { restaurantToggle } = useContext(ChangeContext)
 
   //if prop.restaurant is null, restaurantList = []. Otherwise it gets the list from prop.restaurant.restaurantList
-  const [restaurantList, setRestaurantList] = useState<RestaurantListType[]>(props.restaurant ? props.restaurant.restaurantList : [])
+  const [restaurantList, setRestaurantList] = useState<RestaurantListViewModel[]>(props.restaurants ? props.restaurants : [])
   const [hasLocation, setHasLocation] = useState<boolean>(props.hasLocation)
 
   //if change occurs on location, restaurants gonna be fetched and set locally. 

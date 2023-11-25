@@ -5,16 +5,15 @@ import { DeleteLocationByLocationID, GetUserLocationList } from '../../setup/API
 import { GetCurrentLocation, SetCurrentLocation } from '../../setup/API/user_api'
 //css
 import './styles/CurrentLocation.css'
-//types
-import { CurrentLocationType } from '../../types/UserDataType'
-import { UserLocationsType } from '../../types/LocationDataType'
+//models
+import { LocationViewModel } from '../../models/ViewModels/LocationViewModel'
 //components
 import LocationAdd from '../../pages/Profile/components/Location/LocationAdd'
 
 
 type currentLocationType = {
     width: string,
-    currentLocation: CurrentLocationType | null,
+    currentLocation: LocationViewModel | null,
 }
 
 
@@ -27,7 +26,7 @@ const CurrentLocation = (props: currentLocationType) => {
 
     //States
     const [displayedLocation, setDisplayedLocation] = useState<string>(initialLocationString)
-    const [userLocations, setUserLocations] = useState<UserLocationsType[]>([])
+    const [userLocations, setUserLocations] = useState<LocationViewModel[]>([])
     const [dropDownState, setDropDownState] = useState<boolean>(false)
     const [addLocState, setAddLocState] = useState<boolean>(false)
 
@@ -73,48 +72,48 @@ const CurrentLocation = (props: currentLocationType) => {
 
                             {/* Loc Info */}
                             <div className='location-info' onClick={async () => {
-                                await SetCurrentLocation(location.locationID);
+                                await SetCurrentLocation(location.Id);
                                 setDisplayedLocation(getLocString(location))
                                 setLocationToggle(!locationToggle);
                                 setRestaurantToggle(!restaurantToggle); //if current location changes, we need to update restaurant list
                                 setDropDownState(false);
                             }}>
                                 <i className="fa-solid fa-location-dot" style={{ marginLeft: 1, marginRight: 5, fontSize: 16 }}></i>
-                                {location.locationTitle}
-                                , {location.province}/{location.district}
-                                {location.neighbourhood.length > 12 ?
-                                    `, ${location.neighbourhood.substring(0, 12)}...` : `, ${location.neighbourhood}`
+                                {location.Title}
+                                , {location.Province}/{location.District}
+                                {location.Neighbourhood.length > 12 ?
+                                    `, ${location.Neighbourhood.substring(0, 12)}...` : `, ${location.Neighbourhood}`
                                 }
-                                {location.street ?
-                                    location.street.length > 12 ?
-                                        `, ${location.street.substring(0, 12)}...` : `, ${location.street}`
+                                {location.Street ?
+                                    location.Street.length > 12 ?
+                                        `, ${location.Street.substring(0, 12)}...` : `, ${location.Street}`
                                     : null
                                 }
-                                {location.buildingNo ?
-                                    location.buildingNo.length > 5 ?
-                                        `, ${location.buildingNo.substring(0, 5)}...` : `, ${location.buildingNo}`
+                                {location.BuildingNo ?
+                                    location.BuildingNo.length > 5 ?
+                                        `, ${location.BuildingNo.substring(0, 5)}...` : `, ${location.BuildingNo}`
                                     : null
                                 }
-                                {location.buildingAddition ?
-                                    location.buildingAddition.length > 5 ?
-                                        `, ${location.buildingAddition.substring(0, 5)}...` : `, ${location.buildingAddition}`
+                                {location.BuildingAddition ?
+                                    location.BuildingAddition.length > 5 ?
+                                        `, ${location.BuildingAddition.substring(0, 5)}...` : `, ${location.BuildingAddition}`
                                     : null
                                 }
-                                {location.apartmentNo ?
-                                    location.apartmentNo.length > 5 ?
-                                        `, ${location.apartmentNo.substring(0, 5)}...` : `, ${location.apartmentNo}`
+                                {location.ApartmentNo ?
+                                    location.ApartmentNo.length > 5 ?
+                                        `, ${location.ApartmentNo.substring(0, 5)}...` : `, ${location.ApartmentNo}`
                                     : null
                                 }
-                                {location.note ?
-                                    location.note.length > 15 ?
-                                        `, ${location.note.substring(0, 15)}...` : `, ${location.note}`
+                                {location.Note ?
+                                    location.Note.length > 15 ?
+                                        `, ${location.Note.substring(0, 15)}...` : `, ${location.Note}`
                                     : null
                                 }
                             </div>
 
                             {/* Delete Loc */}
                             <div className='location-delete' onClick={async () => {
-                                await DeleteLocationByLocationID(location.locationID);
+                                await DeleteLocationByLocationID(location.Id);
                                 if(await GetCurrentLocation() == null) {
                                     setDisplayedLocation("")
                                     setRestaurantToggle(!restaurantToggle)
@@ -149,6 +148,6 @@ export default CurrentLocation
 
 
 //Helper
-function getLocString(loc: CurrentLocationType) {
-    return `${loc.locationTitle}, ${loc.province}/${loc.district}, ${loc.neighbourhood} - ${loc.street} ${loc.buildingNo}-${loc.buildingAddition} ${loc.apartmentNo} ${loc.note}`
+function getLocString(loc: LocationViewModel) {
+    return `${loc.Title}, ${loc.Province}/${loc.District}, ${loc.Neighbourhood} - ${loc.Street} ${loc.BuildingNo}-${loc.BuildingAddition} ${loc.ApartmentNo} ${loc.Note}`
 }

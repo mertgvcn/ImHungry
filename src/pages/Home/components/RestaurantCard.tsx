@@ -1,21 +1,26 @@
 import { Link } from 'react-router-dom'
 //css
 import '../styles/RestaurantCard.css'
-//type
-import { RestaurantCardType } from '../../../types/RestaurantDataType'
+//models
+import { RestaurantSummaryViewModel } from '../../../models/ViewModels/RestaurantSummaryViewModel'
 
 
-const RestaurantCard = ({ data: { restaurantID, name, description, imageSource } }: RestaurantCardType) => {
+type RestaurantCardType = {
+    data : RestaurantSummaryViewModel
+}
+
+
+const RestaurantCard = ( { data : { Id, Name, Description, ImageSource } }: RestaurantCardType) => {
 
     return (
-        <Link to="/restaurant" state={{data: restaurantID}} className='restaurant-card-wrapper'> {/*gönderilen dataya restaurant details sayfasındaki bütün componentlardan erişebiliyoruz*/}
+        <Link to="/restaurant" state={{data: Id}} className='restaurant-card-wrapper'> {/*gönderilen dataya restaurant details sayfasındaki bütün componentlardan erişebiliyoruz*/}
                 <div className="restaurant-image">
-                    <img src={require(`../../../assets/RestaurantImages/${imageSource}`)} alt="resim yok" />
+                    <img src={require(`../../../assets/RestaurantImages/${ImageSource}`)} alt="resim yok" />
                 </div>
                 <div className="restaurant-info">
                     <div className="restaurant-title">
-                        <span id="restaurant-name">{name}</span>
-                        <span id="restaurant-description">{description}</span>
+                        <span id="restaurant-name">{Name}</span>
+                        <span id="restaurant-description">{Description}</span>
                     </div>
                     <div className="restaurant-rating">
                         <span id="restaurant-rate">4/5</span>
