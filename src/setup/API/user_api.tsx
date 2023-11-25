@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { getCookie } from '../Cookie';
 import { UserAccountViewModel } from '../../models/ViewModels/UserAccountViewModel';
+import { SetCurrentLocationRequest } from '../../models/ParameterModels/UserParameterModels';
 //models
 
 
@@ -17,10 +18,10 @@ export const GetCurrentLocation = async (): Promise<AxiosResponse> => {
     return response.data
 }
 
-export const SetCurrentLocation = async (locationID: number) => {
+export const SetCurrentLocation = async (x: SetCurrentLocationRequest) => {
     const response = await axios.put('https://localhost:7181/api/User/SetCurrentLocation',
         {
-            locationID: locationID
+            locationID: x.LocationID
         },
         {
             headers: {

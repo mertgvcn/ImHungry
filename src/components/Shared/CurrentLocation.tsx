@@ -9,6 +9,7 @@ import './styles/CurrentLocation.css'
 import { LocationViewModel } from '../../models/ViewModels/LocationViewModel'
 //components
 import LocationAdd from '../../pages/Profile/components/Location/LocationAdd'
+import { SetCurrentLocationRequest } from '../../models/ParameterModels/UserParameterModels'
 
 
 type currentLocationType = {
@@ -39,6 +40,8 @@ const CurrentLocation = (props: currentLocationType) => {
         return new Promise((resolve) => { resolve() })
     }
 
+    
+    //on click actions
     const handleFetchOtherLocations = async (needUpdate: boolean) => {
         if (!dropDownState) { //dropdown açıldığında fetchleyecek, state geriden geldiği için false durumunu aldık
             await fetchLocationsOfUser()
@@ -49,6 +52,27 @@ const CurrentLocation = (props: currentLocationType) => {
         }
     }
 
+    const handleChangeCurrentLocation = async (location: LocationViewModel) => {
+        const setCurrentLocationRequest: SetCurrentLocationRequest = {
+            LocationID: location.Id
+        }     
+
+        await SetCurrentLocation(setCurrentLocationRequest);
+        setDisplayedLocation(getLocString(location))
+        setLocationToggle(!locationToggle);
+        setRestaurantToggle(!restaurantToggle); //if current location changes, we need to update restaurant list
+        setDropDownState(false);
+    }
+
+    const handleDeleteLocation = async (location: LocationViewModel) => {
+        await DeleteLocationByLocationID(location.Id);
+        if(await GetCurrentLocation() == null) {
+            setDisplayedLocation("")
+            setRestaurantToggle(!restaurantToggle)
+        }
+        setDropDownState(!dropDownState)
+        handleFetchOtherLocations(true)
+    }
 
     return (
         <div className='current-location-wrapper' style={{ width: props.width + "%" }}>
@@ -71,12 +95,8 @@ const CurrentLocation = (props: currentLocationType) => {
                         <li key={idx}>
 
                             {/* Loc Info */}
-                            <div className='location-info' onClick={async () => {
-                                await SetCurrentLocation(location.Id);
-                                setDisplayedLocation(getLocString(location))
-                                setLocationToggle(!locationToggle);
-                                setRestaurantToggle(!restaurantToggle); //if current location changes, we need to update restaurant list
-                                setDropDownState(false);
+                            <div className='location-info' onClick={async () => {          
+                                handleChangeCurrentLocation(location)
                             }}>
                                 <i className="fa-solid fa-location-dot" style={{ marginLeft: 1, marginRight: 5, fontSize: 16 }}></i>
                                 {location.Title}
@@ -113,13 +133,7 @@ const CurrentLocation = (props: currentLocationType) => {
 
                             {/* Delete Loc */}
                             <div className='location-delete' onClick={async () => {
-                                await DeleteLocationByLocationID(location.Id);
-                                if(await GetCurrentLocation() == null) {
-                                    setDisplayedLocation("")
-                                    setRestaurantToggle(!restaurantToggle)
-                                }
-                                setDropDownState(!dropDownState)
-                                handleFetchOtherLocations(true)
+                                handleDeleteLocation(location)
                             }}>
                                 <i className="fa-solid fa-xmark"></i>
                             </div>

@@ -33,15 +33,15 @@ const Restaurants = (props: RestaurantsType) => {
   //if change occurs on location, restaurants gonna be fetched and set locally. 
   const fetchRestaurants = async () => {
     const data: any = await GetCurrentLocation()
-
+ 
     if (!data) {
       setHasLocation(false)
       return;
     }
     else {
       const getRestaurantListByLocationParams: GetRestaurantListByLocationRequest = {
-        Province: data.province,
-        District: data.district
+        Province: data.Province,
+        District: data.District
       }
 
       const response = await GetRestaurantListByLocation(getRestaurantListByLocationParams);

@@ -1,9 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { AddLocation } from '../../../../setup/API/location_api'
-import { Decrypt } from '../../../../setup/Cryption'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/LocationAdd.css'
@@ -21,9 +19,6 @@ type propsType = {
 const LocationAdd = (props: propsType) => {
     //Context
     const { locationToggle, setLocationToggle } = useContext(ChangeContext)
-    const { currentUserID } = useContext(UserContext)
-    const _currentUserID = Decrypt(currentUserID)
-
 
     //Add Location States
     const [formData, setFormData] = useState({
@@ -53,7 +48,7 @@ const LocationAdd = (props: propsType) => {
     const handleAdd = async () => {
         if (Validation()) {
             try {
-                const addLocationParams: AddLocationRequest = {
+                const addLocationRequest: AddLocationRequest = {
                     LocationTitle: formData.title,
                     Province: formData.province,
                     District: formData.district,
@@ -65,7 +60,7 @@ const LocationAdd = (props: propsType) => {
                     Note: formData.note
                 }
 
-                await AddLocation(addLocationParams)
+                await AddLocation(addLocationRequest)
                 popAlert("green", "Addrees successfuly added")
                 setLocationToggle(!locationToggle)
                 resetInputs()

@@ -19,5 +19,5 @@ export const GetRestaurantListByLocation = async (params: GetRestaurantListByLoc
         }
     })
 
-    return response.data.restaurantList
+    return response.data
 }
