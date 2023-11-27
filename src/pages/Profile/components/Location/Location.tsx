@@ -1,12 +1,10 @@
 import { useContext, useState } from 'react'
-import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
-import { Decrypt } from '../../../../setup/Cryption'
 import { GetUserLocationList } from '../../../../setup/API/location_api'
 import useDidMountUpdate from '../../../../hooks/useDidMountUpdate'
-//type
-import { LocationDataType, UserLocationsType } from '../../../../types/LocationDataType'
+//models
+import { LocationViewModel } from '../../../../models/ViewModels/LocationViewModel'
 //Css
 import './styles/Location.css'
 //Component
@@ -15,18 +13,16 @@ import LocationCard from './LocationCard'
 
 
 type LocationType = {
-    location: LocationDataType
+    locations: LocationViewModel[]
 }
 
 
 const Location = (props: LocationType) => {
     //Context
     const { locationToggle } = useContext(ChangeContext)
-    const { currentUserID } = useContext(UserContext)
-    const _currentUserID = Decrypt(currentUserID)
 
     //Locations
-    const [userLocations, setUserLocations] = useState<UserLocationsType[]>(props.location.userLocations)
+    const [userLocations, setUserLocations] = useState<LocationViewModel[]>(props.locations)
 
     //Add Location State
     const [addLocationStatus, setAddLocationStatus] = useState<boolean>(false);

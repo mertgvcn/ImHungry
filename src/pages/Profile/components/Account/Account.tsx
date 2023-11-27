@@ -20,23 +20,20 @@ const phoneNumberPattern = new RegExp(/^(\+90|0)?\s*(\(\d{3}\)[\s-]*\d{3}[\s-]*\
 
 
 type AccountType = {
-  accountInfo : AccountInfoType
+  accountInfo : UserAccountViewModel
 }
 
 
 const Account = (props: AccountType) => {
-  //Local Storage
-  const { currentUserID } = useContext(UserContext)
-  const _currentUserID = Decrypt(currentUserID)
 
   //States
   const [formData, setFormData] = useState({
-    firstName: props.accountInfo.firstName,
-    lastName: props.accountInfo.lastName,
-    userName: props.accountInfo.userName,
-    defaultUserName: props.accountInfo.userName,
-    email: props.accountInfo.email,
-    phoneNumber: props.accountInfo.phoneNumber
+    firstName: props.accountInfo.FirstName,
+    lastName: props.accountInfo.LastName,
+    username: props.accountInfo.Username,
+    defaultUsername: props.accountInfo.Username,
+    email: props.accountInfo.Email,
+    phoneNumber: props.accountInfo.PhoneNumber
   })
   const [errors, setErrors] = useState<any>({})
   const [changePassTrigger, setChangePassTrigger] = useState<boolean>(false)
@@ -59,7 +56,7 @@ const Account = (props: AccountType) => {
         const accountParams: UserAccountViewModel = {
           FirstName: formData.firstName,
           LastName: formData.lastName,
-          Username: formData.userName,
+          Username: formData.username,
           Email: formData.email,
           PhoneNumber: formData.phoneNumber
         }
@@ -94,14 +91,14 @@ const Account = (props: AccountType) => {
     }
 
     //username
-    if (!formData.userName.trim()) {
+    if (!formData.username.trim()) {
       validationErrors.userName = "*Username cannot be left blank"
     }
-    else if (formData.userName.trim().length < 4 || formData.userName.trim().length > 25) {
+    else if (formData.username.trim().length < 4 || formData.username.trim().length > 25) {
       validationErrors.userName = "*Username must be between 4-25 characters"
     }
-    else if (formData.userName.trim() !== formData.defaultUserName) {
-      if (await VerifyUsername(formData.userName.trim())) {
+    else if (formData.username.trim() !== formData.defaultUsername) {
+      if (await VerifyUsername(formData.username.trim())) {
         validationErrors.userName = "*Username must be unique"
       }
     }
@@ -154,7 +151,7 @@ const Account = (props: AccountType) => {
 
         <div className='input-group'>
           <p>Username</p>
-          <input name="userName" type="text" placeholder={formData.userName} onChange={handleChange} />
+          <input name="userName" type="text" placeholder={formData.username} onChange={handleChange} />
           <div>
             {errors.userName && <span>{errors.userName}</span>}
           </div>

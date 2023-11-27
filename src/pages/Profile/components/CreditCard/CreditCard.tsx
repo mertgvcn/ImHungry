@@ -1,12 +1,10 @@
 import { useContext, useState } from 'react'
-import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
-import { Decrypt } from '../../../../setup/Cryption'
 import { GetUserCreditCards } from '../../../../setup/API/cc_api'
 import useDidMountUpdate from '../../../../hooks/useDidMountUpdate'
 //type
-import { CreditCardDataType, UserCreditCardsType } from '../../../../types/CreditCardDataType'
+import { CreditCardViewModel } from '../../../../models/ViewModels/CreditCardViewModel'
 //css
 import './styles/CreditCard.css'
 //components
@@ -15,18 +13,16 @@ import CreditCardAdd from './CreditCardAdd'
 
 
 type CreditCardType = {
-    creditCard: CreditCardDataType
+    creditCards: CreditCardViewModel[]
 }
 
 
 const CreditCard = (props: CreditCardType) => {
     //Context
     const { creditCardToggle } = useContext(ChangeContext)
-    const { currentUserID } = useContext(UserContext)
-    const _currentUserID = Decrypt(currentUserID)
 
     //Credit Cards
-    const [creditCards, setCreditCards] = useState<UserCreditCardsType[]>(props.creditCard.userCreditCards)
+    const [creditCards, setCreditCards] = useState<CreditCardViewModel[]>(props.creditCards)
 
     //Add Card State
     const [addCardStatus, setAddCardStatus] = useState<boolean>(false);

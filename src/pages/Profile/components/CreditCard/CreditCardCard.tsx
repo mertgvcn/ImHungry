@@ -3,17 +3,20 @@ import { ChangeContext } from '../../../../context/ChangeContext'
 //helpers
 import { DeleteCreditCardByID } from '../../../../setup/API/cc_api'
 //type
-import { CCCardType } from '../../../../types/CreditCardDataType'
+import { CreditCardViewModel } from '../../../../models/ViewModels/CreditCardViewModel'
 //css
 import './styles/CreditCardCard.css'
 
+type CreditCardCardType = {
+  data: CreditCardViewModel
+}
 
-const CreditCardCard = ({ data: { ccID, ccNo, ccName, expirationDate, cvv } }: CCCardType) => {
+const CreditCardCard = ({ data: { Id, Number, HolderName, ExpirationDate, CVV } }: CreditCardCardType) => {
   const { creditCardToggle, setCreditCardToggle } = useContext(ChangeContext)
 
   const deleteCard = async () => {
     try {
-      await DeleteCreditCardByID(ccID);
+      await DeleteCreditCardByID(Id);
       setCreditCardToggle(!creditCardToggle)
   } catch (error) {
       console.log(error)
@@ -22,7 +25,7 @@ const CreditCardCard = ({ data: { ccID, ccNo, ccName, expirationDate, cvv } }: C
 
   const hideName = () => {
     let hiddenName = ""
-    const nameArray = ccName.split(" ")
+    const nameArray = HolderName.split(" ")
 
     for (let i = 0; i < nameArray.length; i++) {
       for (let j = 0; j < nameArray[i].length; j++) {
@@ -48,7 +51,7 @@ const CreditCardCard = ({ data: { ccID, ccNo, ccName, expirationDate, cvv } }: C
 
       <div className='card-number'>
         <i className="fa-solid fa-microchip" style={{ marginRight: 2, marginLeft: 4 }}></i>
-        <p>{ccNo.slice(0, 4)} **** **** {ccNo.slice(15, 19)}</p>
+        <p>{Number.slice(0, 4)} **** **** {Number.slice(15, 19)}</p>
       </div>
 
       <div className='cardholder-name'>
@@ -56,8 +59,8 @@ const CreditCardCard = ({ data: { ccID, ccNo, ccName, expirationDate, cvv } }: C
       </div>
 
       <div className='date-cvv'>
-        <p>{expirationDate}</p>
-        <p>{cvv}</p>
+        <p>{ExpirationDate}</p>
+        <p>{CVV}</p>
       </div>
     </div>
   )

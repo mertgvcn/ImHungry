@@ -3,17 +3,20 @@ import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { DeleteLocationByLocationID } from '../../../../setup/API/location_api'
 //type
-import { LocationCardType } from '../../../../types/LocationDataType'
+import { LocationViewModel } from '../../../../models/ViewModels/LocationViewModel'
 //css
 import './styles/LocationCard.css'
 
+type LocationCardType = {
+    data: LocationViewModel
+}
 
-const LocationCard = ({ data: { locationTitle, province, district, neighbourhood, street, buildingNo, buildingAddition, apartmentNo, note, locationID } }: LocationCardType) => {
+const LocationCard = ({ data: { Title, Province, District, Neighbourhood, Street, BuildingNo, BuildingAddition, ApartmentNo, Note, Id } }: LocationCardType) => {
     const { locationToggle, setLocationToggle } = useContext(ChangeContext)
 
     const deleteLocation = async () => {
         try {
-            await DeleteLocationByLocationID(locationID);
+            await DeleteLocationByLocationID(Id);
             setLocationToggle(!locationToggle)
         } catch (error) {
             console.log(error)
@@ -26,21 +29,21 @@ const LocationCard = ({ data: { locationTitle, province, district, neighbourhood
                 <i className="fa-solid fa-circle-minus" onClick={deleteLocation}></i>
             </div>
 
-            <p style={{ marginLeft: 2, fontSize: 18, marginBottom: 5 }}><i className="fa-solid fa-location-dot" style={{ marginRight: 4, fontSize: 14 }}></i>{locationTitle}</p>
+            <p style={{ marginLeft: 2, fontSize: 18, marginBottom: 5 }}><i className="fa-solid fa-location-dot" style={{ marginRight: 4, fontSize: 14 }}></i>{Title}</p>
 
             <div>
-                <p style={{ marginLeft: 10, fontSize: 16, marginBottom: 5, color: "#402E32" }}>{province}/{district}</p>
+                <p style={{ marginLeft: 10, fontSize: 16, marginBottom: 5, color: "#402E32" }}>{Province}/{District}</p>
             </div>
 
-            <p className='info'>{neighbourhood}</p>
+            <p className='info'>{Neighbourhood}</p>
 
-            <p className='info'>{street ? `${street}` : null}</p>
+            <p className='info'>{Street ? `${Street}` : null}</p>
 
             <p className='info'>
-                {buildingNo ? `${buildingNo}` : null}{buildingAddition ? `/${buildingAddition}` : null} {apartmentNo ? `- ${apartmentNo}` : null}
+                {BuildingNo ? `${BuildingNo}` : null}{BuildingAddition ? `/${BuildingAddition}` : null} {ApartmentNo ? `- ${ApartmentNo}` : null}
             </p>
 
-            <p className='info'>{note ? `${note}` : null}</p>
+            <p className='info'>{Note ? `${Note}` : null}</p>
         </div>
     )
 }
