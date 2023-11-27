@@ -13,7 +13,7 @@ export const GetUserCreditCards = async (): Promise<AxiosResponse> => {
         }
     })
 
-    return response.data.userCreditCards
+    return response.data
 }
 
 export const AddCreditCard = async (params: AddCreditCardRequest): Promise<AxiosResponse> => {

@@ -1,18 +1,14 @@
-import { useContext, useState } from 'react'
-import { UserContext } from '../../../../context/UserContext'
+import { useState } from 'react'
 //exported functions
-import { Decrypt } from '../../../../setup/Cryption'
 import { VerifyUsername, SetAccountInfo } from '../../../../setup/API/user_api'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/Account.css'
-//type
-import { AccountInfoType } from '../../../../types/UserDataType'
+//models
 import { UserAccountViewModel } from '../../../../models/ViewModels/UserAccountViewModel'
 //components
 import Alert from '../../../../components/Shared/Alert'
 import ChangePass from './ChangePass'
-
 
 
 const emailPattern = new RegExp(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);

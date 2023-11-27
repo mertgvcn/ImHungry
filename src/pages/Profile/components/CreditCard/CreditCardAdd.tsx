@@ -1,16 +1,14 @@
 import React, { useContext, useState } from 'react'
-import { UserContext } from '../../../../context/UserContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
 import { AddCreditCard } from '../../../../setup/API/cc_api'
-import { Decrypt } from '../../../../setup/Cryption'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/CreditCardAdd.css'
-//component
-import Alert from '../../../../components/Shared/Alert'
 //models
 import { AddCreditCardRequest } from '../../../../models/ParameterModels/CreditCardParameterModels'
+//component
+import Alert from '../../../../components/Shared/Alert'
 
 
 type propsType = {
@@ -23,15 +21,13 @@ type propsType = {
 const CreditCardAdd = (props: propsType) => {
     //Context
     const { creditCardToggle, setCreditCardToggle } = useContext(ChangeContext)
-    const { currentUserID } = useContext(UserContext)
-    const _currentUserID = Decrypt(currentUserID)
 
     //Input states
     const [formData, setFormData] = useState({
-        cardNumber: "",
-        cardHolderName: "",
-        expirationDate: "",
-        cvv: ""
+        CreditCardNumber: "",
+        CreditCardHolderName: "",
+        ExpirationDate: "",
+        CVV: ""
     })
     const [errors, setErrors] = useState<any>({})
     const {alertStates, popAlert} = usePopAlert()
@@ -48,10 +44,10 @@ const CreditCardAdd = (props: propsType) => {
         if (Validation()) {
             try {
                 const addCreditCardRequest: AddCreditCardRequest = {
-                    CreditCardNumber: formData.cardNumber,
-                    CreditCardHolderName: formData.cardHolderName,
-                    ExpirationDate: formData.expirationDate,
-                    CVV: parseInt(formData.cvv)
+                    CreditCardNumber: formData.CreditCardNumber,
+                    CreditCardHolderName: formData.CreditCardHolderName,
+                    ExpirationDate: formData.ExpirationDate,
+                    CVV: parseInt(formData.CVV)
                 }
 
                 await AddCreditCard(addCreditCardRequest)
@@ -74,50 +70,50 @@ const CreditCardAdd = (props: propsType) => {
         const validationErrors: any = {}
 
         //card number
-        if (!formData.cardNumber.trim()) {
-            validationErrors.cardNumber = "*Required"
+        if (!formData.CreditCardNumber.trim()) {
+            validationErrors.CreditCardNumber = "*Required"
         }
-        else if (formData.cardNumber.length < 19 || !/^[\d ]*$/.test(formData.cardNumber)) {
-            validationErrors.cardNumber = "*Invalid credit card number"
+        else if (formData.CreditCardNumber.length < 19 || !/^[\d ]*$/.test(formData.CreditCardNumber)) {
+            validationErrors.CreditCardNumber = "*Invalid credit card number"
         }
 
         //cardholder name
-        if (!formData.cardHolderName.trim()) {
-            validationErrors.cardHolderName = "*Required"
+        if (!formData.CreditCardHolderName.trim()) {
+            validationErrors.CreditCardHolderName = "*Required"
         }
-        else if (formData.cardHolderName.length < 4 || !/^[a-zA-Z\s]*$/.test(formData.cardHolderName)) {
-            validationErrors.cardHolderName = "*Invalid name"
+        else if (formData.CreditCardHolderName.length < 4 || !/^[a-zA-Z\s]*$/.test(formData.CreditCardHolderName)) {
+            validationErrors.CreditCardHolderName = "*Invalid name"
         }
 
         //expiration date
-        if (!formData.expirationDate.trim()) {
-            validationErrors.expirationDate = "*Required"
+        if (!formData.ExpirationDate.trim()) {
+            validationErrors.ExpirationDate = "*Required"
         }
-        else if (formData.expirationDate.length < 5) {
-            validationErrors.expirationDate = "*Invalid date"
+        else if (formData.ExpirationDate.length < 5) {
+            validationErrors.ExpirationDate = "*Invalid date"
         }
         else {
-            const month = parseInt(formData.expirationDate.slice(0, 2))
-            const year = parseInt(formData.expirationDate.slice(3, 5))
+            const month = parseInt(formData.ExpirationDate.slice(0, 2))
+            const year = parseInt(formData.ExpirationDate.slice(3, 5))
 
             const date = new Date()
             const currentMonth = date.getMonth() + 1
             const currentYear = parseInt(date.getFullYear().toString().slice(2, 4))
 
             if (year < 23 || year > 53) {
-                validationErrors.expirationDate = "*Invalid date"
+                validationErrors.ExpirationDate = "*Invalid date"
             }
             else if (year == currentYear && month < currentMonth) {
-                validationErrors.expirationDate = "*Invalid date"
+                validationErrors.ExpirationDate = "*Invalid date"
             }
         }
 
         //cvv
-        if (!formData.cvv.trim()) {
-            validationErrors.cvv = "*Required"
+        if (!formData.CVV.trim()) {
+            validationErrors.CVV = "*Required"
         }
-        else if (formData.cvv.length < 3) {
-            validationErrors.cvv = "*Invalid cvv"
+        else if (formData.CVV.length < 3) {
+            validationErrors.CVV = "*Invalid cvv"
         }
 
 
@@ -132,10 +128,10 @@ const CreditCardAdd = (props: propsType) => {
     const resetInputs = () => {
         setErrors({})
         setFormData({
-            cardNumber: "",
-            cardHolderName: "",
-            expirationDate: "",
-            cvv: ""
+            CreditCardNumber: "",
+            CreditCardHolderName: "",
+            ExpirationDate: "",
+            CVV: ""
         })
     }
 
@@ -164,24 +160,24 @@ const CreditCardAdd = (props: propsType) => {
 
                 <div className='input-group'>
                     <p>Card Number</p>
-                    <input name="cardNumber" type="text" placeholder="**** **** **** ****" onChange={handleChange}
-                        value={formData.cardNumber.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ").trim()}
+                    <input name="CreditCardNumber" type="text" placeholder="**** **** **** ****" onChange={handleChange}
+                        value={formData.CreditCardNumber.replace(/\s/g, "").replace(/(\d{4})/g, "$1 ").trim()}
                         onInput={(e) => {
                             if (e.currentTarget.value.length > 19) e.currentTarget.value = e.currentTarget.value.slice(0, 19);
                         }} />
                     <div>
-                        {errors.cardNumber && <span>{errors.cardNumber}</span>}
+                        {errors.CreditCardNumber && <span>{errors.CreditCardNumber}</span>}
                     </div>
                 </div>
 
                 <div className='input-group'>
                     <p>Cardholder Name</p>
-                    <input name="cardHolderName" type="text" onChange={handleChange}
+                    <input name="CreditCardHolderName" type="text" onChange={handleChange}
                         onInput={(e) => {
                             if (e.currentTarget.value.length > 50) e.currentTarget.value = e.currentTarget.value.slice(0, 50);
                         }} />
                     <div>
-                        {errors.cardHolderName && <span>{errors.cardHolderName}</span>}
+                        {errors.CreditCardHolderName && <span>{errors.CreditCardHolderName}</span>}
                     </div>
                 </div>
 
@@ -189,8 +185,8 @@ const CreditCardAdd = (props: propsType) => {
 
                     <div className='input-group'>
                         <p>Expiration Date</p>
-                        <input name="expirationDate" type="text" placeholder="MM/YY" onChange={handleChange} style={{ width: 120 }}
-                            value={formData.expirationDate.replace(
+                        <input name="ExpirationDate" type="text" placeholder="MM/YY" onChange={handleChange} style={{ width: 120 }}
+                            value={formData.ExpirationDate.replace(
                                 /[^0-9]/g, '' // To allow only numbers
                             ).replace(
                                 /^([2-9])$/g, '0$1' // To handle 3 > 03
@@ -205,18 +201,18 @@ const CreditCardAdd = (props: propsType) => {
                                 if (e.currentTarget.value.length > 5) e.currentTarget.value = e.currentTarget.value.slice(0, 5);
                             }} />
                         <div>
-                            {errors.expirationDate && <span>{errors.expirationDate}</span>}
+                            {errors.ExpirationDate && <span>{errors.ExpirationDate}</span>}
                         </div>
                     </div>
 
                     <div className='input-group'>
                         <p>CVV</p>
-                        <input name="cvv" type="number" placeholder="***" onChange={handleChange}
+                        <input name="CVV" type="number" placeholder="***" onChange={handleChange}
                             onInput={(e) => {
                                 if (e.currentTarget.value.length > 3) e.currentTarget.value = e.currentTarget.value.slice(0, 3);
                             }} />
                         <div>
-                            {errors.cvv && <span>{errors.cvv}</span>}
+                            {errors.CVV && <span>{errors.CVV}</span>}
                         </div>
                     </div>
 

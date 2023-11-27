@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react'
-import { UserContext } from '../../../../context/UserContext'
+import React, { useState } from 'react'
 //exported functions
-import { Decrypt, Encrypt } from '../../../../setup/Cryption'
+import { Encrypt } from '../../../../setup/Cryption'
 import { ChangePassword, VerifyPassword } from '../../../../setup/API/user_api'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css
 import './styles/ChangePass.css'
 //component
 import Alert from '../../../../components/Shared/Alert'
+import { ChangePasswordRequest, VerifyPasswordRequest } from '../../../../models/ParameterModels/UserParameterModels'
 
 
 const passwordPattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(\S).{8,20}$/)
@@ -21,10 +21,6 @@ type propsType = {
 
 
 const ChangePass = (props: propsType) => {
-  //Local Storage
-  const { currentUserID } = useContext(UserContext)
-  const _currentUserID = Decrypt(currentUserID)
-
   //Input States
   const [formData, setFormData] = useState({
     password: "",
@@ -45,13 +41,19 @@ const ChangePass = (props: propsType) => {
   
   const handleSave = async () => {
     if (await Validation()) {
-      if (await ChangePassword(Encrypt(formData.newPassword))) {
+      let changePasswordParams : ChangePasswordRequest = {
+        EncryptedPassword : Encrypt(formData.newPassword)
+      }
+
+      try {
+        await ChangePassword(changePasswordParams)
         popAlert("green", "Password successfuly changed")
         resetInputs()
         setTimeout(() => {
           props.setTrigger(false)
         }, 2000)
-      } else {
+      } 
+      catch (e) {
         popAlert("red", "Password could not changed")
       }
     }
@@ -61,11 +63,15 @@ const ChangePass = (props: propsType) => {
     let isValid = true
     const validationErrors: any = {}
 
+    let verifyPasswordParams : VerifyPasswordRequest = {
+      PlainPassword : formData.password
+    } 
+
     //password
     if(!formData.password.trim()) {
       validationErrors.password = "*Cannot be left blank"
     }
-    else if(!await VerifyPassword(formData.password)) {
+    else if(!await VerifyPassword(verifyPasswordParams)) {
       validationErrors.password = "*Password is wrong"
     }
 

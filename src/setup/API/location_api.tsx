@@ -17,7 +17,7 @@ export const GetUserLocationList = async (): Promise<AxiosResponse> => {
 }
 
 export const AddLocation = async (params: AddLocationRequest): Promise<AxiosResponse> => {
-    const response = await axios.post('https://localhost:7181/api/Location/addLocation', 
+    const response = await axios.post('https://localhost:7181/api/Location/AddLocation', 
     {
         locationTitle: params.LocationTitle,
         province: params.Province,

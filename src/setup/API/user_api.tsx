@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { getCookie } from '../Cookie';
 import { UserAccountViewModel } from '../../models/ViewModels/UserAccountViewModel';
-import { SetCurrentLocationRequest } from '../../models/ParameterModels/UserParameterModels';
+import { ChangePasswordRequest, SetCurrentLocationRequest, VerifyPasswordRequest } from '../../models/ParameterModels/UserParameterModels';
 //models
 
 
@@ -78,10 +78,10 @@ export const VerifyEmail = async (email: string) => {
     return response.data
 }
 
-export const VerifyPassword = async (password: string) => {
+export const VerifyPassword = async (params: VerifyPasswordRequest) => {
     const response = await axios.post('https://localhost:7181/api/User/VerifyPassword',
         {
-            password: password
+            plainPassword: params.PlainPassword
         },
         {
             headers: {
@@ -92,10 +92,10 @@ export const VerifyPassword = async (password: string) => {
     return response.data
 }
 
-export const ChangePassword = async (encryptedPassword: string) => {
+export const ChangePassword = async (params: ChangePasswordRequest) => {
     const response = await axios.put('https://localhost:7181/api/User/ChangePassword',
         {
-            encryptedPassword: encryptedPassword
+            encryptedPassword: params.EncryptedPassword
         },
         {
             headers: {
