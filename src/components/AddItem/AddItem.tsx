@@ -4,8 +4,9 @@ import { useLocation } from 'react-router-dom'
 //css
 import './styles/AddItem.css'
 //types
-import { IngredientType, MenuItemType } from '../../types/RestaurantDataType'
 import { CartTransactionRequest } from '../../models/ParameterModels/CartParameterModels'
+import { ItemViewModel } from '../../models/ViewModels/ItemViewModel'
+import { GetItemIngredientResponse } from '../../models/ParameterModels/ItemParameterModels'
 //helpers
 import { usePopAlert } from '../../hooks/usePopAlert'
 import { AddItemToCart } from '../../setup/API/cart_api'
@@ -17,13 +18,13 @@ import Alert from '../Shared/Alert'
 type AddItemProps = {
     trigger: boolean,
     setTrigger: React.Dispatch<React.SetStateAction<boolean>>
-    itemData: MenuItemType
-    ingredients: IngredientType[]
+    itemData: ItemViewModel
+    ingredients: GetItemIngredientResponse[]
 }
 
 
 const AddItem = (props: AddItemProps) => {
-    const { itemID, itemName, itemDescription, imageSource, price } = props.itemData.data
+    const { itemData, ingredients } = props
 
     const location = useLocation()
     const currentRestaurantID = location.state.data;
@@ -56,14 +57,14 @@ const AddItem = (props: AddItemProps) => {
             isAddingProcessContinuing.current = true
 
             const addItemToCartRequest : CartTransactionRequest= {
-                ItemID: itemID,
+                ItemID: itemData.Id,
                 RestaurantID: currentRestaurantID,
                 Ingredients: getRequestedIngredients(),
                 Amount: amount
             }
             try {
                 await AddItemToCart(addItemToCartRequest)
-                popAlert("green", `${itemName} added to the cart`)
+                popAlert("green", `${itemData.Name} added to the cart`)
                 setCartToggle(!cartToggle)
             }
             catch {
@@ -79,7 +80,7 @@ const AddItem = (props: AddItemProps) => {
 
         props.ingredients.map((ingredient) => {
             if (ingredient.isActive) {
-                requestedIngredients.push(ingredient.name)
+                requestedIngredients.push(ingredient.Name)
             }
         })
 
@@ -100,10 +101,10 @@ const AddItem = (props: AddItemProps) => {
 
                     <div className="add-item-title">
                         <div className="row">
-                            {imageSource && <img src={require(`../../assets/FoodImages/${imageSource}`)} alt="img not found" />}
+                            {itemData.ImageSource && <img src={require(`../../assets/FoodImages/${itemData.ImageSource}`)} alt="img not found" />}
                             <div className="col">
-                                <p id="item-name">{itemName}</p>
-                                {itemDescription && <p id="item-description">{itemDescription}</p>}
+                                <p id="item-name">{itemData.Name}</p>
+                                {itemData.Description && <p id="item-description">{itemData.Description}</p>}
                             </div>
                         </div>
                     </div>
@@ -115,7 +116,7 @@ const AddItem = (props: AddItemProps) => {
                                 <div key={idx} onClick={() => {
                                     ingredient.isActive = !ingredient.isActive
                                 }}>
-                                    <IngredientCard name={ingredient.name} />
+                                    <IngredientCard name={ingredient.Name} />
                                 </div>
                             ))}
                         </div>
@@ -126,7 +127,7 @@ const AddItem = (props: AddItemProps) => {
                             <i id='change-amount-button' className="fa-solid fa-circle-minus" onClick={handleDecreaseAmount}></i>
                             <p>{amount}</p>
                             <i id='change-amount-button' className="fa-solid fa-circle-plus" onClick={handleIncreaseAmount}></i>
-                            <p id='total-price'>Price : {amount * parseInt(price)}TL</p>
+                            <p id='total-price'>Price : {amount * itemData.Price}TL</p>
                         </div>
                         <button id='confirm-add-item' onClick={handleAddToCart}><i className="fa-solid fa-cart-plus" style={{ marginRight: 5 }}></i>Add To Cart</button>
                     </div>

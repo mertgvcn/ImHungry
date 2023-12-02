@@ -1,10 +1,9 @@
-import { MenuType, RestaurantDetail } from "../RestaurantDataType"
+import { ItemViewModel } from "../../models/ViewModels/ItemViewModel"
+import { RestaurantSummaryViewModel } from "../../models/ViewModels/RestaurantSummaryViewModel"
 
 export type RestaurantDetailsPageDataType = {
-    restaurant: RestaurantDetailsDataType
-}
-
-export type RestaurantDetailsDataType = {
-    restaurantDetails: RestaurantDetail,
-    menu: MenuType[]
+    restaurant: {
+        restaurantDetails: RestaurantSummaryViewModel,
+        menu: ItemViewModel[]
+    }
 }

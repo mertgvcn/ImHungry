@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 //TYPE
-import { CategoryType, MenuType } from '../../../types/RestaurantDataType'
+import { ItemViewModel } from '../../../models/ViewModels/ItemViewModel'
+import { Category } from '../../../models/EntityModels/Category'
 //CSS
 import '../styles/Menu.css'
 //COMPONENTS
@@ -8,13 +9,13 @@ import MenuItem from './MenuItem'
 
 
 type MenuPropType = {
-    menu: MenuType[]
+    menu: ItemViewModel[]
 }
 
 
 const Menu = (props: MenuPropType) => {
-    const [menuTitles, setMenuTitles] = useState<CategoryType[]>([])
-    const [menu, setMenu] = useState<MenuType[]>(props.menu)
+    const [menuTitles, setMenuTitles] = useState<Category[]>([])
+    const [menu, setMenu] = useState<ItemViewModel[]>(props.menu)
     const didComponentMount = useRef(false)
     
     
@@ -31,14 +32,14 @@ const Menu = (props: MenuPropType) => {
     //Functions
     const extractCategoryNames = () => {
         var categoryNames: string[] = [] //we need categoryNames to track menuTitles
-        var menuTitles: CategoryType[] = [] //not primitive type, includes() doesnt work for this.
+        var menuTitles: Category[] = [] //not primitive type, includes() doesnt work for this.
 
         menu.map((item) => {
-            if (!categoryNames.includes(item.categoryName)) { 
-                categoryNames.push(item.categoryName)
+            if (!categoryNames.includes(item.Category.Name)) { 
+                categoryNames.push(item.Category.Name)
                 menuTitles.push({
-                    categoryID: item.categoryID,
-                    categoryName: item.categoryName
+                    Id: item.Category.Id,
+                    Name: item.Category.Name
                 })
             }
         })
@@ -47,11 +48,11 @@ const Menu = (props: MenuPropType) => {
     }
 
 
-    const placeItems = (categoryID: string) => { //Placing menu items to correct sections (each item should be under its own category)
+    const placeItems = (categoryID: number) => { //Placing menu items to correct sections (each item should be under its own category)
         return menu?.map((menuItem) => {
-            if (menuItem.categoryID === categoryID) {
+            if (menuItem.Category.Id == categoryID) {
                 return (
-                    <MenuItem data={menuItem} key={menuItem.itemName} />
+                    <MenuItem menuItem={menuItem} key={menuItem.Id} />
                 );
             }
             return null;
@@ -66,10 +67,10 @@ const Menu = (props: MenuPropType) => {
             </div>
             <ul className='menus'> {/*Her kategori altında o kategoriye ait yemekler gözükecek şekilde*/}
                 {menuTitles?.map((title) => (
-                    <div className='menu-sections' key={title.categoryID}>
-                        <p id="menu-title">{title.categoryName}</p>
+                    <div className='menu-sections' key={title.Id}>
+                        <p id="menu-title">{title.Name}</p>
                         <div className="menu-items">
-                            {placeItems(title.categoryID)}
+                            {placeItems(title.Id)}
                         </div>
                     </div>
                 ))}

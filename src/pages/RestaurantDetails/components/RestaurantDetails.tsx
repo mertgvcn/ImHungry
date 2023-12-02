@@ -1,29 +1,29 @@
-//Type
-import { RestaurantDetail } from '../../../types/RestaurantDataType'
-//CSS
+//models
+import { RestaurantSummaryViewModel } from '../../../models/ViewModels/RestaurantSummaryViewModel'
+//css
 import '../styles/RestaurantDetails.css'
 
 
 type RestaurantDetailsType = {
-    restaurantDetails: RestaurantDetail
+    restaurantDetails: RestaurantSummaryViewModel
 }
 
 
 const RestaurantDetails = (props: RestaurantDetailsType) => {
-    const {restaurantID, name, phoneNumber, email, description, imageSource} = props.restaurantDetails
+    const {Name, PhoneNumber, Email, Description, ImageSource} = props.restaurantDetails
 
     return (
         <div className='restaurant-details-wrapper'>
-            {imageSource && (
+            {ImageSource && (
                 <div className="restaurant-image">
-                    <img src={require(`../../../assets/RestaurantImages/${imageSource}`)} alt="img not found" />
+                    <img src={require(`../../../assets/RestaurantImages/${ImageSource}`)} alt="img not found" />
                 </div>
             )}
 
             <div className="restaurant-info">
                 <div className="restaurant-title">
-                    <span id="restaurant-name">{name}</span>
-                    <span id="restaurant-description">{description}</span>
+                    <span id="restaurant-name">{Name}</span>
+                    <span id="restaurant-description">{Description}</span>
                 </div>
                 <div className="restaurant-rating-contact">
                     <div className="restaurant-rating">
@@ -35,8 +35,8 @@ const RestaurantDetails = (props: RestaurantDetailsType) => {
                     <div className="restaurant-contact">
                         <p id="restaurant-contact-title">CONTACT</p>
                         <hr />
-                        <p id="restaurant-email"><i className="fa-solid fa-envelope" style={{ marginRight: 5 }}></i>{email}</p>
-                        <p id="restaurant-phone-number"><i className="fa-solid fa-phone" style={{ marginRight: 5 }}></i>{phoneNumber}</p>
+                        <p id="restaurant-email"><i className="fa-solid fa-envelope" style={{ marginRight: 5 }}></i>{Email}</p>
+                        <p id="restaurant-phone-number"><i className="fa-solid fa-phone" style={{ marginRight: 5 }}></i>{PhoneNumber}</p>
                     </div>
                 </div>
             </div>
