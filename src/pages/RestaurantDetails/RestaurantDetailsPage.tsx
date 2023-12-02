@@ -16,7 +16,7 @@ const RestaurantDetailsPage = () => {
     const currentRestaurantID = location.state.data;
 
     const {data, isSuccess} = useFetchData<RestaurantDetailsPageDataType>(RES_DETAILS_PAGE_URL, {restaurantID: currentRestaurantID})
-
+    console.log(data)
     return isSuccess ?
     (
         <div className='restaurant-detail-background'>

@@ -109,10 +109,10 @@ const AddItem = (props: AddItemProps) => {
                         </div>
                     </div>
 
-                    {props.ingredients.length > 0 && <div className="ingredients">
+                    {ingredients.length > 0 && <div className="ingredients">
                         <p id='ingredients-title'>Ingredients</p>
                         <div className="ingredient-list">
-                            {props.ingredients.map((ingredient, idx) => (
+                            {ingredients.map((ingredient, idx) => (
                                 <div key={idx} onClick={() => {
                                     ingredient.isActive = !ingredient.isActive
                                 }}>
