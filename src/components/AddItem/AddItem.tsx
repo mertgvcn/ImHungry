@@ -57,6 +57,7 @@ const AddItem = (props: AddItemProps) => {
             isAddingProcessContinuing.current = true
 
             const addItemToCartRequest : CartTransactionRequest= {
+                CartItemID: 0,
                 ItemID: itemData.Id,
                 RestaurantID: currentRestaurantID,
                 Ingredients: getRequestedIngredients(),

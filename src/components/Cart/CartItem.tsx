@@ -8,7 +8,7 @@ import { CartTransactionRequest } from '../../models/ParameterModels/CartParamet
 //css
 import './styles/CartItem.css'
 //helpers
-import { AddItemToCart, DeleteItemFromCart } from '../../setup/API/cart_api'
+import { AddItemToCart, DecreaseItemAmountByOne } from '../../setup/API/cart_api'
 //components
 import ConfirmPopUp from '../Shared/ConfirmPopUp'
 
@@ -21,7 +21,7 @@ type CartItemType = {
 const CartItem = ({ cartItem } : CartItemType) => {
     const { cartToggle, setCartToggle } = useContext(ChangeContext)
     const { setCartItemAmount } = useContext(CartContext)
-    console.log(cartItem)
+
     //ingredient states
     const [ingredientListState, setIngredientListState] = useState<boolean>(false)
     const ingredientList = stringToArray(cartItem.IngredientList, ",")
@@ -33,6 +33,7 @@ const CartItem = ({ cartItem } : CartItemType) => {
     })
 
     const cartTransactionRequest: CartTransactionRequest = {
+        CartItemID: cartItem.Id,
         ItemID: cartItem.Item.Id,
         RestaurantID: cartItem.Restaurant.Id,
         Ingredients: cartItem.IngredientList,
@@ -53,9 +54,7 @@ const CartItem = ({ cartItem } : CartItemType) => {
     }
 
     const handleDeleteItem = async () => {
-        cartTransactionRequest.Amount = -1
-        
-        await DeleteItemFromCart(cartTransactionRequest)
+        await DecreaseItemAmountByOne(cartItem.Id)
 
         setCartItemAmount((currentAmount: any) => {
             return Number(currentAmount) - 1
@@ -65,7 +64,6 @@ const CartItem = ({ cartItem } : CartItemType) => {
 
     const handleAddItem = async () => {
         cartTransactionRequest.Amount = 1
-
         await AddItemToCart(cartTransactionRequest)
 
         setCartItemAmount((currentAmount: any) => {
