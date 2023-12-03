@@ -8,9 +8,9 @@ import './styles/Cart.css'
 //helpers
 import { GetUserCartItemList } from '../../setup/API/cart_api'
 import { getCookie } from '../../setup/Cookie'
-//Types
-import { CartItemsType } from '../../types/CartDataType'
-//Components
+//models
+import { CartItemViewModel } from '../../models/ViewModels/CartItemViewModel'
+//components
 import CartItem from './CartItem'
 import CartAlert from './CartAlert'
 import useDidMountUpdate from '../../hooks/useDidMountUpdate'
@@ -19,9 +19,8 @@ import useDidMountUpdate from '../../hooks/useDidMountUpdate'
 type propsType = {
   trigger: boolean,
   setTrigger: React.Dispatch<React.SetStateAction<boolean>>,
-  cartItems: CartItemsType[]
+  cartItems: CartItemViewModel[]
 }
-
 
 
 const Cart = (props: propsType) => {
@@ -38,16 +37,16 @@ const Cart = (props: propsType) => {
 
   //Item Info
   const didComponentMount = useRef(false)
-  const [items, setItems] = useState<CartItemsType[]>(props.cartItems)
+  const [cartItems, setCartItems] = useState<CartItemViewModel[]>(props.cartItems)
   const [itemRestaurantNames, setItemRestaurantNames] = useState<string[]>([])
-  const totalPrice = items?.reduce((total, item) => (total += item.price * item.amount), 0)
+  const totalPrice = cartItems?.reduce((total, cartItem) => (total += cartItem.Item.Price * cartItem.Amount), 0)
  
   
   //On first render
   useEffect(() => {
     if(!didComponentMount.current) {
-      setCartItemAmount(getItemAmount(items))
-      extractRestaurantNames(items)
+      setCartItemAmount(getItemAmount(cartItems))
+      extractRestaurantNames(cartItems)
     }
 
     didComponentMount.current = true
@@ -57,7 +56,7 @@ const Cart = (props: propsType) => {
   //If change occurs, re-fetch cart. 
   const fetchCartItems = async (): Promise<void> => {
     const data: any = await GetUserCartItemList()
-    setItems(data)
+    setCartItems(data)
     extractRestaurantNames(data)
     setCartItemAmount(getItemAmount(data))
 
@@ -72,12 +71,12 @@ const Cart = (props: propsType) => {
 
   
   //Functions
-  const extractRestaurantNames = (itemList: CartItemsType[]) => {
+  const extractRestaurantNames = (cartItemList: CartItemViewModel[]) => {
     var restaurantNames: string[] = []
 
-    itemList?.map((item) => {
-      if (!restaurantNames.includes(item.name)) {
-        restaurantNames.push(item.name)
+    cartItemList?.map((cartItem) => {
+      if (!restaurantNames.includes(cartItem.Restaurant.Name)) {
+        restaurantNames.push(cartItem.Restaurant.Name)
       }
     })
 
@@ -85,10 +84,10 @@ const Cart = (props: propsType) => {
   }
 
   const placeItems = (restaurantName: string) => {
-    return items?.map((item, idx) => {
-      if (restaurantName === item.name) {
+    return cartItems?.map((cartItem, idx) => {
+      if (restaurantName === cartItem.Restaurant.Name) {
         return (
-          <CartItem data={item} key={idx} />
+          <CartItem cartItem={cartItem} key={idx} />
         )
       }
       return null
@@ -96,7 +95,7 @@ const Cart = (props: propsType) => {
   }
 
   const handleConfirm = () => {
-    if (items?.length == 0) {
+    if (cartItems?.length == 0) {
       setIsAlert(true)
       setMsg("Please add product to the cart first")
 
@@ -110,8 +109,8 @@ const Cart = (props: propsType) => {
     navigate("/payment")
   }
 
-  const getItemAmount = (itemList: CartItemsType[]) => {
-    return itemList.reduce((amount, item) => (amount += item.amount), 0)
+  const getItemAmount = (cartItemList: CartItemViewModel[]) => {
+    return cartItemList.reduce((amount, cartItem) => (amount += cartItem.Amount), 0)
   }
 
   return (

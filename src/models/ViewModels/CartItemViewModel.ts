@@ -1,6 +1,6 @@
 export interface CartItemViewModel {
   Id: number;
-  IngredientList?: string | null;
+  IngredientList: string | null;
   Amount: number;
   Restaurant: CartItem_RestaurantViewModel;
   Item: CartItem_ItemViewModel;

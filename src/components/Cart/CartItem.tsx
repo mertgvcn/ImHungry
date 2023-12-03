@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 //context
 import { CartContext } from '../../context/CartContext'
 import { ChangeContext } from '../../context/ChangeContext'
 //models
-import { CartItemType } from '../../types/CartType'
+import { CartItemViewModel } from '../../models/ViewModels/CartItemViewModel'
 import { CartTransactionRequest } from '../../models/ParameterModels/CartParameterModels'
 //css
 import './styles/CartItem.css'
@@ -13,13 +13,18 @@ import { AddItemToCart, DeleteItemFromCart } from '../../setup/API/cart_api'
 import ConfirmPopUp from '../Shared/ConfirmPopUp'
 
 
-const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, amount, ingredients } }: CartItemType) => {
+type CartItemType = {
+    cartItem: CartItemViewModel
+}
+
+
+const CartItem = ({ cartItem } : CartItemType) => {
     const { cartToggle, setCartToggle } = useContext(ChangeContext)
     const { setCartItemAmount } = useContext(CartContext)
-
+    console.log(cartItem)
     //ingredient states
     const [ingredientListState, setIngredientListState] = useState<boolean>(false)
-    const ingredientList = stringToArray(ingredients, ",")
+    const ingredientList = stringToArray(cartItem.IngredientList, ",")
 
     //confirm state
     const [confirmProperties, setConfirmProperties] = useState({
@@ -28,18 +33,18 @@ const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, 
     })
 
     const cartTransactionRequest: CartTransactionRequest = {
-        ItemID: itemID,
-        RestaurantID: restaurantID,
-        Ingredients: ingredients,
+        ItemID: cartItem.Item.Id,
+        RestaurantID: cartItem.Restaurant.Id,
+        Ingredients: cartItem.IngredientList,
         Amount: 0
     }
 
     const handleRemoveItem = async () => {
         //To avoid missclick deletion, ask user is it intended or not
-        if (amount == 1) {
+        if (cartItem.Amount == 1) {
             setConfirmProperties({
                 isOpen: true,
-                msg: `Do you want to delete ${itemName} from the cart?`
+                msg: `Do you want to delete ${cartItem.Item.Name} from the cart?`
             })
         }
         else {
@@ -73,24 +78,24 @@ const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, 
         <>
             <div className='cart-item-wrapper'>
 
-                {ingredients &&
+                {cartItem.IngredientList &&
                     <i id="show-ingredients-button" className={ingredientListState ? "fa-solid fa-circle-chevron-down" : "fa-solid fa-circle-chevron-right"}
                         onClick={() => {
                             setIngredientListState(!ingredientListState)
                         }}></i>}
 
                 <div className='item-image'>
-                    <img src={require(`../../assets/FoodImages/${imageSource}`)} alt="img not found" />
+                    <img src={require(`../../assets/FoodImages/${cartItem.Item.ImageSource}`)} alt="img not found" />
                 </div>
 
                 <div className='item-info'>
-                    <p>{itemName}</p>
-                    <p style={{ color: '#555555', fontSize: '14px' }}>{price * amount}TL</p>
+                    <p>{cartItem.Item.Name}</p>
+                    <p style={{ color: '#555555', fontSize: '14px' }}>{cartItem.Item.Price * cartItem.Amount}TL</p>
                 </div>
 
                 <div className='item-process'>
                     <i id="item-process-button" className="fa-solid fa-circle-minus" onClick={handleRemoveItem}></i>
-                    <p id="item-count">{amount}</p>
+                    <p id="item-count">{cartItem.Amount}</p>
                     <i id="item-process-button" className="fa-solid fa-circle-plus" onClick={handleAddItem}></i>
                 </div>
             </div>
@@ -112,8 +117,8 @@ const CartItem = ({ data: { itemID, restaurantID, itemName, imageSource, price, 
     )
 }
 
-const stringToArray = (ingredientString: string, splitCharacter: string) => {
-    return ingredientString.split(splitCharacter)
+const stringToArray = (ingredientString: string | null, splitCharacter: string) => {
+    return ingredientString ? ingredientString.split(splitCharacter) : []
 }
 
 export default CartItem
