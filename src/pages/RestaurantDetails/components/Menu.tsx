@@ -22,7 +22,6 @@ const Menu = (props: MenuPropType) => {
     //On first render
     useEffect(() => {
         if(!didComponentMount.current) {
-            debugger;
             extractCategoryNames()
         }
 

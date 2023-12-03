@@ -39,7 +39,6 @@ const Login = () => {
 
     const handleLogin = async () => {
         if (Validation()) {
-            debugger;
             const encryptedPass = Encrypt(formData.password);
             const loginParams: UserLoginRequest = {
                 Username: formData.userName,

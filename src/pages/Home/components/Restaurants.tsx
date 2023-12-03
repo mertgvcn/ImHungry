@@ -54,7 +54,6 @@ const Restaurants = (props: RestaurantsType) => {
     fetchRestaurants();
   }, [restaurantToggle])
 
-
   return (
     <div className='restaurant-list-wrapper'>
       <div className="restaurant-title-wrapper">
@@ -66,7 +65,7 @@ const Restaurants = (props: RestaurantsType) => {
           {restaurantList?.filter((restaurant: any) => {
             return filteredName.toLowerCase() === ''
               ? restaurant
-              : restaurant.name.toLowerCase().includes(filteredName.toLowerCase())
+              : restaurant.Name.toLowerCase().includes(filteredName.toLowerCase())
           }).map((restaurant: any, key) => (
             <RestaurantCard data={restaurant} key={key} />
           ))}
