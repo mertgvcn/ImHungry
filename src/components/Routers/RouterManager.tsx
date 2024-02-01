@@ -1,17 +1,19 @@
 //components
+import { BrowserRouter } from "react-router-dom"
 import RouterGuest from "./RouterGuest"
-import RouterLogin from "./RouterLogin"
+import RouterRestaurantOwner from "./RouterRestaurantOwner"
+import RouterUser from "./RouterUser"
 
 
-type RouterPropType = {
+type RouterManagerPropType = {
     isLogin: boolean
 }
 
 
-export default function RouterManager({ isLogin }: RouterPropType) {
-    
+export default function RouterManager({ isLogin }: RouterManagerPropType) {
+
     return (
-        <>
+        <BrowserRouter>
             {
                 !isLogin ?
                     (
@@ -19,10 +21,13 @@ export default function RouterManager({ isLogin }: RouterPropType) {
                     )
                     :
                     (
-                        <RouterLogin />
+                        <>
+                            <RouterUser />
+                            <RouterRestaurantOwner />
+                        </>
                     )
             }
-        </>
+        </BrowserRouter>
     )
 }
 

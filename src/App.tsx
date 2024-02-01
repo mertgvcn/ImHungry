@@ -1,6 +1,8 @@
-//Components
-import Layout from "./Layout";
 import { getCookie } from "./setup/Cookie";
+import { BrowserRouter } from "react-router-dom";
+//Components
+import Navbar from "./components/Shared/Navbar";
+import RouterManager from "./components/Routers/RouterManager";
 
 
 const App = () => {
@@ -8,7 +10,7 @@ const App = () => {
 
   return (
     <>
-      <Layout isLogin={isLogin} />
+      <RouterManager isLogin={isLogin} />
     </>
   )
 }
