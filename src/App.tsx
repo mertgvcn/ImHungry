@@ -1,6 +1,3 @@
-//Context
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "./context/UserContext";
 //Components
 import Layout from "./Layout";
 import { getCookie } from "./setup/Cookie";

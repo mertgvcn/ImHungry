@@ -7,6 +7,7 @@ export interface UserLoginResponse {
   AuthenticateResult: boolean;
   AuthToken: string;
   AccessTokenExpireDate: Date;
+  Roles: string[];
 }
 
 export interface UserRegisterRequest {

@@ -54,16 +54,26 @@ const Login = () => {
                 setCookie("jwt", response.AuthToken, response.AccessTokenExpireDate)
                 popAlert("green", "Login successful!")
                 resetInputs()
+                
                 setTimeout(() => {
-                    window.location.href = "/home"
+                    SetRedirect(response.Roles)
                 }, 1000)
                 return;
             }
         }
     }
 
-
     //Support functions
+    const SetRedirect = (roles: string[]) => {
+        if(roles.includes("User")) {
+            window.location.href = "/home"
+        }
+        else if(roles.includes("RestaurantOwner")) {
+            window.location.href = "/dashboard"
+        }
+    }
+
+
     const Validation = () => {
         let isValid = true
         const validationErrors: any = {}
