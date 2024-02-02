@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 //pages
-import DashboardPage from '../../pages/Dashboard/DashboardPage'
+import DashboardPage from '../../pages/RestaurantOwner/Dashboard/DashboardPage'
 import Navbar from '../Shared/Navbar'
 
 const RouterRestaurantOwner = () => {

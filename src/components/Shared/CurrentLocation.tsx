@@ -8,7 +8,7 @@ import './styles/CurrentLocation.css'
 //models
 import { LocationViewModel } from '../../models/ViewModels/LocationViewModel'
 //components
-import LocationAdd from '../../pages/Profile/components/Location/LocationAdd'
+import LocationAdd from '../../pages/User/Profile/components/Location/LocationAdd'
 import { SetCurrentLocationRequest } from '../../models/ParameterModels/UserParameterModels'
 
 

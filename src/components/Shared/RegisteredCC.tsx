@@ -7,7 +7,7 @@ import './styles/RegisteredCC.css'
 //type
 import { UserCreditCardsType } from '../../types/CreditCardDataType'
 //component
-import CreditCardAdd from '../../pages/Profile/components/CreditCard/CreditCardAdd'
+import CreditCardAdd from '../../pages/User/Profile/components/CreditCard/CreditCardAdd'
 
 
 const RegisteredCC = () => {

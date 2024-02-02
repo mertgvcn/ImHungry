@@ -3,9 +3,9 @@ import { Routes, Route, Outlet } from 'react-router-dom'
 //components
 import Navbar from '../Shared/Navbar'
 //pages
-import LoginPage from '../../pages/Login/LoginPage'
-import MainPage from '../../pages/Main/MainPage'
-import RegistrationPage from '../../pages/Register/RegistrationPage'
+import LoginPage from '../../pages/Guest/Login/LoginPage'
+import MainPage from '../../pages/Guest/Main/MainPage'
+import RegistrationPage from '../../pages/Guest/Register/RegistrationPage'
 
 
 const RouterGuest = () => {

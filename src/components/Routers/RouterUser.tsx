@@ -1,10 +1,10 @@
 import React from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 //pages
-import HomePage from '../../pages/Home/HomePage'
-import ProfilePage from '../../pages/Profile/ProfilePage'
-import RestaurantDetailsPage from '../../pages/RestaurantDetails/RestaurantDetailsPage'
-import PaymentPage from '../../pages/Payment/PaymentPage'
+import HomePage from '../../pages/User/Home/HomePage'
+import ProfilePage from '../../pages/User/Profile/ProfilePage'
+import RestaurantDetailsPage from '../../pages/User/RestaurantDetails/RestaurantDetailsPage'
+import PaymentPage from '../../pages/User/Payment/PaymentPage'
 import Navbar from '../Shared/Navbar'
 
 const RouterUser = () => {
