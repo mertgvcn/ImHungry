@@ -17,7 +17,6 @@ type NavbarType = {
 
 
 const Navbar = (props: NavbarType) => {
-
     //Set current cart item amount
     const { cartItemAmount, setCartItemAmount } = useContext(CartContext)
 
@@ -47,7 +46,6 @@ const Navbar = (props: NavbarType) => {
         fetchCartItems()
     }, [cartState])
 
-
     // const didMount = useRef(false)
     // const [cartItemNo, setCartItemNo] = useState<any>(null)
 
@@ -70,7 +68,7 @@ const Navbar = (props: NavbarType) => {
                 <div id="navbar-components">
 
                     <div id="navbar-title">
-                        <Link to="/" className='link'>
+                        <Link to='/' className='link'>
                             <p id="title"><i className="fa-solid fa-drumstick-bite" style={{ paddingRight: "8px" }}></i>Im Hungry</p>
                         </Link>
                     </div>

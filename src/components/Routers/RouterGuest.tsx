@@ -13,7 +13,7 @@ const RouterGuest = () => {
     const Layout = () => {
         return (
             <>
-                <Navbar isLogin={false} />
+                <Navbar isLogin={false}/>
                 <Outlet />
             </>
         )
