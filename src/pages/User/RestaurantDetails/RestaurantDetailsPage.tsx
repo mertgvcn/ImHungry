@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 //css
 import './RestaurantDetailsPage.css'
 //type
-import { RestaurantDetailsPageDataType } from '../../../types/PageDataTypes/RestaurantDetailsPageDataType'
+import { RestaurantDetailsPageDataType } from '../../../models/ViewModels/PageModels/RestaurantDetailsPageDataType'
 //component
 import RestaurantDetails from './components/RestaurantDetails'
 import Menu from './components/Menu'

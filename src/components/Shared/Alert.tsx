@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./styles/Alert.css"
-import { AlertType } from '../../types/AlertType'
+
+export type AlertType = {
+  isOpen: boolean,
+  color: string,
+  msg: string
+}
 
 const Alert = (props: AlertType) => {
   const [title, setTitle] = useState<string>("")

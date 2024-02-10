@@ -4,7 +4,7 @@ import { HOME_PAGE_URL, useFetchData } from '../../../hooks/useFetchData'
 //css
 import './HomePage.css'
 //types
-import { HomePageDataType } from '../../../types/PageDataTypes/HomePageDataType'
+import { HomePageDataType } from '../../../models/ViewModels/PageModels/HomePageDataType'
 //components
 import Restaurants from './components/Restaurants'
 import SearchRestaurant from './components/SearchRestaurant'

@@ -5,7 +5,7 @@ import { DeleteCreditCardByID, GetUserCreditCards } from '../../setup/API/cc_api
 //css
 import './styles/RegisteredCC.css'
 //type
-import { UserCreditCardsType } from '../../types/CreditCardDataType'
+import { CreditCardViewModel } from '../../models/ViewModels/CreditCardViewModel'
 //component
 import CreditCardAdd from '../../pages/User/Profile/components/CreditCard/CreditCardAdd'
 
@@ -15,7 +15,7 @@ const RegisteredCC = () => {
     const { ccID } = useContext(PaymentContext)
 
     //CC states
-    const [userCCs, setUserCCs] = useState<UserCreditCardsType[]>([])
+    const [userCCs, setUserCCs] = useState<CreditCardViewModel[]>([])
     const [displayedCC, setDisplayedCC] = useState<string>("")
     const [dropDownState, setDropDownState] = useState<boolean>(false)
 
@@ -91,18 +91,18 @@ const RegisteredCC = () => {
 
                                 {/* CC Info */}
                                 <div className='cc-info' onClick={() => {
-                                    ccID.current = cc.ccID
-                                    setDisplayedCC(`${cc.ccNo.slice(0, 4)} **** **** ${cc.ccNo.slice(15, 19)}`)
+                                    ccID.current = cc.Id
+                                    setDisplayedCC(`${cc.Number.slice(0, 4)} **** **** ${cc.Number.slice(15, 19)}`)
                                     setDropDownState(false)
                                     setIsAddCC(false)
                                 }}>
                                     <i className="fa-solid fa-credit-card" style={{ marginRight: 5 }}></i>
-                                    {cc.ccNo.slice(0, 4)} **** **** {cc.ccNo.slice(15, 19) + " - " + hideName(cc.ccName)}
+                                    {cc.Number.slice(0, 4)} **** **** {cc.Number.slice(15, 19) + " - " + hideName(cc.HolderName)}
                                 </div>
 
                                 {/* Delete CC */}
                                 <div className='cc-delete' onClick={async () => {
-                                    await DeleteCreditCardByID(cc.ccID)
+                                    await DeleteCreditCardByID(cc.Id)
                                     setDisplayedCC("")
                                     setDropDownState(!dropDownState)
                                     handleFetchCC(true)
