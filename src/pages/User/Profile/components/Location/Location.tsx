@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { ChangeContext } from '../../../../../context/ChangeContext'
 //exported functions
-import { GetUserLocationList } from '../../../../../setup/API/location_api'
+import { GetUserLocationList } from '../../../../../setup/API/UserAPIs/location_api'
 import useDidMountUpdate from '../../../../../hooks/useDidMountUpdate'
 //models
 import { LocationViewModel } from '../../../../../models/ViewModels/LocationViewModel'

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 //helpers
-import { GetUserCartItemList } from "../../setup/API/cart_api";
+import { GetUserCartItemList } from "../../setup/API/UserAPIs/cart_api";
 //css
 import "./styles/Navbar.css";
 //components

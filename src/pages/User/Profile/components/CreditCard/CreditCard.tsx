@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { ChangeContext } from '../../../../../context/ChangeContext'
 //exported functions
-import { GetUserCreditCards } from '../../../../../setup/API/cc_api'
+import { GetUserCreditCards } from '../../../../../setup/API/UserAPIs/cc_api'
 import useDidMountUpdate from '../../../../../hooks/useDidMountUpdate'
 //type
 import { CreditCardViewModel } from '../../../../../models/ViewModels/CreditCardViewModel'

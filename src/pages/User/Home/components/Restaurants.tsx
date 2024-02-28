@@ -3,8 +3,8 @@ import { useContext, useState } from 'react'
 import { RestaurantContext } from '../../../../context/RestaurantContext'
 import { ChangeContext } from '../../../../context/ChangeContext'
 //exported functions
-import { GetCurrentLocation } from '../../../../setup/API/user_api'
-import { GetRestaurantListByLocation } from '../../../../setup/API/restaurant_api'
+import { GetCurrentLocation } from '../../../../setup/API/UserAPIs/user_api'
+import { GetRestaurantListByLocation } from '../../../../setup/API/NeutralAPIs/restaurant_api'
 import useDidMountUpdate from '../../../../hooks/useDidMountUpdate'
 //models
 import { RestaurantListViewModel } from '../../../../models/ViewModels/RestaurantListViewModel'

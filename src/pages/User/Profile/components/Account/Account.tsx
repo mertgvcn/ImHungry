@@ -1,6 +1,6 @@
 import { useState } from 'react'
 //exported functions
-import { VerifyUsername, SetAccountInfo } from '../../../../../setup/API/user_api'
+import { VerifyUsername, SetAccountInfo } from '../../../../../setup/API/UserAPIs/user_api'
 import { usePopAlert } from '../../../../../hooks/usePopAlert'
 //css
 import './styles/Account.css'

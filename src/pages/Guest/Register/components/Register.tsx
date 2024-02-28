@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom'
 //helpers
-import { RegisterUserAsync } from '../../../../setup/API/auth_api'
+import { RegisterUserAsync } from '../../../../setup/API/NeutralAPIs/auth_api'
 import { Encrypt } from '../../../../setup/Cryption'
 import { usePopAlert } from '../../../../hooks/usePopAlert'
 //css

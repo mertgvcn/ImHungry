@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ChangeContext } from '../../../../../context/ChangeContext'
 //helpers
-import { DeleteCreditCardByID } from '../../../../../setup/API/cc_api'
+import { DeleteCreditCardByID } from '../../../../../setup/API/UserAPIs/cc_api'
 //type
 import { CreditCardViewModel } from '../../../../../models/ViewModels/CreditCardViewModel'
 //css

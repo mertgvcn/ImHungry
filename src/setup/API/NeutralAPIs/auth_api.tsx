@@ -1,6 +1,6 @@
 import axios from "axios"
 //Models
-import { UserLoginRequest, UserLoginResponse, UserRegisterRequest, UserRegisterResponse } from "../../models/ParameterModels/AuthParameterModels"
+import { UserLoginRequest, UserLoginResponse, UserRegisterRequest, UserRegisterResponse } from "../../../models/ParameterModels/AuthParameterModels"
 
 
 

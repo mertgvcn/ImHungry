@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 //helpers
-import { LoginUserAsync } from '../../../../setup/API/auth_api'
+import { LoginUserAsync } from '../../../../setup/API/NeutralAPIs/auth_api'
 import { setCookie } from '../../../../setup/Cookie'
 import { Encrypt } from '../../../../setup/Cryption'
 import { usePopAlert } from '../../../../hooks/usePopAlert'

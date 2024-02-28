@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { getCookie } from "../Cookie";
+import { getCookie } from "../../Cookie";
 
 const API_KEY = 'bearer ' + getCookie("jwt")
 

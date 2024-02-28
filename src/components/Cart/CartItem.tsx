@@ -8,7 +8,7 @@ import { CartTransactionRequest } from '../../models/ParameterModels/CartParamet
 //css
 import './styles/CartItem.css'
 //helpers
-import { AddItemToCart, DecreaseItemAmountByOne } from '../../setup/API/cart_api'
+import { AddItemToCart, DecreaseItemAmountByOne } from '../../setup/API/UserAPIs/cart_api'
 //components
 import ConfirmPopUp from '../Shared/ConfirmPopUp'
 

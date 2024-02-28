@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import { PaymentContext } from '../../context/PaymentContext'
 //exported functions
-import { DeleteCreditCardByID, GetUserCreditCards } from '../../setup/API/cc_api'
+import { DeleteCreditCardByID, GetUserCreditCards } from '../../setup/API/UserAPIs/cc_api'
 //css
 import './styles/RegisteredCC.css'
 //type

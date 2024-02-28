@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { ChangeContext } from '../../../../../context/ChangeContext'
 //exported functions
-import { AddCreditCard } from '../../../../../setup/API/cc_api'
+import { AddCreditCard } from '../../../../../setup/API/UserAPIs/cc_api'
 import { usePopAlert } from '../../../../../hooks/usePopAlert'
 //css
 import './styles/CreditCardAdd.css'

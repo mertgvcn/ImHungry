@@ -9,7 +9,7 @@ import { ItemViewModel } from '../../models/ViewModels/ItemViewModel'
 import { GetItemIngredientResponse } from '../../models/ParameterModels/ItemParameterModels'
 //helpers
 import { usePopAlert } from '../../hooks/usePopAlert'
-import { AddItemToCart } from '../../setup/API/cart_api'
+import { AddItemToCart } from '../../setup/API/UserAPIs/cart_api'
 //components
 import IngredientCard from './IngredientCard'
 import Alert from '../Shared/Alert'

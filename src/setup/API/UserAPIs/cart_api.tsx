@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { getCookie } from '../Cookie';
+import { getCookie } from '../../Cookie';
 //models
-import { CartTransactionRequest } from '../../models/ParameterModels/CartParameterModels';
+import { CartTransactionRequest } from '../../../models/ParameterModels/CartParameterModels';
 
 
 

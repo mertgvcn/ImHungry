@@ -7,7 +7,7 @@ import { GetItemIngredientResponse } from '../../../../models/ParameterModels/It
 //components
 import AddItem from '../../../../components/AddItem/AddItem'
 //helpers
-import { GetItemIngredients } from '../../../../setup/API/item_api'
+import { GetItemIngredients } from '../../../../setup/API/NeutralAPIs/item_api'
 
 
 type MenuItemType = {

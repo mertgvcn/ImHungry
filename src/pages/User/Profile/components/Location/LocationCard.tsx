@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { ChangeContext } from '../../../../../context/ChangeContext'
 //exported functions
-import { DeleteLocationByLocationID } from '../../../../../setup/API/location_api'
+import { DeleteLocationByLocationID } from '../../../../../setup/API/UserAPIs/location_api'
 //type
 import { LocationViewModel } from '../../../../../models/ViewModels/LocationViewModel'
 //css

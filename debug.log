@@ -195,3 +195,6 @@
 [0206/004159.497:ERROR:check.cc(297)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
 [0208/004216.975:ERROR:check.cc(297)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
 [0210/225628.817:ERROR:check.cc(297)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
+[0213/183839.527:ERROR:check.cc(297)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
+[0221/174210.161:ERROR:check.cc(297)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!
+[0226/003023.499:ERROR:check.cc(297)] Check failed: false. NOTREACHED log messages are omitted in official builds. Sorry!

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import { getCookie } from '../Cookie';
-import { UserAccountViewModel } from '../../models/ViewModels/UserAccountViewModel';
-import { ChangePasswordRequest, SetCurrentLocationRequest, VerifyPasswordRequest } from '../../models/ParameterModels/UserParameterModels';
+import { getCookie } from '../../Cookie';
+import { UserAccountViewModel } from '../../../models/ViewModels/UserAccountViewModel';
+import { ChangePasswordRequest, SetCurrentLocationRequest, VerifyPasswordRequest } from '../../../models/ParameterModels/UserParameterModels';
 //models
 
 

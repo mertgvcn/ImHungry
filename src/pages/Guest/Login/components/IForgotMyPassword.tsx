@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 //helpers
-import { VerifyEmail } from '../../../../setup/API/user_api';
+import { VerifyEmail } from '../../../../setup/API/UserAPIs/user_api';
 import { usePopAlert } from '../../../../hooks/usePopAlert';
 //css
 import '../styles/IForgotMyPassword.css'

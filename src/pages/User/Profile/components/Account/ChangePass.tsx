@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 //exported functions
 import { Encrypt } from '../../../../../setup/Cryption'
-import { ChangePassword, VerifyPassword } from '../../../../../setup/API/user_api'
+import { ChangePassword, VerifyPassword } from '../../../../../setup/API/UserAPIs/user_api'
 import { usePopAlert } from '../../../../../hooks/usePopAlert'
 //css
 import './styles/ChangePass.css'

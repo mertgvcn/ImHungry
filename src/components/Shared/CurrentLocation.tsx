@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react'
 import { ChangeContext } from '../../context/ChangeContext'
 //exported functions
-import { DeleteLocationByLocationID, GetUserLocationList } from '../../setup/API/location_api'
-import { GetCurrentLocation, SetCurrentLocation } from '../../setup/API/user_api'
+import { DeleteLocationByLocationID, GetUserLocationList } from '../../setup/API/UserAPIs/location_api'
+import { GetCurrentLocation, SetCurrentLocation } from '../../setup/API/UserAPIs/user_api'
 //css
 import './styles/CurrentLocation.css'
 //models

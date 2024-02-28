@@ -6,7 +6,7 @@ import { ChangeContext } from '../../context/ChangeContext'
 //css
 import './styles/Cart.css'
 //helpers
-import { GetUserCartItemList } from '../../setup/API/cart_api'
+import { GetUserCartItemList } from '../../setup/API/UserAPIs/cart_api'
 import { getCookie } from '../../setup/Cookie'
 //models
 import { CartItemViewModel } from '../../models/ViewModels/CartItemViewModel'

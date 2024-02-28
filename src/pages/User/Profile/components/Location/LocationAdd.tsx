@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { ChangeContext } from '../../../../../context/ChangeContext'
 //exported functions
-import { AddLocation } from '../../../../../setup/API/location_api'
+import { AddLocation } from '../../../../../setup/API/UserAPIs/location_api'
 import { usePopAlert } from '../../../../../hooks/usePopAlert'
 //css
 import './styles/LocationAdd.css'
