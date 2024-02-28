@@ -1,0 +1,10 @@
+.menu-page-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - 220px);
+    height: calc(100vh - 65px);
+    padding: 30px;
+
+    box-sizing: border-box;
+}

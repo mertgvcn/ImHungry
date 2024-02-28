@@ -1,11 +1,14 @@
 .sidebar-wrapper {
+    position: sticky;
     z-index: 999;
+    top: 65px;
+    padding-top: 2x;
     width: 220px;
-    height: 91vh;
+    height: calc(100vh - 65px);
+    
     border-right: 2px solid rgb(106, 89, 79, 0.3);
     background-color: #efe4de; 
     font-size: 16px;
-    padding-top: 2x;
 }
 
 .sidebar-list {
