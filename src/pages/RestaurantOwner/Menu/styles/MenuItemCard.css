@@ -40,16 +40,38 @@
     flex-direction: column;
 }
 
-.menu-item-card-container .item-name {
+.menu-item-card-container .item-info .item-name-description .item-name {
     font-size: 16px;
 }
 
-.menu-item-card-container .item-description {
+.menu-item-card-container .item-info .item-name-description .item-description {
     font-size: 10px;
     font-style: italic;
 }
 
-/*PRICE*/
-.menu-item-card-container .item-price {
+.menu-item-card-container .item-info .item-price {
     font-size: 16px;
+}
+
+/*Buttons*/
+.menu-item-card-container .item-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 5%;
+    height: 100%;
+    margin: 0px 10px;
+    box-sizing: border-box;
+    color: #D67244;
+}
+
+.menu-item-card-container .item-buttons i {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.menu-item-card-container .item-buttons i:hover {
+    color: #c76131;
 }

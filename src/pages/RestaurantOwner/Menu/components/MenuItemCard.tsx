@@ -27,6 +27,9 @@ const MenuItemCard = (props: MenuItemCardType) => {
                 </div>
 
                 {/*item management buttons*/}
+                <div className='item-buttons'>
+                    <i id='edit-button' className="fa-solid fa-pen-to-square"></i>
+                </div>
             </div>
         </>
     )
