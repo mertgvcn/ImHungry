@@ -20,24 +20,55 @@ const Menu = (props: MenuPropType) => {
 
     //On first render
     useEffect(() => {
-        if(!didComponentMount.current) {
-            extractCategoryNames(menu, setMenuTitles)
+        if (!didComponentMount.current) {
+            extractCategoryNames()
         }
 
         didComponentMount.current = true
     }, [])
 
+    //functions
+
+    const extractCategoryNames = () => {
+        var categoryNames: string[] = [] //we need categoryNames to track menuTitles
+        var menuTitles: Category[] = [] //not primitive type, includes() doesnt work for this.
+
+        menu.map((item) => {
+            if (!categoryNames.includes(item.Category.Name)) {
+                categoryNames.push(item.Category.Name)
+                menuTitles.push({
+                    Id: item.Category.Id,
+                    Name: item.Category.Name
+                })
+            }
+        })
+
+        setMenuTitles(menuTitles)
+    }
+
+
+    const placeItems = (categoryID: number) => { //Placing menu items to correct sections (each item should be under its own category)
+        return menu?.map((menuItem) => {
+            if (menuItem.Category.Id == categoryID) {
+                return (
+                    <MenuItem menuItem={menuItem} key={menuItem.Id} />
+                );
+            }
+            return null;
+        }).filter((item) => item !== null); // null değerleri filtrele
+    };
+
     return (
         <div className='menu-wrapper'>
             <div className="main-title">
-                <p>MENU</p>
+                <p>Menu</p>
             </div>
             <ul className='menus'> {/*Her kategori altında o kategoriye ait yemekler gözükecek şekilde*/}
                 {menuTitles?.map((title) => (
                     <div className='menu-sections' key={title.Id}>
                         <p id="menu-title">{title.Name}</p>
                         <div className="menu-items">
-                            {placeItems(menu, title.Id)}
+                            {placeItems(title.Id)}
                         </div>
                     </div>
                 ))}
@@ -47,35 +78,3 @@ const Menu = (props: MenuPropType) => {
 }
 
 export default Menu
-
-
-//Following functions can be used in restaurant manager's editable menu
-
-export const extractCategoryNames = (menu: ItemViewModel[], setMenuTitles: React.Dispatch<React.SetStateAction<Category[]>>) => {
-    var categoryNames: string[] = [] //we need categoryNames to track menuTitles
-    var menuTitles: Category[] = [] //not primitive type, includes() doesnt work for this.
-
-    menu.map((item) => {
-        if (!categoryNames.includes(item.Category.Name)) { 
-            categoryNames.push(item.Category.Name)
-            menuTitles.push({
-                Id: item.Category.Id,
-                Name: item.Category.Name
-            })
-        }
-    })
-
-    setMenuTitles(menuTitles)
-}
-
-
-const placeItems = (menu: ItemViewModel[], categoryID: number) => { //Placing menu items to correct sections (each item should be under its own category)
-    return menu?.map((menuItem) => {
-        if (menuItem.Category.Id == categoryID) {
-            return (
-                <MenuItem menuItem={menuItem} key={menuItem.Id}/>
-            );
-        }
-        return null;
-    }).filter((item) => item !== null); // null değerleri filtrele
-};

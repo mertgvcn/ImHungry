@@ -15,7 +15,7 @@ type MenuItemType = {
 }
 
 
-const MenuItem = (props : MenuItemType) => {
+const MenuItem = (props: MenuItemType) => {
   const { Id, Name, Description, ImageSource, Price } = props.menuItem
 
   //AddItem state

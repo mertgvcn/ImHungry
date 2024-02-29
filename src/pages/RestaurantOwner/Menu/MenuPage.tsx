@@ -23,7 +23,7 @@ const MenuPage = () => {
   return data.length>0 ? 
   (
     <div className='menu-page-container'>
-      <MenuManagement />
+      <MenuManagement menu={data}/>
       <CategoryManagement />
     </div>
   ) 
