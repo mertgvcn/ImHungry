@@ -22,7 +22,7 @@ const RestaurantDetailsPage = () => {
         <div className='restaurant-detail-background'>
             <div className="restaurant-body-layout">
                 <RestaurantDetails restaurantDetails={data!.restaurant.restaurantDetails}/>
-                <Menu menu={data!.restaurant.menu}/>
+                <Menu menu={data!.restaurant.menu} categories={data!.restaurant.categories}/>
             </div>
         </div>
     )

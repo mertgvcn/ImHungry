@@ -12,3 +12,13 @@ export const GetMenu = async (): Promise<AxiosResponse> => {
 
     return response.data
 }
+
+export const GetCategories = async (): Promise<AxiosResponse> => {
+    const response = await axios.get('https://localhost:7181/api/Menu/GetCategories', {
+        headers: {
+            'Authorization': API_KEY
+        }
+    })
+
+    return response.data
+}

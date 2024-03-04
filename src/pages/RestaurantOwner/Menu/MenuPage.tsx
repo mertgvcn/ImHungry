@@ -1,36 +1,43 @@
 import React, { useEffect, useState } from 'react'
 //css
 import './MenuPage.css'
-import { GetMenu } from '../../../setup/API/RestaurantManagementAPIs/menu_api'
+import { GetCategories, GetMenu } from '../../../setup/API/RestaurantManagementAPIs/menu_api'
 import MenuManagement from './components/MenuManagement'
 import CategoryManagement from './components/CategoryManagement'
 import { ItemViewModel } from '../../../models/ViewModels/ItemViewModel'
+import { Category } from '../../../models/EntityModels/Category'
 
 const MenuPage = () => {
-  const [data, setData] = useState<ItemViewModel[]>([])
+  const [menu, setMenu] = useState<ItemViewModel[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
+  const [didDataFetched,setDidDataFetched] = useState(false)
 
   useEffect(() => {
     fetchData()
   }, [])
 
   const fetchData = async () => {
-    const response: any = await GetMenu()
-    setData(response)
+    const menuList: any = await GetMenu()
+    setMenu(menuList)
+
+    const categoryList: any = await GetCategories()
+    setCategories(categoryList)
+
+    setDidDataFetched(true)
   }
 
-  console.log(data)
-
-  return data.length>0 ? 
-  (
+  return didDataFetched ? (
     <div className='menu-page-container'>
-      <MenuManagement menu={data}/>
+      <MenuManagement menu={menu} categories={categories}/>
       <CategoryManagement />
     </div>
   ) 
   :
   (
-    <>Loading...</>
-  ) 
+    <>
+      Loading...
+    </>
+  )
 }
 
 export default MenuPage
