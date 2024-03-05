@@ -29,12 +29,12 @@
 }
 
 .sidebar-list #active {
-    background-color: #e6d6ce; 
+    background-color: #e7d7cf; 
 }
 
 .sidebar-list .row:hover {
     cursor: pointer;
-    background-color: #e6d6ce; 
+    background-color: #e7ded9; 
 }
 
 .sidebar-list .row #icon {

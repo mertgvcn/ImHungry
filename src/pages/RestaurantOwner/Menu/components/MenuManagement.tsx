@@ -30,6 +30,9 @@ const MenuManagement = (props: MenuManagementType) => {
     <div className='menu-management-container'>
       <div className="menu-title">
         <p>Menu</p>
+        <div className="add-button-wrapper">
+          <i className="fa-solid fa-plus"></i>
+        </div>
       </div>
 
       <ul className='menus'> {/*Her kategori altında o kategoriye ait yemekler gözükecek şekilde*/}
