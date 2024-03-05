@@ -1,0 +1,28 @@
+.category-item-card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, .3) 2px 4px 6px;
+
+    padding: 0px 10px;
+    box-sizing: border-box;
+}
+
+/*INFO*/
+.category-item-card-container .category-name {
+    display: flex;
+    align-items: center;
+}
+
+.category-item-card-container .category-name i {
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.category-item-card-container .category-name p {
+    font-size: 16px;
+}

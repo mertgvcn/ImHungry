@@ -8,3 +8,11 @@
 
     box-sizing: border-box;
 }
+
+.menu-page-container .col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 49%;
+    height: 100%;
+}

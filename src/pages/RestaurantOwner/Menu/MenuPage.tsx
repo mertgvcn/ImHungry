@@ -10,7 +10,7 @@ import { Category } from '../../../models/EntityModels/Category'
 const MenuPage = () => {
   const [menu, setMenu] = useState<ItemViewModel[]>([])
   const [categories, setCategories] = useState<Category[]>([])
-  const [didDataFetched,setDidDataFetched] = useState(false)
+  const [didDataFetched, setDidDataFetched] = useState(false)
 
   useEffect(() => {
     fetchData()
@@ -28,16 +28,22 @@ const MenuPage = () => {
 
   return didDataFetched ? (
     <div className='menu-page-container'>
-      <MenuManagement menu={menu} categories={categories}/>
-      <CategoryManagement />
+      <div className="col">
+        <MenuManagement menu={menu} categories={categories} />
+      </div>
+
+      <div className="col">
+        <CategoryManagement categories={categories}/>
+        <CategoryManagement categories={categories}/>
+      </div>
     </div>
-  ) 
-  :
-  (
-    <>
-      Loading...
-    </>
   )
+    :
+    (
+      <>
+        Loading...
+      </>
+    )
 }
 
 export default MenuPage
