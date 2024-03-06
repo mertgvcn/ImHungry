@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 40px;
 
@@ -12,7 +13,7 @@
     box-sizing: border-box;
 }
 
-/*INFO*/
+/*Name*/
 .category-item-card-container .category-name {
     display: flex;
     align-items: center;
@@ -25,4 +26,10 @@
 
 .category-item-card-container .category-name p {
     font-size: 16px;
+}
+
+/*Edit Button*/
+.category-item-card-container .category-edit-button {
+    color: #D67244;
+    cursor: pointer;
 }

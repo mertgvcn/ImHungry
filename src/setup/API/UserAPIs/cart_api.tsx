@@ -47,15 +47,15 @@ export const AddItemToCart = async (params: CartTransactionRequest): Promise<Axi
 }
 
 export const DecreaseItemAmountByOne = async (cartItemID: number) => {
-    const response = await axios.delete('https://localhost:7181/api/Cart/DecreaseItemAmountByOne', 
-    {
-        params: {
-            cartItemID: cartItemID
-        },
-        headers: {
-            'Authorization': API_KEY
-        }
-    })
+    const response = await axios.delete('https://localhost:7181/api/Cart/DecreaseItemAmountByOne',
+        {
+            params: {
+                cartItemID: cartItemID
+            },
+            headers: {
+                'Authorization': API_KEY
+            }
+        })
 
     return response.data
 }

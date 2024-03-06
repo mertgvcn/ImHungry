@@ -8,7 +8,6 @@ import "./styles/Sidebar.css"
 
 const Sidebar = () => {
     const navigate = useNavigate()
-    console.log("rerendering sidebar")
 
     const handleLogout = () => {
         deleteCookie("jwt")
