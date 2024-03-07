@@ -36,3 +36,16 @@ export const AddCategory = async (params: AddCategoryRequest): Promise<AxiosResp
 
     return response.data
 }
+
+export const DeleteCategoryById = async (categoryId: number): Promise<AxiosResponse> => {
+    const response = await axios.delete('https://localhost:7181/api/Menu/DeleteCategoryById', {
+        params: {
+            categoryId: categoryId,
+        },
+        headers: {
+            'Authorization': API_KEY
+        }
+    })
+
+    return response.data
+}

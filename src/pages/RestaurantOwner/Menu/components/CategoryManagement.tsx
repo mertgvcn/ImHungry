@@ -42,7 +42,7 @@ const CategoryManagement = (props: CategoryManagementType) => {
         }
 
         await AddCategory(addCategoryParams)
-        await refetchCategories() //category silme ve uyarı ekle
+        await refetchCategories() //category silme ve uyarı ekle, context ile menü de güncellensin
     }
 
     return (
