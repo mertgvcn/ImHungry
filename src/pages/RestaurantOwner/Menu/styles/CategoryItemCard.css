@@ -1,4 +1,7 @@
 .category-item-card-container {
+    position: relative;
+    z-index: 1;
+
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,4 +35,57 @@
 .category-item-card-container .category-edit-button {
     color: #D67244;
     cursor: pointer;
+}
+
+
+/**-----------------------------------------------Edit Category Part--------------------------------------**/
+.category-edit-container {
+    position: relative;
+    z-index: 0;
+
+    width: 100%;
+    height: 100px;
+
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, .3) 2px 2px 3px;
+
+    padding: 10px 50px;
+    box-sizing: border-box;
+}
+
+.category-edit-container .edit-name-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: 30px;
+}
+
+.category-edit-container .edit-name-wrapper p {
+    font-size: 16px;
+    text-wrap: nowrap;
+}
+
+.category-edit-container .edit-name-wrapper input {
+    width: 80%;
+    font-size: 16px;
+
+    outline: none;
+    border: none;
+    border-bottom: 1px solid black;
+
+    padding: 0px 2px;
+    box-sizing: border-box;
+}
+
+.category-edit-container .edit-name-wrapper i {
+    font-size: 18px;
+    color: green;
+    cursor: pointer;
+}
+
+.category-edit-container .edit-name-wrapper i:hover {
+    color: rgb(0, 179, 0);
 }
